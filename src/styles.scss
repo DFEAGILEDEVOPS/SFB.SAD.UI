@@ -1,0 +1,128 @@
+/* You can add global styles to this file, and also import other style files */
+
+// govuk-frontend
+@import "govuk-frontend/govuk/all";
+@import "bootstrap/scss/bootstrap";
+
+*, *::before, *::after {
+    box-sizing: content-box;//changed to fix check boxes
+}
+
+img {
+  box-sizing: border-box;
+}
+
+
+a{
+  text-decoration: underline;
+}
+
+.a-button{
+  text-decoration: none;
+}
+
+.back-button{
+  @include govuk-media-query($from: tablet) {
+    margin-left: 40px;
+    top: 7px;
+    position: relative;
+}
+}
+
+.small-icon{
+  width: 20px;
+  margin-right: 5px;
+}
+
+.large-icon{
+  margin-right: 10px;
+}
+
+.modal-dialog {
+    @media (min-width: 576px){
+    max-width: 660px;
+  }
+}
+
+.ul-two-cols{
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
+.sfb-modal-dialog .close{
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.highlight {
+  background-color: #d53880;
+  display: inline;
+  padding: 5px 5px;
+
+  span {
+      color: white;
+      line-height: 1.8em;
+  }
+
+  a {
+      text-decoration: none;
+
+      &:hover {
+          text-decoration: underline;
+          color: white;
+      }
+  }
+
+  @media(mobile) {
+      margin-bottom: 5px;
+  }
+}
+
+span.table-cell-highlight {
+
+    background-color: #d53880;
+    display: inline;
+    padding: 6px 8px 6px 8px;
+    color: white;
+      line-height: 1.8em;
+      font-weight: bold;
+
+}
+  a.table-cell-highlight {
+      background-color: #d53880;
+      display: inline;
+      padding: 6px 8px 6px 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      &:hover {
+          text-decoration: underline;
+          color: white;
+      }
+      &:focus
+      {
+        color: black!important;
+      }
+      &:visited {
+        color: white;
+      }
+
+
+  @media(mobile) {
+      margin-bottom: 5px;
+  }
+}
+
+.govuk-main-wrapper
+{
+  padding-top: 0;
+}
+
+.govuk-breadcrumbs
+{
+  padding-bottom: 20px;
+}
+
+

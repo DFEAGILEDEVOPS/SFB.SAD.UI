@@ -1,0 +1,32 @@
+{
+  "appSettings": {
+    "name": "Schools financial benchmarking",
+    "version": "1.0.0",
+    "demo": false,
+    "logo": "",
+    "seo": {
+      "title": "Schools financial benchmarking",
+      "titleSuffix": "",
+      "description": "Schools financial benchmarking - Efficiency Metric",
+      "author": "Extended Code",
+      "robots": "index, follow"
+    },
+    "sfbDomain": "https://as-t1dv-sfb.azurewebsites.net",
+    "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api/selfassesment",
+    "azureMapsAPIKey": "a__5AhQrG6OxElxgZbNmbWu3CAlP_-VKdcxzcwA6WYo"
+  },
+  "emailSettings": {
+    "emailAddresses": [
+      {
+        "name": "Demo Email",
+        "email": "demowebnet@gmail.com"
+      }
+    ],
+    "providers": [
+      {
+        "name": "sendinblue",
+        "apiUrl": "https://api.sendinblue.com/v3/smtp/email"
+      }
+    ]
+  }
+}
