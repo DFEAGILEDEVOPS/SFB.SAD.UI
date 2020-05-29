@@ -11,5 +11,5 @@ export class SAModel {
   fsm: number;
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
-  sadAssesmentAreas: AssessmentAreaModel;
+  sadAssesmentAreas: AssessmentAreaModel[];
 }

@@ -4,4 +4,5 @@ export class AssessmentAreaModel {
   schoolData: number;
   percentageSchoolData: number;
   allTresholds: TresholdModel[];
+  matchingTreshold: TresholdModel;
 }
