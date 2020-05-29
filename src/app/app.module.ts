@@ -12,12 +12,14 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GovUkLayoutComponent } from '@layouts/gov-uk-layout/gov-uk-layout.component';
 import { DashboardBreadcrumbComponent } from './dashboard/dashboard-bread-crumb/dashboard-bread-crumb.component';
+import { DashboardCharacteristicsComponent } from './dashboard/dashboard-characteristics/dashboard-characteristics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GovUkLayoutComponent,
     DashboardBreadcrumbComponent,
+    DashboardCharacteristicsComponent,
     DashboardComponent
   ],
   imports: [

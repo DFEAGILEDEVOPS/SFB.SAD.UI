@@ -6,6 +6,9 @@ export class SAModel {
   name: string;
   latestTerm: string;
   overallPhaseWSixthForm: string;
+  londonWeighting: string;
+  numberOfPupils: number;
+  fsm: number;
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
   sadAssesmentAreas: AssessmentAreaModel;

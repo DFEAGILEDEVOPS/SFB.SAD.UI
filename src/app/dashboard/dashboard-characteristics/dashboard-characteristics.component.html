@@ -1,0 +1,41 @@
+<details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text govuk-!-font-size-16">
+      View characteristics used
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+    <p>This benchmark was created using the following criteria.</p>
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Characteristic</th>
+          <th scope="col" class="govuk-table__header">Your school</th>
+          <th scope="col" class="govuk-table__header">Comparison criteria</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">School phase</td>
+          <td class="govuk-table__cell">{{phase}}</td>
+          <td class="govuk-table__cell">{{phase}}</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">London weighting</td>
+          <td class="govuk-table__cell">{{londonWeight}}</td>
+          <td class="govuk-table__cell">{{londonWeight}}</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">Number of pupils</td>
+          <td class="govuk-table__cell">{{noPupils}}</td>
+          <td class="govuk-table__cell">Schools with {{SizeLookup.noPupilsMin}} - {{SizeLookup.noPupilsMax}} pupils</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">FSM</td>
+          <td class="govuk-table__cell">{{FSM | number : '1.0-1'}}%</td>
+          <td class="govuk-table__cell">Schools with {{FSMLookup.fsmMin | number : '1.0-1'}} - {{FSMLookup.fsmMax | number: '1.0-1'}}% FSM</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</details>
