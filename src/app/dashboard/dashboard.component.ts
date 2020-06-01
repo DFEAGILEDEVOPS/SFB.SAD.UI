@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
         this.model.sadAssesmentAreas.forEach(element => {
           element.matchingTreshold =
             element.allTresholds.find(t => element.percentageSchoolData >= t.scoreLow && element.percentageSchoolData <= t.scoreHigh);
-        });
+        }); // todo: is it necessary to do this here, for all aa
       });
     }
 
@@ -51,7 +51,8 @@ export class DashboardComponent implements OnInit {
       const initialState = {
         title: modalContent.title,
         textContent: modalContent.textContent,
-        tresholds: this.model.sadAssesmentAreas.find(sad => sad.assesmentAreaName === assesmentArea).allTresholds
+        tresholds: this.model.sadAssesmentAreas.find(sad => sad.assesmentAreaName === assesmentArea).allTresholds,
+        matchingTreshold: this.model.sadAssesmentAreas.find(sad => sad.assesmentAreaName === assesmentArea).matchingTreshold
       };
 
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});

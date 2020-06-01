@@ -12,6 +12,7 @@ export class DashboardAaModalComponent implements OnInit {
   title: string;
   textContent: string;
   tresholds: TresholdModel[];
+  matchingTreshold: TresholdModel;
 
   constructor(public bsModalRef: BsModalRef) {}
 
