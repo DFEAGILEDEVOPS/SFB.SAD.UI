@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <a class="pull-right govuk-link modal-close-link" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">Close</span>
+  </a>
+</div>
+<div class="modal-body">
+ <div class="aa-modal-left-section">
+    <div [innerHTML]='textContent'></div>
+    <a class="govuk-link" target="_blank" href="https://www.gov.uk/government/publications/school-resource-management-self-assessment-tool/dashboard-support-notes#spend-on-teaching-staff-as-a-percentage-of-total-expenditure">Calculating you data</a>
+ </div>
+ <div class="aa-modal-right-section">
+  <table class="govuk-table aa-modal-right-section__table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header">% of exp.</th>
+        <th scope="col" class="govuk-table__header">Rating against tresholds</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row" *ngFor='let treshold of tresholds'>
+        <td class="govuk-table__cell">{{treshold.scoreLow | percent : '1.0-1'}} - {{treshold.scoreHigh | percent : '1.0-1'}}</td>
+        <td class="govuk-table__cell"><span class="rating-box" [class]='treshold.ratingColour'>{{treshold.ratingText}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ </div>
+</div>

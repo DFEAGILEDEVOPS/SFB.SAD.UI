@@ -42,30 +42,10 @@
       <td class="govuk-table__cell">{{aa.assesmentAreaName}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">{{aa.schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">{{aa.percentageSchoolData | percent : '1.0-1'}}</td>
-      <td class="govuk-table__cell"><span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span></td>
+      <td class="govuk-table__cell"><span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
+      <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assesmentAreaName)" />
+      </td>
     </tr>
   </tbody>
 </table>
 
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Methodology</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">Close</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>The efficiency metric algorithm looks for 50 schools across the country which are similar to your school based on:</p>
-    <ul class="govuk-list govuk-list--bullet govuk-body-s govuk-!-font-weight-bold ul-two-cols">
-      <li>Pupils eligible for FSM in the last 6 years</li>
-      <li>Number of pupils</li>
-      <li>Pupils with a SEN statement or EHCP</li>
-      <li>School phase</li>
-      <li>School type</li>
-    </ul>
-    <p>We divide these school's progress score by their expenditure per pupil (we will standardise the score) allowing us to rank the 50 schools.</p>
-    <p class="govuk-!-font-weight-bold">
-      Standardised progress score / Expenditure per pupil = Efficiency Metric Ranking
-    </p>
-  </div>
-</ng-template>

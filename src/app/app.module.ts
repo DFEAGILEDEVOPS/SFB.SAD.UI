@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GovUkLayoutComponent } from '@layouts/gov-uk-layout/gov-uk-layout.component';
 import { DashboardBreadcrumbComponent } from './dashboard/dashboard-bread-crumb/dashboard-bread-crumb.component';
 import { DashboardCharacteristicsComponent } from './dashboard/dashboard-characteristics/dashboard-characteristics.component';
+import { DashboardAaModalComponent } from './dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DashboardCharacteristicsComponent } from './dashboard/dashboard-charact
     GovUkLayoutComponent,
     DashboardBreadcrumbComponent,
     DashboardCharacteristicsComponent,
-    DashboardComponent
+    DashboardComponent,
+    DashboardAaModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

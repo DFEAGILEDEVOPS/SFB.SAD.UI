@@ -1,3 +1,4 @@
+import { AAModalModels } from './../Models/AAModalModels';
 import { SAModel } from './../Models/SAModel';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -6,17 +7,18 @@ import { SaDataService as SaDataService } from '@core/network/services/sadata.se
 import { SizeLookupModel } from 'app/Models/SizeLookupModel';
 import { FSMLookupModel } from 'app/Models/FSMLookupModel';
 import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
+import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   urn: number;
   model: SAModel;
   modalRef: BsModalRef;
-
+  aaModalModels: AAModalModels;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +32,7 @@ export class DashboardComponent implements OnInit {
       this.model.sadSizeLookup = new SizeLookupModel();
       this.model.sadFSMLookup = new FSMLookupModel();
       this.model.sadAssesmentAreas = [];
+      this.aaModalModels = new AAModalModels();
     }
 
     ngOnInit() {
@@ -43,8 +46,14 @@ export class DashboardComponent implements OnInit {
       });
     }
 
-    openModal(template: TemplateRef<any>) {
-      this.modalRef = this.modalService.show(template, {animated: false, class: 'sfb-modal-dialog'});
-    }
+    openModalWithComponent(assesmentArea: string) {
+      const modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assesmentArea);
+      const initialState = {
+        title: modalContent.title,
+        textContent: modalContent.textContent,
+        tresholds: this.model.sadAssesmentAreas.find(sad => sad.assesmentAreaName === assesmentArea).allTresholds
+      };
 
+      this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});
+    }
 }
