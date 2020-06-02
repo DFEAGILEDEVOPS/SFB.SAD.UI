@@ -28,12 +28,12 @@
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">Number of pupils</td>
           <td class="govuk-table__cell">{{noPupils}}</td>
-          <td class="govuk-table__cell">Schools with {{SizeLookup.noPupilsMin}} - {{SizeLookup.noPupilsMax}} pupils</td>
+          <td class="govuk-table__cell"><span *ngIf='SizeLookup'>Schools with {{SizeLookup.noPupilsMin}} - {{SizeLookup.noPupilsMax}} pupils</span></td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">FSM</td>
           <td class="govuk-table__cell">{{FSM | number : '1.0-1'}}%</td>
-          <td class="govuk-table__cell">Schools with {{FSMLookup.fsmMin | number : '1.0-1'}} - {{FSMLookup.fsmMax | number: '1.0-1'}}% FSM</td>
+          <td class="govuk-table__cell"><span *ngIf='FSMLookup'>Schools with {{FSMLookup.fsmMin | number : '1.0-1'}} - {{FSMLookup.fsmMax | number: '1.0-1'}}% FSM</span></td>
         </tr>
       </tbody>
     </table>
