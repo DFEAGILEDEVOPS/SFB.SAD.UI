@@ -42,17 +42,21 @@ export class DashboardComponent implements OnInit {
         this.model.sadAssesmentAreas.forEach(element => {
           element.matchingTreshold =
             element.allTresholds.find(t => element.percentageSchoolData >= t.scoreLow && element.percentageSchoolData <= t.scoreHigh);
-        }); // todo: is it necessary to do this here, for all aa
+        });
+        this.model.spendingAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'Spending');
+        this.model.reserveAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'Reserve and balance');
+        this.model.characteristicAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'School characteristics');
+        this.model.outcomeAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'Outcomes');
       });
     }
 
-    openModalWithComponent(assesmentArea: string) {
-      const modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assesmentArea);
+    openModalWithComponent(assessmentArea: string) {
+      const modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
       const initialState = {
         title: modalContent.title,
         textContent: modalContent.textContent,
-        tresholds: this.model.sadAssesmentAreas.find(sad => sad.assesmentAreaName === assesmentArea).allTresholds,
-        matchingTreshold: this.model.sadAssesmentAreas.find(sad => sad.assesmentAreaName === assesmentArea).matchingTreshold
+        tresholds: this.model.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).allTresholds,
+        matchingTreshold: this.model.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).matchingTreshold
       };
 
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});

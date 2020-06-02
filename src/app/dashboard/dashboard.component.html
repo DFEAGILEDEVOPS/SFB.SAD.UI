@@ -38,12 +38,34 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    <tr class="govuk-table__row" *ngFor='let aa of model.sadAssesmentAreas'>
-      <td class="govuk-table__cell">{{aa.assesmentAreaName}}</td>
+    <tr class="govuk-table__row" *ngFor='let aa of model.spendingAAs'>
+      <td class="govuk-table__cell">{{aa.assessmentAreaName}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">{{aa.schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">{{aa.percentageSchoolData | percent : '1.0-1'}}</td>
       <td class="govuk-table__cell"><span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-      <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assesmentAreaName)" />
+      <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assessmentAreaName)" />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-!-font-size-24">Reserve and balance</caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Assessment area</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">School data</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">% of income</th>
+      <th scope="col" class="govuk-table__header">Rating against tresholds</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row" *ngFor='let aa of model.reserveAAs'>
+      <td class="govuk-table__cell">{{aa.assessmentAreaName}}</td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">{{aa.schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">{{aa.percentageSchoolData | percent : '1.0-1'}}</td>
+      <td class="govuk-table__cell"><span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
+      <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assessmentAreaName)" />
       </td>
     </tr>
   </tbody>

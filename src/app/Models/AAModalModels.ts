@@ -49,7 +49,17 @@ export class AAModalModels {
         <p>Schools should understand their rating and whether any changes are required to achieve better resource management.</p>
         <p>Spend that is significantly higher than other schools may suggest that too much resource is spent on energy and more
         conservation may need to be considered for both environmental and expense reasons.</p>`
-      }
+      },
+      {
+        assessmentArea : 'In-year balance',
+        title : 'In-year balance as a percentage of total income',
+        textContent : `<p>n/a</p>`
+      },
+      {
+        assessmentArea : 'Revenue reserve',
+        title : 'Revenue reserve as a percentage of total income',
+        textContent : `<p>n/a</p>`
+      },
 
     ];
   }

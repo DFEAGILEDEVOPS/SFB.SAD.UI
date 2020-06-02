@@ -12,4 +12,8 @@ export class SAModel {
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
   sadAssesmentAreas: AssessmentAreaModel[];
+  spendingAAs: AssessmentAreaModel[];
+  reserveAAs: AssessmentAreaModel[];
+  characteristicAAs: AssessmentAreaModel[];
+  outcomeAAs: AssessmentAreaModel[];
 }

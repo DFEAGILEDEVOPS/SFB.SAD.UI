@@ -1,6 +1,7 @@
 import { TresholdModel } from './TresholdModel';
 export class AssessmentAreaModel {
-  assesmentAreaName: string;
+  assessmentAreaType: string;
+  assessmentAreaName: string;
   schoolData: number;
   percentageSchoolData: number;
   allTresholds: TresholdModel[];
