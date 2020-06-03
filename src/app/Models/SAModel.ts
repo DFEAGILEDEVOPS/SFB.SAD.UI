@@ -9,6 +9,11 @@ export class SAModel {
   londonWeighting: string;
   numberOfPupils: number;
   fsm: number;
+  ofstedRating: string;
+  ofstedInspectionDate: Date;
+  progressScore: number;
+  progressScoreType: string;
+  progress8Banding: number;
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
   sadAssesmentAreas: AssessmentAreaModel[];
