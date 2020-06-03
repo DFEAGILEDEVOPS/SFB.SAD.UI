@@ -9,10 +9,12 @@ import { TresholdModel } from 'app/Models/TresholdModel';
 })
 export class DashboardAaModalComponent implements OnInit {
 
+  assessmentArea: string;
   title: string;
   textContent: string;
   tresholds: TresholdModel[];
   matchingTreshold: TresholdModel;
+  tresholdFormat: string;
 
   constructor(public bsModalRef: BsModalRef) {}
 

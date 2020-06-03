@@ -39,9 +39,9 @@ export class DashboardComponent implements OnInit {
       this.saDataService.getSaData(this.urn).
       subscribe(result => {
         this.model = result;
-        this.model.sadAssesmentAreas.forEach(element => {
-          element.matchingTreshold =
-            element.allTresholds.find(t => element.percentageSchoolData >= t.scoreLow && element.percentageSchoolData <= t.scoreHigh);
+        this.model.sadAssesmentAreas.forEach(aa => {
+          aa.matchingTreshold = aa.allTresholds.find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
+          aa.schoolDataFormat = this.getDataFormat(aa.assessmentAreaName);
         });
         this.model.spendingAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'Spending');
         this.model.reserveAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'Reserve and balance');
@@ -53,12 +53,31 @@ export class DashboardComponent implements OnInit {
     openModalWithComponent(assessmentArea: string) {
       const modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
       const initialState = {
+        assessmentArea : modalContent.assessmentArea,
         title: modalContent.title,
         textContent: modalContent.textContent,
         tresholds: this.model.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).allTresholds,
-        matchingTreshold: this.model.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).matchingTreshold
+        matchingTreshold: this.model.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).matchingTreshold,
+        tresholdFormat: this.getDataFormat(modalContent.assessmentArea)
       };
 
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});
+    }
+
+    getDataFormat(assessmentArea): string {
+      switch (assessmentArea) {
+        case 'Pupil to teacher ratio':
+        case 'Pupil to adult ratio':
+          return 'number';
+        case 'Average teacher cost':
+          return 'currency';
+        case 'Senior leaders as a percentage of workforce':
+            return 'percentageOfWf';
+        case 'In-year balance':
+        case 'Revenue reserve':
+              return 'percentageOfInc';
+        default:
+          return 'percentageOfExp';
+      }
     }
 }

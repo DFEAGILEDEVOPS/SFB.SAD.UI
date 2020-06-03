@@ -60,6 +60,26 @@ export class AAModalModels {
         title : 'Revenue reserve as a percentage of total income',
         textContent : `<p>n/a</p>`
       },
+      {
+        assessmentArea : 'Average teacher cost',
+        title : 'Average teacher cost',
+        textContent : `<p>n/a</p>`
+      },
+      {
+        assessmentArea : 'Senior leaders as a percentage of workforce',
+        title : 'Senior leaders as a percentage of workforce',
+        textContent : `<p>n/a</p>`
+      },
+      {
+        assessmentArea : 'Pupil to teacher ratio',
+        title : 'Pupil to teacher ratio',
+        textContent : `<p>n/a</p>`
+      },
+      {
+        assessmentArea : 'Pupil to adult ratio',
+        title : 'Pupil to adult ratio',
+        textContent : `<p>n/a</p>`
+      },
 
     ];
   }
