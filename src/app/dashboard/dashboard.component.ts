@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { SaDataService as SaDataService } from '@core/network/services/sadata.service';
 import { SizeLookupModel } from 'app/Models/SizeLookupModel';
 import { FSMLookupModel } from 'app/Models/FSMLookupModel';
-import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
 
 @Component({
@@ -16,7 +15,7 @@ import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-mod
 })
 export class DashboardComponent implements OnInit {
   urn: number;
-  model: SAModel;
+  activeScenario: SAModel;
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
 
@@ -27,26 +26,44 @@ export class DashboardComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
       });
-      this.model = new SAModel();
-      this.model.name = 'Your school';
-      this.model.sadSizeLookup = new SizeLookupModel();
-      this.model.sadFSMLookup = new FSMLookupModel();
-      this.model.sadAssesmentAreas = [];
+      this.activeScenario = new SAModel();
+      this.activeScenario.name = 'Your school';
+      this.activeScenario.sadSizeLookup = new SizeLookupModel();
+      this.activeScenario.sadFSMLookup = new FSMLookupModel();
+      this.activeScenario.sadAssesmentAreas = [];
       this.aaModalModels = new AAModalModels();
     }
 
     ngOnInit() {
       this.saDataService.getSaData(this.urn).
       subscribe(result => {
-        this.model = result;
-        this.model.sadAssesmentAreas.forEach(aa => {
-          aa.matchingTreshold = aa.allTresholds.find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
+        this.activeScenario = result;
+        this.activeScenario.sadAssesmentAreas.forEach(aa => {
+
+          if (!aa.schoolData) {
+            aa.schoolData = aa.schoolDataLatestTerm;
+          }
+
+          if (!aa.percentageSchoolData) {// TODO: calculate this in angular instead of in server side?
+            aa.percentageSchoolData = aa.percentageSchoolDataLatestTerm;
+          }
+
+          aa.matchingTreshold = aa.allTresholds
+            .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
+
           aa.schoolDataFormat = this.getDataFormat(aa.assessmentAreaName);
         });
-        this.model.spendingAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'Spending');
-        this.model.reserveAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'Reserve and balance');
-        this.model.characteristicAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'School characteristics');
-        this.model.outcomeAAs = this.model.sadAssesmentAreas.filter(aa => aa.assessmentAreaType === 'Outcomes');
+
+        this.copyEditableFieldsFromLatestTermData();
+
+        this.activeScenario.spendingAAs = this.activeScenario.sadAssesmentAreas
+          .filter(aa => aa.assessmentAreaType === 'Spending');
+        this.activeScenario.reserveAAs = this.activeScenario.sadAssesmentAreas
+          .filter(aa => aa.assessmentAreaType === 'Reserve and balance');
+        this.activeScenario.characteristicAAs = this.activeScenario.sadAssesmentAreas
+          .filter(aa => aa.assessmentAreaType === 'School characteristics');
+        this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
+          .filter(aa => aa.assessmentAreaType === 'Outcomes');
       });
     }
 
@@ -56,15 +73,15 @@ export class DashboardComponent implements OnInit {
         assessmentArea : modalContent.assessmentArea,
         title: modalContent.title,
         textContent: modalContent.textContent,
-        tresholds: this.model.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).allTresholds,
-        matchingTreshold: this.model.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).matchingTreshold,
+        tresholds: this.activeScenario.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).allTresholds,
+        matchingTreshold: this.activeScenario.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).matchingTreshold,
         tresholdFormat: this.getDataFormat(modalContent.assessmentArea)
       };
 
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});
     }
 
-    getDataFormat(assessmentArea): string {
+    private getDataFormat(assessmentArea): string {
       switch (assessmentArea) {
         case 'Pupil to teacher ratio':
         case 'Pupil to adult ratio':
@@ -78,6 +95,30 @@ export class DashboardComponent implements OnInit {
               return 'percentageOfInc';
         default:
           return 'percentageOfExp';
+      }
+    }
+
+    private copyEditableFieldsFromLatestTermData() {
+      if (!this.activeScenario.overallPhase) {
+        this.activeScenario.overallPhase = this.activeScenario.overallPhaseLatestTerm;
+      }
+      if (!this.activeScenario.overallPhaseWSixthForm) {
+        this.activeScenario.overallPhaseWSixthForm = this.activeScenario.overallPhaseWSixthFormLatestTerm;
+      }
+      if (!this.activeScenario.totalIncome) {
+        this.activeScenario.totalIncome = this.activeScenario.totalIncomeLatestTerm;
+      }
+      if (!this.activeScenario.totalExpenditure) {
+        this.activeScenario.totalExpenditure = this.activeScenario.totalExpenditureLatestTerm;
+      }
+      if (!this.activeScenario.londonWeighting) {
+        this.activeScenario.londonWeighting = this.activeScenario.londonWeightingLatestTerm;
+      }
+      if (!this.activeScenario.numberOfPupils) {
+        this.activeScenario.numberOfPupils = this.activeScenario.numberOfPupilsLatestTerm;
+      }
+      if (!this.activeScenario.fsm) {
+        this.activeScenario.fsm = this.activeScenario.fsmLatestTerm;
       }
     }
 }
