@@ -21,8 +21,4 @@ export class SAModel {
   reserveAAs: AssessmentAreaModel[];
   characteristicAAs: AssessmentAreaModel[];
   outcomeAAs: AssessmentAreaModel[];
-
-  get OfstedInpectionDateAsDate() {
-    return Date.parse(this.ofstedInspectionDate);
-  }
 }
