@@ -10,7 +10,7 @@ export class SAModel {
   numberOfPupils: number;
   fsm: number;
   ofstedRating: string;
-  ofstedInspectionDate: Date;
+  ofstedInspectionDate: string;
   progressScore: number;
   progressScoreType: string;
   progress8Banding: number;
@@ -21,4 +21,8 @@ export class SAModel {
   reserveAAs: AssessmentAreaModel[];
   characteristicAAs: AssessmentAreaModel[];
   outcomeAAs: AssessmentAreaModel[];
+
+  get OfstedInpectionDateAsDate() {
+    return Date.parse(this.ofstedInspectionDate);
+  }
 }
