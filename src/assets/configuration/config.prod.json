@@ -12,8 +12,7 @@
       "robots": "index, follow"
     },
     "sfbDomain": "https://as-t1dv-sfb.azurewebsites.net",
-    "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api/selfassesment",
-    "azureMapsAPIKey": "a__5AhQrG6OxElxgZbNmbWu3CAlP_-VKdcxzcwA6WYo"
+    "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api/selfassesment"
   },
   "emailSettings": {
     "emailAddresses": [

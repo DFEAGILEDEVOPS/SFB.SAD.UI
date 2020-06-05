@@ -25,6 +25,20 @@
 [FSMLookup]='activeScenario.sadFSMLookup'
 ></app-dashboard-characteristics>
 
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="float-right">
+      <button class="govuk-button govuk-!-margin-right-4" data-module="govuk-button">
+        Add a side-by-side scenario
+      </button>
+      <button class="govuk-button govuk-button--secondary" data-module="govuk-button"
+        routerLink='/self-assessment/editing-format/{{urn}}/{{activeScenario.name}}'>
+        Edit data
+      </button>
+    </div>
+  </div>
+</div>
+
 <h2 class="govuk-heading-m">{{activeScenario.latestTerm}} finance data</h2>
 
 <table class="govuk-table">
@@ -87,9 +101,17 @@
           <span *ngIf="aa.schoolDataFormat ==='currency'">{{aa.percentageSchoolData | currency: 'GBP' :'symbol': '1.0-0'}}</span>
           <span *ngIf="aa.schoolDataFormat ==='percentageOfExp' || aa.schoolDataFormat ==='percentageOfInc' || aa.schoolDataFormat==='percentageOfWf'">{{aa.percentageSchoolData | percent: '1.0-0'}}</span>
           <span *ngIf="aa.schoolDataFormat ==='number'">{{aa.percentageSchoolData | number: '1.0-1'}}</span>
+          <span *ngIf="!aa.schoolData">--</span>
       </td>
-      <td class="govuk-table__cell"><span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-      <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assessmentAreaName)" />
+      <td *ngIf="aa.schoolData" class="govuk-table__cell"><span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
+        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assessmentAreaName)" />
+      </td>
+      <td *ngIf="!aa.schoolData" class="govuk-table__cell">
+        <span class="rating-box gray">
+          <span>Not available.</span>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/editing-format/{{urn}}/{{activeScenario.name}}'>Add data</a>
+        </span>
+        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" />
       </td>
     </tr>
   </tbody>

@@ -7,6 +7,7 @@ import { SaDataService as SaDataService } from '@core/network/services/sadata.se
 import { SizeLookupModel } from 'app/Models/SizeLookupModel';
 import { FSMLookupModel } from 'app/Models/FSMLookupModel';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
+import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,7 @@ export class DashboardComponent implements OnInit {
   activeScenario: SAModel;
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
+  viewMode: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +28,7 @@ export class DashboardComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
       });
+      this.viewMode = 'Display';
       this.activeScenario = new SAModel();
       this.activeScenario.name = 'Your school';
       this.activeScenario.sadSizeLookup = new SizeLookupModel();
@@ -62,6 +65,12 @@ export class DashboardComponent implements OnInit {
           .filter(aa => aa.assessmentAreaType === 'Reserve and balance');
         this.activeScenario.characteristicAAs = this.activeScenario.sadAssesmentAreas
           .filter(aa => aa.assessmentAreaType === 'School characteristics');
+        this.activeScenario.characteristicAAs
+          .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
+        this.activeScenario.characteristicAAs
+          .push(new AssessmentAreaModel('School characteristics', 'Predicted percentage pupil number change in 3-5 years'));
+        this.activeScenario.characteristicAAs
+          .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
         this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
           .filter(aa => aa.assessmentAreaType === 'Outcomes');
       });

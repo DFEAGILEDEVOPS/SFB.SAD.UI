@@ -188,3 +188,13 @@ caption{
 .rating-box.Amber{
   background-color:#FFA029;
 }
+
+.rating-box.gray{
+  background-color: govuk-colour("light-grey");
+}
+
+.button-link {
+  text-decoration: underline!important;
+  cursor: pointer;
+  color:  $govuk-link-colour!important;
+}

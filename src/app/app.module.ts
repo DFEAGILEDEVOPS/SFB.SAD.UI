@@ -1,3 +1,5 @@
+import { EditingFormatBreadcrumbsComponent } from './editing-format/editing-format-breadcrumbs/editing-format-breadcrumbs.component';
+import { EditingFormatComponent } from './editing-format/editing-format.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -22,7 +24,9 @@ import { DashboardAaModalComponent } from './dashboard/dashboard-aa-modal/dashbo
     DashboardBreadcrumbComponent,
     DashboardCharacteristicsComponent,
     DashboardComponent,
-    DashboardAaModalComponent
+    DashboardAaModalComponent,
+    EditingFormatComponent,
+    EditingFormatBreadcrumbsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

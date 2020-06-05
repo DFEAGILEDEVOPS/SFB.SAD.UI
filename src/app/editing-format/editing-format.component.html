@@ -1,0 +1,50 @@
+<app-editing-format-breadcrumbs [urn]='urn' [name]='name'></app-editing-format-breadcrumbs>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">How would you like to edit the data?</h1>
+    <p class="govuk-body-s">
+      Assessing
+      <span class="highlight">
+        <span class="govuk-!-font-weight-bold">{{name}}</span>
+      </span>
+    </p>
+  </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--m">
+
+<form #emTypeForm="ngForm">
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="top-schools" name="editType" type="radio" [(ngModel)]='editType' [value]="'FinancialFigures'" required>
+          <label class="govuk-label govuk-radios__label" for="top-schools">
+            Using financial figures (£)
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="manual" name="editType" type="radio" [(ngModel)]='editType' [value]="'Percentages'" required>
+          <label class="govuk-label govuk-radios__label" for="manual">
+            Using percentage of total expenditure/income
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <hr class="govuk-section-break govuk-section-break--l">
+
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-full">
+      <button class="govuk-button" data-module="govuk-button" type="submit" (click)='onContinue()'>
+        Continue
+      </button>
+      <a routerLink="/self-assessment/{{urn}}"
+        class="govuk-link govuk-link--no-visited-state back-button">Back</a>
+    </div>
+  </div>
+
+</form>
+
