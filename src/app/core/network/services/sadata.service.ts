@@ -1,4 +1,4 @@
-import { SAModel } from '../../../Models/SAModel';
+import { SaScenario } from '../../../Models/SaScenario';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -12,11 +12,11 @@ export class SaDataService {
 
 constructor(private http: HttpClient, @Inject(appSettings) private settings: AppSettings) { }
 
-getSaData(urn: number): Observable<SAModel> {
-  return this.http.get<SAModel>(`${this.settings.apiDomain}/${urn}`)
+getSaData(urn: number): Observable<SaScenario> {
+  return this.http.get<SaScenario>(`${this.settings.apiDomain}/${urn}`)
     .pipe(
-      tap(_ => this.log('fetched emData')),
-      catchError(this.handleError<SAModel>('getEmData', new SAModel()))
+      tap(_ => this.log('fetched saData')),
+      catchError(this.handleError<SaScenario>('getSaData', new SaScenario()))
     );
 }
 

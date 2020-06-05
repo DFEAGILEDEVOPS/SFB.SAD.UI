@@ -1,0 +1,68 @@
+<app-edit-data-breadcrumb [name]='scenarioUnderEdit.name' [urn]='scenarioUnderEdit.urn'></app-edit-data-breadcrumb>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Edit data</h1>
+    <p class="govuk-body-s">
+      Assessing
+      <span class="highlight">
+        <span class="govuk-!-font-weight-bold">{{scenarioUnderEdit.name}}</span>
+      </span>
+    </p>
+  </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--m">
+
+<form>
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        <h2 class="govuk-fieldset__heading">
+         Scenario details
+        </h2>
+      </legend>
+      <label class="govuk-label" for="scenario-name">
+        Name of scenario
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text" [(ngModel)]='scenarioUnderEdit.scenarioName'>
+    </fieldset>
+  </div>
+
+  <hr class="govuk-section-break govuk-section-break--l">
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        <h2 class="govuk-fieldset__heading">
+         School details
+        </h2>
+      </legend>
+      <label class="govuk-label" for="school-phase">
+        School phase
+      </label>
+      <span id="account-number-hint" class="govuk-hint">
+        The {{scenarioUnderEdit.latestTerm}} value was <span class="govuk-!-font-weight-bold">{{scenarioUnderEdit.overallPhaseWSixthFormLatestTerm}}</span>
+      </span>
+      <select class="govuk-select" id="school-phase" name="school-phase" [(ngModel)]='scenarioUnderEdit.overallPhaseWSixthForm'>
+        <option value="Nursery">Nursery</option>
+        <option value="Primary">Primary</option>
+        <option value="Secondary">Secondary</option>
+        <option value="Special">Special</option>
+        <option value="Pupil referral unit">Pupil referral unit</option>
+        <option value="All-through">All-through</option>
+      </select>
+    </fieldset>
+  </div>
+
+  <div class="govuk-grid-row govuk-body">
+    <div class="govuk-grid-column-full">
+      <button class="govuk-button" data-module="govuk-button" type="submit">
+        Submit
+      </button>
+      <a routerLink="/self-assessment/{{scenarioUnderEdit.urn}}"
+        class="govuk-link govuk-link--no-visited-state back-button">Back</a>
+    </div>
+  </div>
+
+</form>

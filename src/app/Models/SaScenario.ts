@@ -1,7 +1,7 @@
 import { AssessmentAreaModel } from './AssessmentAreaModel';
 import { FSMLookupModel } from './FSMLookupModel';
 import { SizeLookupModel } from './SizeLookupModel';
-export class SAModel {
+export class SaScenario {
   scenarioName: string;
   urn: number;
   name: string;

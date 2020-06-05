@@ -22,9 +22,9 @@ export class EditingFormatComponent implements OnInit {
 
   onContinue() {
     if (this.editType === 'FinancialFigures') {
-      this.router.navigate(['self-assessment/', this.urn]);
+      this.router.navigate(['self-assessment/edit-data']);
     } else {
-      this.router.navigate(['self-assessment/', this.urn]);
+      this.router.navigate(['self-assessment/edit-data']);
     }
   }
 

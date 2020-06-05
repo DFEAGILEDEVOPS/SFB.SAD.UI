@@ -1,3 +1,5 @@
+import { EditDataBreadcrumbComponent } from './edit-data/edit-data-breadcrumb/edit-data-breadcrumb.component';
+import { EditDataComponent } from './edit-data/edit-data.component';
 import { EditingFormatBreadcrumbsComponent } from './editing-format/editing-format-breadcrumbs/editing-format-breadcrumbs.component';
 import { EditingFormatComponent } from './editing-format/editing-format.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -26,7 +28,9 @@ import { DashboardAaModalComponent } from './dashboard/dashboard-aa-modal/dashbo
     DashboardComponent,
     DashboardAaModalComponent,
     EditingFormatComponent,
-    EditingFormatBreadcrumbsComponent
+    EditingFormatBreadcrumbsComponent,
+    EditDataComponent,
+    EditDataBreadcrumbComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

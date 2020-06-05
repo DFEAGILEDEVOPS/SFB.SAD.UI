@@ -1,5 +1,6 @@
+import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
-import { SAModel } from './../Models/SAModel';
+import { SaScenario } from '../Models/SaScenario';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +17,7 @@ import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
 })
 export class DashboardComponent implements OnInit {
   urn: number;
-  activeScenario: SAModel;
+  activeScenario: SaScenario;
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
   viewMode: string;
@@ -24,12 +25,13 @@ export class DashboardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private modalService: BsModalService,
-    private saDataService: SaDataService) {
+    private saDataService: SaDataService,
+    private saScenariosService: SaScenariosService) {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
       });
       this.viewMode = 'Display';
-      this.activeScenario = new SAModel();
+      this.activeScenario = new SaScenario();
       this.activeScenario.name = 'Your school';
       this.activeScenario.sadSizeLookup = new SizeLookupModel();
       this.activeScenario.sadFSMLookup = new FSMLookupModel();
@@ -41,6 +43,9 @@ export class DashboardComponent implements OnInit {
       this.saDataService.getSaData(this.urn).
       subscribe(result => {
         this.activeScenario = result;
+
+        this.activeScenario.termOfScenario = this.activeScenario.latestTerm;
+        this.activeScenario.scenarioName = this.activeScenario.termOfScenario + ' finance data';
         this.activeScenario.sadAssesmentAreas.forEach(aa => {
 
           if (!aa.schoolData) {
@@ -73,6 +78,8 @@ export class DashboardComponent implements OnInit {
           .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
         this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
           .filter(aa => aa.assessmentAreaType === 'Outcomes');
+
+          this.saScenariosService.setFirstScenario(this.activeScenario);
       });
     }
 
