@@ -115,7 +115,7 @@
           <span class="govuk-!-font-weight-bold" *ngSwitchCase="'4'"> Inadequate</span>
         </span> |
         <a class="govuk-link" target="_blank" rel="external noopener noreferrer" href="https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/{{activeScenario.urn}}">Ofsted report</a> |
-        <span>Inspected {{ activeScenario.ofstedInspectionDate }}</span>
+        <span>Inspected {{ activeScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
       </td>
     </tr>
     <tr class="govuk-table__row" *ngIf="activeScenario.progressScoreType === 'KS2 score'">
