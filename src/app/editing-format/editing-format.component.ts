@@ -1,5 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-editing-format',
@@ -11,6 +12,9 @@ export class EditingFormatComponent implements OnInit {
   name: string;
   editType: string;
 
+  @ViewChild('editFormatForm')
+  private form: NgForm;
+
   constructor(private route: ActivatedRoute, private router: Router) {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
@@ -21,10 +25,12 @@ export class EditingFormatComponent implements OnInit {
   ngOnInit() { }
 
   onContinue() {
-    if (this.editType === 'FinancialFigures') {
-      this.router.navigate(['self-assessment/edit-data', this.urn]);
-    } else {
-      this.router.navigate(['self-assessment/edit-data', this.urn]);
+    if (this.form.valid) {
+      if (this.editType === 'FinancialFigures') {
+        this.router.navigate(['self-assessment/edit-data', this.urn]);
+      } else {
+        this.router.navigate(['self-assessment/edit-data', this.urn]);
+      }
     }
   }
 

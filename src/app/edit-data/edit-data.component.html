@@ -14,7 +14,7 @@
 
 <hr class="govuk-section-break govuk-section-break--m">
 
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" #editDataForm='ngForm'>
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
@@ -25,7 +25,10 @@
       <label class="govuk-label" for="scenario-name">
         Name of scenario
       </label>
-      <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text" [(ngModel)]='scenarioUnderEdit.scenarioName'>
+      <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text" [(ngModel)]='scenarioUnderEdit.scenarioName' required #scenarioName='ngModel'>
+      <div [hidden]="scenarioName.valid || scenarioName.pristine" class="alert alert-danger">
+        Name is required
+      </div>
     </fieldset>
   </div>
 

@@ -14,22 +14,26 @@
 
 <hr class="govuk-section-break govuk-section-break--m">
 
-<form>
+<form  (ngSubmit)='onContinue()' #editFormatForm ="ngForm">
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
       <div class="govuk-radios">
         <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="top-schools" name="editType" type="radio" [(ngModel)]='editType' [value]="'FinancialFigures'" required>
+          <input class="govuk-radios__input" id="top-schools" name="editTypeRadio" type="radio" [(ngModel)]='editType' [value]="'FinancialFigures'" required
+          #editTypeRadio='ngModel'>
           <label class="govuk-label govuk-radios__label" for="top-schools">
             Using financial figures (£)
           </label>
         </div>
         <div class="govuk-radios__item">
-          <input class="govuk-radios__input" id="manual" name="editType" type="radio" [(ngModel)]='editType' [value]="'Percentages'" required>
+          <input class="govuk-radios__input" id="manual" name="editTypeRadio" type="radio" [(ngModel)]='editType' [value]="'Percentages'" required>
           <label class="govuk-label govuk-radios__label" for="manual">
             Using percentage of total expenditure/income
           </label>
         </div>
+      </div>
+      <div [hidden]="editTypeRadio.valid || !editFormatForm.submitted" class="alert alert-danger">
+        Selection is required
       </div>
     </fieldset>
   </div>
@@ -38,7 +42,7 @@
 
   <div class="govuk-grid-row govuk-body">
     <div class="govuk-grid-column-full">
-      <button class="govuk-button" data-module="govuk-button" type="submit" (click)='onContinue()'>
+      <button class="govuk-button" data-module="govuk-button" type="submit">
         Continue
       </button>
       <a routerLink="/self-assessment/{{urn}}"

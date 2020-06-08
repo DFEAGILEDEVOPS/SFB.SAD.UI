@@ -1,7 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { SaScenario } from './../Models/SaScenario';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-data',
@@ -11,6 +12,9 @@ import { SaScenariosService } from '@core/network/services/sascenarios.service';
 export class EditDataComponent implements OnInit {
   scenarioUnderEdit: SaScenario;
   urn: number;
+
+  @ViewChild('editDataForm')
+  private form: NgForm;
 
   constructor(private route: ActivatedRoute, private router: Router, private saScenariosService: SaScenariosService) {
     this.route.params.subscribe(params => {
@@ -28,7 +32,9 @@ export class EditDataComponent implements OnInit {
   }
 
   onSubmit() {
-    this.saScenariosService.setFirstScenario(this.scenarioUnderEdit);
-    this.router.navigate(['self-assessment/', this.urn]);
+    if (this.form.valid) {
+      this.saScenariosService.setFirstScenario(this.scenarioUnderEdit);
+      this.router.navigate(['self-assessment/', this.urn]);
+    }
   }
 }
