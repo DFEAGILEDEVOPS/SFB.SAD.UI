@@ -4,7 +4,6 @@ import { SaScenario } from '../Models/SaScenario';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute } from '@angular/router';
-import { SaDataService as SaDataService } from '@core/network/services/sadata.service';
 import { SizeLookupModel } from 'app/Models/SizeLookupModel';
 import { FSMLookupModel } from 'app/Models/FSMLookupModel';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
@@ -25,7 +24,6 @@ export class DashboardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private modalService: BsModalService,
-    private saDataService: SaDataService,
     private saScenariosService: SaScenariosService) {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
@@ -40,7 +38,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.saDataService.getSaData(this.urn).
+      this.saScenariosService.getFirstScenario(this.urn).
       subscribe(result => {
         this.activeScenario = result;
 
