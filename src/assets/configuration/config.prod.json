@@ -1,31 +1,17 @@
 {
   "appSettings": {
-    "name": "Schools financial benchmarking",
+    "name": "Schools Financial Benchmarking",
     "version": "1.0.0",
     "demo": false,
     "logo": "",
     "seo": {
-      "title": "Schools financial benchmarking",
-      "titleSuffix": "",
-      "description": "Schools financial benchmarking - Efficiency Metric",
-      "author": "Extended Code",
+      "title": "Schools Financial Benchmarking",
+      "titleSuffix": "SFB",
+      "description": "Schools Financial Benchmarking - Efficiency Metric",
+      "author": "Department of Education",
       "robots": "index, follow"
     },
-    "sfbDomain": "https://as-t1dv-sfb.azurewebsites.net",
-    "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api/selfassesment"
-  },
-  "emailSettings": {
-    "emailAddresses": [
-      {
-        "name": "Demo Email",
-        "email": "demowebnet@gmail.com"
-      }
-    ],
-    "providers": [
-      {
-        "name": "sendinblue",
-        "apiUrl": "https://api.sendinblue.com/v3/smtp/email"
-      }
-    ]
+    "sfbDomain": "https://as-t1stg-sfb.azurewebsites.net",
+    "apiDomain": "https://aa-t1stg-sfb.azurewebsites.net/api/selfassesment"
   }
 }
