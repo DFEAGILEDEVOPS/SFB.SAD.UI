@@ -5,28 +5,13 @@
     "demo": false,
     "logo": "",
     "seo": {
-      "title": "Schools financial benchmarking",
-      "titleSuffix": "",
-      "description": "Schools financial benchmarking - Self Assesment Dashboard",
-      "author": "Extended Code",
+      "title": "Schools Financial Benchmarking",
+      "titleSuffix": "SFB",
+      "description": "Schools Financial Benchmarking - Self Assesment Dashboard",
+      "author": "Department of Education",
       "robots": "index, follow"
     },
     "sfbDomain": "http://localhost",
     "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api/selfassesment"
-  },
-  "emailSettings": {
-    "emailAddresses": [
-      {
-        "name": "Demo Email",
-        "email": "demowebnet@gmail.com"
-      }
-    ],
-    "providers": [
-      {
-        "name": "sendinblue",
-        "apiUrl": "https://api.sendinblue.com/v3/smtp/email"
-      }
-    ]
   }
 }
-
