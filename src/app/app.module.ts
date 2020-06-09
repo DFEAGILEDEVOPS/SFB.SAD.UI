@@ -3,7 +3,7 @@ import { EditDataComponent } from './edit-data/edit-data.component';
 import { EditingFormatBreadcrumbsComponent } from './editing-format/editing-format-breadcrumbs/editing-format-breadcrumbs.component';
 import { EditingFormatComponent } from './editing-format/editing-format.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,6 +36,7 @@ import { DashboardAaModalComponent } from './dashboard/dashboard-aa-modal/dashbo
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     NgBootstrapFormValidationModule.forRoot(),
     CoreModule.forRoot(),
