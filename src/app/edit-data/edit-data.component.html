@@ -28,9 +28,21 @@
         </label>
         <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text"
           formControlName='scenarioName' required>
-          <div [hidden]="editDataForm.value.scenarioDetails.scenarioName.valid || editDataForm.value.scenarioDetails.scenarioName.pristine" class="alert alert-danger">
+          <div [hidden]="scenarioName.valid || scenarioName.pristine" class="alert alert-danger">
             Selection is required
           </div>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="scenario-term">
+          Year of scenario
+        </label>
+        <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm'>
+          <option value="2017/2018">2017/2018</option>
+          <option value="2018/2019">2018/2019</option>
+          <option value="2019/2020">2019/2020</option>
+          <option value="2020/2021">2020/2021</option>
+        </select>
       </div>
     </fieldset>
 
@@ -45,9 +57,9 @@
         <label class="govuk-label" for="school-phase">
           School phase
         </label>
-        <span id="account-number-hint" class="govuk-hint">
+        <span class="govuk-hint">
           The {{originalScenario.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{originalScenario.overallPhaseWSixthFormLatestTerm}}</span>
+            class="govuk-!-font-weight-bold">{{originalScenario.overallPhaseLatestTerm}}</span>
         </span>
         <select class="govuk-select" id="school-phase" name="school-phase" formControlName='schoolPhase'>
           <option value="Nursery">Nursery</option>
@@ -60,15 +72,56 @@
       </div>
 
       <div class="govuk-form-group">
+        <label class="govuk-label" for="sixth-form">
+          Has sixth form?
+        </label>
+        <span class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.hasSixthFormLatestTerm}}</span>
+        </span>
+        <select class="govuk-select" id="sixth-form" name="sixth-form" formControlName='hasSixthForm'>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="london-weighting">
+          London weighting
+        </label>
+        <span class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.londonWeightingLatestTerm}}</span>
+        </span>
+        <select class="govuk-select" id="london-weighting" name="london-weighting" formControlName='londonWeighting'>
+          <option value="Neither">Neither</option>
+          <option value="Inner">Inner</option>
+          <option value="Outer">Outer</option>
+        </select>
+      </div>
+
+      <div class="govuk-form-group">
         <label class="govuk-label" for="number-pupils">
           Number of pupils
         </label>
-        <span id="account-number-hint" class="govuk-hint">
+        <span  class="govuk-hint">
           The {{originalScenario.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{originalScenario.numberOfPupilsLatestTerm}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="text"
           formControlName='numberOfPupils'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="fsm">
+          Percentage of pupils eligible for FSM
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.fsmLatestTerm}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="text"
+          formControlName='fsm'>
       </div>
 
     </fieldset>

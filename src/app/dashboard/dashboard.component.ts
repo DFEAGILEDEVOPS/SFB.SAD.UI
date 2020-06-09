@@ -42,42 +42,13 @@ export class DashboardComponent implements OnInit {
       subscribe(result => {
         this.activeScenario = result;
 
-        this.activeScenario.termOfScenario = this.activeScenario.latestTerm;
-        this.activeScenario.scenarioName = this.activeScenario.termOfScenario + ' finance data';
-        this.activeScenario.sadAssesmentAreas.forEach(aa => {
+        this.assignDefaultValuesToScenario();
 
-          if (!aa.schoolData) {
-            aa.schoolData = aa.schoolDataLatestTerm;
-          }
+        this.initializeAssessmentAreas();
 
-          if (!aa.percentageSchoolData) {// TODO: calculate this in angular instead of in server side?
-            aa.percentageSchoolData = aa.percentageSchoolDataLatestTerm;
-          }
+        this.groupAssessmentAreasByTypes();
 
-          aa.matchingTreshold = aa.allTresholds
-            .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
-
-          aa.schoolDataFormat = this.getDataFormat(aa.assessmentAreaName);
-        });
-
-        this.copyEditableFieldsFromLatestTermData();
-
-        this.activeScenario.spendingAAs = this.activeScenario.sadAssesmentAreas
-          .filter(aa => aa.assessmentAreaType === 'Spending');
-        this.activeScenario.reserveAAs = this.activeScenario.sadAssesmentAreas
-          .filter(aa => aa.assessmentAreaType === 'Reserve and balance');
-        this.activeScenario.characteristicAAs = this.activeScenario.sadAssesmentAreas
-          .filter(aa => aa.assessmentAreaType === 'School characteristics');
-        this.activeScenario.characteristicAAs
-          .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
-        this.activeScenario.characteristicAAs
-          .push(new AssessmentAreaModel('School characteristics', 'Predicted percentage pupil number change in 3-5 years'));
-        this.activeScenario.characteristicAAs
-          .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
-        this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
-          .filter(aa => aa.assessmentAreaType === 'Outcomes');
-
-          this.saScenariosService.setFirstScenario(this.activeScenario);
+        this.saScenariosService.setFirstScenario(this.activeScenario);
       });
     }
 
@@ -95,30 +66,61 @@ export class DashboardComponent implements OnInit {
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});
     }
 
-    private getDataFormat(assessmentArea): string {
-      switch (assessmentArea) {
-        case 'Pupil to teacher ratio':
-        case 'Pupil to adult ratio':
-          return 'number';
-        case 'Average teacher cost':
-          return 'currency';
-        case 'Senior leaders as a percentage of workforce':
-            return 'percentageOfWf';
-        case 'In-year balance':
-        case 'Revenue reserve':
-              return 'percentageOfInc';
-        default:
-          return 'percentageOfExp';
-      }
+    private initializeAssessmentAreas() {
+      this.activeScenario.sadAssesmentAreas.forEach(aa => {
+        if (!aa.schoolData) {
+          aa.schoolData = aa.schoolDataLatestTerm;
+        }
+        if (!aa.percentageSchoolData) { // TODO: calculate this in angular instead of in server side?
+          aa.percentageSchoolData = aa.percentageSchoolDataLatestTerm;
+        }
+        aa.matchingTreshold = aa.allTresholds
+          .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
+        aa.schoolDataFormat = this.getDataFormat(aa.assessmentAreaName);
+      });
     }
 
-    private copyEditableFieldsFromLatestTermData() {
+    private groupAssessmentAreasByTypes() {
+      this.activeScenario.spendingAAs = this.activeScenario.sadAssesmentAreas
+        .filter(aa => aa.assessmentAreaType === 'Spending');
+      this.activeScenario.reserveAAs = this.activeScenario.sadAssesmentAreas
+        .filter(aa => aa.assessmentAreaType === 'Reserve and balance');
+      this.activeScenario.characteristicAAs = this.activeScenario.sadAssesmentAreas
+        .filter(aa => aa.assessmentAreaType === 'School characteristics');
+      this.activeScenario.characteristicAAs
+        .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
+      this.activeScenario.characteristicAAs
+        .push(new AssessmentAreaModel('School characteristics', 'Predicted percentage pupil number change in 3-5 years'));
+      this.activeScenario.characteristicAAs
+        .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
+      this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
+        .filter(aa => aa.assessmentAreaType === 'Outcomes');
+    }
+
+    private assignDefaultValuesToScenario() {
+
+      this.activeScenario.termOfScenario = !this.activeScenario.termOfScenario ?
+        this.activeScenario.latestTerm
+        : this.activeScenario.termOfScenario;
+
+      this.activeScenario.scenarioName = !this.activeScenario.scenarioName ?
+        this.activeScenario.termOfScenario + ' finance data'
+        : this.activeScenario.scenarioName;
+
       if (!this.activeScenario.overallPhase) {
         this.activeScenario.overallPhase = this.activeScenario.overallPhaseLatestTerm;
       }
-      if (!this.activeScenario.overallPhaseWSixthForm) {
-        this.activeScenario.overallPhaseWSixthForm = this.activeScenario.overallPhaseWSixthFormLatestTerm;
+
+      if (!this.activeScenario.hasSixthForm) {
+        this.activeScenario.hasSixthForm = this.activeScenario.hasSixthFormLatestTerm;
       }
+
+      this.activeScenario.overallPhaseWSixthForm = this.activeScenario.overallPhase;
+
+      if (this.activeScenario.hasSixthForm && this.activeScenario.overallPhase !== 'All-through') {
+        this.activeScenario.overallPhaseWSixthForm += ' with sixth form';
+      }
+
       if (!this.activeScenario.totalIncome) {
         this.activeScenario.totalIncome = this.activeScenario.totalIncomeLatestTerm;
       }
@@ -133,6 +135,23 @@ export class DashboardComponent implements OnInit {
       }
       if (!this.activeScenario.fsm) {
         this.activeScenario.fsm = this.activeScenario.fsmLatestTerm;
+      }
+    }
+
+    private getDataFormat(assessmentArea): string {
+      switch (assessmentArea) {
+        case 'Pupil to teacher ratio':
+        case 'Pupil to adult ratio':
+          return 'number';
+        case 'Average teacher cost':
+          return 'currency';
+        case 'Senior leaders as a percentage of workforce':
+            return 'percentageOfWf';
+        case 'In-year balance':
+        case 'Revenue reserve':
+              return 'percentageOfInc';
+        default:
+          return 'percentageOfExp';
       }
     }
 }

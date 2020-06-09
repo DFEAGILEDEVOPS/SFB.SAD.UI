@@ -14,6 +14,9 @@ export class EditDataComponent implements OnInit {
   urn: number;
   editDataForm: FormGroup;
 
+
+  get scenarioName() { return this.editDataForm.get('scenarioDetails').get('scenarioName'); }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -29,11 +32,15 @@ export class EditDataComponent implements OnInit {
 
         this.editDataForm = this.fb.group({
           scenarioDetails: this.fb.group({
-            scenarioName: [this.originalScenario.termOfScenario, Validators.required]
+            scenarioName: [this.originalScenario.scenarioName, Validators.required],
+            scenarioTerm: [this.originalScenario.termOfScenario]
           }),
           schoolDetails: this.fb.group({
-            schoolPhase: [this.originalScenario.overallPhaseWSixthForm],
-            numberOfPupils: [this.originalScenario.numberOfPupils]
+            schoolPhase: [this.originalScenario.overallPhase],
+            hasSixthForm: [this.originalScenario.hasSixthForm],
+            londonWeighting: [this.originalScenario.londonWeighting],
+            numberOfPupils: [this.originalScenario.numberOfPupils],
+            fsm: [this.originalScenario.fsm]
           })
         });
       });
@@ -46,11 +53,16 @@ export class EditDataComponent implements OnInit {
     if (this.editDataForm.valid) {
       const editedScenario: SaScenario = JSON.parse(JSON.stringify(this.originalScenario));
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
-      editedScenario.overallPhaseWSixthForm = this.editDataForm.value.schoolDetails.schoolPhase;
+      editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
+      editedScenario.overallPhase = this.editDataForm.value.schoolDetails.schoolPhase;
+      editedScenario.hasSixthForm = this.editDataForm.value.schoolDetails.hasSixthForm;
+      editedScenario.londonWeighting = this.editDataForm.value.schoolDetails.londonWeighting;
       editedScenario.numberOfPupils = this.editDataForm.value.schoolDetails.numberOfPupils;
+      editedScenario.fsm = this.editDataForm.value.schoolDetails.fsm;
 
       this.saScenariosService.setFirstScenario(editedScenario);
       this.router.navigate(['self-assessment/', this.urn]);
     }
   }
+
 }

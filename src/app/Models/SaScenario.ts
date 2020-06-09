@@ -8,9 +8,10 @@ export class SaScenario {
   latestTerm: string;
   termOfScenario: string;
   overallPhase: string;
+  hasSixthForm: string;
+  hasSixthFormLatestTerm: string;
   overallPhaseLatestTerm: string;
   overallPhaseWSixthForm: string;
-  overallPhaseWSixthFormLatestTerm: string;
   londonWeighting: string;
   londonWeightingLatestTerm: string;
   numberOfPupils: number;
