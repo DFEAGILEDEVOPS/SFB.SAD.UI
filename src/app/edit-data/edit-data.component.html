@@ -125,6 +125,122 @@
         <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="text"
           formControlName='fsm'>
       </div>
+    </fieldset>
+
+    <fieldset class="govuk-fieldset" formGroupName='spendingDetails'>
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        <h2 class="govuk-fieldset__heading">
+          Spending
+        </h2>
+      </legend>
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !totalExpenditure.valid && !totalExpenditure.pristine}">
+        <label class="govuk-label" for="total-expenditure">
+          Total expenditure
+        </label>
+        <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
+          formControlName='totalExpenditure' [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}" required>
+          <div [hidden]="totalExpenditure.valid || totalExpenditure.pristine">
+            <span class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> Total expenditure is required
+            </span>
+          </div>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="ts">
+          Spending on teaching staff
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Teaching staff')}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text"
+          formControlName='teachingStaff'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="ss">
+          Spending on supply staff
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Supply staff')}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text"
+          formControlName='supplyStaff'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="ess">
+          Spending on education support staff
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Education support staff')}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text"
+          formControlName='educationSupportStaff'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="acs">
+          Spending on administrative and clerical staff
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Administrative and clerical staff')}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text"
+          formControlName='adminStaff'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="osc">
+          Spending on other staff costs
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Other staff costs')}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text"
+          formControlName='otherStaff'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="prc">
+          Spending on premises costs
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Premises costs')}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text"
+          formControlName='premises'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="tr">
+          Spending on teaching resources
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Teaching resources')}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text"
+          formControlName='teachingResources'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="en">
+          Spending on energy
+        </label>
+        <span  class="govuk-hint">
+          The {{originalScenario.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Energy')}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text"
+          formControlName='energy'>
+      </div>
 
     </fieldset>
 

@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
 
         this.groupAssessmentAreasByTypes();
 
-        this.saScenariosService.setFirstScenario(this.activeScenario);
+         this.saScenariosService.setFirstScenario(this.activeScenario);
       });
     }
 

@@ -34,4 +34,16 @@ export class SaScenario {
   reserveAAs: AssessmentAreaModel[];
   characteristicAAs: AssessmentAreaModel[];
   outcomeAAs: AssessmentAreaModel[];
+
+  getAAValue(aaName: string) {
+    return this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
+  }
+
+  getAALatestTermValue(aaName: string) {
+    return this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
+  }
+
+  setAAValue(aaName: string, value: any) {
+    this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
+  }
 }

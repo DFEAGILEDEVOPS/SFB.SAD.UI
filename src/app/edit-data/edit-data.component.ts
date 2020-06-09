@@ -16,6 +16,7 @@ export class EditDataComponent implements OnInit {
 
 
   get scenarioName() { return this.editDataForm.get('scenarioDetails').get('scenarioName'); }
+  get totalExpenditure() { return this.editDataForm.get('spendingDetails').get('totalExpenditure'); }
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +42,18 @@ export class EditDataComponent implements OnInit {
             londonWeighting: [this.originalScenario.londonWeighting],
             numberOfPupils: [this.originalScenario.numberOfPupils],
             fsm: [this.originalScenario.fsm]
-          })
+          }),
+          spendingDetails: this.fb.group({
+            totalExpenditure: [this.originalScenario.totalExpenditure],
+            teachingStaff: [this.originalScenario.getAAValue('Teaching staff')],
+            supplyStaff: [this.originalScenario.getAAValue('Supply staff')],
+            educationSupportStaff: [this.originalScenario.getAAValue('Education support staff')],
+            adminStaff: [this.originalScenario.getAAValue('Administrative and clerical staff')],
+            otherStaff: [this.originalScenario.getAAValue('Other staff costs')],
+            premises: [this.originalScenario.getAAValue('Premises costs')],
+            teachingResources: [this.originalScenario.getAAValue('Teaching resources')],
+            energy: [this.originalScenario.getAAValue('Energy')],
+          }),
         });
       });
   }
@@ -51,7 +63,8 @@ export class EditDataComponent implements OnInit {
 
   onSubmit() {
     if (this.editDataForm.valid) {
-      const editedScenario: SaScenario = JSON.parse(JSON.stringify(this.originalScenario));
+      // const editedScenario: SaScenario = JSON.parse(JSON.stringify(this.originalScenario));
+      const editedScenario: SaScenario = this.originalScenario;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
       editedScenario.overallPhase = this.editDataForm.value.schoolDetails.schoolPhase;
@@ -59,6 +72,15 @@ export class EditDataComponent implements OnInit {
       editedScenario.londonWeighting = this.editDataForm.value.schoolDetails.londonWeighting;
       editedScenario.numberOfPupils = this.editDataForm.value.schoolDetails.numberOfPupils;
       editedScenario.fsm = this.editDataForm.value.schoolDetails.fsm;
+      editedScenario.totalExpenditure = this.editDataForm.value.spendingDetails.totalExpenditure;
+      editedScenario.setAAValue('Teaching staff', this.editDataForm.value.spendingDetails.teachingStaff);
+      editedScenario.setAAValue('Supply staff', this.editDataForm.value.spendingDetails.supplyStaff);
+      editedScenario.setAAValue('Education support staff', this.editDataForm.value.spendingDetails.educationSupportStaff);
+      editedScenario.setAAValue('Administrative and clerical staff', this.editDataForm.value.spendingDetails.adminStaff);
+      editedScenario.setAAValue('Other staff costs', this.editDataForm.value.spendingDetails.otherStaff);
+      editedScenario.setAAValue('Premises costs', this.editDataForm.value.spendingDetails.premises);
+      editedScenario.setAAValue('Teaching resources', this.editDataForm.value.spendingDetails.teachingResources);
+      editedScenario.setAAValue('Energy', this.editDataForm.value.spendingDetails.energy);
 
       this.saScenariosService.setFirstScenario(editedScenario);
       this.router.navigate(['self-assessment/', this.urn]);
