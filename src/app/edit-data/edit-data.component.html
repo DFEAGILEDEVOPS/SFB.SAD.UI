@@ -22,14 +22,16 @@
           Scenario details
         </h2>
       </legend>
-      <div class="govuk-form-group">
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !scenarioName.valid && !scenarioName.pristine}">
         <label class="govuk-label" for="scenario-name">
           Name of scenario
         </label>
         <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text"
-          formControlName='scenarioName' required>
-          <div [hidden]="scenarioName.valid || scenarioName.pristine" class="alert alert-danger">
-            Selection is required
+          formControlName='scenarioName' [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}" required>
+          <div [hidden]="scenarioName.valid || scenarioName.pristine">
+            <span class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> Scenario name is required
+            </span>
           </div>
       </div>
 
