@@ -44,11 +44,13 @@ export class DashboardComponent implements OnInit {
 
         this.assignDefaultValuesToScenario();
 
-        this.initializeAssessmentAreas();
-
         this.groupAssessmentAreasByTypes();
 
-         this.saScenariosService.setFirstScenario(this.activeScenario);
+        this.updateAreaTypeTotalsforAssessmentAreas();
+
+        this.initializeAssessmentAreas();
+
+        this.saScenariosService.setFirstScenario(this.activeScenario);
       });
     }
 
@@ -66,20 +68,6 @@ export class DashboardComponent implements OnInit {
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});
     }
 
-    private initializeAssessmentAreas() {
-      this.activeScenario.sadAssesmentAreas.forEach(aa => {
-        if (!aa.schoolData) {
-          aa.schoolData = aa.schoolDataLatestTerm;
-        }
-        if (!aa.percentageSchoolData) { // TODO: calculate this in angular instead of in server side?
-          aa.percentageSchoolData = aa.percentageSchoolDataLatestTerm;
-        }
-        aa.matchingTreshold = aa.allTresholds
-          .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
-        aa.schoolDataFormat = this.getDataFormat(aa.assessmentAreaName);
-      });
-    }
-
     private groupAssessmentAreasByTypes() {
       this.activeScenario.spendingAAs = this.activeScenario.sadAssesmentAreas
         .filter(aa => aa.assessmentAreaType === 'Spending');
@@ -87,6 +75,7 @@ export class DashboardComponent implements OnInit {
         .filter(aa => aa.assessmentAreaType === 'Reserve and balance');
       this.activeScenario.characteristicAAs = this.activeScenario.sadAssesmentAreas
         .filter(aa => aa.assessmentAreaType === 'School characteristics');
+
       this.activeScenario.characteristicAAs
         .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
       this.activeScenario.characteristicAAs
@@ -99,20 +88,16 @@ export class DashboardComponent implements OnInit {
 
     private assignDefaultValuesToScenario() {
 
-      this.activeScenario.termOfScenario = !this.activeScenario.termOfScenario ?
-        this.activeScenario.latestTerm
-        : this.activeScenario.termOfScenario;
-
-      this.activeScenario.scenarioName = !this.activeScenario.scenarioName ?
-        this.activeScenario.termOfScenario + ' finance data'
-        : this.activeScenario.scenarioName;
-
-      if (!this.activeScenario.overallPhase) {
+      if (!this.activeScenario.isEdited) {
+        this.activeScenario.termOfScenario = this.activeScenario.latestTerm;
+        this.activeScenario.scenarioName = this.activeScenario.termOfScenario + ' finance data';
         this.activeScenario.overallPhase = this.activeScenario.overallPhaseLatestTerm;
-      }
-
-      if (!this.activeScenario.hasSixthForm) {
         this.activeScenario.hasSixthForm = this.activeScenario.hasSixthFormLatestTerm;
+        this.activeScenario.totalIncome = this.activeScenario.totalIncomeLatestTerm;
+        this.activeScenario.totalExpenditure = this.activeScenario.totalExpenditureLatestTerm;
+        this.activeScenario.londonWeighting = this.activeScenario.londonWeightingLatestTerm;
+        this.activeScenario.numberOfPupils = this.activeScenario.numberOfPupilsLatestTerm;
+        this.activeScenario.fsm = this.activeScenario.fsmLatestTerm;
       }
 
       this.activeScenario.overallPhaseWSixthForm = this.activeScenario.overallPhase;
@@ -120,22 +105,32 @@ export class DashboardComponent implements OnInit {
       if (this.activeScenario.hasSixthForm && this.activeScenario.overallPhase !== 'All-through') {
         this.activeScenario.overallPhaseWSixthForm += ' with sixth form';
       }
+    }
 
-      if (!this.activeScenario.totalIncome) {
-        this.activeScenario.totalIncome = this.activeScenario.totalIncomeLatestTerm;
-      }
-      if (!this.activeScenario.totalExpenditure) {
-        this.activeScenario.totalExpenditure = this.activeScenario.totalExpenditureLatestTerm;
-      }
-      if (!this.activeScenario.londonWeighting) {
-        this.activeScenario.londonWeighting = this.activeScenario.londonWeightingLatestTerm;
-      }
-      if (!this.activeScenario.numberOfPupils) {
-        this.activeScenario.numberOfPupils = this.activeScenario.numberOfPupilsLatestTerm;
-      }
-      if (!this.activeScenario.fsm) {
-        this.activeScenario.fsm = this.activeScenario.fsmLatestTerm;
-      }
+    private updateAreaTypeTotalsforAssessmentAreas() {
+      this.activeScenario.spendingAAs.forEach(aa => aa.totalForAreaType = this.activeScenario.totalExpenditure);
+      this.activeScenario.reserveAAs.forEach(aa => aa.totalForAreaType = this.activeScenario.totalIncome);
+    }
+
+    private initializeAssessmentAreas() {
+      this.activeScenario.sadAssesmentAreas.forEach(aa => {
+        if (!this.activeScenario.isEdited) {
+          aa.schoolData = aa.schoolDataLatestTerm;
+        }
+
+        if (!this.activeScenario.isEdited) {
+          aa.totalForAreaType = aa.totalForAreaTypeLatestTerm;
+        }
+
+        if (aa.schoolData) {
+          aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+        }
+
+        aa.matchingTreshold = aa.allTresholds
+          .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
+
+        aa.schoolDataFormat = this.getDataFormat(aa.assessmentAreaName);
+      });
     }
 
     private getDataFormat(assessmentArea): string {

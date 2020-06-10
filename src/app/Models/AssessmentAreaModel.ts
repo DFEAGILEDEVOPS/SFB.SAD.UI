@@ -5,7 +5,8 @@ export class AssessmentAreaModel {
   schoolData: number;
   schoolDataLatestTerm: number;
   percentageSchoolData: number;
-  percentageSchoolDataLatestTerm: number;
+  totalForAreaType: number;
+  totalForAreaTypeLatestTerm: number;
   allTresholds: TresholdModel[];
   matchingTreshold: TresholdModel;
   schoolDataFormat: string;

@@ -82,6 +82,7 @@ export class EditDataComponent implements OnInit {
       editedScenario.setAAValue('Teaching resources', this.editDataForm.value.spendingDetails.teachingResources);
       editedScenario.setAAValue('Energy', this.editDataForm.value.spendingDetails.energy);
 
+      editedScenario.isEdited = true;
       this.saScenariosService.setFirstScenario(editedScenario);
       this.router.navigate(['self-assessment/', this.urn]);
     }

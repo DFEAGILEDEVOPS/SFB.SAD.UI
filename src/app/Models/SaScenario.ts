@@ -35,6 +35,8 @@ export class SaScenario {
   characteristicAAs: AssessmentAreaModel[];
   outcomeAAs: AssessmentAreaModel[];
 
+  isEdited: boolean;
+
   getAAValue(aaName: string) {
     return this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
   }
