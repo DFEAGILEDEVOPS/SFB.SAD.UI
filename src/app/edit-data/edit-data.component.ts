@@ -65,6 +65,10 @@ export class EditDataComponent implements OnInit {
             seniorLeaders: [this.originalScenario.getAAValue('Senior leaders as a percentage of workforce') * 100],
             pupilToTeacher: [this.originalScenario.getAAValue('Pupil to teacher ratio')],
             pupilToAdult: [this.originalScenario.getAAValue('Pupil to adult ratio')],
+            teacherContactRatio: [this.originalScenario.getAAValue('Teacher contact ratio (less than 1)')],
+            predictedPupil: [this.originalScenario.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
+              this.originalScenario.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null],
+            averageClassSize: [this.originalScenario.getAAValue('Average Class size')],
           }),
         });
       });
@@ -103,6 +107,10 @@ export class EditDataComponent implements OnInit {
       editedScenario.setAAValue('Senior leaders as a percentage of workforce', this.editDataForm.value.character.seniorLeaders / 100);
       editedScenario.setAAValue('Pupil to teacher ratio', this.editDataForm.value.character.pupilToTeacher);
       editedScenario.setAAValue('Pupil to adult ratio', this.editDataForm.value.character.pupilToAdult);
+      editedScenario.setAAValue('Teacher contact ratio (less than 1)', this.editDataForm.value.character.teacherContactRatio);
+      // tslint:disable-next-line:max-line-length
+      editedScenario.setAAValue('Predicted percentage pupil number change in 3-5 years', this.editDataForm.value.character.predictedPupil / 100);
+      editedScenario.setAAValue('Average Class size', this.editDataForm.value.character.averageClassSize);
 
       editedScenario.isEdited = true;
       this.saScenariosService.setFirstScenario(editedScenario);

@@ -80,6 +80,21 @@ export class AAModalModels {
         title : 'Pupil to adult ratio',
         textContent : `<p>n/a</p>`
       },
+      {
+        assessmentArea : 'Teacher contact ratio (less than 1)',
+        title : 'Teacher contact ratio (less than 1)',
+        textContent : `<p>n/a</p>`
+      },
+      {
+        assessmentArea : 'Predicted percentage pupil number change in 3-5 years',
+        title : 'Predicted percentage pupil number change in 3-5 years',
+        textContent : `<p>n/a</p>`
+      },
+      {
+        assessmentArea : 'Average Class size',
+        title : 'Average Class size',
+        textContent : `<p>n/a</p>`
+      },
 
     ];
   }

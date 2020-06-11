@@ -76,16 +76,16 @@ export class DashboardComponent implements OnInit {
       this.activeScenario.characteristicAAs = this.activeScenario.sadAssesmentAreas
         .filter(aa => aa.assessmentAreaType === 'School characteristics');
 
-      if (!this.activeScenario.isEdited) {
-        this.activeScenario.characteristicAAs
-          .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
-        this.activeScenario.characteristicAAs
-          .push(new AssessmentAreaModel('School characteristics', 'Predicted percentage pupil number change in 3-5 years'));
-        this.activeScenario.characteristicAAs
-          .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
-        this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
-          .filter(aa => aa.assessmentAreaType === 'Outcomes');
-      }
+      // if (!this.activeScenario.isEdited) {
+      //   this.activeScenario.characteristicAAs
+      //     .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
+      //   this.activeScenario.characteristicAAs
+      //     .push(new AssessmentAreaModel('School characteristics', 'Predicted percentage pupil number change in 3-5 years'));
+      //   this.activeScenario.characteristicAAs
+      //     .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
+      //   this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
+      //     .filter(aa => aa.assessmentAreaType === 'Outcomes');
+      // }
     }
 
     private assignDefaultValuesToScenario() {
@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit {
         }
 
         if (aa.schoolData) {
-            aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+          aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
         } else {
           aa.percentageSchoolData = null;
         }
@@ -140,6 +140,8 @@ export class DashboardComponent implements OnInit {
       switch (assessmentArea) {
         case 'Pupil to teacher ratio':
         case 'Pupil to adult ratio':
+        case 'Teacher contact ratio (less than 1)':
+        case 'Average Class size':
           return 'number';
         case 'Average teacher cost':
           return 'currency';
