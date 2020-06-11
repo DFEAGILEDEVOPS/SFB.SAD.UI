@@ -46,6 +46,8 @@ export class DashboardComponent implements OnInit {
 
         this.groupAssessmentAreasByTypes();
 
+        this.updateAreaTypeTotalsforAssessmentAreas();
+
         this.initializeAssessmentAreas();
 
         this.saScenariosService.setFirstScenario(this.activeScenario);
@@ -74,14 +76,16 @@ export class DashboardComponent implements OnInit {
       this.activeScenario.characteristicAAs = this.activeScenario.sadAssesmentAreas
         .filter(aa => aa.assessmentAreaType === 'School characteristics');
 
-      this.activeScenario.characteristicAAs
-        .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
-      this.activeScenario.characteristicAAs
-        .push(new AssessmentAreaModel('School characteristics', 'Predicted percentage pupil number change in 3-5 years'));
-      this.activeScenario.characteristicAAs
-        .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
-      this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
-        .filter(aa => aa.assessmentAreaType === 'Outcomes');
+      if (!this.activeScenario.isEdited) {
+        this.activeScenario.characteristicAAs
+          .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
+        this.activeScenario.characteristicAAs
+          .push(new AssessmentAreaModel('School characteristics', 'Predicted percentage pupil number change in 3-5 years'));
+        this.activeScenario.characteristicAAs
+          .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
+        this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
+          .filter(aa => aa.assessmentAreaType === 'Outcomes');
+      }
     }
 
     private assignDefaultValuesToScenario() {
@@ -105,18 +109,22 @@ export class DashboardComponent implements OnInit {
       }
     }
 
+    private updateAreaTypeTotalsforAssessmentAreas() {
+      if (this.activeScenario.isEdited) {
+        this.activeScenario.spendingAAs.forEach(aa => aa.totalForAreaType = this.activeScenario.totalExpenditure);
+        this.activeScenario.reserveAAs.forEach(aa => aa.totalForAreaType = this.activeScenario.totalIncome);
+      }
+    }
+
     private initializeAssessmentAreas() {
       this.activeScenario.sadAssesmentAreas.forEach(aa => {
         if (!this.activeScenario.isEdited) {
           aa.schoolData = aa.schoolDataLatestTerm;
-        }
-
-        if (!this.activeScenario.isEdited) {
           aa.totalForAreaType = aa.totalForAreaTypeLatestTerm;
         }
 
         if (aa.schoolData) {
-          aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+            aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
         } else {
           aa.percentageSchoolData = null;
         }

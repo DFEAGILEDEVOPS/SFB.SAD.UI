@@ -16,7 +16,8 @@ export class EditDataComponent implements OnInit {
 
 
   get scenarioName() { return this.editDataForm.get('scenarioDetails').get('scenarioName'); }
-  get totalExpenditure() { return this.editDataForm.get('spendingDetails').get('totalExpenditure'); }
+  get totalExpenditure() { return this.editDataForm.get('spending').get('totalExpenditure'); }
+  get totalIncome() { return this.editDataForm.get('reserveBalance').get('totalIncome'); }
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +44,7 @@ export class EditDataComponent implements OnInit {
             numberOfPupils: [this.originalScenario.numberOfPupils],
             fsm: [this.originalScenario.fsm]
           }),
-          spendingDetails: this.fb.group({
+          spending: this.fb.group({
             totalExpenditure: [this.originalScenario.totalExpenditure],
             teachingStaff: [this.originalScenario.getAAValue('Teaching staff')],
             supplyStaff: [this.originalScenario.getAAValue('Supply staff')],
@@ -53,6 +54,17 @@ export class EditDataComponent implements OnInit {
             premises: [this.originalScenario.getAAValue('Premises costs')],
             teachingResources: [this.originalScenario.getAAValue('Teaching resources')],
             energy: [this.originalScenario.getAAValue('Energy')],
+          }),
+          reserveBalance: this.fb.group({
+            totalIncome: [this.originalScenario.totalIncome],
+            balance: [this.originalScenario.getAAValue('In-year balance')],
+            rr: [this.originalScenario.getAAValue('Revenue reserve')],
+          }),
+          character: this.fb.group({
+            teacherCost: [this.originalScenario.getAAValue('Average teacher cost')],
+            seniorLeaders: [this.originalScenario.getAAValue('Senior leaders as a percentage of workforce')],
+            pupilToTeacher: [this.originalScenario.getAAValue('Pupil to teacher ratio')],
+            pupilToAdult: [this.originalScenario.getAAValue('Pupil to adult ratio')],
           }),
         });
       });
@@ -72,15 +84,25 @@ export class EditDataComponent implements OnInit {
       editedScenario.londonWeighting = this.editDataForm.value.schoolDetails.londonWeighting;
       editedScenario.numberOfPupils = this.editDataForm.value.schoolDetails.numberOfPupils;
       editedScenario.fsm = this.editDataForm.value.schoolDetails.fsm;
-      editedScenario.totalExpenditure = this.editDataForm.value.spendingDetails.totalExpenditure;
-      editedScenario.setAAValue('Teaching staff', this.editDataForm.value.spendingDetails.teachingStaff);
-      editedScenario.setAAValue('Supply staff', this.editDataForm.value.spendingDetails.supplyStaff);
-      editedScenario.setAAValue('Education support staff', this.editDataForm.value.spendingDetails.educationSupportStaff);
-      editedScenario.setAAValue('Administrative and clerical staff', this.editDataForm.value.spendingDetails.adminStaff);
-      editedScenario.setAAValue('Other staff costs', this.editDataForm.value.spendingDetails.otherStaff);
-      editedScenario.setAAValue('Premises costs', this.editDataForm.value.spendingDetails.premises);
-      editedScenario.setAAValue('Teaching resources', this.editDataForm.value.spendingDetails.teachingResources);
-      editedScenario.setAAValue('Energy', this.editDataForm.value.spendingDetails.energy);
+
+      editedScenario.totalExpenditure = this.editDataForm.value.spending.totalExpenditure;
+      editedScenario.setAAValue('Teaching staff', this.editDataForm.value.spending.teachingStaff);
+      editedScenario.setAAValue('Supply staff', this.editDataForm.value.spending.supplyStaff);
+      editedScenario.setAAValue('Education support staff', this.editDataForm.value.spending.educationSupportStaff);
+      editedScenario.setAAValue('Administrative and clerical staff', this.editDataForm.value.spending.adminStaff);
+      editedScenario.setAAValue('Other staff costs', this.editDataForm.value.spending.otherStaff);
+      editedScenario.setAAValue('Premises costs', this.editDataForm.value.spending.premises);
+      editedScenario.setAAValue('Teaching resources', this.editDataForm.value.spending.teachingResources);
+      editedScenario.setAAValue('Energy', this.editDataForm.value.spending.energy);
+
+      editedScenario.totalIncome = this.editDataForm.value.reserveBalance.totalIncome;
+      editedScenario.setAAValue('In-year balance', this.editDataForm.value.reserveBalance.balance);
+      editedScenario.setAAValue('Revenue reserve', this.editDataForm.value.reserveBalance.rr);
+
+      editedScenario.setAAValue('Average teacher cost', this.editDataForm.value.character.teacherCost);
+      editedScenario.setAAValue('Senior leaders as a percentage of workforce', this.editDataForm.value.character.seniorLeaders);
+      editedScenario.setAAValue('Pupil to teacher ratio', this.editDataForm.value.character.pupilToTeacher);
+      editedScenario.setAAValue('Pupil to adult ratio', this.editDataForm.value.character.pupilToAdult);
 
       editedScenario.isEdited = true;
       this.saScenariosService.setFirstScenario(editedScenario);
