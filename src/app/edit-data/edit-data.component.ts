@@ -62,7 +62,7 @@ export class EditDataComponent implements OnInit {
           }),
           character: this.fb.group({
             teacherCost: [this.originalScenario.getAAValue('Average teacher cost')],
-            seniorLeaders: [this.originalScenario.getAAValue('Senior leaders as a percentage of workforce')],
+            seniorLeaders: [this.originalScenario.getAAValue('Senior leaders as a percentage of workforce') * 100],
             pupilToTeacher: [this.originalScenario.getAAValue('Pupil to teacher ratio')],
             pupilToAdult: [this.originalScenario.getAAValue('Pupil to adult ratio')],
           }),
@@ -100,7 +100,7 @@ export class EditDataComponent implements OnInit {
       editedScenario.setAAValue('Revenue reserve', this.editDataForm.value.reserveBalance.rr);
 
       editedScenario.setAAValue('Average teacher cost', this.editDataForm.value.character.teacherCost);
-      editedScenario.setAAValue('Senior leaders as a percentage of workforce', this.editDataForm.value.character.seniorLeaders);
+      editedScenario.setAAValue('Senior leaders as a percentage of workforce', this.editDataForm.value.character.seniorLeaders / 100);
       editedScenario.setAAValue('Pupil to teacher ratio', this.editDataForm.value.character.pupilToTeacher);
       editedScenario.setAAValue('Pupil to adult ratio', this.editDataForm.value.character.pupilToAdult);
 

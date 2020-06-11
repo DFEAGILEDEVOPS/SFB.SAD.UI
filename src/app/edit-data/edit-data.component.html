@@ -306,7 +306,7 @@
         </label>
         <span class="govuk-hint">
           The {{originalScenario.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Senior leaders as a percentage of workforce')}}</span>
+            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Senior leaders as a percentage of workforce') * 100}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="sl" name="sl" type="text" formControlName='seniorLeaders'>
       </div>
