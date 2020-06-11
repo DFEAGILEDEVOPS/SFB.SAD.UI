@@ -46,8 +46,6 @@ export class DashboardComponent implements OnInit {
 
         this.groupAssessmentAreasByTypes();
 
-        this.updateAreaTypeTotalsforAssessmentAreas();
-
         this.initializeAssessmentAreas();
 
         this.saScenariosService.setFirstScenario(this.activeScenario);
@@ -107,11 +105,6 @@ export class DashboardComponent implements OnInit {
       }
     }
 
-    private updateAreaTypeTotalsforAssessmentAreas() {
-      this.activeScenario.spendingAAs.forEach(aa => aa.totalForAreaType = this.activeScenario.totalExpenditure);
-      this.activeScenario.reserveAAs.forEach(aa => aa.totalForAreaType = this.activeScenario.totalIncome);
-    }
-
     private initializeAssessmentAreas() {
       this.activeScenario.sadAssesmentAreas.forEach(aa => {
         if (!this.activeScenario.isEdited) {
@@ -124,6 +117,8 @@ export class DashboardComponent implements OnInit {
 
         if (aa.schoolData) {
           aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+        } else {
+          aa.percentageSchoolData = null;
         }
 
         aa.matchingTreshold = aa.allTresholds
