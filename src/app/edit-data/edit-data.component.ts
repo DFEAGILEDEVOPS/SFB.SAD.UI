@@ -13,11 +13,19 @@ export class EditDataComponent implements OnInit {
   originalScenario: SaScenario;
   urn: number;
   editDataForm: FormGroup;
+  viewType: string;
 
+  get scenarioName() {
+    return this.editDataForm.get('scenarioDetails').get('scenarioName');
+  }
 
-  get scenarioName() { return this.editDataForm.get('scenarioDetails').get('scenarioName'); }
-  get totalExpenditure() { return this.editDataForm.get('spending').get('totalExpenditure'); }
-  get totalIncome() { return this.editDataForm.get('reserveBalance').get('totalIncome'); }
+  get totalExpenditure() {
+    return this.editDataForm.get('spending').get('totalExpenditure');
+  }
+
+  get totalIncome() {
+    return this.editDataForm.get('reserveBalance').get('totalIncome');
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +34,7 @@ export class EditDataComponent implements OnInit {
     private saScenariosService: SaScenariosService) {
     this.route.params.subscribe(params => {
       this.urn = +params.urn;
+      this.viewType = params.viewType;
     });
 
     saScenariosService.getFirstScenario(this.urn)

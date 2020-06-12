@@ -3,11 +3,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-editing-format',
-  templateUrl: './editing-format.component.html',
-  styleUrls: ['./editing-format.component.css']
+  selector: 'app-sidebyside-format',
+  templateUrl: './sidebyside-format.component.html',
+  styleUrls: ['./sidebyside-format.component.css']
 })
-export class EditingFormatComponent implements OnInit {
+export class SidebysideFormatComponent implements OnInit {
+
   urn: number;
   name: string;
   editType: string;
@@ -27,11 +28,10 @@ export class EditingFormatComponent implements OnInit {
   onContinue() {
     if (this.form.valid) {
       if (this.editType === 'FinancialFigures') {
-        this.router.navigate(['self-assessment/edit-data', this.urn, 'edit']);
+        this.router.navigate(['self-assessment/edit-data', this.urn, 'enter']);
       } else {
-        this.router.navigate(['self-assessment/edit-data', this.urn, 'edit']);
+        this.router.navigate(['self-assessment/edit-data', this.urn, 'enter']);
       }
     }
   }
-
 }

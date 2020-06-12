@@ -1,3 +1,4 @@
+import { SidebysideFormatComponent } from './core/sidebyside-format/sidebyside-format.component';
 import { EditDataBreadcrumbComponent } from './edit-data/edit-data-breadcrumb/edit-data-breadcrumb.component';
 import { EditDataComponent } from './edit-data/edit-data.component';
 import { EditingFormatBreadcrumbsComponent } from './editing-format/editing-format-breadcrumbs/editing-format-breadcrumbs.component';
@@ -18,6 +19,8 @@ import { GovUkLayoutComponent } from '@layouts/gov-uk-layout/gov-uk-layout.compo
 import { DashboardBreadcrumbComponent } from './dashboard/dashboard-bread-crumb/dashboard-bread-crumb.component';
 import { DashboardCharacteristicsComponent } from './dashboard/dashboard-characteristics/dashboard-characteristics.component';
 import { DashboardAaModalComponent } from './dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
+// tslint:disable-next-line:max-line-length
+import { SidebysideFormatBreadcrumbsComponent } from '@core/sidebyside-format/sidebyside-format-breadcrumbs/sidebyside-format-breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { DashboardAaModalComponent } from './dashboard/dashboard-aa-modal/dashbo
     DashboardAaModalComponent,
     EditingFormatComponent,
     EditingFormatBreadcrumbsComponent,
+    SidebysideFormatComponent,
+    SidebysideFormatBreadcrumbsComponent,
     EditDataComponent,
     EditDataBreadcrumbComponent
   ],

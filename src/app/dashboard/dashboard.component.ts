@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
         textContent: modalContent.textContent,
         tresholds: assessmentAreas.allTresholds,
         matchingTreshold: assessmentAreas.matchingTreshold,
-        tresholdFormat: getAADataFormat(modalContent.assessmentArea)
+        tresholdFormat: getAADataFormat(modalContent.assessmentArea)// TODO: create a pipe for this
       };
 
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});

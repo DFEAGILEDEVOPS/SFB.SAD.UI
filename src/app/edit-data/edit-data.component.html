@@ -2,7 +2,8 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <h1 class="govuk-heading-xl">Edit data</h1>
+    <h1 *ngIf='viewType === "edit"'  class="govuk-heading-xl">Edit data</h1>
+    <h1 *ngIf='viewType === "enter"'  class="govuk-heading-xl">Enter data</h1>
     <p class="govuk-body-s">
       Assessing
       <span class="highlight">

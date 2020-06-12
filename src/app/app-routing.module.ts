@@ -1,3 +1,4 @@
+import { SidebysideFormatComponent } from './core/sidebyside-format/sidebyside-format.component';
 import { EditDataComponent } from './edit-data/edit-data.component';
 import { EditingFormatComponent } from './editing-format/editing-format.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -7,9 +8,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from '@layouts/gov-uk-layout/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'self-assessment/edit-data/:urn', component: EditDataComponent},
+  { path: 'self-assessment/edit-data/:urn/:viewType', component: EditDataComponent},
   { path: 'self-assessment/:urn', component: DashboardComponent},
   { path: 'self-assessment/editing-format/:urn/:name', component: EditingFormatComponent},
+  { path: 'self-assessment/sidebyside-format/:urn/:name', component: SidebysideFormatComponent},
   { path: '**', component: NotFoundComponent }
 ];
 
