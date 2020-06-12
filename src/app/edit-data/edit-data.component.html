@@ -1,4 +1,4 @@
-<app-edit-data-breadcrumb [name]='originalScenario.name' [urn]='originalScenario.urn'></app-edit-data-breadcrumb>
+<app-edit-data-breadcrumb [name]='scenarioInEdit.name' [urn]='scenarioInEdit.urn'></app-edit-data-breadcrumb>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -7,7 +7,7 @@
     <p class="govuk-body-s">
       Assessing
       <span class="highlight">
-        <span class="govuk-!-font-weight-bold">{{originalScenario.name}}</span>
+        <span class="govuk-!-font-weight-bold">{{scenarioInEdit.name}}</span>
       </span>
     </p>
   </div>
@@ -62,8 +62,8 @@
         School phase
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.overallPhaseLatestTerm}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.overallPhaseLatestTerm}}</span>
       </span>
       <select class="govuk-select" id="school-phase" name="school-phase" formControlName='schoolPhase'>
         <option value="Nursery">Nursery</option>
@@ -80,8 +80,8 @@
         Has sixth form?
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.hasSixthFormLatestTerm}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.hasSixthFormLatestTerm}}</span>
       </span>
       <select class="govuk-select" id="sixth-form" name="sixth-form" formControlName='hasSixthForm'>
         <option value="true">Yes</option>
@@ -94,8 +94,8 @@
         London weighting
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.londonWeightingLatestTerm}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.londonWeightingLatestTerm}}</span>
       </span>
       <select class="govuk-select" id="london-weighting" name="london-weighting" formControlName='londonWeighting'>
         <option value="Neither">Neither</option>
@@ -109,8 +109,8 @@
         Number of pupils
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.numberOfPupilsLatestTerm}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.numberOfPupilsLatestTerm}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="text"
         formControlName='numberOfPupils'>
@@ -121,8 +121,8 @@
         Percentage of pupils eligible for FSM
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.fsmLatestTerm}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.fsmLatestTerm}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="text" formControlName='fsm'>
     </div>
@@ -154,8 +154,8 @@
         Spending on teaching staff
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Teaching staff')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching staff')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text" formControlName='teachingStaff'>
     </div>
@@ -165,8 +165,8 @@
         Spending on supply staff
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Supply staff')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Supply staff')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text" formControlName='supplyStaff'>
     </div>
@@ -176,8 +176,8 @@
         Spending on education support staff
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Education support staff')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Education support staff')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text"
         formControlName='educationSupportStaff'>
@@ -188,8 +188,8 @@
         Spending on administrative and clerical staff
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Administrative and clerical staff')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Administrative and clerical staff')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text" formControlName='adminStaff'>
     </div>
@@ -199,8 +199,8 @@
         Spending on other staff costs
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Other staff costs')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Other staff costs')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text" formControlName='otherStaff'>
     </div>
@@ -210,8 +210,8 @@
         Spending on premises costs
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Premises costs')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Premises costs')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text" formControlName='premises'>
     </div>
@@ -221,8 +221,8 @@
         Spending on teaching resources
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Teaching resources')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching resources')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text"
         formControlName='teachingResources'>
@@ -233,8 +233,8 @@
         Spending on energy
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Energy')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Energy')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text" formControlName='energy'>
     </div>
@@ -266,8 +266,8 @@
         In-year balance
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('In-year balance')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('In-year balance')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="iyb" name="iyb" type="text" formControlName='balance'>
     </div>
@@ -277,8 +277,8 @@
         Revenue reserve
       </label>
       <span class="govuk-hint">
-        The {{originalScenario.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Revenue reserve')}}</span>
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve')}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text" formControlName='rr'>
     </div>
@@ -295,8 +295,8 @@
           Average teacher cost
         </label>
         <span class="govuk-hint">
-          The {{originalScenario.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Average teacher cost')}}</span>
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Average teacher cost')}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="atc" name="atc" type="text" formControlName='teacherCost'>
       </div>
@@ -306,8 +306,8 @@
           Senior leaders as a percentage of workforce
         </label>
         <span class="govuk-hint">
-          The {{originalScenario.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Senior leaders as a percentage of workforce') * 100}}</span>
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Senior leaders as a percentage of workforce') * 100}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="sl" name="sl" type="text" formControlName='seniorLeaders'>
       </div>
@@ -317,8 +317,8 @@
           Pupil to teacher ratio
         </label>
         <span class="govuk-hint">
-          The {{originalScenario.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Pupil to teacher ratio')}}</span>
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to teacher ratio')}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="ptt" name="ptt" type="text" formControlName='pupilToTeacher'>
       </div>
@@ -328,8 +328,8 @@
           Pupil to adult ratio
         </label>
         <span class="govuk-hint">
-          The {{originalScenario.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{originalScenario.getAALatestTermValue('Pupil to adult ratio')}}</span>
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to adult ratio')}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="pta" name="pta" type="text" formControlName='pupilToAdult'>
       </div>
@@ -363,7 +363,7 @@
       <button class="govuk-button" data-module="govuk-button" type="submit">
         Submit
       </button>
-      <a routerLink="/self-assessment/{{originalScenario.urn}}"
+      <a routerLink="/self-assessment/{{scenarioInEdit.urn}}"
         class="govuk-link govuk-link--no-visited-state back-button">Back</a>
     </div>
   </div>

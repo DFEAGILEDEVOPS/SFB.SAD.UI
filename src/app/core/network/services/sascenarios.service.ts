@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { SaDataService } from './sadata.service';
 import { SaScenario } from 'app/Models/SaScenario';
+import { SaData } from 'app/Models/SaData';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,14 @@ setSecondScenario(scenario: SaScenario) {
 }
 
 getSecondScenario(): SaScenario {
-  return this.scenarios[1];
+  if (this.scenarios[1]) {
+    return this.scenarios[1];
+  } else {
+    const data = new SaData();
+    data.urn = this.scenarios[0].urn;
+    data.name = this.scenarios[0].name;
+    return new SaScenario(data);
+  }
 }
 
 }

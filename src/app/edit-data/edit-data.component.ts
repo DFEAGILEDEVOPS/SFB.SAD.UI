@@ -10,7 +10,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./edit-data.component.css']
 })
 export class EditDataComponent implements OnInit {
-  originalScenario: SaScenario;
+  scenarioInEdit: SaScenario;
   urn: number;
   editDataForm: FormGroup;
   viewType: string;
@@ -37,50 +37,58 @@ export class EditDataComponent implements OnInit {
       this.viewType = params.viewType;
     });
 
-    saScenariosService.getFirstScenario(this.urn)
-      .subscribe(result => {
-        this.originalScenario = result;
-
-        this.editDataForm = this.fb.group({
-          scenarioDetails: this.fb.group({
-            scenarioName: [this.originalScenario.scenarioName, Validators.required],
-            scenarioTerm: [this.originalScenario.termOfScenario]
-          }),
-          schoolDetails: this.fb.group({
-            schoolPhase: [this.originalScenario.overallPhase],
-            hasSixthForm: [this.originalScenario.hasSixthForm],
-            londonWeighting: [this.originalScenario.londonWeighting],
-            numberOfPupils: [this.originalScenario.numberOfPupils],
-            fsm: [this.originalScenario.fsm]
-          }),
-          spending: this.fb.group({
-            totalExpenditure: [this.originalScenario.totalExpenditure],
-            teachingStaff: [this.originalScenario.getAAValue('Teaching staff')],
-            supplyStaff: [this.originalScenario.getAAValue('Supply staff')],
-            educationSupportStaff: [this.originalScenario.getAAValue('Education support staff')],
-            adminStaff: [this.originalScenario.getAAValue('Administrative and clerical staff')],
-            otherStaff: [this.originalScenario.getAAValue('Other staff costs')],
-            premises: [this.originalScenario.getAAValue('Premises costs')],
-            teachingResources: [this.originalScenario.getAAValue('Teaching resources')],
-            energy: [this.originalScenario.getAAValue('Energy')],
-          }),
-          reserveBalance: this.fb.group({
-            totalIncome: [this.originalScenario.totalIncome],
-            balance: [this.originalScenario.getAAValue('In-year balance')],
-            rr: [this.originalScenario.getAAValue('Revenue reserve')],
-          }),
-          character: this.fb.group({
-            teacherCost: [this.originalScenario.getAAValue('Average teacher cost')],
-            seniorLeaders: [this.originalScenario.getAAValue('Senior leaders as a percentage of workforce') * 100],
-            pupilToTeacher: [this.originalScenario.getAAValue('Pupil to teacher ratio')],
-            pupilToAdult: [this.originalScenario.getAAValue('Pupil to adult ratio')],
-            teacherContactRatio: [this.originalScenario.getAAValue('Teacher contact ratio (less than 1)')],
-            predictedPupil: [this.originalScenario.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
-              this.originalScenario.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null],
-            averageClassSize: [this.originalScenario.getAAValue('Average Class size')],
-          }),
+    if (this.viewType === 'edit') {
+      saScenariosService.getFirstScenario(this.urn)
+        .subscribe(result => {
+          this.scenarioInEdit = result;
+          this.buildForm();
         });
-      });
+    } else {
+      this.scenarioInEdit = saScenariosService.getSecondScenario();
+      this.buildForm();
+    }
+  }
+
+  private buildForm() {
+    this.editDataForm = this.fb.group({
+      scenarioDetails: this.fb.group({
+        scenarioName: [this.scenarioInEdit.scenarioName, Validators.required],
+        scenarioTerm: [this.scenarioInEdit.termOfScenario]
+      }),
+      schoolDetails: this.fb.group({
+        schoolPhase: [this.scenarioInEdit.overallPhase],
+        hasSixthForm: [this.scenarioInEdit.hasSixthForm],
+        londonWeighting: [this.scenarioInEdit.londonWeighting],
+        numberOfPupils: [this.scenarioInEdit.numberOfPupils],
+        fsm: [this.scenarioInEdit.fsm]
+      }),
+      spending: this.fb.group({
+        totalExpenditure: [this.scenarioInEdit.totalExpenditure],
+        teachingStaff: [this.scenarioInEdit.getAAValue('Teaching staff')],
+        supplyStaff: [this.scenarioInEdit.getAAValue('Supply staff')],
+        educationSupportStaff: [this.scenarioInEdit.getAAValue('Education support staff')],
+        adminStaff: [this.scenarioInEdit.getAAValue('Administrative and clerical staff')],
+        otherStaff: [this.scenarioInEdit.getAAValue('Other staff costs')],
+        premises: [this.scenarioInEdit.getAAValue('Premises costs')],
+        teachingResources: [this.scenarioInEdit.getAAValue('Teaching resources')],
+        energy: [this.scenarioInEdit.getAAValue('Energy')],
+      }),
+      reserveBalance: this.fb.group({
+        totalIncome: [this.scenarioInEdit.totalIncome],
+        balance: [this.scenarioInEdit.getAAValue('In-year balance')],
+        rr: [this.scenarioInEdit.getAAValue('Revenue reserve')],
+      }),
+      character: this.fb.group({
+        teacherCost: [this.scenarioInEdit.getAAValue('Average teacher cost')],
+        seniorLeaders: [this.scenarioInEdit.getAAValue('Senior leaders as a percentage of workforce') * 100],
+        pupilToTeacher: [this.scenarioInEdit.getAAValue('Pupil to teacher ratio')],
+        pupilToAdult: [this.scenarioInEdit.getAAValue('Pupil to adult ratio')],
+        teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)')],
+        predictedPupil: [this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
+          this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null],
+        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size')],
+      }),
+    });
   }
 
   ngOnInit() {
@@ -89,7 +97,7 @@ export class EditDataComponent implements OnInit {
   onSubmit() {
     if (this.editDataForm.valid) {
       // const editedScenario: SaScenario = JSON.parse(JSON.stringify(this.originalScenario));
-      const editedScenario: SaScenario = this.originalScenario;
+      const editedScenario: SaScenario = this.scenarioInEdit;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
       editedScenario.overallPhase = this.editDataForm.value.schoolDetails.schoolPhase;

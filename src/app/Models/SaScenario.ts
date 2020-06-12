@@ -55,7 +55,7 @@ export class SaScenario {
     this.sadAssesmentAreas = data.sadAssesmentAreas;
 
     this.termOfScenario = this.latestTerm;
-    this.scenarioName = this.termOfScenario + ' finance data';
+    this.scenarioName = this.termOfScenario ? this.termOfScenario + ' finance data' : null;
     this.overallPhase = this.overallPhaseLatestTerm;
     this.hasSixthForm = this.hasSixthFormLatestTerm;
     this.totalIncome = this.totalIncomeLatestTerm;
@@ -87,11 +87,11 @@ export class SaScenario {
   }
 
   getAAValue(aaName: string) {
-    return this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
+    return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
   }
 
   getAALatestTermValue(aaName: string) {
-    return this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
+    return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
   }
 
   setAAValue(aaName: string, value: any) {
