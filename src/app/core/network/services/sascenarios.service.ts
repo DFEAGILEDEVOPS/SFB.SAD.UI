@@ -15,29 +15,30 @@ constructor(private saDataService: SaDataService) {
  }
 
 setFirstScenario(scenario: SaScenario) {
+
+  scenario.spendingAAs.forEach(aa => aa.totalForAreaType = scenario.totalExpenditure);
+  scenario.reserveAAs.forEach(aa => aa.totalForAreaType = scenario.totalIncome);
+
+  scenario.sadAssesmentAreas.forEach(aa => {
+    if (aa.schoolData) {
+      aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+    } else {
+      aa.percentageSchoolData = null;
+    }
+
+    aa.matchingTreshold = aa.allTresholds
+      .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
+
+  });
+
   this.scenarios[0] = scenario;
 }
 
 getFirstScenario(urn: number): Observable<SaScenario> {
   if (this.scenarios[0]) {
-    const firstScenario = this.scenarios[0];
-
-    // TODO: find a better way of doing this
-    firstScenario.getAAValue = function(aaName: string) {
-      return this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
-    };
-
-    firstScenario.getAALatestTermValue =  function(aaName: string) {
-      return this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
-    };
-
-    firstScenario.setAAValue = function(aaName: string, value: any) {
-      this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
-    };
-
-    return new Observable((observer) =>  observer.next(firstScenario));
+    return new Observable((observer) =>  observer.next(this.scenarios[0]));
   } else {
-    return this.saDataService.getSaData(urn);
+    return this.saDataService.getSaScenario(urn);
   }
 }
 

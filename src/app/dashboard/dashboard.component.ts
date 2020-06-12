@@ -1,13 +1,12 @@
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { SaScenario } from '../Models/SaScenario';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute } from '@angular/router';
-import { SizeLookupModel } from 'app/Models/SizeLookupModel';
-import { FSMLookupModel } from 'app/Models/FSMLookupModel';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
-import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
+import { SaData } from 'app/Models/SaData';
+import { getAADataFormat } from '@core/network/services/getAADataFormat';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +18,6 @@ export class DashboardComponent implements OnInit {
   activeScenario: SaScenario;
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
-  viewMode: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,130 +26,30 @@ export class DashboardComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
       });
-      this.viewMode = 'Display';
-      this.activeScenario = new SaScenario();
-      this.activeScenario.name = 'Your school';
-      this.activeScenario.sadSizeLookup = new SizeLookupModel();
-      this.activeScenario.sadFSMLookup = new FSMLookupModel();
-      this.activeScenario.sadAssesmentAreas = [];
       this.aaModalModels = new AAModalModels();
+      this.activeScenario = new SaScenario(new SaData());
     }
 
     ngOnInit() {
       this.saScenariosService.getFirstScenario(this.urn).
-      subscribe(result => {
-        this.activeScenario = result;
-
-        this.assignDefaultValuesToScenario();
-
-        this.groupAssessmentAreasByTypes();
-
-        this.updateAreaTypeTotalsforAssessmentAreas();
-
-        this.initializeAssessmentAreas();
-
-        this.saScenariosService.setFirstScenario(this.activeScenario);
-      });
+        subscribe(result => {
+          this.activeScenario = result;
+          this.saScenariosService.setFirstScenario(result);
+        });
     }
 
     openModalWithComponent(assessmentArea: string) {
       const modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
+      const assessmentAreas = this.activeScenario.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
       const initialState = {
         assessmentArea : modalContent.assessmentArea,
         title: modalContent.title,
         textContent: modalContent.textContent,
-        tresholds: this.activeScenario.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).allTresholds,
-        matchingTreshold: this.activeScenario.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea).matchingTreshold,
-        tresholdFormat: this.getDataFormat(modalContent.assessmentArea)
+        tresholds: assessmentAreas.allTresholds,
+        matchingTreshold: assessmentAreas.matchingTreshold,
+        tresholdFormat: getAADataFormat(modalContent.assessmentArea)
       };
 
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});
-    }
-
-    private groupAssessmentAreasByTypes() {
-      this.activeScenario.spendingAAs = this.activeScenario.sadAssesmentAreas
-        .filter(aa => aa.assessmentAreaType === 'Spending');
-      this.activeScenario.reserveAAs = this.activeScenario.sadAssesmentAreas
-        .filter(aa => aa.assessmentAreaType === 'Reserve and balance');
-      this.activeScenario.characteristicAAs = this.activeScenario.sadAssesmentAreas
-        .filter(aa => aa.assessmentAreaType === 'School characteristics');
-
-      // if (!this.activeScenario.isEdited) {
-      //   this.activeScenario.characteristicAAs
-      //     .push(new AssessmentAreaModel('School characteristics', 'Teacher contact ratio (less than 1.0)'));
-      //   this.activeScenario.characteristicAAs
-      //     .push(new AssessmentAreaModel('School characteristics', 'Predicted percentage pupil number change in 3-5 years'));
-      //   this.activeScenario.characteristicAAs
-      //     .push(new AssessmentAreaModel('School characteristics', 'Average class size'));
-      //   this.activeScenario.outcomeAAs = this.activeScenario.sadAssesmentAreas
-      //     .filter(aa => aa.assessmentAreaType === 'Outcomes');
-      // }
-    }
-
-    private assignDefaultValuesToScenario() {
-
-      if (!this.activeScenario.isEdited) {
-        this.activeScenario.termOfScenario = this.activeScenario.latestTerm;
-        this.activeScenario.scenarioName = this.activeScenario.termOfScenario + ' finance data';
-        this.activeScenario.overallPhase = this.activeScenario.overallPhaseLatestTerm;
-        this.activeScenario.hasSixthForm = this.activeScenario.hasSixthFormLatestTerm;
-        this.activeScenario.totalIncome = this.activeScenario.totalIncomeLatestTerm;
-        this.activeScenario.totalExpenditure = this.activeScenario.totalExpenditureLatestTerm;
-        this.activeScenario.londonWeighting = this.activeScenario.londonWeightingLatestTerm;
-        this.activeScenario.numberOfPupils = this.activeScenario.numberOfPupilsLatestTerm;
-        this.activeScenario.fsm = this.activeScenario.fsmLatestTerm;
-      }
-
-      this.activeScenario.overallPhaseWSixthForm = this.activeScenario.overallPhase;
-
-      if (this.activeScenario.hasSixthForm && this.activeScenario.overallPhase !== 'All-through') {
-        this.activeScenario.overallPhaseWSixthForm += ' with sixth form';
-      }
-    }
-
-    private updateAreaTypeTotalsforAssessmentAreas() {
-      if (this.activeScenario.isEdited) {
-        this.activeScenario.spendingAAs.forEach(aa => aa.totalForAreaType = this.activeScenario.totalExpenditure);
-        this.activeScenario.reserveAAs.forEach(aa => aa.totalForAreaType = this.activeScenario.totalIncome);
-      }
-    }
-
-    private initializeAssessmentAreas() {
-      this.activeScenario.sadAssesmentAreas.forEach(aa => {
-        if (!this.activeScenario.isEdited) {
-          aa.schoolData = aa.schoolDataLatestTerm;
-          aa.totalForAreaType = aa.totalForAreaTypeLatestTerm;
-        }
-
-        if (aa.schoolData) {
-          aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
-        } else {
-          aa.percentageSchoolData = null;
-        }
-
-        aa.matchingTreshold = aa.allTresholds
-          .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
-
-        aa.schoolDataFormat = this.getDataFormat(aa.assessmentAreaName);
-      });
-    }
-
-    private getDataFormat(assessmentArea): string {
-      switch (assessmentArea) {
-        case 'Pupil to teacher ratio':
-        case 'Pupil to adult ratio':
-        case 'Teacher contact ratio (less than 1)':
-        case 'Average Class size':
-          return 'number';
-        case 'Average teacher cost':
-          return 'currency';
-        case 'Senior leaders as a percentage of workforce':
-            return 'percentageOfWf';
-        case 'In-year balance':
-        case 'Revenue reserve':
-              return 'percentageOfInc';
-        default:
-          return 'percentageOfExp';
-      }
     }
 }
