@@ -29,3 +29,65 @@
 [SizeLookup2]='secondScenario.sadSizeLookup'
 [FSMLookup2]='secondScenario.sadFSMLookup'
 ></app-sidebyside-characteristics>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="float-right">
+      <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Edit scenarios
+      </button>
+    </div>
+  </div>
+</div>
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header no-bottom"></th>
+      <th scope="col" class="govuk-table__header no-bottom pb-3" colspan="3">{{firstScenario.scenarioName}}</th>
+      <th scope="col" class="govuk-table__header cell-separate no-bottom pb-3" colspan="3">{{secondScenario.scenarioName}}</th>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header no-bottom">Spending</th>
+      <th scope="col" class="govuk-table__header no-bottom" colspan="3"></th>
+      <th scope="col" class="govuk-table__header cell-separate no-bottom" colspan="3"></th>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Assessment area</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">School data</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">% of exp.</th>
+      <th scope="col" class="govuk-table__header">Rating against tresholds</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric cell-separate">School data</th>
+      <th scope="col" class="govuk-table__header govuk-table__header--numeric">% of exp.</th>
+      <th scope="col" class="govuk-table__header">Rating against tresholds</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row" *ngFor='let _ of firstScenario.spendingAAs; let i=index'>
+      <td class="govuk-table__cell">{{firstScenario.spendingAAs[i].assessmentAreaName}}</td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">{{firstScenario.spendingAAs[i].schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">{{firstScenario.spendingAAs[i].percentageSchoolData | percent : '1.0-1'}}</td>
+      <td *ngIf="firstScenario.spendingAAs[i].schoolData" class="govuk-table__cell">
+        <span class="rating-box" [class]='firstScenario.spendingAAs[i].matchingTreshold.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold.ratingText}}</span>
+      </td>
+      <td *ngIf="!firstScenario.spendingAAs[i].schoolData" class="govuk-table__cell">
+        <span class="rating-box gray">
+          <span>Not available.</span>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}'>Add data</a>
+        </span>
+      </td>
+      
+      <td class="govuk-table__cell govuk-table__cell--numeric cell-separate">{{secondScenario.spendingAAs[i].schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">{{secondScenario.spendingAAs[i].percentageSchoolData | percent : '1.0-1'}}</td>
+      <td *ngIf="secondScenario.spendingAAs[i].schoolData" class="govuk-table__cell">
+        <span class="rating-box" [class]='secondScenario.spendingAAs[i].matchingTreshold.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold.ratingText}}</span>
+      </td>
+      <td *ngIf="!secondScenario.spendingAAs[i].schoolData" class="govuk-table__cell">
+        <span class="rating-box gray">
+          <span>Not available.</span>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{secondScenario.urn}}'>Add data</a>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
