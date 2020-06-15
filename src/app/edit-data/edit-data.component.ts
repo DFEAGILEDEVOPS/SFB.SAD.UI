@@ -88,7 +88,8 @@ export class EditDataComponent implements OnInit {
       }),
       character: this.fb.group({
         teacherCost: [this.scenarioInEdit.getAAValue('Average teacher cost')],
-        seniorLeaders: [this.scenarioInEdit.getAAValue('Senior leaders as a percentage of workforce') * 100],
+        seniorLeaders: [this.scenarioInEdit.getAAValue('Senior leaders as a percentage of workforce') ?
+          this.scenarioInEdit.getAAValue('Senior leaders as a percentage of workforce') * 100 : null],
         pupilToTeacher: [this.scenarioInEdit.getAAValue('Pupil to teacher ratio')],
         pupilToAdult: [this.scenarioInEdit.getAAValue('Pupil to adult ratio')],
         teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)')],

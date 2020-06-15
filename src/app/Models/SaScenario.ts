@@ -7,34 +7,37 @@ export class SaScenario {
   scenarioName: string;
   urn: number;
   name: string;
-  latestTerm: string;
   termOfScenario: string;
+  latestTerm: string;
   overallPhase: string;
+  overallPhaseLatestTerm: string;
   hasSixthForm: string;
   hasSixthFormLatestTerm: string;
-  overallPhaseLatestTerm: string;
   londonWeighting: string;
   londonWeightingLatestTerm: string;
   numberOfPupils: number;
   numberOfPupilsLatestTerm: number;
   fsm: number;
   fsmLatestTerm: number;
+  totalExpenditure: number;
+  totalExpenditureLatestTerm: number;
+  totalIncome: number;
+  totalIncomeLatestTerm: number;
   ofstedRating: string;
   ofstedInspectionDate: string;
   progressScore: number;
   progressScoreType: string;
   progress8Banding: number;
-  totalExpenditure: number;
-  totalExpenditureLatestTerm: number;
-  totalIncome: number;
-  totalIncomeLatestTerm: number;
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
   sadAssesmentAreas: AssessmentAreaModel[];
 
+  scenarioNo: number;
   isEdited: boolean;
+  data: SaData;
 
   constructor(data: SaData) {
+    this.data = data;
     this.name = data.name;
     this.urn = data.urn;
     this.latestTerm = data.latestTerm;

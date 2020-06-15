@@ -1,4 +1,5 @@
-<app-edit-data-breadcrumb [name]='scenarioInEdit.name' [urn]='scenarioInEdit.urn' [viewType]='viewType'></app-edit-data-breadcrumb>
+<app-edit-data-breadcrumb [name]='scenarioInEdit.name' [urn]='scenarioInEdit.urn' [viewType]='viewType'>
+</app-edit-data-breadcrumb>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -104,7 +105,8 @@
       </select>
     </div>
 
-    <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !numberOfPupils.valid && !numberOfPupils.pristine}">
+    <div class="govuk-form-group"
+      [class]="{'govuk-form-group--error' : !numberOfPupils.valid && !numberOfPupils.pristine}">
       <label class="govuk-label" for="number-pupils">
         Number of pupils
       </label>
@@ -122,8 +124,7 @@
       </div>
     </div>
 
-    <div class="govuk-form-group"
-      [class]="{'govuk-form-group--error' : !fsm.valid && !fsm.pristine}">
+    <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !fsm.valid && !fsm.pristine}">
       <label class="govuk-label" for="fsm">
         Percentage of pupils eligible for FSM
       </label>
@@ -132,7 +133,7 @@
           class="govuk-!-font-weight-bold">{{scenarioInEdit.fsmLatestTerm}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="text" formControlName='fsm'
-      [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}" required>
+        [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}" required>
       <div [hidden]="fsm.valid || fsm.pristine">
         <span class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM is required
@@ -152,6 +153,10 @@
       <label class="govuk-label" for="total-expenditure">
         Total expenditure
       </label>
+      <span class="govuk-hint">
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditure}}</span>
+      </span>
       <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
         formControlName='totalExpenditure'
         [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}" required>
@@ -264,6 +269,10 @@
       <label class="govuk-label" for="total-income">
         Total income
       </label>
+      <span class="govuk-hint">
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncome}}</span>
+      </span>
       <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
         formControlName='totalIncome' [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
         required>
@@ -302,73 +311,74 @@
       <h2 class="govuk-fieldset__heading">
         School characteristics
       </h2>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="atc">
-          Average teacher cost
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Average teacher cost')}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="atc" name="atc" type="text" formControlName='teacherCost'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="sl">
-          Senior leaders as a percentage of workforce
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Senior leaders as a percentage of workforce') * 100}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="sl" name="sl" type="text" formControlName='seniorLeaders'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="ptt">
-          Pupil to teacher ratio
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to teacher ratio')}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="ptt" name="ptt" type="text" formControlName='pupilToTeacher'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="pta">
-          Pupil to adult ratio
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to adult ratio')}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="pta" name="pta" type="text" formControlName='pupilToAdult'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="tcr">
-          Teacher contact ratio (less than 1)
-        </label>
-        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="text" formControlName='teacherContactRatio'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="ppl">
-          Predicted percentage pupil number change in 3-5 years
-        </label>
-        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="text" formControlName='predictedPupil'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="acs">
-          Average Class size
-        </label>
-        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text" formControlName='averageClassSize'>
-      </div>
-
     </legend>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="atc">
+        Average teacher cost
+      </label>
+      <span class="govuk-hint">
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Average teacher cost')}}</span>
+      </span>
+      <input class="govuk-input govuk-input--width-20" id="atc" name="atc" type="text" formControlName='teacherCost'>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="sl">
+        Senior leaders as a percentage of workforce
+      </label>
+      <span class="govuk-hint">
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Senior leaders as a percentage of workforce') * 100}}</span>
+      </span>
+      <input class="govuk-input govuk-input--width-20" id="sl" name="sl" type="text" formControlName='seniorLeaders'>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="ptt">
+        Pupil to teacher ratio
+      </label>
+      <span class="govuk-hint">
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to teacher ratio')}}</span>
+      </span>
+      <input class="govuk-input govuk-input--width-20" id="ptt" name="ptt" type="text" formControlName='pupilToTeacher'>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="pta">
+        Pupil to adult ratio
+      </label>
+      <span class="govuk-hint">
+        The {{scenarioInEdit.latestTerm}} value was <span
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to adult ratio')}}</span>
+      </span>
+      <input class="govuk-input govuk-input--width-20" id="pta" name="pta" type="text" formControlName='pupilToAdult'>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="tcr">
+        Teacher contact ratio (less than 1)
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="text"
+        formControlName='teacherContactRatio'>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="ppl">
+        Predicted percentage pupil number change in 3-5 years
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="text" formControlName='predictedPupil'>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="acs">
+        Average Class size
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text"
+        formControlName='averageClassSize'>
+    </div>
   </fieldset>
 
   <div class="govuk-grid-row govuk-body">
