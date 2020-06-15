@@ -9,5 +9,11 @@
     <li class="govuk-breadcrumbs__list-item">
       <a class="govuk-breadcrumbs__link" routerLink='/self-assessment/{{urn}}'>Self assessment dashboard</a>
     </li>
+    <li *ngIf='viewType === "edit"' class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" routerLink='/self-assessment/editing-format/{{urn}}/{{name}}'>How would you like to edit the data?</a>
+    </li>
+    <li *ngIf='viewType === "enter"' class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" routerLink='/self-assessment/sidebyside-format/{{urn}}/{{name}}'>How would you like to enter the data for the side-by-side scenario?</a>
+    </li>
   </ol>
 </div>

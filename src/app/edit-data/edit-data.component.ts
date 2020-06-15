@@ -27,6 +27,14 @@ export class EditDataComponent implements OnInit {
     return this.editDataForm.get('reserveBalance').get('totalIncome');
   }
 
+  get numberOfPupils() {
+    return this.editDataForm.get('schoolDetails').get('numberOfPupils');
+  }
+
+  get fsm() {
+    return this.editDataForm.get('schoolDetails').get('fsm');
+  }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,

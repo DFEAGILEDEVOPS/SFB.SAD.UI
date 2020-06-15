@@ -10,6 +10,7 @@ export class EditDataBreadcrumbComponent implements OnInit {
 
   @Input() urn: number;
   @Input() name: string;
+  @Input() viewType: string;
   constructor(@Inject(appSettings) public settings: AppSettings) {
 
   }

@@ -1,9 +1,9 @@
-<app-edit-data-breadcrumb [name]='scenarioInEdit.name' [urn]='scenarioInEdit.urn'></app-edit-data-breadcrumb>
+<app-edit-data-breadcrumb [name]='scenarioInEdit.name' [urn]='scenarioInEdit.urn' [viewType]='viewType'></app-edit-data-breadcrumb>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <h1 *ngIf='viewType === "edit"'  class="govuk-heading-xl">Edit data</h1>
-    <h1 *ngIf='viewType === "enter"'  class="govuk-heading-xl">Enter data</h1>
+    <h1 *ngIf='viewType === "edit"' class="govuk-heading-xl">Edit data</h1>
+    <h1 *ngIf='viewType === "enter"' class="govuk-heading-xl">Enter data</h1>
     <p class="govuk-body-s">
       Assessing
       <span class="highlight">
@@ -104,7 +104,7 @@
       </select>
     </div>
 
-    <div class="govuk-form-group">
+    <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !numberOfPupils.valid && !numberOfPupils.pristine}">
       <label class="govuk-label" for="number-pupils">
         Number of pupils
       </label>
@@ -113,10 +113,17 @@
           class="govuk-!-font-weight-bold">{{scenarioInEdit.numberOfPupilsLatestTerm}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="text"
-        formControlName='numberOfPupils'>
+        formControlName='numberOfPupils'
+        [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}" required>
+      <div [hidden]="numberOfPupils.valid || numberOfPupils.pristine">
+        <span class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Number of pupils is required
+        </span>
+      </div>
     </div>
 
-    <div class="govuk-form-group">
+    <div class="govuk-form-group"
+      [class]="{'govuk-form-group--error' : !fsm.valid && !fsm.pristine}">
       <label class="govuk-label" for="fsm">
         Percentage of pupils eligible for FSM
       </label>
@@ -124,7 +131,13 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.fsmLatestTerm}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="text" formControlName='fsm'>
+      <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="text" formControlName='fsm'
+      [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}" required>
+      <div [hidden]="fsm.valid || fsm.pristine">
+        <span class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM is required
+        </span>
+      </div>
     </div>
   </fieldset>
 
