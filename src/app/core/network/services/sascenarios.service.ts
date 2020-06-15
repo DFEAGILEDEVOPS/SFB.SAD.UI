@@ -19,9 +19,11 @@ setFirstScenario(scenario: SaScenario) {
   this.updateScenario(scenario);
   scenario.scenarioNo = 0;
   this.scenarios[0] = scenario;
+  sessionStorage.setItem('scenario_0', JSON.stringify(scenario));
 }
 
 getFirstScenario(urn: number): Observable<SaScenario> {
+  // this.scenarios[0] = this.scenarios[0] ?? JSON.parse(sessionStorage.getItem('scenario_0'));
   if (this.scenarios[0]) {
     return new Observable((observer) =>  observer.next(this.scenarios[0]));
   } else {
@@ -33,9 +35,11 @@ setSecondScenario(scenario: SaScenario) {
   this.updateScenario(scenario);
   scenario.scenarioNo = 1;
   this.scenarios[1] = scenario;
+  sessionStorage.setItem('scenario_1', JSON.stringify(scenario));
 }
 
 getSecondScenario(): SaScenario {
+  // this.scenarios[1] = this.scenarios[1] ?? JSON.parse(sessionStorage.getItem('scenario_1'));
   if (this.scenarios[1]) {
     return this.scenarios[1];
   } else {

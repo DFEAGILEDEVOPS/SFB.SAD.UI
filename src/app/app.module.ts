@@ -21,6 +21,9 @@ import { DashboardCharacteristicsComponent } from './dashboard/dashboard-charact
 import { DashboardAaModalComponent } from './dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
 // tslint:disable-next-line:max-line-length
 import { SidebysideFormatBreadcrumbsComponent } from '@core/sidebyside-format/sidebyside-format-breadcrumbs/sidebyside-format-breadcrumbs.component';
+import { SidebysideComponent } from './sidebyside/sidebyside.component';
+import { SidebysideBreadcrumbComponent } from './sidebyside/sidebyside-breadcrumb/sidebyside-breadcrumb.component';
+import { SidebysideCharacteristicsComponent } from './sidebyside/sidebyside-characteristics/sidebyside-characteristics.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { SidebysideFormatBreadcrumbsComponent } from '@core/sidebyside-format/si
     SidebysideFormatComponent,
     SidebysideFormatBreadcrumbsComponent,
     EditDataComponent,
-    EditDataBreadcrumbComponent
+    EditDataBreadcrumbComponent,
+    SidebysideComponent,
+    SidebysideBreadcrumbComponent,
+    SidebysideCharacteristicsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

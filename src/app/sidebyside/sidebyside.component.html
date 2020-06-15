@@ -1,0 +1,31 @@
+<app-sidebyside-breadcrumb [urn]='firstScenario.urn' [name]='firstScenario.name'></app-sidebyside-breadcrumb>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Side-by-side scenario</h1>
+    <p class="govuk-body-s">
+      Assessing
+      <span class="highlight">
+        <span class="govuk-!-font-weight-bold">{{firstScenario.name}}</span>
+      </span>
+      using <span class="govuk-!-font-weight-bold">custom</span> finance data.
+    </p>
+  </div>
+</div>
+
+<app-sidebyside-characteristics
+[scenarioName1] = 'firstScenario.scenarioName'
+[phase1]='firstScenario.overallPhaseWSixthForm'
+[londonWeight1]='firstScenario.londonWeighting'
+[noPupils1]='firstScenario.numberOfPupils'
+[FSM1]='firstScenario.fsm'
+[SizeLookup1]='firstScenario.sadSizeLookup'
+[FSMLookup1]='firstScenario.sadFSMLookup'
+[scenarioName2] = 'secondScenario.scenarioName'
+[phase2]='secondScenario.overallPhaseWSixthForm'
+[londonWeight2]='secondScenario.londonWeighting'
+[noPupils2]='secondScenario.numberOfPupils'
+[FSM2]='secondScenario.fsm'
+[SizeLookup2]='secondScenario.sadSizeLookup'
+[FSMLookup2]='secondScenario.sadFSMLookup'
+></app-sidebyside-characteristics>

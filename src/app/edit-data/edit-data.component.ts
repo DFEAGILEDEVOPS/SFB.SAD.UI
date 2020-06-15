@@ -105,7 +105,7 @@ export class EditDataComponent implements OnInit {
 
   onSubmit() {
     if (this.editDataForm.valid) {
-      // const editedScenario: SaScenario = JSON.parse(JSON.stringify(this.originalScenario));
+
       const editedScenario: SaScenario = this.scenarioInEdit;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
@@ -139,8 +139,14 @@ export class EditDataComponent implements OnInit {
       editedScenario.setAAValue('Average Class size', this.editDataForm.value.character.averageClassSize);
 
       editedScenario.isEdited = true;
-      this.saScenariosService.setFirstScenario(editedScenario);
-      this.router.navigate(['self-assessment/', this.urn]);
+
+      if (this.viewType === 'edit') {
+        this.saScenariosService.setFirstScenario(editedScenario);
+        this.router.navigate(['self-assessment/', this.urn]);
+      } else {
+        this.saScenariosService.setSecondScenario(editedScenario);
+        this.router.navigate(['self-assessment/side-by-side']);
+      }
     }
   }
 

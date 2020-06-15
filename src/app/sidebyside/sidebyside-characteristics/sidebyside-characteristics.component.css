@@ -1,0 +1,8 @@
+.cell-separate{
+  border-left: 1px solid #b1b4b6;
+  padding-left: 10px;
+}
+
+.no-bottom{
+  border-bottom: none;
+}
