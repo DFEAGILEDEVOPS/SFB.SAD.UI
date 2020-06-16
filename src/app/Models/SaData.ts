@@ -5,7 +5,7 @@ export class SaData {
   urn: number;
   name: string;
   latestTerm: string;
-  hasSixthFormLatestTerm: string;
+  hasSixthFormLatestTerm: boolean;
   overallPhaseLatestTerm: string;
   londonWeightingLatestTerm: string;
   numberOfPupilsLatestTerm: number;
