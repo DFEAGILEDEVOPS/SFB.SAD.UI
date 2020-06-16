@@ -1,6 +1,15 @@
 .cell-separate{
   border-left: 1px solid #b1b4b6;
-  padding-left: 10px;
+}
+
+.govuk-table__header {
+  padding-left: 5px!important;
+  padding-right: 10px!important;
+}
+
+.govuk-table__cell {
+  padding-left: 5px!important;
+  padding-right: 5px!important;
 }
 
 .no-bottom{
@@ -88,3 +97,6 @@
     color: #fff;
 }
 }
+
+
+
