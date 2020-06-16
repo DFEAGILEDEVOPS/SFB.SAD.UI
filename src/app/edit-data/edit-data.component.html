@@ -155,7 +155,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditure}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditureLatestTerm}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
         formControlName='totalExpenditure'
@@ -271,7 +271,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncome}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
         formControlName='totalIncome' [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"

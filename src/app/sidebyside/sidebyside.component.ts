@@ -9,7 +9,7 @@ import { SaData } from 'app/Models/SaData';
 @Component({
   selector: 'app-sidebyside',
   templateUrl: './sidebyside.component.html',
-  styleUrls: ['./sidebyside.component.css']
+  styleUrls: ['./sidebyside.component.scss']
 })
 export class SidebysideComponent implements OnInit {
   firstScenario: SaScenario;

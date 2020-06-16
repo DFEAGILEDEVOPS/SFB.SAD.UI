@@ -1,0 +1,90 @@
+.cell-separate{
+  border-left: 1px solid #b1b4b6;
+  padding-left: 10px;
+}
+
+.no-bottom{
+  border-bottom: none;
+}
+
+@import "govuk-frontend/govuk/all";
+
+.govuk-table {
+  font-size: 16px;
+}
+
+.rating-help-icon{
+  float: right;
+  position: relative;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.rating {
+  display: inline-block;
+  width: 18px;
+  height: 21px;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.rating-1 {
+  background-color:  govuk-colour("green");
+}
+
+.rating-2 {
+  background-color:  govuk-colour("blue");
+}
+
+.rating-3 {
+  background-color:  govuk-colour("orange");
+  color:  $govuk-text-colour
+}
+
+.rating-4 {
+  background-color: govuk-colour("red");
+}
+
+.rating-0 {
+  background-color:  govuk-colour("light-grey");
+}
+
+.progress-td {
+  text-align: center;
+}
+
+.progress-text {
+  text-align: center;
+  padding: 3px;
+  min-width: 50px;
+  display: inline-block;
+  border-radius: 3px;
+  width: 99%;
+
+  &--well-below {
+    background-color: #df3034;
+    color: #fff;
+}
+
+&--below {
+    background-color: #f47738;
+    color: #fff;
+}
+
+&--average {
+    background-color: #ffbf47;
+}
+
+&--above {
+    background-color: #85994b;
+    color: #fff;
+}
+
+&--well-above {
+    background-color: #006435;
+    color: #fff;
+}
+}
