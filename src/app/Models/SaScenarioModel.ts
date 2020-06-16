@@ -3,7 +3,7 @@ import { AssessmentAreaModel } from './AssessmentAreaModel';
 import { FSMLookupModel } from './FSMLookupModel';
 import { SizeLookupModel } from './SizeLookupModel';
 import { getAADataFormat } from '../core/network/services/getAADataFormat';
-export class SaScenario {
+export class SaScenarioModel {
   scenarioName: string;
   urn: number;
   name: string;
@@ -11,8 +11,8 @@ export class SaScenario {
   latestTerm: string;
   overallPhase: string;
   overallPhaseLatestTerm: string;
-  hasSixthForm: string;
-  hasSixthFormLatestTerm: string;
+  hasSixthForm: boolean;
+  hasSixthFormLatestTerm: boolean;
   londonWeighting: string;
   londonWeightingLatestTerm: string;
   numberOfPupils: number;

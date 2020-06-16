@@ -1,8 +1,7 @@
 import { AAModalModels } from './../Models/AAModalModels';
 import { Component, OnInit } from '@angular/core';
-import { SaScenario } from 'app/Models/SaScenario';
+import { SaScenarioModel } from 'app/Models/SaScenarioModel';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { ActivatedRoute } from '@angular/router';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { SaData } from 'app/Models/SaData';
 
@@ -12,8 +11,8 @@ import { SaData } from 'app/Models/SaData';
   styleUrls: ['./sidebyside.component.scss']
 })
 export class SidebysideComponent implements OnInit {
-  firstScenario: SaScenario;
-  secondScenario: SaScenario;
+  firstScenario: SaScenarioModel;
+  secondScenario: SaScenarioModel;
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
 
@@ -21,8 +20,8 @@ export class SidebysideComponent implements OnInit {
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService) {
       this.aaModalModels = new AAModalModels();
-      this.firstScenario = new SaScenario(new SaData());
-      this.secondScenario = new SaScenario(new SaData());
+      this.firstScenario = new SaScenarioModel(new SaData());
+      this.secondScenario = new SaScenarioModel(new SaData());
     }
 
     ngOnInit() {

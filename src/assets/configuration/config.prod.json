@@ -12,6 +12,6 @@
       "robots": "index, follow"
     },
     "sfbDomain": "https://as-t1stg-sfb.azurewebsites.net",
-    "apiDomain": "https://aa-t1stg-sfb.azurewebsites.net/api/selfassesment"
+    "apiDomain": "https://aa-t1stg-sfb.azurewebsites.net/api"
   }
 }

@@ -1,10 +1,12 @@
-import { SaScenario } from '../../../Models/SaScenario';
+import { SizeLookupModel } from './../../../Models/SizeLookupModel';
+import { SaScenarioModel } from '../../../Models/SaScenarioModel';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 import { SaData } from 'app/Models/SaData';
+import { FSMLookupModel } from 'app/Models/FSMLookupModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +15,28 @@ export class SaDataService {
 
 constructor(private http: HttpClient, @Inject(appSettings) private settings: AppSettings) { }
 
-getSaScenario(urn: number): Observable<SaScenario> {
-  return this.http.get<SaData>(`${this.settings.apiDomain}/${urn}`)
+getSaScenario(urn: number): Observable<SaScenarioModel> {
+  return this.http.get<SaData>(`${this.settings.apiDomain}/selfassessment/${urn}`)
     .pipe(
       tap(_ => this.log('fetched saData')),
-      map(data => new SaScenario(data)),
-      catchError(this.handleError<SaScenario>('getSaData', new SaScenario(new SaData())))
+      map(data => new SaScenarioModel(data)),
+      catchError(this.handleError<SaScenarioModel>('getSaData', new SaScenarioModel(new SaData())))
+    );
+}
+
+getSizeLookupList(): Observable<SizeLookupModel[]> {
+  return this.http.get<SizeLookupModel[]>(`${this.settings.apiDomain}/sadsizelookup`)
+    .pipe(
+      tap(_ => this.log('fetched saData')),
+      catchError(this.handleError<SizeLookupModel[]>('getSaData', new Array<SizeLookupModel>()))
+    );
+}
+
+getFSMLookupList(): Observable<FSMLookupModel[]> {
+  return this.http.get<FSMLookupModel[]>(`${this.settings.apiDomain}/sadfsmlookup`)
+    .pipe(
+      tap(_ => this.log('fetched saData')),
+      catchError(this.handleError<FSMLookupModel[]>('getSaData', new Array<FSMLookupModel>()))
     );
 }
 

@@ -1,6 +1,6 @@
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
-import { SaScenario } from '../Models/SaScenario';
+import { SaScenarioModel } from '../Models/SaScenarioModel';
 import { Component, OnInit } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +15,7 @@ import { getAADataFormat } from '@core/network/services/getAADataFormat';
 })
 export class DashboardComponent implements OnInit {
   urn: number;
-  activeScenario: SaScenario;
+  activeScenario: SaScenarioModel;
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
 
@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
         this.urn = +params.urn;
       });
       this.aaModalModels = new AAModalModels();
-      this.activeScenario = new SaScenario(new SaData());
+      this.activeScenario = new SaScenarioModel(new SaData());
     }
 
     ngOnInit() {

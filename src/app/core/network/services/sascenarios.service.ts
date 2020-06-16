@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { SaDataService } from './sadata.service';
-import { SaScenario } from 'app/Models/SaScenario';
+import { SaScenarioModel } from 'app/Models/SaScenarioModel';
 import { SaData } from 'app/Models/SaData';
 
 @Injectable({
@@ -9,20 +9,20 @@ import { SaData } from 'app/Models/SaData';
 })
 export class SaScenariosService {
 
-scenarios: SaScenario[];
+scenarios: SaScenarioModel[];
 
 constructor(private saDataService: SaDataService) {
-  this.scenarios = new Array<SaScenario>();
+  this.scenarios = new Array<SaScenarioModel>();
  }
 
-setFirstScenario(scenario: SaScenario) {
+setFirstScenario(scenario: SaScenarioModel) {
   this.updateScenario(scenario);
   scenario.scenarioNo = 0;
   this.scenarios[0] = scenario;
-  sessionStorage.setItem('scenario_0', JSON.stringify(scenario));
+  // sessionStorage.setItem('scenario_0', JSON.stringify(scenario));
 }
 
-getFirstScenario(urn: number): Observable<SaScenario> {
+getFirstScenario(urn: number): Observable<SaScenarioModel> {
   // this.scenarios[0] = this.scenarios[0] ?? JSON.parse(sessionStorage.getItem('scenario_0'));
   if (this.scenarios[0]) {
     return new Observable((observer) =>  observer.next(this.scenarios[0]));
@@ -31,21 +31,21 @@ getFirstScenario(urn: number): Observable<SaScenario> {
   }
 }
 
-setSecondScenario(scenario: SaScenario) {
+setSecondScenario(scenario: SaScenarioModel) {
   this.updateScenario(scenario);
   scenario.scenarioNo = 1;
   this.scenarios[1] = scenario;
-  sessionStorage.setItem('scenario_1', JSON.stringify(scenario));
+  // sessionStorage.setItem('scenario_1', JSON.stringify(scenario));
 }
 
-getSecondScenario(): SaScenario {
+getSecondScenario(): SaScenarioModel {
   // this.scenarios[1] = this.scenarios[1] ?? JSON.parse(sessionStorage.getItem('scenario_1'));
   if (this.scenarios[1]) {
     return this.scenarios[1];
   } else {
     const firstScenario = this.scenarios[0];
     const data: SaData = JSON.parse(JSON.stringify(firstScenario.data));
-    const secondScenario = new SaScenario(data);
+    const secondScenario = new SaScenarioModel(data);
     secondScenario.scenarioName = null;
     secondScenario.scenarioNo = 1;
     secondScenario.numberOfPupils = null;
@@ -60,7 +60,7 @@ getSecondScenario(): SaScenario {
   }
 }
 
-private updateScenario(scenario: SaScenario) {
+private updateScenario(scenario: SaScenarioModel) {
   scenario.spendingAAs.forEach(aa => aa.totalForAreaType = scenario.totalExpenditure);
   scenario.reserveAAs.forEach(aa => aa.totalForAreaType = scenario.totalIncome);
   scenario.sadAssesmentAreas.forEach(aa => {
