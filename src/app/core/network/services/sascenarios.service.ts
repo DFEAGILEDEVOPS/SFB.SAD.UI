@@ -76,8 +76,8 @@ export class SaScenariosService {
           scenario.overallPhase,
           scenario.hasSixthForm,
           scenario.londonWeighting,
-          scenario.sadSizeLookup.sizeType,
-          scenario.sadFSMLookup.fsmScale,
+          scenario.sadSizeLookup?.sizeType,
+          scenario.sadFSMLookup?.fsmScale,
           scenario.termOfScenario)
           .subscribe(results => {
             aa.allTresholds = results;
