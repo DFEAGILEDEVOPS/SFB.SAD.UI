@@ -89,15 +89,15 @@ export class SaScenarioModel {
     return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaType === 'School characteristics');
   }
 
-  getAAValue(aaName: string) {
+  getAAValue(aaName: string): number {
     return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
   }
 
-  getAALatestTermValue(aaName: string) {
+  getAALatestTermValue(aaName: string): number {
     return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
   }
 
-  setAAValue(aaName: string, value: any) {
+  setAAValue(aaName: string, value: number) {
     this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
   }
 

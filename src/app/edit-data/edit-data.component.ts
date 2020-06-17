@@ -5,6 +5,7 @@ import { SaScenarioModel } from '../Models/SaScenarioModel';
 import { Component, OnInit } from '@angular/core';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { isNumber } from 'util';
 
 @Component({
   selector: 'app-edit-data',
@@ -134,12 +135,15 @@ export class EditDataComponent implements OnInit {
       editedScenario.setAAValue('Revenue reserve', this.editDataForm.value.reserveBalance.rr);
 
       editedScenario.setAAValue('Average teacher cost', this.editDataForm.value.character.teacherCost);
-      editedScenario.setAAValue('Senior leaders as a percentage of workforce', this.editDataForm.value.character.seniorLeaders / 100);
+      // tslint:disable-next-line:max-line-length
+      editedScenario.setAAValue('Senior leaders as a percentage of workforce', isNumber(this.editDataForm.value.character.seniorLeaders) ?
+        this.editDataForm.value.character.seniorLeaders / 100 : null);
       editedScenario.setAAValue('Pupil to teacher ratio', this.editDataForm.value.character.pupilToTeacher);
       editedScenario.setAAValue('Pupil to adult ratio', this.editDataForm.value.character.pupilToAdult);
       editedScenario.setAAValue('Teacher contact ratio (less than 1)', this.editDataForm.value.character.teacherContactRatio);
       // tslint:disable-next-line:max-line-length
-      editedScenario.setAAValue('Predicted percentage pupil number change in 3-5 years', this.editDataForm.value.character.predictedPupil / 100);
+      editedScenario.setAAValue('Predicted percentage pupil number change in 3-5 years', isNumber(this.editDataForm.value.character.predictedPupil) ?
+        this.editDataForm.value.character.predictedPupil / 100 : null);
       editedScenario.setAAValue('Average Class size', this.editDataForm.value.character.averageClassSize);
 
       editedScenario.isEdited = true;

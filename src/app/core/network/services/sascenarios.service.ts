@@ -64,7 +64,7 @@ export class SaScenariosService {
     scenario.spendingAAs.forEach(aa => aa.totalForAreaType = scenario.totalExpenditure);
     scenario.reserveAAs.forEach(aa => aa.totalForAreaType = scenario.totalIncome);
     scenario.sadAssesmentAreas.forEach(aa => {
-      if (aa.schoolData) {
+      if (aa.schoolData !== null) {
         aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
       } else {
         aa.percentageSchoolData = null;
