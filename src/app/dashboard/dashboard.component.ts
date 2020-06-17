@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
       this.saScenariosService.getFirstScenario(this.urn).
         subscribe(result => {
           this.activeScenario = result;
-          this.saScenariosService.setFirstScenario(result);
+          this.saScenariosService.setFirstScenario(result, false);
         });
     }
 

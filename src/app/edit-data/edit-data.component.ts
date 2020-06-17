@@ -159,9 +159,9 @@ export class EditDataComponent implements OnInit {
           editedScenario.fsm);
 
       if (this.viewType === 'edit') {
-        this.scenariosService.setFirstScenario(editedScenario);
+        this.scenariosService.setFirstScenario(editedScenario, true);
         this.router.navigate(['self-assessment/', this.urn]);
-      } else {
+      } else if (this.viewType === 'enter')  {
         this.scenariosService.setSecondScenario(editedScenario);
         this.router.navigate(['self-assessment/side-by-side']);
       }

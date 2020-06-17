@@ -7,6 +7,7 @@ import { tap, catchError, map } from 'rxjs/operators';
 import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 import { SaData } from 'app/Models/SaData';
 import { FSMLookupModel } from 'app/Models/FSMLookupModel';
+import { TresholdModel } from 'app/Models/TresholdModel';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,23 @@ getFSMLookupList(): Observable<FSMLookupModel[]> {
     .pipe(
       tap(_ => this.log('fetched saData')),
       catchError(this.handleError<FSMLookupModel[]>('getSaData', new Array<FSMLookupModel>()))
+    );
+}
+
+getAATresholdsList(
+  areaName: string,
+  overallPhase: string,
+  has6Form: boolean,
+  londonWeight: string,
+  sizeType: string,
+  fsmScale: string,
+  termYears: string): Observable<TresholdModel[]> {
+  return this.http.get<TresholdModel[]>(`${this.settings.apiDomain}/sadtresholds?`
+    + `areaName=${areaName}&overallPhase=${overallPhase}&has6Form=${has6Form}`
+    + `&londonWeight=${londonWeight}&sizeType=${sizeType}&fsmScale=${fsmScale}&termYears=${termYears}`)
+    .pipe(
+      tap(_ => this.log('fetched saData')),
+      catchError(this.handleError<TresholdModel[]>('getSaData', new Array<TresholdModel>()))
     );
 }
 
