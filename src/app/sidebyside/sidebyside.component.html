@@ -44,8 +44,20 @@
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header no-bottom width-twenty-percent"></th>
-      <th scope="col" class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent govuk-!-font-size-24" colspan="3">{{firstScenario.scenarioName}}</th>
-      <th scope="col" class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent govuk-!-font-size-24" colspan="3">{{secondScenario.scenarioName}}</th>
+      <th scope="col" class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" colspan="3">
+        <span class="govuk-!-font-size-24">{{firstScenario.scenarioName}}</span>
+        <div class="govuk-!-margin-top-1">
+          <a class="govuk-link"><span style="vertical-align: middle; font-size: 22px;">&times;&nbsp;</span>Remove
+            scenario</a>
+        </div>
+      </th>
+      <th scope="col" class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" colspan="3">
+        <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
+        <div class="govuk-!-margin-top-1">
+          <a class="govuk-link"><span style="vertical-align: middle; font-size: 22px;">&times;&nbsp;</span>Remove
+            scenario</a>
+        </div>
+      </th>
     </tr>
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Spending</th>
@@ -65,7 +77,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row" *ngFor='let _ of firstScenario.spendingAAs; let i=index'>
-      <td class="govuk-table__cell">{{firstScenario.spendingAAs[i].assessmentAreaName}}</td>
+      <td class="govuk-table__cell aa-cell">{{firstScenario.spendingAAs[i].assessmentAreaName}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric cell-separate">{{firstScenario.spendingAAs[i].schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">{{firstScenario.spendingAAs[i].percentageSchoolData | percent : '1.0-1'}}</td>
       <td *ngIf="firstScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
@@ -113,7 +125,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row" *ngFor='let _ of firstScenario.reserveAAs; let i=index'>
-      <td class="govuk-table__cell">{{firstScenario.reserveAAs[i].assessmentAreaName}}</td>
+      <td class="govuk-table__cell aa-cell">{{firstScenario.reserveAAs[i].assessmentAreaName}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric cell-separate">{{firstScenario.reserveAAs[i].schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric">{{firstScenario.reserveAAs[i].percentageSchoolData | percent : '1.0-1'}}</td>
       <td *ngIf="firstScenario.reserveAAs[i].schoolData !== null" class="govuk-table__cell">
@@ -159,7 +171,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row" *ngFor='let _ of firstScenario.characteristicAAs; let i=index'>
-      <td class="govuk-table__cell">{{firstScenario.characteristicAAs[i].assessmentAreaName}}</td>
+      <td class="govuk-table__cell aa-cell">{{firstScenario.characteristicAAs[i].assessmentAreaName}}</td>
       <td class="govuk-table__cell govuk-table__cell--numeric cell-separate">
         <span *ngIf="firstScenario.characteristicAAs[i].schoolDataFormat ==='currency'">{{firstScenario.characteristicAAs[i].percentageSchoolData | currency: 'GBP' :'symbol': '1.0-0'}}</span>
         <span *ngIf="firstScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfExp' || firstScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfInc' || firstScenario.characteristicAAs[i].schoolDataFormat==='percentageOfWf'">{{firstScenario.characteristicAAs[i].percentageSchoolData | percent: '1.0-0'}}</span>
@@ -211,7 +223,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row">
-      <td class="govuk-table__cell">Ofsted rating</td>
+      <td class="govuk-table__cell aa-cell">Ofsted rating</td>
       <td class="govuk-table__cell cell-separate">
         <span class="rating rating-{{firstScenario.ofstedRating}}"> {{firstScenario.ofstedRating}} </span>
         <span [ngSwitch]="firstScenario.ofstedRating">
@@ -237,7 +249,7 @@
       </td>
     </tr>
     <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'KS2 score'">
-      <td class="govuk-table__cell">{{firstScenario.progressScoreType}}</td>
+      <td class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</td>
       <td class="govuk-table__cell progress-td cell-separate">
         <span class="progress-text" [ngClass]="{
               'progress-text-well-below': firstScenario.progressScore < -3 ,
@@ -271,7 +283,7 @@
       </td>
     </tr>
     <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'Progress 8 score'">
-      <td class="govuk-table__cell">{{firstScenario.progressScoreType}}</td>
+      <td class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</td>
       <td class="govuk-table__cell progress-td cell-separate">
         <span class="progress-text" [ngClass]="{
               'progress-text--well-below': firstScenario.progress8Banding === 5,

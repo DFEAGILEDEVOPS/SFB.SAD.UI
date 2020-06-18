@@ -1,3 +1,9 @@
+@import "govuk-frontend/govuk/all";
+
+.rating-box{
+  font-size: 14px;
+}
+
 .cell-separate{
   border-left: 1px solid #b1b4b6;
 }
@@ -10,13 +16,16 @@
 .govuk-table__cell {
   padding-left: 5px!important;
   padding-right: 5px!important;
+  background-color: govuk-colour("light-grey");
+}
+
+.aa-cell {
+  background-color: white;
 }
 
 .no-bottom{
   border-bottom: none!important;
 }
-
-@import "govuk-frontend/govuk/all";
 
 .govuk-table {
   font-size: 16px;

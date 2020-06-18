@@ -30,7 +30,17 @@
 ></app-dashboard-characteristics>
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
+  <div class="govuk-grid-column-one-half">
+    <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold" >
+      <img src="assets/images/icon-file-download.png" style="max-width: 17px;" class="small-icon" />
+      <span>Download page</span>
+    </a>
+    <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold ml-4">
+      <img src="assets/images/icon-print.png" class="small-icon" />
+      <span>Print page</span>
+    </a>
+  </div>
+  <div class="govuk-grid-column-one-half">
     <div class="float-right">
       <button class="govuk-button govuk-!-margin-right-4" data-module="govuk-button"
         routerLink='/self-assessment/sidebyside-format/{{urn}}/{{activeScenario.name}}'>
