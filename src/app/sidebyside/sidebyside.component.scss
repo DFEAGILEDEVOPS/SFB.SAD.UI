@@ -4,8 +4,9 @@
   font-size: 14px;
 }
 
-.cell-separate{
+td.cell-separate, th.cell-separate{
   border-left: 1px solid #b1b4b6;
+  padding-left: 10px!important;
 }
 
 .govuk-table__header {
