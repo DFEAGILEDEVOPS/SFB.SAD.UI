@@ -7,6 +7,7 @@ export class SaScenarioModel {
   scenarioName: string;
   urn: number;
   name: string;
+  financeType: string;
   termOfScenario: string;
   latestTerm: string;
   overallPhase: string;
@@ -41,6 +42,7 @@ export class SaScenarioModel {
     this.name = data.name;
     this.urn = data.urn;
     this.latestTerm = data.latestTerm;
+    this.financeType = data.financeType;
     this.hasSixthFormLatestTerm = data.hasSixthFormLatestTerm;
     this.overallPhaseLatestTerm = data.overallPhaseLatestTerm;
     this.londonWeightingLatestTerm = data.londonWeightingLatestTerm;
