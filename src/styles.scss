@@ -19,6 +19,9 @@ a{
 
 .a-button{
   text-decoration: none;
+  &:visited{
+    color: initial!important;
+  }
 }
 
 .back-button{
