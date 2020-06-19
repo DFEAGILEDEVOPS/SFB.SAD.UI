@@ -78,8 +78,8 @@
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row" *ngFor='let _ of firstScenario.spendingAAs; let i=index'>
       <td class="govuk-table__cell aa-cell">{{firstScenario.spendingAAs[i].assessmentAreaName}}</td>
-      <td class="govuk-table__cell cell-separate">{{firstScenario.spendingAAs[i].schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
-      <td class="govuk-table__cell">{{firstScenario.spendingAAs[i].percentageSchoolData | percent : '1.0-1'}}</td>
+      <td class="govuk-table__cell cell-separate">{{firstScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
+      <td class="govuk-table__cell">{{firstScenario.spendingAAs[i].percentageSchoolData | aaValueFormat : firstScenario.spendingAAs[i].assessmentAreaName }}</td>
       <td *ngIf="firstScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
         <span class="rating-box" [class]='firstScenario.spendingAAs[i].matchingTreshold.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold.ratingText}}</span>
       </td>
@@ -90,8 +90,8 @@
         </span>
       </td>
       <!---->
-      <td class="govuk-table__cell cell-separate">{{secondScenario.spendingAAs[i].schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
-      <td class="govuk-table__cell">{{secondScenario.spendingAAs[i].percentageSchoolData | percent : '1.0-1'}}</td>
+      <td class="govuk-table__cell cell-separate">{{secondScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
+      <td class="govuk-table__cell">{{secondScenario.spendingAAs[i].percentageSchoolData | aaValueFormat : secondScenario.spendingAAs[i].assessmentAreaName }}</td>
       <td *ngIf="secondScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
         <span class="rating-box" [class]='secondScenario.spendingAAs[i].matchingTreshold.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold.ratingText}}</span>
       </td>
@@ -126,8 +126,8 @@
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row" *ngFor='let _ of firstScenario.reserveAAs; let i=index'>
       <td class="govuk-table__cell aa-cell">{{firstScenario.reserveAAs[i].assessmentAreaName}}</td>
-      <td class="govuk-table__cell cell-separate">{{firstScenario.reserveAAs[i].schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
-      <td class="govuk-table__cell">{{firstScenario.reserveAAs[i].percentageSchoolData | percent : '1.0-1'}}</td>
+      <td class="govuk-table__cell cell-separate">{{firstScenario.reserveAAs[i].schoolData | aaValueFormat}}</td>
+      <td class="govuk-table__cell">{{firstScenario.reserveAAs[i].percentageSchoolData | aaValueFormat : firstScenario.reserveAAs[i].assessmentAreaName}}</td>
       <td *ngIf="firstScenario.reserveAAs[i].schoolData !== null" class="govuk-table__cell">
         <span class="rating-box" [class]='firstScenario.reserveAAs[i].matchingTreshold.ratingColour'>{{firstScenario.reserveAAs[i].matchingTreshold.ratingText}}</span>
       </td>
@@ -138,8 +138,8 @@
         </span>
       </td>
       <!---->
-      <td class="govuk-table__cell cell-separate">{{secondScenario.reserveAAs[i].schoolData | currency: 'GBP' :'symbol': '1.0-0'}}</td>
-      <td class="govuk-table__cell">{{secondScenario.reserveAAs[i].percentageSchoolData | percent : '1.0-1'}}</td>
+      <td class="govuk-table__cell cell-separate">{{secondScenario.reserveAAs[i].schoolData | aaValueFormat}}</td>
+      <td class="govuk-table__cell">{{secondScenario.reserveAAs[i].percentageSchoolData | aaValueFormat : firstScenario.reserveAAs[i].assessmentAreaName}}</td>
       <td *ngIf="secondScenario.reserveAAs[i].schoolData !== null" class="govuk-table__cell">
         <span class="rating-box" [class]='secondScenario.reserveAAs[i].matchingTreshold.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold.ratingText}}</span>
       </td>
@@ -173,10 +173,10 @@
     <tr class="govuk-table__row" *ngFor='let _ of firstScenario.characteristicAAs; let i=index'>
       <td class="govuk-table__cell aa-cell">{{firstScenario.characteristicAAs[i].assessmentAreaName}}</td>
       <td class="govuk-table__cell cell-separate">
-        <span *ngIf="firstScenario.characteristicAAs[i].schoolDataFormat ==='currency'">{{firstScenario.characteristicAAs[i].percentageSchoolData | currency: 'GBP' :'symbol': '1.0-0'}}</span>
-        <span *ngIf="firstScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfExp' || firstScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfInc' || firstScenario.characteristicAAs[i].schoolDataFormat==='percentageOfWf'">{{firstScenario.characteristicAAs[i].percentageSchoolData | percent: '1.0-0'}}</span>
+        <span>{{firstScenario.characteristicAAs[i].percentageSchoolData | aaValueFormat : firstScenario.characteristicAAs[i].assessmentAreaName}}</span>
+        <!-- <span *ngIf="firstScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfExp' || firstScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfInc' || firstScenario.characteristicAAs[i].schoolDataFormat==='percentageOfWf'">{{firstScenario.characteristicAAs[i].percentageSchoolData | percent: '1.0-0'}}</span>
         <span *ngIf="firstScenario.characteristicAAs[i].schoolDataFormat ==='number'">{{firstScenario.characteristicAAs[i].percentageSchoolData | number: '1.0-1'}}</span>
-        <span *ngIf="!firstScenario.characteristicAAs[i].schoolData"></span>
+        <span *ngIf="!firstScenario.characteristicAAs[i].schoolData"></span> -->
       </td>
       <td *ngIf="firstScenario.characteristicAAs[i].schoolData !== null" class="govuk-table__cell">
         <span class="rating-box" [class]='firstScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>
@@ -189,10 +189,10 @@
       </td>
       <!---->
       <td class="govuk-table__cell cell-separate">
-        <span *ngIf="secondScenario.characteristicAAs[i].schoolDataFormat ==='currency'">{{secondScenario.characteristicAAs[i].percentageSchoolData | currency: 'GBP' :'symbol': '1.0-0'}}</span>
-        <span *ngIf="secondScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfExp' || secondScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfInc' || secondScenario.characteristicAAs[i].schoolDataFormat==='percentageOfWf'">{{secondScenario.characteristicAAs[i].percentageSchoolData | percent: '1.0-0'}}</span>
+        <span>{{secondScenario.characteristicAAs[i].percentageSchoolData | aaValueFormat : secondScenario.characteristicAAs[i].assessmentAreaName}}</span>
+        <!-- <span *ngIf="secondScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfExp' || secondScenario.characteristicAAs[i].schoolDataFormat ==='percentageOfInc' || secondScenario.characteristicAAs[i].schoolDataFormat==='percentageOfWf'">{{secondScenario.characteristicAAs[i].percentageSchoolData | percent: '1.0-0'}}</span>
         <span *ngIf="secondScenario.characteristicAAs[i].schoolDataFormat ==='number'">{{secondScenario.characteristicAAs[i].percentageSchoolData | number: '1.0-1'}}</span>
-        <span *ngIf="!secondScenario.characteristicAAs[i].schoolData"></span>
+        <span *ngIf="!secondScenario.characteristicAAs[i].schoolData"></span> -->
       </td>
       <td *ngIf="secondScenario.characteristicAAs[i].schoolData !== null" class="govuk-table__cell">
         <span class="rating-box" [class]='secondScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{secondScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>

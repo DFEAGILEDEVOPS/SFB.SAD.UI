@@ -155,7 +155,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditureLatestTerm}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditureLatestTerm | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="number"
         formControlName='totalExpenditure'
@@ -173,7 +173,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching staff')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching staff') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="number" formControlName='teachingStaff'>
     </div>
@@ -184,7 +184,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Supply staff')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Supply staff') | aaValueFormat }}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="number" formControlName='supplyStaff'>
     </div>
@@ -195,7 +195,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Education support staff')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Education support staff') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="number"
         formControlName='educationSupportStaff'>
@@ -207,7 +207,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Administrative and clerical staff')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Administrative and clerical staff') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number" formControlName='adminStaff'>
     </div>
@@ -218,7 +218,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Other staff costs')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Other staff costs') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="number" formControlName='otherStaff'>
     </div>
@@ -229,7 +229,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Premises costs')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Premises costs') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="number" formControlName='premises'>
     </div>
@@ -240,7 +240,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching resources')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching resources') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="number"
         formControlName='teachingResources'>
@@ -252,7 +252,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Energy')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Energy') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="en" name="en" type="number" formControlName='energy'>
     </div>
@@ -271,7 +271,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="number"
         formControlName='totalIncome' [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
@@ -289,7 +289,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('In-year balance')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('In-year balance') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="iyb" name="iyb" type="number" formControlName='balance'>
     </div>
@@ -300,7 +300,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="number" formControlName='rr'>
     </div>
@@ -319,7 +319,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Average teacher cost')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Average teacher cost') | aaValueFormat}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="atc" name="atc" type="number" formControlName='teacherCost'>
     </div>
@@ -330,7 +330,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Senior leaders as a percentage of workforce') * 100}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Senior leaders as a percentage of workforce') | aaValueFormat : 'Senior leaders as a percentage of workforce'}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="sl" name="sl" type="number" formControlName='seniorLeaders'>
     </div>
@@ -341,7 +341,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to teacher ratio')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to teacher ratio') | aaValueFormat : 'Pupil to teacher ratio'}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="ptt" name="ptt" type="number" formControlName='pupilToTeacher'>
     </div>
@@ -352,7 +352,7 @@
       </label>
       <span class="govuk-hint">
         The {{scenarioInEdit.latestTerm}} value was <span
-          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to adult ratio')}}</span>
+          class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to adult ratio') | aaValueFormat : 'Pupil to adult ratio'}}</span>
       </span>
       <input class="govuk-input govuk-input--width-20" id="pta" name="pta" type="number" formControlName='pupilToAdult'>
     </div>

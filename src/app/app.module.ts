@@ -1,4 +1,4 @@
-import { SidebysideFormatComponent } from './core/sidebyside-format/sidebyside-format.component';
+import { AaValueFormatPipe } from './core/pipes/aa-value-format.pipe';
 import { EditDataBreadcrumbComponent } from './edit-data/edit-data-breadcrumb/edit-data-breadcrumb.component';
 import { EditDataComponent } from './edit-data/edit-data.component';
 import { EditingFormatBreadcrumbsComponent } from './editing-format/editing-format-breadcrumbs/editing-format-breadcrumbs.component';
@@ -20,10 +20,13 @@ import { DashboardBreadcrumbComponent } from './dashboard/dashboard-bread-crumb/
 import { DashboardCharacteristicsComponent } from './dashboard/dashboard-characteristics/dashboard-characteristics.component';
 import { DashboardAaModalComponent } from './dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
 // tslint:disable-next-line:max-line-length
-import { SidebysideFormatBreadcrumbsComponent } from '@core/sidebyside-format/sidebyside-format-breadcrumbs/sidebyside-format-breadcrumbs.component';
+
 import { SidebysideComponent } from './sidebyside/sidebyside.component';
 import { SidebysideBreadcrumbComponent } from './sidebyside/sidebyside-breadcrumb/sidebyside-breadcrumb.component';
 import { SidebysideCharacteristicsComponent } from './sidebyside/sidebyside-characteristics/sidebyside-characteristics.component';
+// tslint:disable-next-line:max-line-length
+import { SidebysideFormatBreadcrumbsComponent } from './sidebyside-format/sidebyside-format-breadcrumbs/sidebyside-format-breadcrumbs.component';
+import { SidebysideFormatComponent } from './sidebyside-format/sidebyside-format.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { SidebysideCharacteristicsComponent } from './sidebyside/sidebyside-char
     EditDataBreadcrumbComponent,
     SidebysideComponent,
     SidebysideBreadcrumbComponent,
-    SidebysideCharacteristicsComponent
+    SidebysideCharacteristicsComponent,
+    AaValueFormatPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
