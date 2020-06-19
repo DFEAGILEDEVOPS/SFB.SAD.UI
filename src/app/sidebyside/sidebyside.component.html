@@ -139,7 +139,7 @@
       </td>
       <!---->
       <td class="govuk-table__cell cell-separate">{{secondScenario.reserveAAs[i].schoolData | aaValueFormat}}</td>
-      <td class="govuk-table__cell">{{secondScenario.reserveAAs[i].percentageSchoolData | aaValueFormat : firstScenario.reserveAAs[i].assessmentAreaName}}</td>
+      <td class="govuk-table__cell">{{secondScenario.reserveAAs[i].percentageSchoolData | aaValueFormat : secondScenario.reserveAAs[i].assessmentAreaName}}</td>
       <td *ngIf="secondScenario.reserveAAs[i].schoolData !== null" class="govuk-table__cell">
         <span class="rating-box" [class]='secondScenario.reserveAAs[i].matchingTreshold.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold.ratingText}}</span>
       </td>

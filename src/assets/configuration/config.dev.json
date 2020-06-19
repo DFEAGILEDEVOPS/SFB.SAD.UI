@@ -12,6 +12,6 @@
       "robots": "index, follow"
     },
     "sfbDomain": "http://localhost",
-    "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api"
+    "apiDomain": "https://localhost:5001/api"
   }
 }

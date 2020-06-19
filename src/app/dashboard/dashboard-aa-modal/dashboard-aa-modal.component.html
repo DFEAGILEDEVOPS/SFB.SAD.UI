@@ -24,7 +24,10 @@
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row" *ngFor='let treshold of tresholds'>
         <td class="govuk-table__cell">
-           <span [class]="{'highlighted-percentage': treshold.scoreLow === matchingTreshold.scoreLow}">{{treshold.scoreLow | aaValueFormat : assessmentArea}} - {{treshold.scoreHigh | aaValueFormat : assessmentArea}}</span>
+           <span [class]="{'highlighted-percentage': treshold.scoreLow === matchingTreshold.scoreLow}">
+             {{treshold.scoreLow == null ? '&infin;' : treshold.scoreLow | aaValueFormat : assessmentArea}}
+             -
+             {{treshold.scoreHigh == null ? '&infin;' : treshold.scoreHigh | aaValueFormat : assessmentArea}}</span>
         </td>
         <td class="govuk-table__cell"><span class="rating-box" [class]='treshold.ratingColour'>{{treshold.ratingText}}</span>
         </td>
