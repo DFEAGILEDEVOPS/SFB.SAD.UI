@@ -3,4 +3,5 @@ export class TresholdModel {
   scoreHigh: number;
   ratingText: string;
   ratingColour: string;
+  assessmentAreaName: string;
 }

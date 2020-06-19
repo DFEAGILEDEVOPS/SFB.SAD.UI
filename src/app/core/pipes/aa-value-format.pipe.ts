@@ -9,8 +9,6 @@ export class AaValueFormatPipe implements PipeTransform {
     switch (assessmentArea) {
       case undefined:
       case 'Average teacher cost':
-      case 'Teaching staff':
-      case 'Supply staff':
         const formatter = new Intl.NumberFormat('en-UK', {
           style: 'currency',
           currency: 'GBP',
@@ -25,7 +23,7 @@ export class AaValueFormatPipe implements PipeTransform {
         if (value === null) {
           return '';
         }
-        return `${(value * 100).toFixed(2)}%`;
+        return `${(value * 100).toFixed(0)}%`;
     }
   }
 

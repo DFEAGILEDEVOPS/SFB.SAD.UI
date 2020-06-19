@@ -2,7 +2,6 @@ import { SaData } from './SaData';
 import { AssessmentAreaModel } from './AssessmentAreaModel';
 import { FSMLookupModel } from './FSMLookupModel';
 import { SizeLookupModel } from './SizeLookupModel';
-import { getAADataFormat } from '../core/network/services/getAADataFormat';
 export class SaScenarioModel {
   scenarioName: string;
   urn: number;
@@ -114,8 +113,6 @@ export class SaScenarioModel {
 
       aa.matchingTreshold = aa.allTresholds
         .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
-
-      aa.schoolDataFormat = getAADataFormat(aa.assessmentAreaName);
     });
   }
 }

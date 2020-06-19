@@ -9,7 +9,6 @@ export class AssessmentAreaModel {
   totalForAreaTypeLatestTerm: number;
   allTresholds: TresholdModel[];
   matchingTreshold: TresholdModel;
-  schoolDataFormat: string;
 
   constructor(assessmentAreaType: string, assessmentAreaName: string) {
     this.assessmentAreaType = assessmentAreaType;
