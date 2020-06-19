@@ -87,7 +87,8 @@ export class SaScenariosService {
           });
       } else {
         aa.matchingTreshold = aa.allTresholds
-          .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
+        .find(t => (aa.percentageSchoolData >= t.scoreLow || t.scoreLow == null)
+        && (aa.percentageSchoolData <= t.scoreHigh || t.scoreHigh === null));
       }
     });
   }
