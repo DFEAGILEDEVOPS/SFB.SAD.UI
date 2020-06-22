@@ -1,3 +1,12 @@
 .toast {
-  opacity: 50;
+  opacity: 0.8;
+  color: red;
+}
+
+.toast-wrapper {
+  position: -webkit-sticky; // required for Safari
+  position: sticky;
+  top: 0; // required as well.
+  z-index: 10000;
+  //margin-top: 10px;
 }

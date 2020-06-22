@@ -6,7 +6,7 @@ import { EditingFormatComponent } from './editing-format/editing-format.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
@@ -27,6 +27,7 @@ import { SidebysideCharacteristicsComponent } from './sidebyside/sidebyside-char
 // tslint:disable-next-line:max-line-length
 import { SidebysideFormatBreadcrumbsComponent } from './sidebyside-format/sidebyside-format-breadcrumbs/sidebyside-format-breadcrumbs.component';
 import { SidebysideFormatComponent } from './sidebyside-format/sidebyside-format.component';
+import { GlobalErrorHandler } from '@core/error-handling/GlobalErrorHandler';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { SidebysideFormatComponent } from './sidebyside-format/sidebyside-format
     AppRoutingModule,
     ModalModule.forRoot()
   ],
-  providers: [],
+  providers: [{provide: ErrorHandler, useClass: GlobalErrorHandler}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
