@@ -19,7 +19,7 @@ constructor(private http: HttpClient, @Inject(appSettings) private settings: App
 getSaScenario(urn: number): Observable<SaScenarioModel> {
   return this.http.get<SaData>(`${this.settings.apiDomain}/selfassessment/${urn}`)
     .pipe(
-      tap(_ => this.log('fetched saData')),
+      tap(_ => console.log('fetched saData')),
       map(data => new SaScenarioModel(data)),
       catchError(this.handleError<SaScenarioModel>('getSaData', new SaScenarioModel(new SaData())))
     );
@@ -28,7 +28,7 @@ getSaScenario(urn: number): Observable<SaScenarioModel> {
 getSizeLookupList(): Observable<SizeLookupModel[]> {
   return this.http.get<SizeLookupModel[]>(`${this.settings.apiDomain}/sadsizelookup`)
     .pipe(
-      tap(_ => this.log('fetched saData')),
+      tap(_ => console.log('fetched SizeLookupList')),
       catchError(this.handleError<SizeLookupModel[]>('getSaData', new Array<SizeLookupModel>()))
     );
 }
@@ -36,7 +36,7 @@ getSizeLookupList(): Observable<SizeLookupModel[]> {
 getFSMLookupList(): Observable<FSMLookupModel[]> {
   return this.http.get<FSMLookupModel[]>(`${this.settings.apiDomain}/sadfsmlookup`)
     .pipe(
-      tap(_ => this.log('fetched saData')),
+      tap(_ => console.log('fetched FSMLookupList')),
       catchError(this.handleError<FSMLookupModel[]>('getSaData', new Array<FSMLookupModel>()))
     );
 }
@@ -53,7 +53,7 @@ getAATresholdsList(
     + `areaName=${areaName}&overallPhase=${overallPhase}&has6Form=${has6Form}`
     + `&londonWeight=${londonWeight}&sizeType=${sizeType}&fsmScale=${fsmScale}&termYears=${termYears}`)
     .pipe(
-      tap(_ => this.log('fetched saData')),
+      tap(_ => console.log('fetched AATresholdsList')),
       catchError(this.handleError<TresholdModel[]>('getSaData', new Array<TresholdModel>()))
     );
 }
@@ -64,15 +64,16 @@ private handleError<T>(operation = 'operation', result?: T) {
     console.error(error); // log to console instead
 
     // TODO: better job of transforming error for user consumption
-    this.log(`${operation} failed: ${error.message}`);
+    this.logError(`${operation} failed: ${error}`);
 
     // Let the app keep running by returning an empty result.
     return of(result as T);
   };
 
 }
-private log(message: string) {
-  // this.messageService.add(`HeroService: ${message}`);
+private logError(message: string) {
+  document.getElementById('toast').style.display = 'block';
+  document.getElementById('toast-body').innerText = message;
 }
 
 }
