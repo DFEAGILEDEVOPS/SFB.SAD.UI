@@ -6,6 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class AaValueFormatPipe implements PipeTransform {
 
   transform(value: number, assessmentArea?: string): any {
+    if (value === null) {
+      return '';
+    }
+
     switch (assessmentArea) {
       case undefined:
       case 'Average teacher cost':

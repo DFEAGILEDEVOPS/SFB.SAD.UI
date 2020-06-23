@@ -47,14 +47,14 @@
       <th scope="col" class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" colspan="3">
         <span class="govuk-!-font-size-24">{{firstScenario.scenarioName}}</span>
         <div class="govuk-!-margin-top-1">
-          <a class="govuk-link"><span style="vertical-align: middle; font-size: 22px;">&times;&nbsp;</span>Remove
+          <a [routerLink]='' class="govuk-link a-button" (click)='removeScenario(0)'><span style="vertical-align: middle; font-size: 22px;">&times;&nbsp;</span>Remove
             scenario</a>
         </div>
       </th>
       <th scope="col" class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" colspan="3">
         <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
         <div class="govuk-!-margin-top-1">
-          <a class="govuk-link"><span style="vertical-align: middle; font-size: 22px;">&times;&nbsp;</span>Remove
+          <a [routerLink]='' class="govuk-link a-button" (click)='removeScenario(1)'><span style="vertical-align: middle; font-size: 22px;">&times;&nbsp;</span>Remove
             scenario</a>
         </div>
       </th>

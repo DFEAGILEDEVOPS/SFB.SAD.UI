@@ -31,6 +31,15 @@ export class SaScenariosService {
     }
   }
 
+  deleteFirstScenario() {
+    this.scenarios[0] = this.scenarios[1];
+    this.scenarios[1] = null;
+  }
+
+  deleteSecondScenario() {
+    this.scenarios[1] = null;
+  }
+
   setSecondScenario(scenario: SaScenarioModel) {
     this.refreshScenarioWithUpdatedData(scenario, true);
     scenario.scenarioNo = 1;
