@@ -28,9 +28,9 @@ export class SidebysideFormatComponent implements OnInit {
   onContinue() {
     if (this.form.valid) {
       if (this.editType === 'FinancialFigures') {
-        this.router.navigate(['self-assessment/edit-data', this.urn, 'enter']);
+        this.router.navigate(['self-assessment/edit-data', this.urn, 'enter', 1]);
       } else {
-        this.router.navigate(['self-assessment/edit-data', this.urn, 'enter']);
+        this.router.navigate(['self-assessment/edit-data', this.urn, 'enter', 1]);
       }
     }
   }

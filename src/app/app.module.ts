@@ -1,3 +1,4 @@
+import { EditScenariosComponent } from './edit-scenarios/edit-scenarios.component';
 import { AaValueFormatPipe } from './core/pipes/aa-value-format.pipe';
 import { EditDataBreadcrumbComponent } from './edit-data/edit-data-breadcrumb/edit-data-breadcrumb.component';
 import { EditDataComponent } from './edit-data/edit-data.component';
@@ -46,6 +47,7 @@ import { GlobalErrorHandler } from '@core/error-handling/GlobalErrorHandler';
     SidebysideComponent,
     SidebysideBreadcrumbComponent,
     SidebysideCharacteristicsComponent,
+    EditScenariosComponent,
     AaValueFormatPipe
   ],
   imports: [

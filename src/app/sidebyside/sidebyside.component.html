@@ -33,7 +33,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <div class="float-right">
-      <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      <button class="govuk-button govuk-button--secondary" data-module="govuk-button" routerLink="/self-assessment/edit-scenarios/{{this.firstScenario.urn}}/{{this.firstScenario.name}}">
         Edit scenarios
       </button>
     </div>
@@ -81,24 +81,24 @@
       <td class="govuk-table__cell cell-separate">{{firstScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
       <td class="govuk-table__cell">{{firstScenario.spendingAAs[i].percentageSchoolData | aaValueFormat : firstScenario.spendingAAs[i].assessmentAreaName }}</td>
       <td *ngIf="firstScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
-        <span class="rating-box" [class]='firstScenario.spendingAAs[i].matchingTreshold.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold.ratingText}}</span>
+        <span class="rating-box" [class]='firstScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
       </td>
       <td *ngIf="firstScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
         <span class="rating-box gray">
           <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit'>Add data</a>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0'>Add data</a>
         </span>
       </td>
       <!---->
       <td class="govuk-table__cell cell-separate">{{secondScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
       <td class="govuk-table__cell">{{secondScenario.spendingAAs[i].percentageSchoolData | aaValueFormat : secondScenario.spendingAAs[i].assessmentAreaName }}</td>
       <td *ngIf="secondScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
-        <span class="rating-box" [class]='secondScenario.spendingAAs[i].matchingTreshold.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold.ratingText}}</span>
+        <span class="rating-box" [class]='secondScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
       </td>
       <td *ngIf="secondScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
         <span class="rating-box gray">
           <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit'>Add data</a>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1'>Add data</a>
         </span>
       </td>
     </tr>
@@ -129,24 +129,24 @@
       <td class="govuk-table__cell cell-separate">{{firstScenario.reserveAAs[i].schoolData | aaValueFormat}}</td>
       <td class="govuk-table__cell">{{firstScenario.reserveAAs[i].percentageSchoolData | aaValueFormat : firstScenario.reserveAAs[i].assessmentAreaName}}</td>
       <td *ngIf="firstScenario.reserveAAs[i].schoolData !== null" class="govuk-table__cell">
-        <span class="rating-box" [class]='firstScenario.reserveAAs[i].matchingTreshold.ratingColour'>{{firstScenario.reserveAAs[i].matchingTreshold.ratingText}}</span>
+        <span class="rating-box" [class]='firstScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
       </td>
       <td *ngIf="firstScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
         <span class="rating-box gray">
           <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit'>Add data</a>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0'>Add data</a>
         </span>
       </td>
       <!---->
       <td class="govuk-table__cell cell-separate">{{secondScenario.reserveAAs[i].schoolData | aaValueFormat}}</td>
       <td class="govuk-table__cell">{{secondScenario.reserveAAs[i].percentageSchoolData | aaValueFormat : secondScenario.reserveAAs[i].assessmentAreaName}}</td>
       <td *ngIf="secondScenario.reserveAAs[i].schoolData !== null" class="govuk-table__cell">
-        <span class="rating-box" [class]='secondScenario.reserveAAs[i].matchingTreshold.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold.ratingText}}</span>
+        <span class="rating-box" [class]='secondScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
       </td>
       <td *ngIf="secondScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
         <span class="rating-box gray">
           <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit'>Add data</a>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1'>Add data</a>
         </span>
       </td>
     </tr>
@@ -176,12 +176,12 @@
         <span>{{firstScenario.characteristicAAs[i].percentageSchoolData | aaValueFormat : firstScenario.characteristicAAs[i].assessmentAreaName}}</span>
       </td>
       <td *ngIf="firstScenario.characteristicAAs[i].schoolData !== null" class="govuk-table__cell">
-        <span class="rating-box" [class]='firstScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>
+        <span class="rating-box" [class]='firstScenario.characteristicAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold?.ratingText}}</span>
       </td>
       <td *ngIf="firstScenario.characteristicAAs[i].schoolData === null" class="govuk-table__cell">
         <span class="rating-box gray">
           <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit'>Add data</a>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0'>Add data</a>
         </span>
       </td>
       <!---->
@@ -189,12 +189,12 @@
         <span>{{secondScenario.characteristicAAs[i].percentageSchoolData | aaValueFormat : secondScenario.characteristicAAs[i].assessmentAreaName}}</span>
       </td>
       <td *ngIf="secondScenario.characteristicAAs[i].schoolData !== null" class="govuk-table__cell">
-        <span class="rating-box" [class]='secondScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{secondScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>
+        <span class="rating-box" [class]='secondScenario.characteristicAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.characteristicAAs[i].matchingTreshold?.ratingText}}</span>
       </td>
       <td *ngIf="secondScenario.characteristicAAs[i].schoolData === null" class="govuk-table__cell">
         <span class="rating-box gray">
           <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit'>Add data</a>
+          <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/1'>Add data</a>
         </span>
       </td>
     </tr>

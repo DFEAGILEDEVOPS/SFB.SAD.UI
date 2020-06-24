@@ -80,6 +80,7 @@ export class SaScenariosService {
       }
 
       if (isEdited) { // TODO: make these api calls only when 'school details' edited, not all the time
+        aa.matchingTreshold = null;
         this.saDataService.getAATresholdsList(
           aa.assessmentAreaName,
           scenario.overallPhase,

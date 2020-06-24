@@ -11,6 +11,7 @@ export class EditingFormatComponent implements OnInit {
   urn: number;
   name: string;
   editType: string;
+  scenarioNo: number;
 
   @ViewChild('editFormatForm')
   private form: NgForm;
@@ -19,6 +20,7 @@ export class EditingFormatComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
         this.name = params.name;
+        this.scenarioNo = params.scenarioNo;
       });
   }
 
@@ -26,11 +28,11 @@ export class EditingFormatComponent implements OnInit {
 
   onContinue() {
     if (this.form.valid) {
-      if (this.editType === 'FinancialFigures') {
-        this.router.navigate(['self-assessment/edit-data', this.urn, 'edit']);
-      } else {
-        this.router.navigate(['self-assessment/edit-data', this.urn, 'edit']);
-      }
+        if (this.scenarioNo) {
+          this.router.navigate(['self-assessment/edit-data', this.urn, 'edit', this.scenarioNo]);
+        } else {
+          this.router.navigate(['self-assessment/edit-data', this.urn, 'edit']);
+        }
     }
   }
 

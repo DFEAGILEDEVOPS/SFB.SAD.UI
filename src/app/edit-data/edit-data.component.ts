@@ -17,6 +17,7 @@ export class EditDataComponent implements OnInit {
   urn: number;
   editDataForm: FormGroup;
   viewType: string;
+  scenarioNo: number;
 
   get scenarioName() {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
@@ -48,9 +49,10 @@ export class EditDataComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.urn = +params.urn;
       this.viewType = params.viewType;
+      this.scenarioNo =  params.scenarioNo ? Number(params.scenarioNo) : null;
     });
 
-    if (this.viewType === 'edit') {
+    if (this.viewType === 'edit' && (this.scenarioNo === null || this.scenarioNo === 0)) {
       scenariosService.getFirstScenario(this.urn)
         .subscribe(result => {
           this.scenarioInEdit = result;
@@ -162,11 +164,15 @@ export class EditDataComponent implements OnInit {
           editedScenario.termOfScenario,
           editedScenario.fsm);
 
-      if (this.viewType === 'edit') {
+      if (this.viewType === 'edit' && this.scenarioNo === null) {
         this.scenariosService.setFirstScenario(editedScenario, true);
         this.router.navigate(['self-assessment/', this.urn]);
-      } else if (this.viewType === 'enter')  {
-        this.scenariosService.setSecondScenario(editedScenario);
+      } else {
+        if (this.scenarioNo === 0) {
+          this.scenariosService.setFirstScenario(editedScenario, true);
+        } else {
+          this.scenariosService.setSecondScenario(editedScenario);
+        }
         this.router.navigate(['self-assessment/side-by-side']);
       }
     }
