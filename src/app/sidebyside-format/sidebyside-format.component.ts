@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -16,7 +17,7 @@ export class SidebysideFormatComponent implements OnInit {
   @ViewChild('editFormatForm')
   private form: NgForm;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private location: Location) {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
         this.name = params.name;
@@ -33,5 +34,9 @@ export class SidebysideFormatComponent implements OnInit {
         this.router.navigate(['self-assessment/edit-data', this.urn, 'enter', 1]);
       }
     }
+  }
+
+  onBack() {
+    this.location.back();
   }
 }
