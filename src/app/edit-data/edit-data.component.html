@@ -389,8 +389,8 @@
       <button *ngIf='viewType === "enter"' class="govuk-button" data-module="govuk-button" type="submit">
         Continue to the side-by-side scenario
       </button>
-      <a routerLink="/self-assessment/{{scenarioInEdit.urn}}"
-        class="govuk-link govuk-link--no-visited-state back-button">Back</a>
+      <a (click)='onBack()' routerLink='' class="govuk-link govuk-link--no-visited-state back-button">Back
+      </a>
     </div>
   </div>
 

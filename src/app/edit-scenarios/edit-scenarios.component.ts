@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 
 @Component({
@@ -18,7 +19,10 @@ export class EditScenariosComponent implements OnInit {
   @ViewChild('editScenariosForm')
   private form: NgForm;
 
-  constructor(private route: ActivatedRoute, private router: Router, private saScenariosService: SaScenariosService) {
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private saScenariosService: SaScenariosService,
+    private location: Location) {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
         this.name = params.name;
@@ -41,6 +45,10 @@ export class EditScenariosComponent implements OnInit {
         this.router.navigate(['self-assessment/editing-format', this.urn, this.name, this.selectedScenarioNo]);
       }
     }
+  }
+
+  onBack() {
+    this.location.back();
   }
 
 }

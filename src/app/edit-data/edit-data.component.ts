@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { SaFsmLookupService } from './../core/network/services/safsmlookup.service';
 import { SaSizeLookupService } from './../core/network/services/sasizelookup.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -45,7 +46,8 @@ export class EditDataComponent implements OnInit {
     private fb: FormBuilder,
     private scenariosService: SaScenariosService,
     private sizeLookupService: SaSizeLookupService,
-    private fsmLookupService: SaFsmLookupService) {
+    private fsmLookupService: SaFsmLookupService,
+    private location: Location) {
     this.route.params.subscribe(params => {
       this.urn = +params.urn;
       this.viewType = params.viewType;
@@ -176,6 +178,10 @@ export class EditDataComponent implements OnInit {
         this.router.navigate(['self-assessment/side-by-side']);
       }
     }
+  }
+
+  onBack() {
+    this.location.back();
   }
 
 }

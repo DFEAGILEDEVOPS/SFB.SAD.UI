@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -16,11 +17,11 @@ export class EditingFormatComponent implements OnInit {
   @ViewChild('editFormatForm')
   private form: NgForm;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private location: Location) {
       this.route.params.subscribe(params => {
         this.urn = +params.urn;
         this.name = params.name;
-        this.scenarioNo = params.scenarioNo;
+        this.scenarioNo =  params.scenarioNo ? Number(params.scenarioNo) : null;
       });
   }
 
@@ -28,12 +29,15 @@ export class EditingFormatComponent implements OnInit {
 
   onContinue() {
     if (this.form.valid) {
-        if (this.scenarioNo) {
-          this.router.navigate(['self-assessment/edit-data', this.urn, 'edit', this.scenarioNo]);
-        } else {
+        if (this.scenarioNo === null) {
           this.router.navigate(['self-assessment/edit-data', this.urn, 'edit']);
+        } else {
+          this.router.navigate(['self-assessment/edit-data', this.urn, 'edit', this.scenarioNo]);
         }
     }
   }
 
+  onBack() {
+    this.location.back();
+  }
 }
