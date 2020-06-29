@@ -22,7 +22,9 @@ export class SaFsmLookupService {
 
   getFSMLookup(overallPhase: string, hasSixthForm: boolean, term: string, fsm: number): FSMLookupModel {
     return this.FSMLookups
-      .find(s => s.overallPhase === overallPhase && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm) && s.term === term
+      .find(s => s.overallPhase === overallPhase
+      && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm)
+      && (!s.term || s.term === term)
       && fsm >= s.fsmMin && fsm <= s.fsmMax);
   }
 

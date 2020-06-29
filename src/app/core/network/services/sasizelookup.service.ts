@@ -22,7 +22,9 @@ export class SaSizeLookupService {
 
   getSizeLookup(overallPhase: string, hasSixthForm: boolean, term: string, noPupils: number): SizeLookupModel {
     return this.SizeLookups
-      .find(s => s.overallPhase === overallPhase && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm) && s.term === term
+      .find(s => s.overallPhase === overallPhase
+        && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm)
+        && (!s.term || s.term === term)
         && (noPupils >= s.noPupilsMin && (s.noPupilsMax == null || noPupils <= s.noPupilsMax)));
   }
 }
