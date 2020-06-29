@@ -39,9 +39,23 @@
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">Number of pupils</td>
           <td class="govuk-table__cell">{{noPupils1}}</td>
-          <td class="govuk-table__cell"><span *ngIf='SizeLookup1'>Schools with {{SizeLookup1.noPupilsMin}} - {{SizeLookup1.noPupilsMax}} pupils</span></td>
+          <td class="govuk-table__cell">
+            <span *ngIf='SizeLookup1 && SizeLookup1.noPupilsMax != null'>
+              Schools with {{SizeLookup1.noPupilsMin}} - {{SizeLookup1.noPupilsMax}} pupils
+            </span>
+            <span *ngIf='SizeLookup1 && SizeLookup1.noPupilsMax == null'>
+              Schools with {{SizeLookup1.noPupilsMin}} or more pupils
+            </span>
+          </td>
           <td class="govuk-table__cell cell-separate">{{noPupils2}}</td>
-          <td class="govuk-table__cell"><span *ngIf='SizeLookup2'>Schools with {{SizeLookup2.noPupilsMin}} - {{SizeLookup2.noPupilsMax}} pupils</span></td>
+          <td class="govuk-table__cell">
+            <span *ngIf='SizeLookup2 && SizeLookup2.noPupilsMax != null'>
+              Schools with {{SizeLookup2.noPupilsMin}} - {{SizeLookup2.noPupilsMax}} pupils
+            </span>
+            <span *ngIf='SizeLookup2 && SizeLookup2.noPupilsMax == null'>
+              Schools with {{SizeLookup2.noPupilsMin}} or more pupils
+            </span>
+          </td>
         </tr>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">FSM</td>
