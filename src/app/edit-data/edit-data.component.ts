@@ -83,22 +83,22 @@ export class EditDataComponent implements OnInit {
       }),
       spending: this.fb.group({
         totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure)],
-        teachingStaff: [this.scenarioInEdit.getAAValue('Teaching staff')],
-        supplyStaff: [this.scenarioInEdit.getAAValue('Supply staff')],
-        educationSupportStaff: [this.scenarioInEdit.getAAValue('Education support staff')],
-        adminStaff: [this.scenarioInEdit.getAAValue('Administrative and clerical staff')],
-        otherStaff: [this.scenarioInEdit.getAAValue('Other staff costs')],
-        premises: [this.scenarioInEdit.getAAValue('Premises costs')],
-        teachingResources: [this.scenarioInEdit.getAAValue('Teaching resources')],
-        energy: [this.scenarioInEdit.getAAValue('Energy')],
+        teachingStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching staff'))],
+        supplyStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Supply staff'))],
+        educationSupportStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Education support staff'))],
+        adminStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Administrative and clerical staff'))],
+        otherStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Other staff costs'))],
+        premises: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Premises costs'))],
+        teachingResources: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching resources'))],
+        energy: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Energy'))],
       }),
       reserveBalance: this.fb.group({
-        totalIncome: [this.scenarioInEdit.totalIncome],
-        balance: [this.scenarioInEdit.getAAValue('In-year balance')],
-        rr: [this.scenarioInEdit.getAAValue('Revenue reserve')],
+        totalIncome: [this.numberToCurrency(this.scenarioInEdit.totalIncome)],
+        balance: [this.numberToCurrency(this.scenarioInEdit.getAAValue('In-year balance'))],
+        rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
       }),
       character: this.fb.group({
-        teacherCost: [this.scenarioInEdit.getAAValue('Average teacher cost')],
+        teacherCost: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Average teacher cost'))],
         seniorLeaders: [this.scenarioInEdit.getAAValue('Senior leaders as a percentage of workforce') ?
           this.scenarioInEdit.getAAValue('Senior leaders as a percentage of workforce') * 100 : null],
         pupilToTeacher: [this.scenarioInEdit.getAAValue('Pupil to teacher ratio')],
@@ -127,20 +127,20 @@ export class EditDataComponent implements OnInit {
       editedScenario.fsm = this.editDataForm.value.schoolDetails.fsm;
 
       editedScenario.totalExpenditure = this.currencyToNumber(this.editDataForm.value.spending.totalExpenditure);
-      editedScenario.setAAValue('Teaching staff', this.editDataForm.value.spending.teachingStaff);
-      editedScenario.setAAValue('Supply staff', this.editDataForm.value.spending.supplyStaff);
-      editedScenario.setAAValue('Education support staff', this.editDataForm.value.spending.educationSupportStaff);
-      editedScenario.setAAValue('Administrative and clerical staff', this.editDataForm.value.spending.adminStaff);
-      editedScenario.setAAValue('Other staff costs', this.editDataForm.value.spending.otherStaff);
-      editedScenario.setAAValue('Premises costs', this.editDataForm.value.spending.premises);
-      editedScenario.setAAValue('Teaching resources', this.editDataForm.value.spending.teachingResources);
-      editedScenario.setAAValue('Energy', this.editDataForm.value.spending.energy);
+      editedScenario.setAAValue('Teaching staff', this.currencyToNumber(this.editDataForm.value.spending.teachingStaff));
+      editedScenario.setAAValue('Supply staff', this.currencyToNumber(this.editDataForm.value.spending.supplyStaff));
+      editedScenario.setAAValue('Education support staff', this.currencyToNumber(this.editDataForm.value.spending.educationSupportStaff));
+      editedScenario.setAAValue('Administrative and clerical staff', this.currencyToNumber(this.editDataForm.value.spending.adminStaff));
+      editedScenario.setAAValue('Other staff costs', this.currencyToNumber(this.editDataForm.value.spending.otherStaff));
+      editedScenario.setAAValue('Premises costs', this.currencyToNumber(this.editDataForm.value.spending.premises));
+      editedScenario.setAAValue('Teaching resources', this.currencyToNumber(this.editDataForm.value.spending.teachingResources));
+      editedScenario.setAAValue('Energy', this.currencyToNumber(this.editDataForm.value.spending.energy));
 
-      editedScenario.totalIncome = this.editDataForm.value.reserveBalance.totalIncome;
-      editedScenario.setAAValue('In-year balance', this.editDataForm.value.reserveBalance.balance);
-      editedScenario.setAAValue('Revenue reserve', this.editDataForm.value.reserveBalance.rr);
+      editedScenario.totalIncome = this.currencyToNumber(this.editDataForm.value.reserveBalance.totalIncome);
+      editedScenario.setAAValue('In-year balance', this.currencyToNumber(this.editDataForm.value.reserveBalance.balance));
+      editedScenario.setAAValue('Revenue reserve', this.currencyToNumber(this.editDataForm.value.reserveBalance.rr));
 
-      editedScenario.setAAValue('Average teacher cost', this.editDataForm.value.character.teacherCost);
+      editedScenario.setAAValue('Average teacher cost', this.currencyToNumber(this.editDataForm.value.character.teacherCost));
       // tslint:disable-next-line:max-line-length
       editedScenario.setAAValue('Senior leaders as a percentage of workforce', isNumber(this.editDataForm.value.character.seniorLeaders) ?
         this.editDataForm.value.character.seniorLeaders / 100 : null);
@@ -186,8 +186,8 @@ export class EditDataComponent implements OnInit {
     this.location.back();
   }
 
-  transformAmount(element) {
-    this.formattedAmount = this.numberToCurrency(this.currencyToNumber(this.editDataForm.value.spending.totalExpenditure));
+  transformAmount(element, formControl) {
+    this.formattedAmount = this.numberToCurrency(this.currencyToNumber(formControl));
 
     element.target.value = this.formattedAmount;
   }

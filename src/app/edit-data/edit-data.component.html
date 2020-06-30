@@ -159,7 +159,9 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
         formControlName='totalExpenditure'
-        [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}" required (blur)="transformAmount($event)">
+        [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}"
+        (blur)="transformAmount($event, editDataForm.value.spending.totalExpenditure)"
+        required>
       <div [hidden]="totalExpenditure.valid || totalExpenditure.pristine">
         <span class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> Total expenditure is required
@@ -175,7 +177,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching staff') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="number" formControlName='teachingStaff'>
+      <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text"
+      formControlName='teachingStaff'
+      (blur)="transformAmount($event, editDataForm.value.spending.teachingStaff)"
+      >
     </div>
 
     <div class="govuk-form-group">
@@ -186,7 +191,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Supply staff') | aaValueFormat }}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="number" formControlName='supplyStaff'>
+      <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text"
+      formControlName='supplyStaff'
+      (blur)="transformAmount($event, editDataForm.value.spending.supplyStaff)"
+      >
     </div>
 
     <div class="govuk-form-group">
@@ -197,8 +205,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Education support staff') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="number"
-        formControlName='educationSupportStaff'>
+      <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text"
+        formControlName='educationSupportStaff'
+        (blur)="transformAmount($event, editDataForm.value.spending.educationSupportStaff)"
+        >
     </div>
 
     <div class="govuk-form-group">
@@ -209,7 +219,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Administrative and clerical staff') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number" formControlName='adminStaff'>
+      <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text"
+      formControlName='adminStaff'
+      (blur)="transformAmount($event, editDataForm.value.spending.adminStaff)"
+      >
     </div>
 
     <div class="govuk-form-group">
@@ -220,7 +233,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Other staff costs') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="number" formControlName='otherStaff'>
+      <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text"
+      formControlName='otherStaff'
+      (blur)="transformAmount($event, editDataForm.value.spending.otherStaff)"
+      >
     </div>
 
     <div class="govuk-form-group">
@@ -231,7 +247,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Premises costs') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="number" formControlName='premises'>
+      <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text"
+      formControlName='premises'
+      (blur)="transformAmount($event, editDataForm.value.spending.premises)"
+      >
     </div>
 
     <div class="govuk-form-group">
@@ -242,8 +261,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching resources') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="number"
-        formControlName='teachingResources'>
+      <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text"
+        formControlName='teachingResources'
+        (blur)="transformAmount($event, editDataForm.value.spending.teachingResources)"
+        >
     </div>
 
     <div class="govuk-form-group">
@@ -254,7 +275,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Energy') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="en" name="en" type="number" formControlName='energy'>
+      <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text"
+      formControlName='energy'
+      (blur)="transformAmount($event, editDataForm.value.spending.energy)"
+      >
     </div>
 
   </fieldset>
@@ -273,8 +297,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="number"
-        formControlName='totalIncome' [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
+      <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
+        formControlName='totalIncome'
+        [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
+        (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)"
         required>
       <div [hidden]="totalIncome.valid || totalIncome.pristine">
         <span class="govuk-error-message">
@@ -291,7 +317,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('In-year balance') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="iyb" name="iyb" type="number" formControlName='balance'>
+      <input class="govuk-input govuk-input--width-20" id="iyb" name="iyb" type="text"
+      formControlName='balance'
+      (blur)="transformAmount($event, editDataForm.value.reserveBalance.balance)"
+      >
     </div>
 
     <div class="govuk-form-group">
@@ -302,7 +331,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="number" formControlName='rr'>
+      <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text"
+      formControlName='rr'
+      (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr)"
+      >
     </div>
   </fieldset>
 
@@ -321,7 +353,10 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Average teacher cost') | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="atc" name="atc" type="number" formControlName='teacherCost'>
+      <input class="govuk-input govuk-input--width-20" id="atc" name="atc" type="text"
+      formControlName='teacherCost'
+      (blur)="transformAmount($event, editDataForm.value.character.teacherCost)"
+      >
     </div>
 
     <div class="govuk-form-group">
