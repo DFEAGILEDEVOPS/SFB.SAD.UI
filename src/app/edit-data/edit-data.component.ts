@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { Location, CurrencyPipe } from '@angular/common';
 import { SaFsmLookupService } from './../core/network/services/safsmlookup.service';
 import { SaSizeLookupService } from './../core/network/services/sasizelookup.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +19,7 @@ export class EditDataComponent implements OnInit {
   editDataForm: FormGroup;
   viewType: string;
   scenarioNo: number;
+  formattedAmount: any;
 
   get scenarioName() {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
@@ -47,6 +48,7 @@ export class EditDataComponent implements OnInit {
     private scenariosService: SaScenariosService,
     private sizeLookupService: SaSizeLookupService,
     private fsmLookupService: SaFsmLookupService,
+    private currencyPipe: CurrencyPipe,
     private location: Location) {
     this.route.params.subscribe(params => {
       this.urn = +params.urn;
@@ -80,7 +82,7 @@ export class EditDataComponent implements OnInit {
         fsm: [this.scenarioInEdit.fsm]
       }),
       spending: this.fb.group({
-        totalExpenditure: [this.scenarioInEdit.totalExpenditure],
+        totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure)],
         teachingStaff: [this.scenarioInEdit.getAAValue('Teaching staff')],
         supplyStaff: [this.scenarioInEdit.getAAValue('Supply staff')],
         educationSupportStaff: [this.scenarioInEdit.getAAValue('Education support staff')],
@@ -124,7 +126,7 @@ export class EditDataComponent implements OnInit {
       editedScenario.numberOfPupils = this.editDataForm.value.schoolDetails.numberOfPupils;
       editedScenario.fsm = this.editDataForm.value.schoolDetails.fsm;
 
-      editedScenario.totalExpenditure = this.editDataForm.value.spending.totalExpenditure;
+      editedScenario.totalExpenditure = this.currencyToNumber(this.editDataForm.value.spending.totalExpenditure);
       editedScenario.setAAValue('Teaching staff', this.editDataForm.value.spending.teachingStaff);
       editedScenario.setAAValue('Supply staff', this.editDataForm.value.spending.supplyStaff);
       editedScenario.setAAValue('Education support staff', this.editDataForm.value.spending.educationSupportStaff);
@@ -182,6 +184,24 @@ export class EditDataComponent implements OnInit {
 
   onBack() {
     this.location.back();
+  }
+
+  transformAmount(element) {
+    this.formattedAmount = this.numberToCurrency(this.currencyToNumber(this.editDataForm.value.spending.totalExpenditure));
+
+    element.target.value = this.formattedAmount;
+  }
+
+  private numberToCurrency(val: number): string {
+    return this.currencyPipe.transform(val, '£');
+  }
+
+  private currencyToNumber(val: any): number {
+    if (typeof(val) === 'string') {
+      return Number(val.replace(new RegExp('[^.0-9]', 'g'), ''));
+    }
+
+    return val;
   }
 
 }

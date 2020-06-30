@@ -157,9 +157,9 @@
         The {{scenarioInEdit.latestTerm}} value was <span
           class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditureLatestTerm | aaValueFormat}}</span>
       </span>
-      <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="number"
+      <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
         formControlName='totalExpenditure'
-        [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}" required>
+        [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}" required (blur)="transformAmount($event)">
       <div [hidden]="totalExpenditure.valid || totalExpenditure.pristine">
         <span class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> Total expenditure is required

@@ -29,6 +29,7 @@ import { SidebysideCharacteristicsComponent } from './sidebyside/sidebyside-char
 import { SidebysideFormatBreadcrumbsComponent } from './sidebyside-format/sidebyside-format-breadcrumbs/sidebyside-format-breadcrumbs.component';
 import { SidebysideFormatComponent } from './sidebyside-format/sidebyside-format.component';
 import { GlobalErrorHandler } from '@core/error-handling/GlobalErrorHandler';
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { GlobalErrorHandler } from '@core/error-handling/GlobalErrorHandler';
     AppRoutingModule,
     ModalModule.forRoot()
   ],
-  providers: [{provide: ErrorHandler, useClass: GlobalErrorHandler}],
+  providers: [{provide: ErrorHandler, useClass: GlobalErrorHandler}, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
