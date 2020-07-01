@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   activeScenario: SaScenarioModel;
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
+  scenarioLoaded: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,13 +29,17 @@ export class DashboardComponent implements OnInit {
       });
       this.aaModalModels = new AAModalModels();
       this.activeScenario = new SaScenarioModel(new SaData());
+      this.scenarioLoaded = false;
     }
 
     ngOnInit() {
       this.saScenariosService.getFirstScenario(this.urn).
         subscribe(result => {
           this.activeScenario = result;
-          this.saScenariosService.setFirstScenario(result, false);
+          if (!result.isEdited) {
+            this.saScenariosService.setFirstScenario(result);
+          }
+          this.scenarioLoaded = true;
         });
     }
 

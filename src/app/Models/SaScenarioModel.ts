@@ -34,6 +34,7 @@ export class SaScenarioModel {
 
   scenarioNo: number;
   isEdited: boolean;
+  isTresholdsRefreshed: boolean;
   data: SaData;
 
   constructor(data: SaData) {

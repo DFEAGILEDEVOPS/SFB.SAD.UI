@@ -15,11 +15,19 @@ export class SaScenariosService {
     this.scenarios = new Array<SaScenarioModel>();
   }
 
-  setFirstScenario(scenario: SaScenarioModel, isEdited: boolean) {
-    this.refreshScenarioWithUpdatedData(scenario, isEdited);
+  setFirstScenario(scenario: SaScenarioModel) {
+    this.populateScenarioWithCalculatedData(scenario);
+    this.refreshAATresholdsWithOriginalData(scenario);
     scenario.scenarioNo = 0;
     this.scenarios[0] = scenario;
     // sessionStorage.setItem('scenario_0', JSON.stringify(scenario));
+  }
+
+  setFirstScenarioWithEdits(scenario: SaScenarioModel) {
+    this.populateScenarioWithCalculatedData(scenario);
+    this.refreshAATresholdsWithApiData(scenario);
+    scenario.scenarioNo = 0;
+    this.scenarios[0] = scenario;
   }
 
   getFirstScenario(urn: number): Observable<SaScenarioModel> {
@@ -41,7 +49,8 @@ export class SaScenariosService {
   }
 
   setSecondScenario(scenario: SaScenarioModel) {
-    this.refreshScenarioWithUpdatedData(scenario, true);
+    this.populateScenarioWithCalculatedData(scenario);
+    this.refreshAATresholdsWithApiData(scenario);
     scenario.scenarioNo = 1;
     this.scenarios[1] = scenario;
     // sessionStorage.setItem('scenario_1', JSON.stringify(scenario));
@@ -69,7 +78,7 @@ export class SaScenariosService {
     }
   }
 
-  private refreshScenarioWithUpdatedData(scenario: SaScenarioModel, isEdited: boolean) {
+  private populateScenarioWithCalculatedData(scenario: SaScenarioModel) {
     scenario.spendingAAs.forEach(aa => aa.totalForAreaType = scenario.totalExpenditure);
     scenario.reserveAAs.forEach(aa => aa.totalForAreaType = scenario.totalIncome);
     scenario.sadAssesmentAreas.forEach(aa => {
@@ -78,9 +87,17 @@ export class SaScenariosService {
       } else {
         aa.percentageSchoolData = null;
       }
+    });
+  }
 
-      if (isEdited) { // TODO: make these api calls only when 'school details' edited, not all the time
-        aa.matchingTreshold = null;
+  private refreshAATresholdsWithApiData(scenario: SaScenarioModel) {
+    // TODO: make these api calls only when 'school details' edited, not all the time
+    scenario.isTresholdsRefreshed = false;
+    scenario.sadAssesmentAreas.forEach(aa => {
+      aa.matchingTreshold = null;
+    });
+
+    scenario.sadAssesmentAreas.forEach(aa => {
         this.saDataService.getAATresholdsList(
           aa.assessmentAreaName,
           scenario.overallPhase,
@@ -94,13 +111,19 @@ export class SaScenariosService {
             aa.matchingTreshold = aa.allTresholds
               .find(t => (aa.percentageSchoolData >= t.scoreLow || t.scoreLow == null)
               && (aa.percentageSchoolData <= t.scoreHigh || t.scoreHigh === null));
+            scenario.isTresholdsRefreshed = scenario.sadAssesmentAreas.every(a => a.matchingTreshold);
           });
-      } else {
-        aa.matchingTreshold = aa.allTresholds
-        .find(t => (aa.percentageSchoolData >= t.scoreLow || t.scoreLow == null)
-        && (aa.percentageSchoolData <= t.scoreHigh || t.scoreHigh === null));
-      }
     });
+  }
+
+  private refreshAATresholdsWithOriginalData(scenario: SaScenarioModel) {
+    scenario.sadAssesmentAreas.forEach(aa => {
+      aa.matchingTreshold = aa.allTresholds
+        .find(t => (aa.percentageSchoolData >= t.scoreLow || t.scoreLow == null)
+          && (aa.percentageSchoolData <= t.scoreHigh || t.scoreHigh === null));
+    });
+
+    scenario.isTresholdsRefreshed = true;
   }
 
 }

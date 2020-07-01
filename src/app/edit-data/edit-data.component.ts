@@ -20,6 +20,7 @@ export class EditDataComponent implements OnInit {
   viewType: string;
   scenarioNo: number;
   formattedAmount: any;
+  scenarioLoaded: boolean;
 
   get scenarioName() {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
@@ -55,17 +56,7 @@ export class EditDataComponent implements OnInit {
       this.viewType = params.viewType;
       this.scenarioNo =  params.scenarioNo ? Number(params.scenarioNo) : null;
     });
-
-    if (this.viewType === 'edit' && (this.scenarioNo === null || this.scenarioNo === 0)) {
-      scenariosService.getFirstScenario(this.urn)
-        .subscribe(result => {
-          this.scenarioInEdit = result;
-          this.buildForm();
-        });
-    } else {
-      this.scenarioInEdit = scenariosService.getSecondScenario();
-      this.buildForm();
-    }
+    this.scenarioLoaded = false;
   }
 
   private buildForm() {
@@ -112,6 +103,18 @@ export class EditDataComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.viewType === 'edit' && (this.scenarioNo === null || this.scenarioNo === 0)) {
+      this.scenariosService.getFirstScenario(this.urn)
+        .subscribe(result => {
+          this.scenarioInEdit = result;
+          this.scenarioLoaded = true;
+          this.buildForm();
+        });
+    } else {
+      this.scenarioInEdit = this.scenariosService.getSecondScenario();
+      this.scenarioLoaded = true;
+      this.buildForm();
+    }
   }
 
   onSubmit() {
@@ -169,11 +172,11 @@ export class EditDataComponent implements OnInit {
           editedScenario.fsm);
 
       if (this.viewType === 'edit' && this.scenarioNo === null) {
-        this.scenariosService.setFirstScenario(editedScenario, true);
+        this.scenariosService.setFirstScenarioWithEdits(editedScenario);
         this.router.navigate(['self-assessment/', this.urn]);
       } else {
         if (this.scenarioNo === 0) {
-          this.scenariosService.setFirstScenario(editedScenario, true);
+          this.scenariosService.setFirstScenarioWithEdits(editedScenario);
         } else {
           this.scenariosService.setSecondScenario(editedScenario);
         }
