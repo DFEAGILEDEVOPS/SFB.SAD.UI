@@ -160,7 +160,7 @@
       <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
         formControlName='totalExpenditure'
         [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}"
-        (keyup)="transformAmount($event, editDataForm.value.spending.totalExpenditure)"
+        (blur)="transformAmount($event, editDataForm.value.spending.totalExpenditure)"
         required>
       <div [hidden]="totalExpenditure.valid || totalExpenditure.pristine">
         <span class="govuk-error-message">
@@ -179,7 +179,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text"
       formControlName='teachingStaff'
-      (keyup)="transformAmount($event, editDataForm.value.spending.teachingStaff)"
+      (blur)="transformAmount($event, editDataForm.value.spending.teachingStaff)"
       >
     </div>
 
@@ -193,7 +193,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text"
       formControlName='supplyStaff'
-      (keyup)="transformAmount($event, editDataForm.value.spending.supplyStaff)"
+      (blur)="transformAmount($event, editDataForm.value.spending.supplyStaff)"
       >
     </div>
 
@@ -207,7 +207,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text"
         formControlName='educationSupportStaff'
-        (keyup)="transformAmount($event, editDataForm.value.spending.educationSupportStaff)"
+        (blur)="transformAmount($event, editDataForm.value.spending.educationSupportStaff)"
         >
     </div>
 
@@ -221,7 +221,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text"
       formControlName='adminStaff'
-      (keyup)="transformAmount($event, editDataForm.value.spending.adminStaff)"
+      (blur)="transformAmount($event, editDataForm.value.spending.adminStaff)"
       >
     </div>
 
@@ -235,7 +235,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text"
       formControlName='otherStaff'
-      (keyup)="transformAmount($event, editDataForm.value.spending.otherStaff)"
+      (blur)="transformAmount($event, editDataForm.value.spending.otherStaff)"
       >
     </div>
 
@@ -249,7 +249,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text"
       formControlName='premises'
-      (keyup)="transformAmount($event, editDataForm.value.spending.premises)"
+      (blur)="transformAmount($event, editDataForm.value.spending.premises)"
       >
     </div>
 
@@ -263,7 +263,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text"
         formControlName='teachingResources'
-        (keyup)="transformAmount($event, editDataForm.value.spending.teachingResources)"
+        (blur)="transformAmount($event, editDataForm.value.spending.teachingResources)"
         >
     </div>
 
@@ -277,7 +277,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text"
       formControlName='energy'
-      (keyup)="transformAmount($event, editDataForm.value.spending.energy)"
+      (blur)="transformAmount($event, editDataForm.value.spending.energy)"
       >
     </div>
 
@@ -300,7 +300,7 @@
       <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
         formControlName='totalIncome'
         [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
-        (keyup)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)"
+        (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)"
         required>
       <div [hidden]="totalIncome.valid || totalIncome.pristine">
         <span class="govuk-error-message">
@@ -319,7 +319,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="iyb" name="iyb" type="text"
       formControlName='balance'
-      (keyup)="transformAmount($event, editDataForm.value.reserveBalance.balance)"
+      (blur)="transformAmount($event, editDataForm.value.reserveBalance.balance)"
       >
     </div>
 
@@ -333,7 +333,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text"
       formControlName='rr'
-      (keyup)="transformAmount($event, editDataForm.value.reserveBalance.rr)"
+      (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr)"
       >
     </div>
   </fieldset>
@@ -355,7 +355,7 @@
       </span>
       <input class="govuk-input govuk-input--width-20" id="atc" name="atc" type="text"
       formControlName='teacherCost'
-      (keyup)="transformAmount($event, editDataForm.value.character.teacherCost)"
+      (blur)="transformAmount($event, editDataForm.value.character.teacherCost)"
       >
     </div>
 
