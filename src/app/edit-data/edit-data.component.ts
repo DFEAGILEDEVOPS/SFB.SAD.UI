@@ -193,12 +193,12 @@ export class EditDataComponent implements OnInit {
   }
 
   private numberToCurrency(val: number): string {
-    return this.currencyPipe.transform(val, '£');
+    return this.currencyPipe.transform(val, ' ');
   }
 
   private currencyToNumber(val: any): number {
     if (typeof(val) === 'string') {
-      return Number(val.replace(new RegExp('[^.0-9]', 'g'), ''));
+      return Number(val.replace(new RegExp('[^.0-9-]', 'g'), ''));
     }
 
     return val;
