@@ -17,6 +17,8 @@ export class SidebysideComponent implements OnInit {
   secondScenario: SaScenarioModel;
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
+  firstScenarioLoaded: boolean;
+  secondScenarioLoaded: boolean;
 
   constructor(
     private router: Router,
@@ -31,8 +33,10 @@ export class SidebysideComponent implements OnInit {
       this.saScenariosService.getFirstScenario(null).
         subscribe(result => {
           this.firstScenario = result;
+          this.firstScenarioLoaded = true;
         });
       this.secondScenario = this.saScenariosService.getSecondScenario();
+      this.secondScenarioLoaded = true;
     }
 
     removeScenario(scenarioNo: number) {
