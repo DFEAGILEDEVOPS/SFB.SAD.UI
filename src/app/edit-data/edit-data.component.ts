@@ -27,7 +27,7 @@ export class EditDataComponent implements OnInit {
   }
 
   get totalExpenditure() {
-    return this.editDataForm.get('spending').get('totalExpenditure');
+    return this.editDataForm.get('reserveBalance').get('totalExpenditure');
   }
 
   get totalIncome() {
@@ -36,6 +36,18 @@ export class EditDataComponent implements OnInit {
 
   get numberOfPupils() {
     return this.editDataForm.get('schoolDetails').get('numberOfPupils');
+  }
+
+  get schoolWorkforce() {
+    return this.editDataForm.get('schoolDetails').get('schoolWorkforce');
+  }
+
+  get numberOfTeachers() {
+    return this.editDataForm.get('schoolDetails').get('numberOfTeachers');
+  }
+
+  get seniorLeadership() {
+    return this.editDataForm.get('schoolDetails').get('seniorLeadership');
   }
 
   get fsm() {
@@ -66,14 +78,17 @@ export class EditDataComponent implements OnInit {
         scenarioTerm: [this.scenarioInEdit.termOfScenario]
       }),
       schoolDetails: this.fb.group({
-        schoolPhase: [this.scenarioInEdit.overallPhase],
-        hasSixthForm: [this.scenarioInEdit.hasSixthForm],
-        londonWeighting: [this.scenarioInEdit.londonWeighting],
         numberOfPupils: [this.scenarioInEdit.numberOfPupils],
-        fsm: [this.scenarioInEdit.fsm]
+        schoolWorkforce: [this.scenarioInEdit.workforceTotal],
+        numberOfTeachers: [this.scenarioInEdit.teachersTotal],
+        seniorLeadership: [this.scenarioInEdit.teachersLeader],
+        fsm: [this.scenarioInEdit.fsm],
+        teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)')],
+        predictedPupil: [this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
+          this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null],
+        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size')],
       }),
       spending: this.fb.group({
-        totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure)],
         teachingStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching staff'))],
         supplyStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Supply staff'))],
         educationSupportStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Education support staff'))],
@@ -85,20 +100,9 @@ export class EditDataComponent implements OnInit {
       }),
       reserveBalance: this.fb.group({
         totalIncome: [this.numberToCurrency(this.scenarioInEdit.totalIncome)],
-        balance: [this.numberToCurrency(this.scenarioInEdit.getAAValue('In-year balance'))],
+        totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure)],
         rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
-      }),
-      character: this.fb.group({
-        teacherCost: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Average teacher cost'))],
-        seniorLeaders: [this.scenarioInEdit.getAAValue('Senior leaders as a percentage of workforce') ?
-          this.scenarioInEdit.getAAValue('Senior leaders as a percentage of workforce') * 100 : null],
-        pupilToTeacher: [this.scenarioInEdit.getAAValue('Pupil to teacher ratio')],
-        pupilToAdult: [this.scenarioInEdit.getAAValue('Pupil to adult ratio')],
-        teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)')],
-        predictedPupil: [this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
-          this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null],
-        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size')],
-      }),
+      })
     });
   }
 
@@ -123,13 +127,17 @@ export class EditDataComponent implements OnInit {
       const editedScenario: SaScenarioModel = this.scenarioInEdit;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
-      editedScenario.overallPhase = this.editDataForm.value.schoolDetails.schoolPhase;
-      editedScenario.hasSixthForm = this.editDataForm.value.schoolDetails.hasSixthForm;
-      editedScenario.londonWeighting = this.editDataForm.value.schoolDetails.londonWeighting;
       editedScenario.numberOfPupils = this.editDataForm.value.schoolDetails.numberOfPupils;
+      editedScenario.workforceTotal = this.editDataForm.value.schoolDetails.schoolWorkforce;
+      editedScenario.teachersTotal = this.editDataForm.value.schoolDetails.numberOfTeachers;
+      editedScenario.teachersLeader = this.editDataForm.value.schoolDetails.seniorLeadership;
       editedScenario.fsm = this.editDataForm.value.schoolDetails.fsm;
+      editedScenario.setAAValue('Teacher contact ratio (less than 1)', this.editDataForm.value.schoolDetails.teacherContactRatio);
+      editedScenario.setAAValue('Predicted percentage pupil number change in 3-5 years',
+        isNumber(this.editDataForm.value.schoolDetails.predictedPupil) ?
+        this.editDataForm.value.schoolDetails.predictedPupil / 100 : null);
+      editedScenario.setAAValue('Average Class size', this.editDataForm.value.schoolDetails.averageClassSize);
 
-      editedScenario.totalExpenditure = this.currencyToNumber(this.editDataForm.value.spending.totalExpenditure);
       editedScenario.setAAValue('Teaching staff', this.currencyToNumber(this.editDataForm.value.spending.teachingStaff));
       editedScenario.setAAValue('Supply staff', this.currencyToNumber(this.editDataForm.value.spending.supplyStaff));
       editedScenario.setAAValue('Education support staff', this.currencyToNumber(this.editDataForm.value.spending.educationSupportStaff));
@@ -140,20 +148,16 @@ export class EditDataComponent implements OnInit {
       editedScenario.setAAValue('Energy', this.currencyToNumber(this.editDataForm.value.spending.energy));
 
       editedScenario.totalIncome = this.currencyToNumber(this.editDataForm.value.reserveBalance.totalIncome);
-      editedScenario.setAAValue('In-year balance', this.currencyToNumber(this.editDataForm.value.reserveBalance.balance));
+      editedScenario.totalExpenditure = this.currencyToNumber(this.editDataForm.value.reserveBalance.totalExpenditure);
+      editedScenario.setAAValue('In-year balance', this.currencyToNumber(this.editDataForm.value.reserveBalance.totalIncome)
+        - this.currencyToNumber(this.editDataForm.value.reserveBalance.totalExpenditure));
       editedScenario.setAAValue('Revenue reserve', this.currencyToNumber(this.editDataForm.value.reserveBalance.rr));
 
-      editedScenario.setAAValue('Average teacher cost', this.currencyToNumber(this.editDataForm.value.character.teacherCost));
-      // tslint:disable-next-line:max-line-length
-      editedScenario.setAAValue('Senior leaders as a percentage of workforce', isNumber(this.editDataForm.value.character.seniorLeaders) ?
-        this.editDataForm.value.character.seniorLeaders / 100 : null);
-      editedScenario.setAAValue('Pupil to teacher ratio', this.editDataForm.value.character.pupilToTeacher);
-      editedScenario.setAAValue('Pupil to adult ratio', this.editDataForm.value.character.pupilToAdult);
-      editedScenario.setAAValue('Teacher contact ratio (less than 1)', this.editDataForm.value.character.teacherContactRatio);
-      // tslint:disable-next-line:max-line-length
-      editedScenario.setAAValue('Predicted percentage pupil number change in 3-5 years', isNumber(this.editDataForm.value.character.predictedPupil) ?
-        this.editDataForm.value.character.predictedPupil / 100 : null);
-      editedScenario.setAAValue('Average Class size', this.editDataForm.value.character.averageClassSize);
+      // editedScenario.setAAValue('Average teacher cost', this.currencyToNumber(this.editDataForm.value.character.teacherCost));
+      // editedScenario.setAAValue('Senior leaders as a percentage of workforce',
+      // isNumber(this.editDataForm.value.character.seniorLeaders) ? this.editDataForm.value.character.seniorLeaders / 100 : null);
+      // editedScenario.setAAValue('Pupil to teacher ratio', this.editDataForm.value.character.pupilToTeacher);
+      // editedScenario.setAAValue('Pupil to adult ratio', this.editDataForm.value.character.pupilToAdult);
 
       editedScenario.isEdited = true;
 
@@ -172,15 +176,22 @@ export class EditDataComponent implements OnInit {
           editedScenario.fsm);
 
       if (this.viewType === 'edit' && this.scenarioNo === null) {
-        this.scenariosService.setFirstScenarioWithEdits(editedScenario);
-        this.router.navigate(['self-assessment/', this.urn]);
+        this.scenariosService.setFirstScenarioWithEdits(editedScenario)
+        .then(() => {
+          this.router.navigate(['self-assessment/', this.urn]);
+        });
       } else {
         if (this.scenarioNo === 0) {
-          this.scenariosService.setFirstScenarioWithEdits(editedScenario);
+          this.scenariosService.setFirstScenarioWithEdits(editedScenario)
+          .then(() => {
+            this.router.navigate(['self-assessment/side-by-side']);
+          });
         } else {
-          this.scenariosService.setSecondScenario(editedScenario);
+          this.scenariosService.setSecondScenario(editedScenario)
+          .then(() => {
+            this.router.navigate(['self-assessment/side-by-side']);
+          });
         }
-        this.router.navigate(['self-assessment/side-by-side']);
       }
     }
   }

@@ -59,57 +59,10 @@
         </h2>
       </legend>
 
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="school-phase">
-          School phase
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.overallPhaseLatestTerm}}</span>
-        </span>
-        <select class="govuk-select" id="school-phase" name="school-phase" formControlName='schoolPhase'>
-          <option value="Nursery">Nursery</option>
-          <option value="Primary">Primary</option>
-          <option value="Secondary">Secondary</option>
-          <option value="Special">Special</option>
-          <option value="Pupil referral unit">Pupil referral unit</option>
-          <option value="All-through">All-through</option>
-        </select>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="sixth-form">
-          Has sixth form?
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.hasSixthFormLatestTerm}}</span>
-        </span>
-        <select class="govuk-select" id="sixth-form" name="sixth-form" formControlName='hasSixthForm'>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="london-weighting">
-          London weighting
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.londonWeightingLatestTerm}}</span>
-        </span>
-        <select class="govuk-select" id="london-weighting" name="london-weighting" formControlName='londonWeighting'>
-          <option value="Neither">Neither</option>
-          <option value="Inner">Inner</option>
-          <option value="Outer">Outer</option>
-        </select>
-      </div>
-
       <div class="govuk-form-group"
         [class]="{'govuk-form-group--error' : !numberOfPupils.valid && !numberOfPupils.pristine}">
         <label class="govuk-label" for="number-pupils">
-          Number of pupils
+          Number of pupils (FTE)
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -121,6 +74,60 @@
         <div [hidden]="numberOfPupils.valid || numberOfPupils.pristine">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of pupils is required
+          </span>
+        </div>
+      </div>
+
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}">
+        <label class="govuk-label" for="school-workforce">
+          School workforce (FTE)
+        </label>
+        <span class="govuk-hint">
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.workforceTotalLastTerm}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number"
+          formControlName='schoolWorkforce'
+          [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}" required>
+        <div [hidden]="schoolWorkforce.valid || schoolWorkforce.pristine">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> School workforce number is required
+          </span>
+        </div>
+      </div>
+
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}">
+        <label class="govuk-label" for="number-teachers">
+          Number of teachers (FTE)
+        </label>
+        <span class="govuk-hint">
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.teachersTotalLastTerm}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number"
+          formControlName='numberOfTeachers'
+          [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}" required>
+        <div [hidden]="numberOfTeachers.valid || numberOfTeachers.pristine">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Number of teachers is required
+          </span>
+        </div>
+      </div>
+
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !seniorLeadership.valid && !seniorLeadership.pristine}">
+        <label class="govuk-label" for="senior-leadership">
+          Senior leadership (FTE)
+        </label>
+        <span class="govuk-hint">
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.teachersLeaderLastTerm}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number"
+          formControlName='seniorLeadership'
+          [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}" required>
+        <div [hidden]="seniorLeadership.valid || seniorLeadership.pristine">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Senior leadership number is required
           </span>
         </div>
       </div>
@@ -141,14 +148,58 @@
           </span>
         </div>
       </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="tcr">
+          Teacher contact ratio (less than 1)
+        </label>
+        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number"
+          formControlName='teacherContactRatio'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="ppl">
+          Predicted percentage pupil number change in 3-5 years
+        </label>
+        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil'>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="acs">
+          Average Class size
+        </label>
+        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number"
+          formControlName='averageClassSize'>
+      </div>
+
     </fieldset>
 
-    <fieldset class="govuk-fieldset" formGroupName='spending'>
+    <fieldset class="govuk-fieldset" formGroupName='reserveBalance'>
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         <h2 class="govuk-fieldset__heading">
-          Spending
+          Totals
         </h2>
       </legend>
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !totalIncome.valid && !totalIncome.pristine}">
+        <label class="govuk-label" for="total-income">
+          Total income
+        </label>
+        <span class="govuk-hint">
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm | aaValueFormat}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
+          formControlName='totalIncome'
+          [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
+          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)"
+          required>
+        <div [hidden]="totalIncome.valid || totalIncome.pristine">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Total income is required
+          </span>
+        </div>
+      </div>
+
       <div class="govuk-form-group"
         [class]="{'govuk-form-group--error' : !totalExpenditure.valid && !totalExpenditure.pristine}">
         <label class="govuk-label" for="total-expenditure">
@@ -161,7 +212,7 @@
         <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
           formControlName='totalExpenditure'
           [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}"
-          (blur)="transformAmount($event, editDataForm.value.spending.totalExpenditure)"
+          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalExpenditure)"
           required>
         <div [hidden]="totalExpenditure.valid || totalExpenditure.pristine">
           <span class="govuk-error-message">
@@ -169,6 +220,28 @@
           </span>
         </div>
       </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="rr">
+          Revenue reserve
+        </label>
+        <span class="govuk-hint">
+          The {{scenarioInEdit.latestTerm}} value was <span
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve') | aaValueFormat}}</span>
+        </span>
+        <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text"
+        formControlName='rr'
+        (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr)"
+        >
+      </div>
+    </fieldset>
+
+    <fieldset class="govuk-fieldset" formGroupName='spending'>
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        <h2 class="govuk-fieldset__heading">
+          Expenditure
+        </h2>
+      </legend>
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="ts">
@@ -284,62 +357,7 @@
 
     </fieldset>
 
-    <fieldset class="govuk-fieldset" formGroupName='reserveBalance'>
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-        <h2 class="govuk-fieldset__heading">
-          Reserve and balance
-        </h2>
-      </legend>
-      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !totalIncome.valid && !totalIncome.pristine}">
-        <label class="govuk-label" for="total-income">
-          Total income
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm | aaValueFormat}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
-          formControlName='totalIncome'
-          [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
-          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)"
-          required>
-        <div [hidden]="totalIncome.valid || totalIncome.pristine">
-          <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Total income is required
-          </span>
-        </div>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="iyb">
-          In-year balance
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('In-year balance') | aaValueFormat}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="iyb" name="iyb" type="text"
-        formControlName='balance'
-        (blur)="transformAmount($event, editDataForm.value.reserveBalance.balance)"
-        >
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="rr">
-          Revenue reserve
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve') | aaValueFormat}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text"
-        formControlName='rr'
-        (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr)"
-        >
-      </div>
-    </fieldset>
-
-    <fieldset class="govuk-fieldset" formGroupName='character'>
+<!--     <fieldset class="govuk-fieldset" formGroupName='character'>
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         <h2 class="govuk-fieldset__heading">
           School characteristics
@@ -393,29 +411,7 @@
         <input class="govuk-input govuk-input--width-20" id="pta" name="pta" type="number" formControlName='pupilToAdult'>
       </div>
 
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="tcr">
-          Teacher contact ratio (less than 1)
-        </label>
-        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number"
-          formControlName='teacherContactRatio'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="ppl">
-          Predicted percentage pupil number change in 3-5 years
-        </label>
-        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="acs">
-          Average Class size
-        </label>
-        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number"
-          formControlName='averageClassSize'>
-      </div>
-    </fieldset>
+    </fieldset> -->
 
     <div class="govuk-grid-row govuk-body">
       <div class="govuk-grid-column-full">

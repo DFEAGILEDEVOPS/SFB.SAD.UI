@@ -10,11 +10,8 @@ export class SaScenarioModel {
   termOfScenario: string;
   latestTerm: string;
   overallPhase: string;
-  overallPhaseLatestTerm: string;
   hasSixthForm: boolean;
-  hasSixthFormLatestTerm: boolean;
   londonWeighting: string;
-  londonWeightingLatestTerm: string;
   numberOfPupils: number;
   numberOfPupilsLatestTerm: number;
   fsm: number;
@@ -28,14 +25,21 @@ export class SaScenarioModel {
   progressScore: number;
   progressScoreType: string;
   progress8Banding: number;
+  teachersTotal: number;
+  teachersLeader: number;
+  workforceTotal: number;
+  teachersTotalLastTerm: number;
+  teachersLeaderLastTerm: number;
+  workforceTotalLastTerm: number;
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
-  sadAssesmentAreas: AssessmentAreaModel[];
+  sadAssessmentAreas: AssessmentAreaModel[];
 
   scenarioNo: number;
   isEdited: boolean;
   isTresholdsRefreshed: boolean;
   data: SaData;
+
 
   constructor(data: SaData) {
     this.data = data;
@@ -43,9 +47,9 @@ export class SaScenarioModel {
     this.urn = data.urn;
     this.latestTerm = data.latestTerm;
     this.financeType = data.financeType;
-    this.hasSixthFormLatestTerm = data.hasSixthFormLatestTerm;
-    this.overallPhaseLatestTerm = data.overallPhaseLatestTerm;
-    this.londonWeightingLatestTerm = data.londonWeightingLatestTerm;
+    this.hasSixthForm = data.hasSixthForm;
+    this.overallPhase = data.overallPhase;
+    this.londonWeighting = data.londonWeighting;
     this.numberOfPupilsLatestTerm = data.numberOfPupilsLatestTerm;
     this.fsmLatestTerm = data.fsmLatestTerm;
     this.ofstedRating = data.ofstedRating;
@@ -55,21 +59,24 @@ export class SaScenarioModel {
     this.progress8Banding = data.progress8Banding;
     this.totalExpenditureLatestTerm = data.totalExpenditureLatestTerm;
     this.totalIncomeLatestTerm = data.totalIncomeLatestTerm;
+    this.teachersTotalLastTerm = data.teachersTotalLastTerm;
+    this.teachersLeaderLastTerm = data.teachersLeaderLastTerm;
+    this.workforceTotalLastTerm = data.workforceTotalLastTerm;
     this.sadSizeLookup = data.sadSizeLookup;
     this.sadFSMLookup = data.sadFSMLookup;
-    this.sadAssesmentAreas = data.sadAssesmentAreas;
+    this.sadAssessmentAreas = data.sadAssesmentAreas;
 
     this.termOfScenario = this.latestTerm;
     this.scenarioName = this.termOfScenario ? this.termOfScenario + ' finance data' : null;
-    this.overallPhase = this.overallPhaseLatestTerm;
-    this.hasSixthForm = this.hasSixthFormLatestTerm;
     this.totalIncome = this.totalIncomeLatestTerm;
     this.totalExpenditure = this.totalExpenditureLatestTerm;
-    this.londonWeighting = this.londonWeightingLatestTerm;
     this.numberOfPupils = this.numberOfPupilsLatestTerm;
     this.fsm = this.fsmLatestTerm;
+    this.teachersTotal = data.teachersTotalLastTerm;
+    this.teachersLeader = data.teachersLeaderLastTerm;
+    this.workforceTotal = data.workforceTotalLastTerm;
 
-    this.initializeAssessmentAreas();
+    this.initAAsWithCalculatedData();
   }
 
   get overallPhaseWSixthForm(): string {
@@ -80,41 +87,138 @@ export class SaScenarioModel {
   }
 
   get spendingAAs(): AssessmentAreaModel[] {
-    return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaType === 'Spending');
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaType === 'Spending');
   }
 
   get reserveAAs(): AssessmentAreaModel[] {
-    return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaType === 'Reserve and balance');
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaType === 'Reserve and balance');
   }
 
   get characteristicAAs(): AssessmentAreaModel[] {
-    return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaType === 'School characteristics');
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaType === 'School characteristics');
   }
 
   getAAValue(aaName: string): number {
-    return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
   }
 
   getAALatestTermValue(aaName: string): number {
-    return this.sadAssesmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
   }
 
   setAAValue(aaName: string, value: number) {
-    this.sadAssesmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
+    this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
   }
 
-  private initializeAssessmentAreas() {
-    this.sadAssesmentAreas?.forEach(aa => {
-        aa.schoolData = aa.schoolDataLatestTerm;
-        aa.totalForAreaType = aa.totalForAreaTypeLatestTerm;
+  initAAsWithCalculatedData() {
+    this.initSpendingAAsWithCalculatedData();
 
-      if (aa.schoolData) {
-        aa.percentageSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+    this.initReserveAAsWithCalculatedData();
+
+    this.initCharacteristicAAsWithCalculatedData();
+
+    this.isTresholdsRefreshed = true;
+  }
+
+  private initCharacteristicAAsWithCalculatedData() {
+
+    const averageTeacherCostAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Average teacher cost');
+    averageTeacherCostAA.totalForAreaType = this.teachersTotal;
+    averageTeacherCostAA.schoolData = this.getAAValue('Teaching staff');
+    if (averageTeacherCostAA.schoolData !== null) {
+      averageTeacherCostAA.calculatedSchoolData = parseFloat((averageTeacherCostAA.schoolData
+        / averageTeacherCostAA.totalForAreaType).toFixed(2));
+    } else {
+      averageTeacherCostAA.calculatedSchoolData = null;
+    }
+    this.setAAsMatchingTreshold(averageTeacherCostAA);
+
+    const seniorLeadersAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Senior leaders as a percentage of workforce');
+    seniorLeadersAA.totalForAreaType = this.workforceTotal;
+    seniorLeadersAA.schoolData = this.teachersLeader;
+    if (seniorLeadersAA.schoolData !== null) {
+      seniorLeadersAA.calculatedSchoolData = parseFloat((seniorLeadersAA.schoolData
+        / seniorLeadersAA.totalForAreaType).toFixed(2));
+    } else {
+      seniorLeadersAA.calculatedSchoolData = null;
+    }
+    this.setAAsMatchingTreshold(seniorLeadersAA);
+
+    const pupilToTeacherAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Pupil to teacher ratio');
+    pupilToTeacherAA.totalForAreaType = this.teachersTotal;
+    pupilToTeacherAA.schoolData = this.numberOfPupils;
+    if (pupilToTeacherAA.schoolData !== null) {
+      pupilToTeacherAA.calculatedSchoolData = parseFloat((pupilToTeacherAA.schoolData
+        / pupilToTeacherAA.totalForAreaType).toFixed(2));
+    } else {
+      pupilToTeacherAA.calculatedSchoolData = null;
+    }
+    this.setAAsMatchingTreshold(pupilToTeacherAA);
+
+    const pupilToAdultAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Pupil to adult ratio');
+    pupilToAdultAA.totalForAreaType = this.workforceTotal;
+    pupilToAdultAA.schoolData = this.numberOfPupils;
+    if (pupilToAdultAA.schoolData !== null) {
+      pupilToAdultAA.calculatedSchoolData = parseFloat((pupilToAdultAA.schoolData
+        / pupilToAdultAA.totalForAreaType).toFixed(2));
+    } else {
+      pupilToAdultAA.calculatedSchoolData = null;
+    }
+    this.setAAsMatchingTreshold(pupilToAdultAA);
+
+    const teacherContactRatioAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Teacher contact ratio (less than 1)');
+    teacherContactRatioAA.calculatedSchoolData = teacherContactRatioAA.schoolData;
+    this.setAAsMatchingTreshold(teacherContactRatioAA);
+
+    const pupilChangeAA = this.sadAssessmentAreas
+      .find(aa => aa.assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years');
+    pupilChangeAA.calculatedSchoolData = pupilChangeAA.schoolData;
+    this.setAAsMatchingTreshold(pupilChangeAA);
+
+    const avClassSizeAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Average Class size');
+    avClassSizeAA.calculatedSchoolData = avClassSizeAA.schoolData;
+    this.setAAsMatchingTreshold(avClassSizeAA);
+
+  }
+
+  private initReserveAAsWithCalculatedData() {
+    this.reserveAAs.forEach(aa => {
+      aa.totalForAreaType = this.totalIncome;
+      if (aa.schoolData === undefined) {
+        aa.schoolData = aa.schoolDataLatestTerm;
       }
 
-      aa.matchingTreshold = aa.allTresholds
-        .find(t => aa.percentageSchoolData >= t.scoreLow && aa.percentageSchoolData <= t.scoreHigh);
+      if (aa.schoolData !== null) {
+        aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+      } else {
+        aa.calculatedSchoolData = null;
+      }
+
+      this.setAAsMatchingTreshold(aa);
     });
+  }
+
+  private initSpendingAAsWithCalculatedData() {
+    this.spendingAAs.forEach(aa => {
+      aa.totalForAreaType = this.totalExpenditure;
+      if (aa.schoolData === undefined) {
+        aa.schoolData = aa.schoolDataLatestTerm;
+      }
+
+      if (aa.schoolData !== null) {
+        aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+      } else {
+        aa.calculatedSchoolData = null;
+      }
+
+      this.setAAsMatchingTreshold(aa);
+    });
+  }
+
+  private setAAsMatchingTreshold(aa: AssessmentAreaModel) {
+    aa.matchingTreshold = aa.allTresholds
+      .find(t => (aa.calculatedSchoolData >= t.scoreLow || t.scoreLow == null)
+        && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh === null));
   }
 }
 

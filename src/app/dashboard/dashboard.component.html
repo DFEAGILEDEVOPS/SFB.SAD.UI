@@ -1,6 +1,8 @@
-<app-dashboard-bread-crumb [urn]='this.activeScenario.urn' [name]='this.activeScenario.name'></app-dashboard-bread-crumb>
+<div *ngIf='scenarioLoaded && activeScenario?.isTresholdsRefreshed'>
 
-<div class="govuk-grid-row">
+<app-dashboard-bread-crumb [urn]='activeScenario.urn' [name]='activeScenario.name'></app-dashboard-bread-crumb>
+
+<div class="govuk-grid-row" >
   <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-xl">Self-assessment dashboard</h1>
     <p class="govuk-body-s">
@@ -58,7 +60,6 @@
 
 <h2 class="govuk-heading-m">{{activeScenario.scenarioName}}</h2>
 
-<div [hidden]='!scenarioLoaded || !activeScenario.isTresholdsRefreshed'>
   <table class="govuk-table">
     <caption class="govuk-table__caption govuk-!-font-size-24">Spending</caption>
     <thead class="govuk-table__head">
@@ -73,7 +74,7 @@
       <tr class="govuk-table__row" *ngFor='let aa of activeScenario.spendingAAs'>
         <td class="govuk-table__cell">{{aa.assessmentAreaName}}</td>
         <td class="govuk-table__cell" nowrap>{{aa.schoolData | aaValueFormat}}</td>
-        <td class="govuk-table__cell">{{aa.percentageSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
+        <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
         <td *ngIf="aa.schoolData !== null && aa.matchingTreshold" class="govuk-table__cell">
           <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assessmentAreaName)" />
@@ -103,7 +104,7 @@
       <tr class="govuk-table__row" *ngFor='let aa of activeScenario.reserveAAs'>
         <td class="govuk-table__cell">{{aa.assessmentAreaName}}</td>
         <td class="govuk-table__cell" nowrap>{{aa.schoolData | aaValueFormat}}</td>
-        <td class="govuk-table__cell">{{aa.percentageSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
+        <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
         <td *ngIf="aa.schoolData !== null && aa.matchingTreshold" class="govuk-table__cell">
           <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assessmentAreaName)" />
@@ -131,14 +132,14 @@
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row" *ngFor='let aa of activeScenario.characteristicAAs'>
         <td class="govuk-table__cell">{{aa.assessmentAreaName}}</td>
-        <td class="govuk-table__cell">
-            <span>{{aa.percentageSchoolData | aaValueFormat : aa.assessmentAreaName}}</span>
+        <td class="govuk-table__cell" nowrap>
+            <span>{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</span>
         </td>
-        <td *ngIf="aa.schoolData !== null && aa.matchingTreshold" class="govuk-table__cell">
+        <td *ngIf="aa.schoolData !== null && aa.schoolData !== undefined && aa.matchingTreshold" class="govuk-table__cell">
           <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" (click)="openModalWithComponent(aa.assessmentAreaName)" />
         </td>
-        <td *ngIf='aa.schoolData === null'class="govuk-table__cell">
+        <td *ngIf='aa.schoolData === null || aa.schoolData === undefined'class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
             <a class="govuk-link ml-2 button-link" routerLink='/self-assessment/edit-data/{{activeScenario.urn}}/edit'>Add data</a>

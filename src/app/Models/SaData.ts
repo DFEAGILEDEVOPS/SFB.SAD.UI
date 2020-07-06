@@ -6,9 +6,9 @@ export class SaData {
   name: string;
   latestTerm: string;
   financeType: string;
-  hasSixthFormLatestTerm: boolean;
-  overallPhaseLatestTerm: string;
-  londonWeightingLatestTerm: string;
+  hasSixthForm: boolean;
+  overallPhase: string;
+  londonWeighting: string;
   numberOfPupilsLatestTerm: number;
   fsmLatestTerm: number;
   ofstedRating: string;
@@ -18,6 +18,9 @@ export class SaData {
   progress8Banding: number;
   totalExpenditureLatestTerm: number;
   totalIncomeLatestTerm: number;
+  teachersTotalLastTerm: number;
+  teachersLeaderLastTerm: number;
+  workforceTotalLastTerm: number;
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
   sadAssesmentAreas: AssessmentAreaModel[];

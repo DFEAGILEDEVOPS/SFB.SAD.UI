@@ -5,7 +5,6 @@ import { Component, OnInit, DebugElement } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
-import { SaData } from 'app/Models/SaData';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
 
 @Component({
@@ -28,7 +27,6 @@ export class DashboardComponent implements OnInit {
         this.urn = +params.urn;
       });
       this.aaModalModels = new AAModalModels();
-      this.activeScenario = new SaScenarioModel(new SaData());
       this.scenarioLoaded = false;
     }
 
@@ -36,16 +34,13 @@ export class DashboardComponent implements OnInit {
       this.saScenariosService.getFirstScenario(this.urn).
         subscribe(result => {
           this.activeScenario = result;
-          if (!result.isEdited) {
-            this.saScenariosService.setFirstScenario(result);
-          }
           this.scenarioLoaded = true;
         });
     }
 
     openModalWithComponent(assessmentArea: string) {
       const modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
-      const assessmentAreas = this.activeScenario.sadAssesmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
+      const assessmentAreas = this.activeScenario.sadAssessmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
       const initialState = {
         assessmentArea : modalContent.assessmentArea,
         title: modalContent.title,

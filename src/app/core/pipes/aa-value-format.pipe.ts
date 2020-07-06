@@ -24,7 +24,7 @@ export class AaValueFormatPipe implements PipeTransform {
       case 'Average Class size':
         return value;
       default:
-        if (value === null) {
+        if (value === null || value === undefined) {
           return '';
         }
         return `${(value * 100).toFixed(0)}%`;
