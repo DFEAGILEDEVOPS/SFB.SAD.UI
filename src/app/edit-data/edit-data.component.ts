@@ -177,18 +177,18 @@ export class EditDataComponent implements OnInit {
 
       if (this.viewType === 'edit' && this.scenarioNo === null) {
         this.scenariosService.setFirstScenarioWithEdits(editedScenario)
-        .then(() => {
+        .subscribe(() => {
           this.router.navigate(['self-assessment/', this.urn]);
         });
       } else {
         if (this.scenarioNo === 0) {
           this.scenariosService.setFirstScenarioWithEdits(editedScenario)
-          .then(() => {
+          .subscribe(() => {
             this.router.navigate(['self-assessment/side-by-side']);
           });
         } else {
-          this.scenariosService.setSecondScenario(editedScenario)
-          .then(() => {
+          this.scenariosService.setSecondScenarioWithEdits(editedScenario)
+          .subscribe(() => {
             this.router.navigate(['self-assessment/side-by-side']);
           });
         }

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { SaDataService } from './sadata.service';
 import { SaScenarioModel } from 'app/Models/SaScenarioModel';
@@ -19,7 +19,10 @@ export class SaScenariosService {
   getFirstScenario(urn: number): Observable<SaScenarioModel> {
     // this.scenarios[0] = this.scenarios[0] ?? JSON.parse(sessionStorage.getItem('scenario_0'));
     if (this.scenarios[0]) {
-      return new Observable((observer) => observer.next(this.scenarios[0]));
+      return new Observable((observer) => {
+        observer.next(this.scenarios[0]);
+        observer.complete();
+      });
     } else {
       return this.saDataService.getSaScenario(urn)
         .pipe(
@@ -39,15 +42,14 @@ export class SaScenariosService {
   }
 
   setFirstScenarioWithEdits(scenario: SaScenarioModel) {
-    return new Promise((resolve) => {
       scenario.initAAsWithCalculatedData();
-      this.refreshAATresholdsWithApiData(scenario)
-      .then(() => {
-        scenario.scenarioNo = 0;
-        this.scenarios[0] = scenario;
-        resolve();
-      });
-    });
+      return this.refreshAATresholdsWithApiData(scenario)
+      .pipe(
+        tap(() => {
+          scenario.scenarioNo = 0;
+          this.scenarios[0] = scenario;
+        })
+      );
   }
 
   getSecondScenario(): SaScenarioModel {
@@ -74,16 +76,15 @@ export class SaScenariosService {
     }
   }
 
-  setSecondScenario(scenario: SaScenarioModel) {
-    return new Promise((resolve) => {
-      scenario.initAAsWithCalculatedData();
-      this.refreshAATresholdsWithApiData(scenario)
-        .then(() => {
-            scenario.scenarioNo = 1;
-          this.scenarios[1] = scenario;
-          resolve();
-        });
-    });
+  setSecondScenarioWithEdits(scenario: SaScenarioModel) {
+    scenario.initAAsWithCalculatedData();
+    return this.refreshAATresholdsWithApiData(scenario)
+    .pipe(
+      tap(() => {
+        scenario.scenarioNo = 1;
+        this.scenarios[1] = scenario;
+      })
+    );
     // sessionStorage.setItem('scenario_1', JSON.stringify(scenario));
   }
 
@@ -98,7 +99,7 @@ export class SaScenariosService {
 
   private refreshAATresholdsWithApiData(scenario: SaScenarioModel) {
     // TODO: make these api calls only when noPupils or FSM or term edited, not all the time
-    return new Promise((resolve) => {
+    return from(new Promise((resolve) => {
 
       scenario.isTresholdsRefreshed = false;
       scenario.sadAssessmentAreas.forEach(aa => {
@@ -126,7 +127,7 @@ export class SaScenariosService {
             }
           });
       });
-    });
+    }));
   }
 }
 
