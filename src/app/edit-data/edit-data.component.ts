@@ -58,6 +58,18 @@ export class EditDataComponent implements OnInit {
     return this.editDataForm.get('schoolDetails').get('fsm');
   }
 
+  get teacherContactRatio() {
+    return this.editDataForm.get('schoolDetails').get('teacherContactRatio');
+  }
+
+  get predictedPupil() {
+    return this.editDataForm.get('schoolDetails').get('predictedPupil');
+  }
+
+  get averageClassSize() {
+    return this.editDataForm.get('schoolDetails').get('averageClassSize');
+  }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -78,19 +90,20 @@ export class EditDataComponent implements OnInit {
   private buildForm() {
     this.editDataForm = this.fb.group({
       scenarioDetails: this.fb.group({
-        scenarioName: [this.scenarioInEdit.scenarioName, Validators.required],
+        scenarioName: [this.scenarioInEdit.scenarioName, [Validators.required, Validators.minLength(3)]],
         scenarioTerm: [this.scenarioInEdit.termOfScenario]
       }),
       schoolDetails: this.fb.group({
-        numberOfPupils: [this.scenarioInEdit.numberOfPupils],
-        schoolWorkforce: [this.scenarioInEdit.workforceTotal],
-        numberOfTeachers: [this.scenarioInEdit.teachersTotal],
-        seniorLeadership: [this.scenarioInEdit.teachersLeader],
-        fsm: [this.scenarioInEdit.fsm],
-        teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)')],
+        numberOfPupils: [this.scenarioInEdit.numberOfPupils, [Validators.required, Validators.min(1)]],
+        schoolWorkforce: [this.scenarioInEdit.workforceTotal, [Validators.required, Validators.min(1)]],
+        numberOfTeachers: [this.scenarioInEdit.teachersTotal, [Validators.required, Validators.min(1)]],
+        seniorLeadership: [this.scenarioInEdit.teachersLeader, [Validators.required, Validators.min(0)]],
+        fsm: [this.scenarioInEdit.fsm, [Validators.required, Validators.min(0)]],
+        teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)'),
+          [Validators.min(0), Validators.max(1)]],
         predictedPupil: [this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
-          this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null],
-        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size')],
+          this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null, Validators.min(-100)],
+        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size'), Validators.min(0)],
       }),
       spending: this.fb.group({
         teachingStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching staff'))],
@@ -165,7 +178,6 @@ export class EditDataComponent implements OnInit {
 
       editedScenario.isEdited = true;
 
-      debugger;
       if (this.viewType === 'edit' && this.scenarioNo === null) {
         if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
 

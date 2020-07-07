@@ -32,9 +32,12 @@
         <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text"
           formControlName='scenarioName' [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}"
           required>
-        <div [hidden]="scenarioName.valid || scenarioName.pristine">
-          <span class="govuk-error-message">
+        <div *ngIf="scenarioName.invalid && scenarioName.dirty">
+          <span *ngIf="scenarioName.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Scenario name is required
+          </span>
+          <span *ngIf="scenarioName.errors.minlength" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Scenario name must be minimum 3 characters
           </span>
         </div>
       </div>
@@ -71,9 +74,12 @@
         <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="number"
           formControlName='numberOfPupils'
           [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}" required>
-        <div [hidden]="numberOfPupils.valid || numberOfPupils.pristine">
-          <span class="govuk-error-message">
+        <div *ngIf="numberOfPupils.invalid && numberOfPupils.dirty">
+          <span *ngIf="numberOfPupils.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of pupils is required
+          </span>
+          <span *ngIf="numberOfPupils.errors.min" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Number of pupils must be minimum 1
           </span>
         </div>
       </div>
@@ -89,9 +95,12 @@
         <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number"
           formControlName='schoolWorkforce'
           [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}" required>
-        <div [hidden]="schoolWorkforce.valid || schoolWorkforce.pristine">
-          <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> School workforce number is required
+        <div *ngIf="schoolWorkforce.invalid && schoolWorkforce.dirty">
+          <span *ngIf="schoolWorkforce.errors.required" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> School workforce count is required
+          </span>
+          <span *ngIf="schoolWorkforce.errors.min" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> School workforce count must be minimum 1
           </span>
         </div>
       </div>
@@ -107,9 +116,12 @@
         <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number"
           formControlName='numberOfTeachers'
           [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}" required>
-        <div [hidden]="numberOfTeachers.valid || numberOfTeachers.pristine">
-          <span class="govuk-error-message">
+        <div *ngIf="numberOfTeachers.invalid && numberOfTeachers.dirty">
+          <span *ngIf="numberOfTeachers.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of teachers is required
+          </span>
+          <span *ngIf="numberOfTeachers.errors.min" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Number of teachers must be minimum 1
           </span>
         </div>
       </div>
@@ -125,9 +137,12 @@
         <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number"
           formControlName='seniorLeadership'
           [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}" required>
-        <div [hidden]="seniorLeadership.valid || seniorLeadership.pristine">
-          <span class="govuk-error-message">
+        <div *ngIf="seniorLeadership.invalid && seniorLeadership.dirty">
+          <span *ngIf="seniorLeadership.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Senior leadership number is required
+          </span>
+          <span *ngIf="seniorLeadership.errors.min" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Senior leadership number must be minimum 0
           </span>
         </div>
       </div>
@@ -142,34 +157,58 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" formControlName='fsm'
           [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}" required>
-        <div [hidden]="fsm.valid || fsm.pristine">
-          <span class="govuk-error-message">
+        <div *ngIf="fsm.invalid && fsm.dirty">
+          <span *ngIf="fsm.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM is required
+          </span>
+          <span *ngIf="fsm.errors.min" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM must be minimum 0
           </span>
         </div>
       </div>
-
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}">
         <label class="govuk-label" for="tcr">
           Teacher contact ratio (less than 1)
         </label>
         <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number"
-          formControlName='teacherContactRatio'>
+          formControlName='teacherContactRatio'
+          [class]="{'govuk-input--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}">
+        <div *ngIf="teacherContactRatio.invalid && teacherContactRatio.dirty">
+          <span *ngIf="teacherContactRatio.errors.min" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Teacher contact ratio must be minimum 0
+          </span>
+          <span *ngIf="teacherContactRatio.errors.max" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Teacher contact ratio must be maximum 1
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !predictedPupil.valid && !predictedPupil.pristine}">
         <label class="govuk-label" for="ppl">
           Predicted percentage pupil number change in 3-5 years
         </label>
-        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil'>
+        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil'
+        [class]="{'govuk-input--error' : !predictedPupil.valid && !predictedPupil.pristine}">
+        <div *ngIf="predictedPupil.invalid && predictedPupil.dirty">
+          <span *ngIf="predictedPupil.errors.min" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Predicted pupil number change percentage must be minimum -100
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : !averageClassSize.valid && !averageClassSize.pristine}">
         <label class="govuk-label" for="acs">
           Average Class size
         </label>
-        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number"
-          formControlName='averageClassSize'>
+        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number" formControlName='averageClassSize'
+          [class]="{'govuk-input--error' : !averageClassSize.valid && !averageClassSize.pristine}">
+        <div *ngIf="averageClassSize.invalid && averageClassSize.dirty">
+          <span *ngIf="averageClassSize.errors.min" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Average class size must be minimum 0
+          </span>
+        </div>
       </div>
 
     </fieldset>
