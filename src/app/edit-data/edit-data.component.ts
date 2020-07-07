@@ -26,6 +26,10 @@ export class EditDataComponent implements OnInit {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
   }
 
+  get scenarioTerm() {
+    return this.editDataForm.get('scenarioDetails').get('scenarioTerm');
+  }
+
   get totalExpenditure() {
     return this.editDataForm.get('reserveBalance').get('totalExpenditure');
   }
@@ -66,7 +70,7 @@ export class EditDataComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.urn = +params.urn;
       this.viewType = params.viewType;
-      this.scenarioNo =  params.scenarioNo ? Number(params.scenarioNo) : null;
+      this.scenarioNo = params.scenarioNo ? Number(params.scenarioNo) : null;
     });
     this.scenarioLoaded = false;
   }
@@ -104,6 +108,12 @@ export class EditDataComponent implements OnInit {
         rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
       })
     });
+
+    // this.fsm.valueChanges.subscribe(() => {
+    //   let apiRefreshNecessary = true;
+    //   debugger;
+    //  }
+    // );
   }
 
   ngOnInit() {
@@ -135,7 +145,7 @@ export class EditDataComponent implements OnInit {
       editedScenario.setAAValue('Teacher contact ratio (less than 1)', this.editDataForm.value.schoolDetails.teacherContactRatio);
       editedScenario.setAAValue('Predicted percentage pupil number change in 3-5 years',
         isNumber(this.editDataForm.value.schoolDetails.predictedPupil) ?
-        this.editDataForm.value.schoolDetails.predictedPupil / 100 : null);
+          this.editDataForm.value.schoolDetails.predictedPupil / 100 : null);
       editedScenario.setAAValue('Average Class size', this.editDataForm.value.schoolDetails.averageClassSize);
 
       editedScenario.setAAValue('Teaching staff', this.currencyToNumber(this.editDataForm.value.spending.teachingStaff));
@@ -153,44 +163,79 @@ export class EditDataComponent implements OnInit {
         - this.currencyToNumber(this.editDataForm.value.reserveBalance.totalExpenditure));
       editedScenario.setAAValue('Revenue reserve', this.currencyToNumber(this.editDataForm.value.reserveBalance.rr));
 
-      // editedScenario.setAAValue('Average teacher cost', this.currencyToNumber(this.editDataForm.value.character.teacherCost));
-      // editedScenario.setAAValue('Senior leaders as a percentage of workforce',
-      // isNumber(this.editDataForm.value.character.seniorLeaders) ? this.editDataForm.value.character.seniorLeaders / 100 : null);
-      // editedScenario.setAAValue('Pupil to teacher ratio', this.editDataForm.value.character.pupilToTeacher);
-      // editedScenario.setAAValue('Pupil to adult ratio', this.editDataForm.value.character.pupilToAdult);
-
       editedScenario.isEdited = true;
 
-      editedScenario.sadSizeLookup =
-        this.sizeLookupService.getSizeLookup(
-          editedScenario.overallPhase,
-          editedScenario.hasSixthForm,
-          editedScenario.termOfScenario,
-          editedScenario.numberOfPupils);
-
-      editedScenario.sadFSMLookup =
-        this.fsmLookupService.getFSMLookup(
-          editedScenario.overallPhase,
-          editedScenario.hasSixthForm,
-          editedScenario.termOfScenario,
-          editedScenario.fsm);
-
+      debugger;
       if (this.viewType === 'edit' && this.scenarioNo === null) {
-        this.scenariosService.setFirstScenarioWithEdits(editedScenario)
-        .subscribe(() => {
+        if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
+
+          editedScenario.sadSizeLookup = this.sizeLookupService.getSizeLookup(
+            editedScenario.overallPhase,
+            editedScenario.hasSixthForm,
+            editedScenario.termOfScenario,
+            editedScenario.numberOfPupils);
+
+          editedScenario.sadFSMLookup = this.fsmLookupService.getFSMLookup(
+            editedScenario.overallPhase,
+            editedScenario.hasSixthForm,
+            editedScenario.termOfScenario,
+            editedScenario.fsm);
+
+          this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
+            .subscribe(() => {
+              this.router.navigate(['self-assessment/', this.urn]);
+            });
+        } else {
+          this.scenariosService.setFirstScenario(editedScenario);
           this.router.navigate(['self-assessment/', this.urn]);
-        });
+        }
       } else {
         if (this.scenarioNo === 0) {
-          this.scenariosService.setFirstScenarioWithEdits(editedScenario)
-          .subscribe(() => {
+          if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
+
+            editedScenario.sadSizeLookup = this.sizeLookupService.getSizeLookup(
+                editedScenario.overallPhase,
+                editedScenario.hasSixthForm,
+                editedScenario.termOfScenario,
+                editedScenario.numberOfPupils);
+
+            editedScenario.sadFSMLookup = this.fsmLookupService.getFSMLookup(
+              editedScenario.overallPhase,
+              editedScenario.hasSixthForm,
+              editedScenario.termOfScenario,
+              editedScenario.fsm);
+
+            this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
+              .subscribe(() => {
+                this.router.navigate(['self-assessment/side-by-side']);
+              });
+          } else {
+            this.scenariosService.setFirstScenario(editedScenario);
             this.router.navigate(['self-assessment/side-by-side']);
-          });
+          }
         } else {
-          this.scenariosService.setSecondScenarioWithEdits(editedScenario)
-          .subscribe(() => {
+          if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
+
+            editedScenario.sadSizeLookup = this.sizeLookupService.getSizeLookup(
+              editedScenario.overallPhase,
+              editedScenario.hasSixthForm,
+              editedScenario.termOfScenario,
+              editedScenario.numberOfPupils);
+
+            editedScenario.sadFSMLookup = this.fsmLookupService.getFSMLookup(
+              editedScenario.overallPhase,
+              editedScenario.hasSixthForm,
+              editedScenario.termOfScenario,
+              editedScenario.fsm);
+
+            this.scenariosService.setSecondScenarioWithRefresh(editedScenario)
+              .subscribe(() => {
+                this.router.navigate(['self-assessment/side-by-side']);
+              });
+          } else {
+            this.scenariosService.setSecondScenario(editedScenario);
             this.router.navigate(['self-assessment/side-by-side']);
-          });
+          }
         }
       }
     }
@@ -211,7 +256,7 @@ export class EditDataComponent implements OnInit {
   }
 
   private currencyToNumber(val: any): number {
-    if (typeof(val) === 'string') {
+    if (typeof (val) === 'string') {
       return Number(val.replace(new RegExp('[^.0-9-]', 'g'), ''));
     }
 

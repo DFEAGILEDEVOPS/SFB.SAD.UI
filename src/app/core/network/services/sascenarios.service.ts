@@ -17,7 +17,6 @@ export class SaScenariosService {
   }
 
   getFirstScenario(urn: number): Observable<SaScenarioModel> {
-    // this.scenarios[0] = this.scenarios[0] ?? JSON.parse(sessionStorage.getItem('scenario_0'));
     if (this.scenarios[0]) {
       return new Observable((observer) => {
         observer.next(this.scenarios[0]);
@@ -38,10 +37,9 @@ export class SaScenariosService {
     scenario.initAAsWithCalculatedData();
     scenario.scenarioNo = 0;
     this.scenarios[0] = scenario;
-    // sessionStorage.setItem('scenario_0', JSON.stringify(scenario));
   }
 
-  setFirstScenarioWithEdits(scenario: SaScenarioModel) {
+  setFirstScenarioWithRefresh(scenario: SaScenarioModel) {
       scenario.initAAsWithCalculatedData();
       return this.refreshAATresholdsWithApiData(scenario)
       .pipe(
@@ -76,7 +74,13 @@ export class SaScenariosService {
     }
   }
 
-  setSecondScenarioWithEdits(scenario: SaScenarioModel) {
+  setSecondScenario(scenario: SaScenarioModel) {
+    scenario.initAAsWithCalculatedData();
+    scenario.scenarioNo = 1;
+    this.scenarios[1] = scenario;
+  }
+
+  setSecondScenarioWithRefresh(scenario: SaScenarioModel) {
     scenario.initAAsWithCalculatedData();
     return this.refreshAATresholdsWithApiData(scenario)
     .pipe(
@@ -85,7 +89,6 @@ export class SaScenariosService {
         this.scenarios[1] = scenario;
       })
     );
-    // sessionStorage.setItem('scenario_1', JSON.stringify(scenario));
   }
 
   deleteFirstScenario() {
@@ -98,7 +101,6 @@ export class SaScenariosService {
   }
 
   private refreshAATresholdsWithApiData(scenario: SaScenarioModel) {
-    // TODO: make these api calls only when noPupils or FSM or term edited, not all the time
     return from(new Promise((resolve) => {
 
       scenario.isTresholdsRefreshed = false;
