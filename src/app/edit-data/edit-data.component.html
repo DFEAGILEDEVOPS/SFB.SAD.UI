@@ -17,6 +17,7 @@
 <hr class="govuk-section-break govuk-section-break--m">
 
 <div [hidden]='!scenarioLoaded'>
+
   <form (ngSubmit)="onSubmit()" [formGroup]="editDataForm">
 
     <fieldset class="govuk-fieldset" formGroupName='scenarioDetails'>
@@ -240,7 +241,7 @@
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : !totalExpenditure.valid && !totalExpenditure.pristine}">
+        [class]="{'govuk-form-group--error' : (!totalExpenditure.valid && !totalExpenditure.pristine) || editDataForm.errors?.maxExpenditureExceeded}">
         <label class="govuk-label" for="total-expenditure">
           Total expenditure
         </label>
@@ -250,12 +251,17 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
           formControlName='totalExpenditure'
-          [class]="{'govuk-input--error' : !totalExpenditure.valid && !totalExpenditure.pristine}"
+          [class]="{'govuk-input--error' : (!totalExpenditure.valid && !totalExpenditure.pristine) || editDataForm.errors?.maxExpenditureExceeded}"
           (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalExpenditure)"
           required>
         <div [hidden]="totalExpenditure.valid || totalExpenditure.pristine">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Total expenditure is required
+          </span>
+        </div>
+        <div *ngIf="editDataForm.errors?.maxExpenditureExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Total expenditure can not be lower than sum of expenditures below
           </span>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { mustBeLowerThanTotalSpendingValidator } from './../core/directives/mustBeLowerThanTotalSpendingValidator.directive';
 import { Location, CurrencyPipe } from '@angular/common';
 import { SaFsmLookupService } from './../core/network/services/safsmlookup.service';
 import { SaSizeLookupService } from './../core/network/services/sasizelookup.service';
@@ -120,7 +121,7 @@ export class EditDataComponent implements OnInit {
         totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure)],
         rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
       })
-    });
+    }, { validators: mustBeLowerThanTotalSpendingValidator });
 
     // this.fsm.valueChanges.subscribe(() => {
     //   let apiRefreshNecessary = true;
@@ -276,3 +277,5 @@ export class EditDataComponent implements OnInit {
   }
 
 }
+
+
