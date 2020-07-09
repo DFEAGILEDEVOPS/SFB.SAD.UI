@@ -178,7 +178,7 @@
         <td class="govuk-table__cell">{{activeScenario.progressScoreType}}</td>
         <td class="govuk-table__cell progress-td">
           <div class="progress-text-wrapper">
-            <span class="progress-text" [ngClass]="{
+            <span *ngIf='activeScenario.progressScore' class="progress-text" [ngClass]="{
                   'progress-text-well-below': activeScenario.progressScore < -3 ,
                   'progress-text--below': activeScenario.progressScore >= -3 && activeScenario.progressScore < -2,
                   'progress-text--average': activeScenario.progressScore >= -2 && activeScenario.progressScore <= 2,
@@ -191,6 +191,7 @@
               <span *ngIf="activeScenario.progressScore <= 3 && activeScenario.progressScore > 2">&nbsp; Above average</span>
               <span *ngIf="activeScenario.progressScore > 3">&nbsp; Well above average</span>
             </span>
+            <span [hidden]='activeScenario.progressScore' style="float: left;">N/A</span>
           </div>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" />
         </td>
@@ -199,7 +200,7 @@
         <td class="govuk-table__cell">{{activeScenario.progressScoreType}}</td>
         <td class="govuk-table__cell progress-td">
           <div class="progress-text-wrapper">
-            <span class="progress-text" [ngClass]="{
+            <span *ngIf='activeScenario.progressScore' class="progress-text" [ngClass]="{
                       'progress-text--well-below': activeScenario.progress8Banding === 5,
                       'progress-text--below': activeScenario.progress8Banding === 4,
                       'progress-text--average': activeScenario.progress8Banding === 3,
@@ -214,6 +215,7 @@
                 <span *ngSwitchCase="1">&nbsp; Well above average</span>
               </span>
             </span>
+            <span [hidden]='activeScenario.progressScore' style="float: left;">N/A</span>
           </div>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" />
         </td>

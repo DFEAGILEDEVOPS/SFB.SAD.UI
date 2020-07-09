@@ -230,19 +230,17 @@
           class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Outcomes
         </th>
         <th scope="col" class="govuk-table__header no-bottom cell-separate width-forty-percent"></th>
-        <th scope="col" class="govuk-table__header cell-separate no-bottom width-forty-percent"></th>
+        <th scope="col" class="govuk-table__header no-bottom width-forty-percent"></th>
       </tr>
       <tr class="govuk-table__row">
         <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-        <th scope="col" class="govuk-table__header cell-separate width-forty-percent">School data</th>
-        <!---->
-        <th scope="col" class="govuk-table__header cell-separate width-forty-percent">School data</th>
+        <th scope="col" class="govuk-table__header cell-separate width-forty-percent" colspan="2">School data</th>
       </tr>
     </thead>
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
         <td class="govuk-table__cell aa-cell">Ofsted rating</td>
-        <td class="govuk-table__cell cell-separate">
+        <td class="govuk-table__cell cell-separate" colspan="2">
           <span class="rating rating-{{firstScenario.ofstedRating}}"> {{firstScenario.ofstedRating}} </span>
           <span [ngSwitch]="firstScenario.ofstedRating">
             <span class="govuk-!-font-weight-bold" *ngSwitchCase="'1'"> Outstanding</span>
@@ -256,96 +254,51 @@
           <span *ngIf='firstScenario.ofstedInspectionDate'> | Inspected
             {{ firstScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
         </td>
-        <!---->
-        <td class="govuk-table__cell cell-separate">
-          <span class="rating rating-{{secondScenario.ofstedRating}}"> {{secondScenario.ofstedRating}} </span>
-          <span [ngSwitch]="secondScenario.ofstedRating">
-            <span class="govuk-!-font-weight-bold" *ngSwitchCase="'1'"> Outstanding</span>
-            <span class="govuk-!-font-weight-bold" *ngSwitchCase="'2'"> Good</span>
-            <span class="govuk-!-font-weight-bold" *ngSwitchCase="'3'"> Requires improvement</span>
-            <span class="govuk-!-font-weight-bold" *ngSwitchCase="'4'"> Inadequate</span>
-          </span> |
-          <a class="govuk-link" target="_blank" rel="external noopener noreferrer"
-            href="https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/{{firstScenario.urn}}">Ofsted
-            report</a>
-          <span *ngIf='secondScenario.ofstedInspectionDate'> | Inspected
-            {{ secondScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
-        </td>
       </tr>
       <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'KS2 score'">
         <td class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</td>
-        <td class="govuk-table__cell progress-td cell-separate">
-          <span class="progress-text" [ngClass]="{
-                'progress-text-well-below': firstScenario.progressScore < -3 ,
-                'progress-text--below': firstScenario.progressScore >= -3 && firstScenario.progressScore < -2,
-                'progress-text--average': firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2,
-                'progress-text--above': firstScenario.progressScore <= 3 && firstScenario.progressScore > 2,
-                'progress-text--well-above': firstScenario.progressScore > 3}">
-            {{firstScenario.progressScore | number: '1.2-2'}}
-            <span *ngIf="firstScenario.progressScore < -3">&nbsp; Well below average</span>
-            <span *ngIf="firstScenario.progressScore >= -3 && firstScenario.progressScore < -2">&nbsp; Below
-              average</span>
-            <span *ngIf="firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2">&nbsp; Average</span>
-            <span *ngIf="firstScenario.progressScore <= 3 && firstScenario.progressScore > 2">&nbsp; Above
-              average</span>
-            <span *ngIf="firstScenario.progressScore > 3">&nbsp; Well above average</span>
-          </span>
-        </td>
-        <!---->
-        <td class="govuk-table__cell progress-td cell-separate">
-          <span class="progress-text" [ngClass]="{
-                'progress-text-well-below': secondScenario.progressScore < -3 ,
-                'progress-text--below': secondScenario.progressScore >= -3 && secondScenario.progressScore < -2,
-                'progress-text--average': secondScenario.progressScore >= -2 && secondScenario.progressScore <= 2,
-                'progress-text--above': secondScenario.progressScore <= 3 && secondScenario.progressScore > 2,
-                'progress-text--well-above': secondScenario.progressScore > 3}">
-            {{secondScenario.progressScore | number: '1.2-2'}}
-            <span *ngIf="secondScenario.progressScore < -3">&nbsp; Well below average</span>
-            <span *ngIf="secondScenario.progressScore >= -3 && secondScenario.progressScore < -2">&nbsp; Below
-              average</span>
-            <span *ngIf="secondScenario.progressScore >= -2 && secondScenario.progressScore <= 2">&nbsp; Average</span>
-            <span *ngIf="secondScenario.progressScore <= 3 && secondScenario.progressScore > 2">&nbsp; Above
-              average</span>
-            <span *ngIf="secondScenario.progressScore > 3">&nbsp; Well above average</span>
-          </span>
+        <td class="govuk-table__cell progress-td cell-separate" colspan="2">
+          <div *ngIf='firstScenario.progressScore'>
+            <span class="progress-text" [ngClass]="{
+                          'progress-text-well-below': firstScenario.progressScore < -3 ,
+                          'progress-text--below': firstScenario.progressScore >= -3 && firstScenario.progressScore < -2,
+                          'progress-text--average': firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2,
+                          'progress-text--above': firstScenario.progressScore <= 3 && firstScenario.progressScore > 2,
+                          'progress-text--well-above': firstScenario.progressScore > 3}">
+              {{firstScenario.progressScore | number: '1.2-2'}}
+              <span *ngIf="firstScenario.progressScore < -3">&nbsp; Well below average</span>
+              <span *ngIf="firstScenario.progressScore >= -3 && firstScenario.progressScore < -2">&nbsp; Below
+                average</span>
+              <span *ngIf="firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2">&nbsp; Average</span>
+              <span *ngIf="firstScenario.progressScore <= 3 && firstScenario.progressScore > 2">&nbsp; Above
+                average</span>
+              <span *ngIf="firstScenario.progressScore > 3">&nbsp; Well above average</span>
+            </span>
+          </div>
+          <span [hidden]='firstScenario.progressScore' style="float: left">N/A</span>
         </td>
       </tr>
       <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'Progress 8 score'">
         <td class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</td>
-        <td class="govuk-table__cell progress-td cell-separate">
-          <span class="progress-text" [ngClass]="{
-                'progress-text--well-below': firstScenario.progress8Banding === 5,
-                'progress-text--below': firstScenario.progress8Banding === 4,
-                'progress-text--average': firstScenario.progress8Banding === 3,
-                'progress-text--above': firstScenario.progress8Banding === 2,
-                'progress-text--well-above': firstScenario.progress8Banding === 1}">
-            {{firstScenario.progressScore | number: '1.2-2'}}
-            <span [ngSwitch]="firstScenario.progress8Banding">
-              <span *ngSwitchCase="5">&nbsp; Well below average</span>
-              <span *ngSwitchCase="4">&nbsp; Below average</span>
-              <span *ngSwitchCase="3">&nbsp; Average</span>
-              <span *ngSwitchCase="2">&nbsp; Above average</span>
-              <span *ngSwitchCase="1">&nbsp; Well above average</span>
+        <td class="govuk-table__cell progress-td cell-separate" colspan="2">
+          <div *ngIf='firstScenario.progressScore'>
+            <span class="progress-text" [ngClass]="{
+                          'progress-text--well-below': firstScenario.progress8Banding === 5,
+                          'progress-text--below': firstScenario.progress8Banding === 4,
+                          'progress-text--average': firstScenario.progress8Banding === 3,
+                          'progress-text--above': firstScenario.progress8Banding === 2,
+                          'progress-text--well-above': firstScenario.progress8Banding === 1}">
+              {{firstScenario.progressScore | number: '1.2-2'}}
+              <span [ngSwitch]="firstScenario.progress8Banding">
+                <span *ngSwitchCase="5">&nbsp; Well below average</span>
+                <span *ngSwitchCase="4">&nbsp; Below average</span>
+                <span *ngSwitchCase="3">&nbsp; Average</span>
+                <span *ngSwitchCase="2">&nbsp; Above average</span>
+                <span *ngSwitchCase="1">&nbsp; Well above average</span>
+              </span>
             </span>
-          </span>
-        </td>
-        <!---->
-        <td class="govuk-table__cell progress-td cell-separate">
-          <span class="progress-text" [ngClass]="{
-                'progress-text--well-below': secondScenario.progress8Banding === 5,
-                'progress-text--below': secondScenario.progress8Banding === 4,
-                'progress-text--average': secondScenario.progress8Banding === 3,
-                'progress-text--above': secondScenario.progress8Banding === 2,
-                'progress-text--well-above': secondScenario.progress8Banding === 1}">
-            {{secondScenario.progressScore | number: '1.2-2'}}
-            <span [ngSwitch]="secondScenario.progress8Banding">
-              <span *ngSwitchCase="5">&nbsp; Well below average</span>
-              <span *ngSwitchCase="4">&nbsp; Below average</span>
-              <span *ngSwitchCase="3">&nbsp; Average</span>
-              <span *ngSwitchCase="2">&nbsp; Above average</span>
-              <span *ngSwitchCase="1">&nbsp; Well above average</span>
-            </span>
-          </span>
+          </div>
+          <span [hidden]='firstScenario.progressScore' style="float: left">N/A</span>
         </td>
       </tr>
     </tbody>
