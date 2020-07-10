@@ -40,9 +40,9 @@ export class EditScenariosComponent implements OnInit {
   onContinue() {
     if (this.form.valid) {
       if (this.selectedScenarioNo === 0) {
-        this.router.navigate(['self-assessment/editing-format', this.urn, this.name, this.selectedScenarioNo]);
+        this.router.navigate(['self-assessment/edit-data', this.urn, 'edit', this.selectedScenarioNo]);
       } else {
-        this.router.navigate(['self-assessment/editing-format', this.urn, this.name, this.selectedScenarioNo]);
+        this.router.navigate(['self-assessment/edit-data', this.urn, 'edit', this.selectedScenarioNo]);
       }
     }
   }

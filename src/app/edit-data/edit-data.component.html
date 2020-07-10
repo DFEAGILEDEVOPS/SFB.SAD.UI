@@ -402,69 +402,10 @@
 
     </fieldset>
 
-<!--     <fieldset class="govuk-fieldset" formGroupName='character'>
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-        <h2 class="govuk-fieldset__heading">
-          School characteristics
-        </h2>
-      </legend>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="atc">
-          Average teacher cost
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Average teacher cost') | aaValueFormat}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="atc" name="atc" type="text"
-        formControlName='teacherCost'
-        (blur)="transformAmount($event, editDataForm.value.character.teacherCost)"
-        >
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="sl">
-          Senior leaders as a percentage of workforce
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Senior leaders as a percentage of workforce') | aaValueFormat : 'Senior leaders as a percentage of workforce'}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="sl" name="sl" type="number" formControlName='seniorLeaders'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="ptt">
-          Pupil to teacher ratio
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to teacher ratio') | aaValueFormat : 'Pupil to teacher ratio'}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="ptt" name="ptt" type="number" formControlName='pupilToTeacher'>
-      </div>
-
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="pta">
-          Pupil to adult ratio
-        </label>
-        <span class="govuk-hint">
-          The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Pupil to adult ratio') | aaValueFormat : 'Pupil to adult ratio'}}</span>
-        </span>
-        <input class="govuk-input govuk-input--width-20" id="pta" name="pta" type="number" formControlName='pupilToAdult'>
-      </div>
-
-    </fieldset> -->
-
     <div class="govuk-grid-row govuk-body">
       <div class="govuk-grid-column-full">
-        <button *ngIf='viewType === "edit"' class="govuk-button" data-module="govuk-button" type="submit">
+        <button class="govuk-button" data-module="govuk-button" type="submit">
           Submit
-        </button>
-        <button *ngIf='viewType === "enter"' class="govuk-button" data-module="govuk-button" type="submit">
-          Continue to the side-by-side scenario
         </button>
         <a (click)='onBack()' href="javascript:void(0)" class="govuk-link govuk-link--no-visited-state back-button">Back
         </a>

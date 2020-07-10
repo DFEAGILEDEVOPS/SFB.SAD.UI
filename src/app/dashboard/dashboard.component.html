@@ -45,12 +45,12 @@
   <div class="govuk-grid-column-one-half">
     <div class="float-right">
       <button class="govuk-button govuk-!-margin-right-4" data-module="govuk-button"
-        routerLink='/self-assessment/sidebyside-format/{{urn}}/{{activeScenario.name}}'
+        routerLink='/self-assessment/edit-data/{{urn}}/enter'
         [disabled]='!this.scenarioLoaded'>
         Add a side-by-side scenario
       </button>
       <button class="govuk-button govuk-button--secondary" data-module="govuk-button"
-        routerLink='/self-assessment/editing-format/{{urn}}/{{activeScenario.name}}'
+        routerLink='/self-assessment/edit-data/{{urn}}/edit'
         [disabled]='!this.scenarioLoaded'>
         Edit data
       </button>
