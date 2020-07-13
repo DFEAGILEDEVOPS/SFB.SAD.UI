@@ -182,21 +182,25 @@ export class EditDataComponent implements OnInit {
       if (this.viewType === 'edit' && this.scenarioNo === null) {
         if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
 
-          editedScenario.sadSizeLookup = this.sizeLookupService.getSizeLookup(
+          this.sizeLookupService.getSizeLookup(
             editedScenario.overallPhase,
             editedScenario.hasSixthForm,
             editedScenario.termOfScenario,
-            editedScenario.numberOfPupils);
+            editedScenario.numberOfPupils).subscribe(result => {
+              editedScenario.sadSizeLookup = result;
 
-          editedScenario.sadFSMLookup = this.fsmLookupService.getFSMLookup(
-            editedScenario.overallPhase,
-            editedScenario.hasSixthForm,
-            editedScenario.termOfScenario,
-            editedScenario.fsm);
+              this.fsmLookupService.getFSMLookup(
+                editedScenario.overallPhase,
+                editedScenario.hasSixthForm,
+                editedScenario.termOfScenario,
+                editedScenario.fsm).subscribe(response => {
+                  editedScenario.sadFSMLookup = response;
 
-          this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
-            .subscribe(() => {
-              this.router.navigate(['self-assessment/', this.urn]);
+                  this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
+                    .subscribe(() => {
+                      this.router.navigate(['self-assessment/', this.urn]);
+                    });
+                });
             });
         } else {
           this.scenariosService.setFirstScenario(editedScenario);
@@ -206,22 +210,27 @@ export class EditDataComponent implements OnInit {
         if (this.scenarioNo === 0) {
           if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
 
-            editedScenario.sadSizeLookup = this.sizeLookupService.getSizeLookup(
-                editedScenario.overallPhase,
-                editedScenario.hasSixthForm,
-                editedScenario.termOfScenario,
-                editedScenario.numberOfPupils);
-
-            editedScenario.sadFSMLookup = this.fsmLookupService.getFSMLookup(
+            this.sizeLookupService.getSizeLookup(
               editedScenario.overallPhase,
               editedScenario.hasSixthForm,
               editedScenario.termOfScenario,
-              editedScenario.fsm);
+              editedScenario.numberOfPupils).subscribe(result => {
+                editedScenario.sadSizeLookup = result;
 
-            this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
-              .subscribe(() => {
-                this.router.navigate(['self-assessment/side-by-side']);
+                this.fsmLookupService.getFSMLookup(
+                  editedScenario.overallPhase,
+                  editedScenario.hasSixthForm,
+                  editedScenario.termOfScenario,
+                  editedScenario.fsm).subscribe(response => {
+                    editedScenario.sadFSMLookup = response;
+
+                    this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
+                      .subscribe(() => {
+                        this.router.navigate(['self-assessment/side-by-side']);
+                      });
+                  });
               });
+
           } else {
             this.scenariosService.setFirstScenario(editedScenario);
             this.router.navigate(['self-assessment/side-by-side']);
@@ -229,23 +238,27 @@ export class EditDataComponent implements OnInit {
         } else {
           if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
 
-            editedScenario.sadSizeLookup = this.sizeLookupService.getSizeLookup(
+            this.sizeLookupService.getSizeLookup(
               editedScenario.overallPhase,
               editedScenario.hasSixthForm,
               editedScenario.termOfScenario,
-              editedScenario.numberOfPupils);
+              editedScenario.numberOfPupils).subscribe(result => {
+                editedScenario.sadSizeLookup = result;
 
-            editedScenario.sadFSMLookup = this.fsmLookupService.getFSMLookup(
-              editedScenario.overallPhase,
-              editedScenario.hasSixthForm,
-              editedScenario.termOfScenario,
-              editedScenario.fsm);
+                this.fsmLookupService.getFSMLookup(
+                  editedScenario.overallPhase,
+                  editedScenario.hasSixthForm,
+                  editedScenario.termOfScenario,
+                  editedScenario.fsm).subscribe(response => {
+                    editedScenario.sadFSMLookup = response;
 
-            this.scenariosService.setSecondScenarioWithRefresh(editedScenario)
-              .subscribe(() => {
-                this.router.navigate(['self-assessment/side-by-side']);
+                    this.scenariosService.setSecondScenarioWithRefresh(editedScenario)
+                      .subscribe(() => {
+                        this.router.navigate(['self-assessment/side-by-side']);
+                      });
+                  });
               });
-          } else {
+         } else {
             this.scenariosService.setSecondScenario(editedScenario);
             this.router.navigate(['self-assessment/side-by-side']);
           }

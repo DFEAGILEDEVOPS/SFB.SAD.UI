@@ -1,30 +1,22 @@
 import { SizeLookupModel } from './../../../Models/SizeLookupModel';
 import { Injectable } from '@angular/core';
 import { SaDataService } from './sadata.service';
+import { map } from 'rxjs/internal/operators/map';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaSizeLookupService {
-  private sizeLookups: SizeLookupModel[];
 
-  constructor(private saDataService: SaDataService) {
-    saDataService.getSizeLookupList().subscribe(
-      result => {
-        this.sizeLookups = result;
-      }
-    );
-  }
+  constructor(private saDataService: SaDataService) { }
 
-  get SizeLookups(): SizeLookupModel[] {
-    return this.sizeLookups;
-  }
-
-  getSizeLookup(overallPhase: string, hasSixthForm: boolean, term: string, noPupils: number): SizeLookupModel {
-    return this.SizeLookups
-      .find(s => s.overallPhase === overallPhase
+  getSizeLookup(overallPhase: string, hasSixthForm: boolean, term: string, noPupils: number): Observable<SizeLookupModel> {
+    return this.saDataService.getSizeLookupList().pipe(
+      map(sizes => sizes.find(s => s.overallPhase === overallPhase
         && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm)
         && (!s.term || s.term === term)
-        && (noPupils >= s.noPupilsMin && (s.noPupilsMax == null || noPupils <= s.noPupilsMax)));
+        && (noPupils >= s.noPupilsMin && (s.noPupilsMax == null || noPupils <= s.noPupilsMax))))
+    );
   }
 }
