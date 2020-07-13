@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService) {
-      this.route.params.subscribe(params => {
-        this.urn = +params.urn;
+      this.route.paramMap.subscribe(pmap => {
+        this.urn = +pmap.get('urn');
       });
       this.aaModalModels = new AAModalModels();
       this.scenarioLoaded = false;

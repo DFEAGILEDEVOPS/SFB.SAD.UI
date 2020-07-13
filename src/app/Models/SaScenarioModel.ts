@@ -122,67 +122,81 @@ export class SaScenarioModel {
 
   private initCharacteristicAAsWithCalculatedData() {
 
-    const averageTeacherCostAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Average teacher cost');
-    averageTeacherCostAA.totalForAreaType = this.teachersTotal;
-    averageTeacherCostAA.schoolData = this.getAAValue('Teaching staff');
-    if (averageTeacherCostAA.schoolData !== null) {
-      averageTeacherCostAA.calculatedSchoolData = parseFloat((averageTeacherCostAA.schoolData
-        / averageTeacherCostAA.totalForAreaType).toFixed(2));
-    } else {
-      averageTeacherCostAA.calculatedSchoolData = null;
+    const averageTeacherCostAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Average teacher cost');
+    if (averageTeacherCostAA) {
+      averageTeacherCostAA.totalForAreaType = this.teachersTotal;
+      averageTeacherCostAA.schoolData = this.getAAValue('Teaching staff');
+      if (averageTeacherCostAA.schoolData !== null) {
+        averageTeacherCostAA.calculatedSchoolData = parseFloat((averageTeacherCostAA.schoolData
+          / averageTeacherCostAA.totalForAreaType).toFixed(2));
+      } else {
+        averageTeacherCostAA.calculatedSchoolData = null;
+      }
+      this.setAAsMatchingTreshold(averageTeacherCostAA);
     }
-    this.setAAsMatchingTreshold(averageTeacherCostAA);
 
-    const seniorLeadersAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Senior leaders as a percentage of workforce');
-    seniorLeadersAA.totalForAreaType = this.workforceTotal;
-    seniorLeadersAA.schoolData = this.teachersLeader;
-    if (seniorLeadersAA.schoolData !== null) {
-      seniorLeadersAA.calculatedSchoolData = parseFloat((seniorLeadersAA.schoolData
-        / seniorLeadersAA.totalForAreaType).toFixed(2));
-    } else {
-      seniorLeadersAA.calculatedSchoolData = null;
+    const seniorLeadersAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Senior leaders as a percentage of workforce');
+    if (seniorLeadersAA) {
+      seniorLeadersAA.totalForAreaType = this.workforceTotal;
+      seniorLeadersAA.schoolData = this.teachersLeader;
+      if (seniorLeadersAA.schoolData !== null) {
+        seniorLeadersAA.calculatedSchoolData = parseFloat((seniorLeadersAA.schoolData
+          / seniorLeadersAA.totalForAreaType).toFixed(2));
+      } else {
+        seniorLeadersAA.calculatedSchoolData = null;
+      }
+      this.setAAsMatchingTreshold(seniorLeadersAA);
     }
-    this.setAAsMatchingTreshold(seniorLeadersAA);
 
-    const pupilToTeacherAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Pupil to teacher ratio');
-    pupilToTeacherAA.totalForAreaType = this.teachersTotal;
-    pupilToTeacherAA.schoolData = this.numberOfPupils;
-    if (pupilToTeacherAA.schoolData !== null) {
-      pupilToTeacherAA.calculatedSchoolData = parseFloat((pupilToTeacherAA.schoolData
-        / pupilToTeacherAA.totalForAreaType).toFixed(2));
-    } else {
-      pupilToTeacherAA.calculatedSchoolData = null;
+    const pupilToTeacherAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Pupil to teacher ratio');
+    if (pupilToTeacherAA) {
+      pupilToTeacherAA.totalForAreaType = this.teachersTotal;
+      pupilToTeacherAA.schoolData = this.numberOfPupils;
+      if (pupilToTeacherAA.schoolData !== null) {
+        pupilToTeacherAA.calculatedSchoolData = parseFloat((pupilToTeacherAA.schoolData
+          / pupilToTeacherAA.totalForAreaType).toFixed(2));
+      } else {
+        pupilToTeacherAA.calculatedSchoolData = null;
+      }
+      this.setAAsMatchingTreshold(pupilToTeacherAA);
     }
-    this.setAAsMatchingTreshold(pupilToTeacherAA);
 
-    const pupilToAdultAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Pupil to adult ratio');
-    pupilToAdultAA.totalForAreaType = this.workforceTotal;
-    pupilToAdultAA.schoolData = this.numberOfPupils;
-    if (pupilToAdultAA.schoolData !== null) {
-      pupilToAdultAA.calculatedSchoolData = parseFloat((pupilToAdultAA.schoolData
-        / pupilToAdultAA.totalForAreaType).toFixed(2));
-    } else {
-      pupilToAdultAA.calculatedSchoolData = null;
+    const pupilToAdultAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Pupil to adult ratio');
+    if (pupilToAdultAA) {
+      pupilToAdultAA.totalForAreaType = this.workforceTotal;
+      pupilToAdultAA.schoolData = this.numberOfPupils;
+      if (pupilToAdultAA.schoolData !== null) {
+        pupilToAdultAA.calculatedSchoolData = parseFloat((pupilToAdultAA.schoolData
+          / pupilToAdultAA.totalForAreaType).toFixed(2));
+      } else {
+        pupilToAdultAA.calculatedSchoolData = null;
+      }
+      this.setAAsMatchingTreshold(pupilToAdultAA);
     }
-    this.setAAsMatchingTreshold(pupilToAdultAA);
 
-    const teacherContactRatioAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Teacher contact ratio (less than 1)');
-    teacherContactRatioAA.calculatedSchoolData = teacherContactRatioAA.schoolData;
-    this.setAAsMatchingTreshold(teacherContactRatioAA);
+    const teacherContactRatioAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Teacher contact ratio (less than 1)');
+    if (teacherContactRatioAA) {
+      teacherContactRatioAA.calculatedSchoolData = teacherContactRatioAA.schoolData;
+      this.setAAsMatchingTreshold(teacherContactRatioAA);
+    }
 
-    const pupilChangeAA = this.sadAssessmentAreas
-      .find(aa => aa.assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years');
-    pupilChangeAA.calculatedSchoolData = pupilChangeAA.schoolData;
-    this.setAAsMatchingTreshold(pupilChangeAA);
+    // tslint:disable-next-line:max-line-length
+    const pupilChangeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years');
+    if (pupilChangeAA) {
+      pupilChangeAA.calculatedSchoolData = pupilChangeAA.schoolData;
+      this.setAAsMatchingTreshold(pupilChangeAA);
+    }
 
-    const avClassSizeAA = this.sadAssessmentAreas.find(aa => aa.assessmentAreaName === 'Average Class size');
-    avClassSizeAA.calculatedSchoolData = avClassSizeAA.schoolData;
-    this.setAAsMatchingTreshold(avClassSizeAA);
+    const avClassSizeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Average Class size');
+    if (avClassSizeAA) {
+      avClassSizeAA.calculatedSchoolData = avClassSizeAA.schoolData;
+      this.setAAsMatchingTreshold(avClassSizeAA);
+    }
 
   }
 
   private initReserveAAsWithCalculatedData() {
-    this.reserveAAs.forEach(aa => {
+    this.reserveAAs?.forEach(aa => {
       aa.totalForAreaType = this.totalIncome;
       if (aa.schoolData === undefined) {
         aa.schoolData = aa.schoolDataLatestTerm;
@@ -199,7 +213,7 @@ export class SaScenarioModel {
   }
 
   private initSpendingAAsWithCalculatedData() {
-    this.spendingAAs.forEach(aa => {
+    this.spendingAAs?.forEach(aa => {
       aa.totalForAreaType = this.totalExpenditure;
       if (aa.schoolData === undefined) {
         aa.schoolData = aa.schoolDataLatestTerm;

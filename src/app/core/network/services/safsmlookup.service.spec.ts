@@ -1,6 +1,4 @@
-/* tslint:disable:no-unused-variable */
-
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed} from '@angular/core/testing';
 
 import { defer } from 'rxjs/internal/observable/defer';
 import { SaFsmLookupService } from './safsmlookup.service';
@@ -43,5 +41,5 @@ describe('Service: SaFSMlookup', () => {
     );
   });
 
-  
+
 });
