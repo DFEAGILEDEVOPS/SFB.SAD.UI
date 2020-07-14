@@ -22,6 +22,12 @@ export class SaScenariosService {
         observer.next(this.scenarios[0]);
         observer.complete();
       });
+    } else if (localStorage.getItem(`urn#${urn}-scenario_0`)) {
+      this.scenarios[0] = this.generateNewFromSavedScenarioData(JSON.parse(localStorage.getItem(`urn#${urn}-scenario_0`)));
+      return new Observable((observer) => {
+        observer.next(this.scenarios[0]);
+        observer.complete();
+      });
     } else {
       return this.saDataService.getSaScenario(urn)
         .pipe(
@@ -37,6 +43,8 @@ export class SaScenariosService {
     scenario.initAAsWithCalculatedData();
     scenario.scenarioNo = 0;
     this.scenarios[0] = scenario;
+
+    localStorage.setItem(`urn#${scenario.urn}-scenario_0`, JSON.stringify(scenario));
   }
 
   setFirstScenarioWithRefresh(scenario: SaScenarioModel) {
@@ -46,6 +54,8 @@ export class SaScenariosService {
         tap(() => {
           scenario.scenarioNo = 0;
           this.scenarios[0] = scenario;
+
+          localStorage.setItem(`urn#${scenario.urn}-scenario_0`, JSON.stringify(scenario));
         })
       );
   }
@@ -98,6 +108,22 @@ export class SaScenariosService {
 
   deleteSecondScenario() {
     this.scenarios[1] = null;
+  }
+
+  private generateNewFromSavedScenarioData(savedModel: SaScenarioModel) {
+    const newModel = new SaScenarioModel(savedModel.data);
+    newModel.scenarioName = savedModel.scenarioName;
+    newModel.termOfScenario = savedModel.termOfScenario;
+    newModel.numberOfPupils = savedModel.numberOfPupils;
+    newModel.workforceTotal = savedModel.workforceTotal;
+    newModel.teachersTotal = savedModel.teachersTotal;
+    newModel.teachersLeader = savedModel.teachersLeader;
+    newModel.fsm = savedModel.fsm;
+    newModel.totalIncome = savedModel.totalIncome;
+    newModel.totalExpenditure = savedModel.totalExpenditure;
+
+    newModel.initAAsWithCalculatedData();
+    return newModel;
   }
 
   private refreshAATresholdsWithApiData(scenario: SaScenarioModel) {
