@@ -1,8 +1,9 @@
 export class FSMLookupModel {
-  fsmMin: number;
-  fsmMax: number;
-  fsmScale: string;
-  overallPhase: string;
-  hasSixthForm: boolean;
-  term: string;
+  constructor(
+    public fsmMin: number,
+    public fsmMax: number,
+    public fsmScale: string,
+    public overallPhase: string,
+    public hasSixthForm: boolean,
+    public term: string) { }
 }

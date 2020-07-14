@@ -1,8 +1,9 @@
 export class SizeLookupModel {
-  noPupilsMin: number;
-  noPupilsMax: number;
-  sizeType: string;
-  overallPhase: string;
-  hasSixthForm: boolean;
-  term: string;
+  constructor(
+    public noPupilsMin: number,
+    public noPupilsMax: number,
+    public sizeType: string,
+    public overallPhase: string,
+    public hasSixthForm: boolean,
+    public term: string) { }
 }
