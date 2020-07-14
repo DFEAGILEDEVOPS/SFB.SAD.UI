@@ -42,7 +42,7 @@ describe('Component: Dashboard', () => {
 
   it('should load the first scenario upon initialization', () => {
     const stubSaData = new SaData();
-    stubSaData.urn = 123;
+    stubSaData.urn = 312;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
 
     comp.ngOnInit();
