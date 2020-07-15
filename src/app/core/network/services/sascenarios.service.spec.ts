@@ -28,7 +28,11 @@ describe('Service: Sascenarios', () => {
     saDataServiceSpy.getSaScenario.and.returnValue(asyncData(JSON.parse(fakeScenarioJSON)));
   });
 
-  it('#getFirsScenario should return scenario in memory, if exists', done => {
+  afterAll(() => {
+    localStorage.clear();
+  });
+
+  it('#getFirstScenario should return scenario in memory, if exists', done => {
     const stubSaData = new SaData();
     stubSaData.urn = 123;
     saScenariosService.scenarios.push(new SaScenarioModel(stubSaData));
@@ -38,20 +42,19 @@ describe('Service: Sascenarios', () => {
       expect(scenarioFromMemory.urn).toBe(123);
       done();
     },
-    fail
+      fail
     );
   });
 
   it('#getFirstScenario should return scenario in localStorage, if it does not exist in memory', done => {
-    localStorage.setItem(`urn#144083-scenario_0`,  fakeScenarioJSON);
+    localStorage.setItem(`urn#144083-scenario_0`, fakeScenarioJSON);
     saScenariosService.getFirstScenario(144083).subscribe((scenarioFromLocalStorage) => {
       expect(scenarioFromLocalStorage).not.toBeNull();
       expect(scenarioFromLocalStorage.urn).toBe(144083);
       done();
     },
-    fail
+      fail
     );
-    localStorage.removeItem(`urn#144083-scenario_0`);
   });
 
   it('#getFirstScenario should return scenario from API, if it does not exist in memory or local storage', done => {
@@ -60,8 +63,37 @@ describe('Service: Sascenarios', () => {
       expect(saDataServiceSpy.getSaScenario).toHaveBeenCalled();
       done();
     },
-    fail
+      fail
     );
+  });
+
+  it('#getSecondScenario should copy a new one from first scenario, if it does not exist in memory or local storage', () => {
+    const stubSaData = new SaData();
+    stubSaData.urn = 123;
+    saScenariosService.scenarios.push(new SaScenarioModel(stubSaData));
+    const secondScenario = saScenariosService.getSecondScenario(123);
+    expect(secondScenario).not.toBeNull();
+    expect(secondScenario.urn).toBe(123);
+  });
+
+  it('#getSecondScenario should return scenario in memory, if exists', () => {
+    const stubSaData = new SaData();
+    stubSaData.urn = 123;
+    saScenariosService.scenarios.push(new SaScenarioModel(stubSaData));
+    const stubScenarioModel = new SaScenarioModel(stubSaData);
+    stubScenarioModel.scenarioName = 'test';
+    saScenariosService.scenarios.push(stubScenarioModel);
+
+    const scenarioFromMemory = saScenariosService.getSecondScenario(123);
+    expect(scenarioFromMemory).not.toBeNull();
+    expect(scenarioFromMemory.scenarioName).toBe('test');
+  });
+
+  it('#getSecondScenario should return scenario in localStorage, if it does not exist in memory', () => {
+    localStorage.setItem(`urn#144083-scenario_1`, fakeScenarioJSON);
+    const scenarioFromLocalStorage = saScenariosService.getSecondScenario(144083);
+    expect(scenarioFromLocalStorage).not.toBeNull();
+    expect(scenarioFromLocalStorage.urn).toBe(144083);
   });
 
   function setFakeScenarioJSON() {

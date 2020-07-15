@@ -139,7 +139,7 @@ export class EditDataComponent implements OnInit {
           this.buildForm();
         });
     } else {
-      this.scenarioInEdit = this.scenariosService.getSecondScenario();
+      this.scenarioInEdit = this.scenariosService.getSecondScenario(this.urn);
       this.scenarioLoaded = true;
       this.buildForm();
     }

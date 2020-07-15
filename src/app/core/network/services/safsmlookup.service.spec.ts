@@ -30,6 +30,7 @@ describe('Service: SaFSMlookup', () => {
     saDataServiceSpy.getFSMLookupList.and.returnValue(asyncData(stubValue));
   });
 
+
   it('#getFSMLookup should return correct fsm lookup from list', done => {
     saFSMLookupService.getFSMLookup('Secondary', true, null, 7).subscribe(
       result => {

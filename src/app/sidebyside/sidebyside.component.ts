@@ -32,7 +32,7 @@ export class SidebysideComponent implements OnInit {
           this.firstScenario = result;
           this.firstScenarioLoaded = true;
         });
-      this.secondScenario = this.saScenariosService.getSecondScenario();
+      this.secondScenario = this.saScenariosService.getSecondScenario(this.firstScenario.urn);
       this.secondScenarioLoaded = true;
     }
 

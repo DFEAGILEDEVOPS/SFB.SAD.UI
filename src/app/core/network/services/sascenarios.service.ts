@@ -58,8 +58,11 @@ export class SaScenariosService {
       );
   }
 
-  getSecondScenario(): SaScenarioModel {
+  getSecondScenario(urn: number): SaScenarioModel {
     if (this.scenarios[1]) {
+      return this.scenarios[1];
+    } else if (localStorage.getItem(`urn#${urn}-scenario_1`)) {
+      this.scenarios[1] = this.generateNewFromSavedScenarioData(this.retrieveStoredScenarioFromLocalStorage(urn, 1));
       return this.scenarios[1];
     } else {
       const firstScenario = this.scenarios[0];
@@ -86,6 +89,7 @@ export class SaScenariosService {
     scenario.initAAsWithCalculatedData();
     scenario.scenarioNo = 1;
     this.scenarios[1] = scenario;
+    this.storeScenarioInLocalStorage(scenario, 1);
   }
 
   setSecondScenarioWithRefresh(scenario: SaScenarioModel) {
@@ -95,6 +99,7 @@ export class SaScenariosService {
       tap(() => {
         scenario.scenarioNo = 1;
         this.scenarios[1] = scenario;
+        this.storeScenarioInLocalStorage(scenario, 1);
       })
     );
   }
