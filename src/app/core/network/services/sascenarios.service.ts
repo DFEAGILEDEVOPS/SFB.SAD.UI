@@ -105,12 +105,26 @@ export class SaScenariosService {
   }
 
   deleteFirstScenario() {
+    this.storeScenarioInLocalStorage(this.scenarios[1], 0);
+    this.removeScenarioFromLocalStorage(this.scenarios[0].urn, 1);
     this.scenarios[0] = this.scenarios[1];
     this.scenarios[1] = null;
   }
 
   deleteSecondScenario() {
+    this.removeScenarioFromLocalStorage(this.scenarios[0].urn, 1);
     this.scenarios[1] = null;
+  }
+
+  isSecondScenarioEditedAndStored(urn: number) {
+    if (localStorage.getItem(`urn#${urn}-scenario_1`)) {
+      return true;
+    }
+    return false;
+  }
+
+  private removeScenarioFromLocalStorage(urn: number, scenarioNo: number) {
+    localStorage.removeItem(`urn#${urn}-scenario_${scenarioNo}`);
   }
 
   private storeScenarioInLocalStorage(scenario: SaScenarioModel, scenarioNo: number) {

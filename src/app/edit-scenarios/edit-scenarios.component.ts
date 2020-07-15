@@ -34,7 +34,7 @@ export class EditScenariosComponent implements OnInit {
     .subscribe(result => {
       this.scenario1Name = result.scenarioName;
     });
-    this.scenario2Name = this.saScenariosService.getSecondScenario().scenarioName;
+    this.scenario2Name = this.saScenariosService.getSecondScenario(this.urn).scenarioName;
   }
 
   onContinue() {

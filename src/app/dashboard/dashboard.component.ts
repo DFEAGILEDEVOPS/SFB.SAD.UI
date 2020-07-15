@@ -3,7 +3,7 @@ import { AAModalModels } from './../Models/AAModalModels';
 import { SaScenarioModel } from '../Models/SaScenarioModel';
 import { Component, OnInit, DebugElement } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
 
@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService) {
       this.route.paramMap.subscribe(pmap => {
@@ -33,6 +34,9 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
       this.saScenariosService.getFirstScenario(this.urn).
         subscribe(result => {
+          if (this.saScenariosService.isSecondScenarioEditedAndStored(this.urn)) {
+            this.router.navigate(['self-assessment/side-by-side']);
+          }
           this.activeScenario = result;
           this.scenarioLoaded = true;
         });

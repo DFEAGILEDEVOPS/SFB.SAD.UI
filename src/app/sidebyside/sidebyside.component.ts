@@ -31,9 +31,9 @@ export class SidebysideComponent implements OnInit {
         subscribe(result => {
           this.firstScenario = result;
           this.firstScenarioLoaded = true;
+          this.secondScenario = this.saScenariosService.getSecondScenario(this.firstScenario.urn);
+          this.secondScenarioLoaded = true;
         });
-      this.secondScenario = this.saScenariosService.getSecondScenario(this.firstScenario.urn);
-      this.secondScenarioLoaded = true;
     }
 
     removeScenario(scenarioNo: number) {
