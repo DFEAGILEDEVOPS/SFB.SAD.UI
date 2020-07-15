@@ -24,7 +24,7 @@ describe('Component: DashboardCharacteristics', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DashboardCharacteristicsComponent);
-    comp    = fixture.componentInstance;
+    comp = fixture.componentInstance;
 
     comp.phase = 'Primary';
     comp.londonWeight = 'Inner';

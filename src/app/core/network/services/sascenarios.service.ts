@@ -23,7 +23,7 @@ export class SaScenariosService {
         observer.complete();
       });
     } else if (localStorage.getItem(`urn#${urn}-scenario_0`)) {
-      this.scenarios[0] = this.generateNewFromSavedScenarioData(JSON.parse(localStorage.getItem(`urn#${urn}-scenario_0`)));
+      this.scenarios[0] = this.generateNewFromSavedScenarioData(this.retrieveStoredScenarioFromLocalStorage(urn, 0));
       return new Observable((observer) => {
         observer.next(this.scenarios[0]);
         observer.complete();
@@ -43,8 +43,7 @@ export class SaScenariosService {
     scenario.initAAsWithCalculatedData();
     scenario.scenarioNo = 0;
     this.scenarios[0] = scenario;
-
-    localStorage.setItem(`urn#${scenario.urn}-scenario_0`, JSON.stringify(scenario));
+    this.storeScenarioInLocalStorage(scenario, 0);
   }
 
   setFirstScenarioWithRefresh(scenario: SaScenarioModel) {
@@ -54,8 +53,7 @@ export class SaScenariosService {
         tap(() => {
           scenario.scenarioNo = 0;
           this.scenarios[0] = scenario;
-
-          localStorage.setItem(`urn#${scenario.urn}-scenario_0`, JSON.stringify(scenario));
+          this.storeScenarioInLocalStorage(scenario, 0);
         })
       );
   }
@@ -108,6 +106,14 @@ export class SaScenariosService {
 
   deleteSecondScenario() {
     this.scenarios[1] = null;
+  }
+
+  private storeScenarioInLocalStorage(scenario: SaScenarioModel, scenarioNo: number) {
+    localStorage.setItem(`urn#${scenario.urn}-scenario_${scenarioNo}`, JSON.stringify(scenario));
+  }
+
+  private retrieveStoredScenarioFromLocalStorage(urn: number, scenarioNo: number): SaScenarioModel {
+    return JSON.parse(localStorage.getItem(`urn#${urn}-scenario_${scenarioNo}`));
   }
 
   private generateNewFromSavedScenarioData(savedModel: SaScenarioModel) {
