@@ -90,6 +90,7 @@ export class SaScenariosService {
     scenario.scenarioNo = 1;
     this.scenarios[1] = scenario;
     this.storeScenarioInLocalStorage(scenario, 1);
+    this.storeScenarioInLocalStorage(this.scenarios[0], 0);
   }
 
   setSecondScenarioWithRefresh(scenario: SaScenarioModel) {
@@ -100,6 +101,7 @@ export class SaScenariosService {
         scenario.scenarioNo = 1;
         this.scenarios[1] = scenario;
         this.storeScenarioInLocalStorage(scenario, 1);
+        this.storeScenarioInLocalStorage(this.scenarios[0], 0);
       })
     );
   }
