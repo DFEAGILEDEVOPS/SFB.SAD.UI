@@ -24,13 +24,20 @@
     [FSMLookup2]='secondScenario.sadFSMLookup'></app-sidebyside-characteristics>
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-      <div class="float-right">
-        <button class="govuk-button govuk-button--secondary" data-module="govuk-button"
-          routerLink="/self-assessment/edit-scenarios/{{this.firstScenario.urn}}/{{this.firstScenario.name}}">
-          Edit scenarios
-        </button>
-      </div>
+    <div class="govuk-grid-column-one-half">
+      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold">
+        <img src="assets/images/icon-file-download.png" style="max-width: 17px;" class="small-icon" />
+        <span>Download page</span>
+      </a>
+      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold ml-4">
+        <img src="assets/images/icon-print.png" class="small-icon" />
+        <span>Print page</span>
+      </a>
+    </div>
+    <div class="govuk-grid-column-one-half">
+      <button class="govuk-button govuk-button--secondary float-right" data-module="govuk-button">
+        Reset dashboard
+      </button>
     </div>
   </div>
 
@@ -40,79 +47,23 @@
         <th scope="col" class="govuk-table__header no-bottom width-twenty-percent"></th>
         <th scope="col" class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" colspan="3">
           <span class="govuk-!-font-size-24">{{firstScenario.scenarioName}}</span>
+          <div class="govuk-caption-m">Scenario year {{firstScenario.termOfScenario}}</div>
           <div class="govuk-!-margin-top-1">
-            <a [routerLink]='' class="govuk-link a-button" (click)='removeScenario(0)'><span
-                style="vertical-align: middle; font-size: 22px;">&times;&nbsp;</span>Remove
-              scenario</a>
+            <a routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0' class="govuk-link link-button">Edit data</a>
+            <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(0)'>Remove</a>
           </div>
         </th>
         <th scope="col" class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" colspan="3">
           <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
+          <div class="govuk-caption-m">Scenario year {{secondScenario.termOfScenario}}</div>
           <div class="govuk-!-margin-top-1">
-            <a [routerLink]='' class="govuk-link a-button" (click)='removeScenario(1)'><span
-                style="vertical-align: middle; font-size: 22px;">&times;&nbsp;</span>Remove
-              scenario</a>
+            <a routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1' class="govuk-link link-button">Edit data</a>
+            <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(1)'>Remove</a>
           </div>
         </th>
       </tr>
-      <tr class="govuk-table__row">
-        <th scope="col"
-          class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Spending
-        </th>
-        <th scope="col" class="govuk-table__header no-bottom  cell-separate width-forty-percent" colspan="3"></th>
-        <th scope="col" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"></th>
-      </tr>
-      <tr class="govuk-table__row">
-        <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-        <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-        <th scope="col" class="govuk-table__header width-ten-percent">% of exp.</th>
-        <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
-        <!---->
-        <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-        <th scope="col" class="govuk-table__header width-ten-percent">% of exp.</th>
-        <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
-      <tr class="govuk-table__row" *ngFor='let _ of firstScenario.spendingAAs; let i=index'>
-        <td class="govuk-table__cell aa-cell">{{firstScenario.spendingAAs[i].assessmentAreaName}}</td>
-        <td class="govuk-table__cell cell-separate" nowrap>{{firstScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
-        <td class="govuk-table__cell">
-          {{firstScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.spendingAAs[i].assessmentAreaName }}
-        </td>
-        <td *ngIf="firstScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
-          <span class="rating-box"
-            [class]='firstScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
-        </td>
-        <td *ngIf="firstScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
-          <span class="rating-box gray">
-            <span>Not available.</span>
-            <a class="govuk-link ml-2 button-link"
-              routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0'>Add data</a>
-          </span>
-        </td>
-        <!---->
-        <td class="govuk-table__cell cell-separate" nowrap>{{secondScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
-        <td class="govuk-table__cell">
-          {{secondScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.spendingAAs[i].assessmentAreaName }}
-        </td>
-        <td *ngIf="secondScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
-          <span class="rating-box"
-            [class]='secondScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
-        </td>
-        <td *ngIf="secondScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
-          <span class="rating-box gray">
-            <span>Not available.</span>
-            <a class="govuk-link ml-2 button-link"
-              routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1'>Add data</a>
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="govuk-table">
-    <thead class="govuk-table__head">
       <tr class="govuk-table__row">
         <th scope="col"
           class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Reserve
@@ -159,6 +110,64 @@
             [class]='secondScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
         </td>
         <td *ngIf="secondScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
+          <span class="rating-box gray">
+            <span>Not available.</span>
+            <a class="govuk-link ml-2 button-link"
+              routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1'>Add data</a>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col"
+          class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Spending
+        </th>
+        <th scope="col" class="govuk-table__header no-bottom  cell-separate width-forty-percent" colspan="3"></th>
+        <th scope="col" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"></th>
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
+        <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
+        <th scope="col" class="govuk-table__header width-ten-percent">% of exp.</th>
+        <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
+        <!---->
+        <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
+        <th scope="col" class="govuk-table__header width-ten-percent">% of exp.</th>
+        <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row" *ngFor='let _ of firstScenario.spendingAAs; let i=index'>
+        <td class="govuk-table__cell aa-cell">{{firstScenario.spendingAAs[i].assessmentAreaName}}</td>
+        <td class="govuk-table__cell cell-separate" nowrap>{{firstScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
+        <td class="govuk-table__cell">
+          {{firstScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.spendingAAs[i].assessmentAreaName }}
+        </td>
+        <td *ngIf="firstScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
+          <span class="rating-box"
+            [class]='firstScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
+        </td>
+        <td *ngIf="firstScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
+          <span class="rating-box gray">
+            <span>Not available.</span>
+            <a class="govuk-link ml-2 button-link"
+              routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0'>Add data</a>
+          </span>
+        </td>
+        <!---->
+        <td class="govuk-table__cell cell-separate" nowrap>{{secondScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
+        <td class="govuk-table__cell">
+          {{secondScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.spendingAAs[i].assessmentAreaName }}
+        </td>
+        <td *ngIf="secondScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
+          <span class="rating-box"
+            [class]='secondScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
+        </td>
+        <td *ngIf="secondScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
             <a class="govuk-link ml-2 button-link"

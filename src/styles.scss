@@ -27,6 +27,16 @@ a{
   }
 }
 
+.link-button{
+  font-weight: normal;
+  &:visited{
+    color: $govuk-link-colour!important;
+  }
+  &:hover{
+    text-decoration: none;
+  }
+}
+
 .back-button{
   @include govuk-media-query($from: tablet) {
     margin-left: 40px;

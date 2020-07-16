@@ -67,7 +67,7 @@ export class SaScenarioModel {
     this.sadAssessmentAreas = data.sadAssesmentAreas;
 
     this.termOfScenario = this.latestTerm;
-    this.scenarioName = this.termOfScenario ? this.termOfScenario + ' finance data' : null;
+    this.scenarioName = this.termOfScenario ? this.termOfScenario + ' submitted data' : null;
     this.totalIncome = this.totalIncomeLatestTerm;
     this.totalExpenditure = this.totalExpenditureLatestTerm;
     this.numberOfPupils = this.numberOfPupilsLatestTerm;
