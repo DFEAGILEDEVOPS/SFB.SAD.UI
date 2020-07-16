@@ -56,4 +56,9 @@ export class DashboardComponent implements OnInit {
 
       this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});
     }
+
+    onReset() {
+      this.saScenariosService.deleteFirstScenario();
+      this.ngOnInit();
+    }
 }

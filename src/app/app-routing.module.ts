@@ -1,4 +1,4 @@
-import { EditScenariosComponent } from './edit-scenarios/edit-scenarios.component';
+
 import { EditDataComponent } from './edit-data/edit-data.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 

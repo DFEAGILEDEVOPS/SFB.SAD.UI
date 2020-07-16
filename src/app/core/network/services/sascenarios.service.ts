@@ -105,6 +105,11 @@ export class SaScenariosService {
   }
 
   deleteFirstScenario() {
+    this.removeScenarioFromLocalStorage(this.scenarios[0].urn, 0);
+    this.scenarios[0] = null;
+  }
+
+  deleteFirstScenarioAndReplaceItWithSecond() {
     this.storeScenarioInLocalStorage(this.scenarios[1], 0);
     this.removeScenarioFromLocalStorage(this.scenarios[0].urn, 1);
     this.scenarios[0] = this.scenarios[1];
@@ -112,7 +117,7 @@ export class SaScenariosService {
   }
 
   deleteSecondScenario() {
-    this.removeScenarioFromLocalStorage(this.scenarios[0].urn, 1);
+    this.removeScenarioFromLocalStorage(this.scenarios[1].urn, 1);
     this.scenarios[1] = null;
   }
 
@@ -148,6 +153,7 @@ export class SaScenariosService {
     newModel.totalExpenditure = savedModel.totalExpenditure;
 
     newModel.initAAsWithCalculatedData();
+    newModel.isEdited = true;
     return newModel;
   }
 

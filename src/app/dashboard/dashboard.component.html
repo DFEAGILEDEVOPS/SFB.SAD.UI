@@ -44,6 +44,10 @@
           routerLink='/self-assessment/edit-data/{{urn}}/enter' [disabled]='!this.scenarioLoaded'>
           Add a side-by-side scenario
         </button>
+        <button *ngIf='activeScenario.isEdited' class="govuk-button govuk-button--secondary float-right" data-module="govuk-button"
+          (click)='onReset()'>
+          Reset dashboard
+        </button>
       </div>
     </div>
   </div>

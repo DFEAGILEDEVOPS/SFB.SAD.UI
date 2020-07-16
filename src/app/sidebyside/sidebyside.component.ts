@@ -38,13 +38,20 @@ export class SidebysideComponent implements OnInit {
 
     removeScenario(scenarioNo: number) {
       if (scenarioNo === 0) {
-        this.saScenariosService.deleteFirstScenario();
+        this.saScenariosService.deleteFirstScenarioAndReplaceItWithSecond();
         this.router.navigate(['self-assessment/', this.secondScenario.urn]);
       }
       if (scenarioNo === 1) {
         this.saScenariosService.deleteSecondScenario();
         this.router.navigate(['self-assessment/', this.firstScenario.urn]);
       }
+    }
+
+    onReset() {
+      const urn = this.secondScenario.urn;
+      this.saScenariosService.deleteFirstScenario();
+      this.saScenariosService.deleteSecondScenario();
+      this.router.navigate(['self-assessment/', urn]);
     }
 
 }
