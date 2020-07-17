@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'self-assessment/side-by-side', component: SidebysideComponent},
   { path: 'self-assessment/edit-data/:urn/:viewType/:scenarioNo', component: EditDataComponent},
   { path: 'self-assessment/edit-data/:urn/:viewType', component: EditDataComponent},
+  { path: 'self-assessment/add-missing-data/:urn/:field', component: EditDataComponent},
   { path: 'self-assessment/:urn', component: DashboardComponent},
   { path: '**', component: NotFoundComponent }
 ];

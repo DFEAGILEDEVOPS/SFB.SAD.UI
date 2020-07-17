@@ -4,7 +4,7 @@ import { SaFsmLookupService } from './../core/network/services/safsmlookup.servi
 import { SaSizeLookupService } from './../core/network/services/sasizelookup.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SaScenarioModel } from '../Models/SaScenarioModel';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isNumber } from 'util';
@@ -14,14 +14,18 @@ import { isNumber } from 'util';
   templateUrl: './edit-data.component.html',
   styleUrls: ['./edit-data.component.css']
 })
-export class EditDataComponent implements OnInit {
+export class EditDataComponent implements OnInit, AfterViewInit {
   scenarioInEdit: SaScenarioModel;
   urn: number;
   editDataForm: FormGroup;
   viewType: string;
   scenarioNo: number;
-  formattedAmount: any;
   scenarioLoaded: boolean;
+  missingField: string;
+
+  @ViewChild('averageClassSizeElement') averageClassSizeElement: ElementRef;
+  @ViewChild('predictedPupilElement') predictedPupilElement: ElementRef;
+  @ViewChild('teacherContactRatioElement') teacherContactRatioElement: ElementRef;
 
   get scenarioName() {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
@@ -82,52 +86,11 @@ export class EditDataComponent implements OnInit {
     private location: Location) {
     this.route.params.subscribe(params => {
       this.urn = +params.urn;
-      this.viewType = params.viewType;
+      this.viewType = params.viewType ?? 'edit';
+      this.missingField = params.field;
       this.scenarioNo = params.scenarioNo ? Number(params.scenarioNo) : null;
     });
     this.scenarioLoaded = false;
-  }
-
-  private buildForm() {
-    this.editDataForm = this.fb.group({
-      scenarioDetails: this.fb.group({
-        scenarioName: [this.scenarioInEdit.scenarioName, [Validators.required, Validators.minLength(3)]],
-        scenarioTerm: [this.scenarioInEdit.termOfScenario]
-      }),
-      schoolDetails: this.fb.group({
-        numberOfPupils: [this.scenarioInEdit.numberOfPupils, [Validators.required, Validators.min(1)]],
-        schoolWorkforce: [this.scenarioInEdit.workforceTotal, [Validators.required, Validators.min(1)]],
-        numberOfTeachers: [this.scenarioInEdit.teachersTotal, [Validators.required, Validators.min(1)]],
-        seniorLeadership: [this.scenarioInEdit.teachersLeader, [Validators.required, Validators.min(0)]],
-        fsm: [this.scenarioInEdit.fsm, [Validators.required, Validators.min(0)]],
-        teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)'),
-          [Validators.min(0), Validators.max(1)]],
-        predictedPupil: [this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
-          this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null, Validators.min(-100)],
-        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size'), Validators.min(0)],
-      }),
-      spending: this.fb.group({
-        teachingStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching staff'))],
-        supplyStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Supply staff'))],
-        educationSupportStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Education support staff'))],
-        adminStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Administrative and clerical staff'))],
-        otherStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Other staff costs'))],
-        premises: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Premises costs'))],
-        teachingResources: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching resources'))],
-        energy: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Energy'))],
-      }),
-      reserveBalance: this.fb.group({
-        totalIncome: [this.numberToCurrency(this.scenarioInEdit.totalIncome)],
-        totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure)],
-        rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
-      })
-    }, { validators: mustBeLowerThanTotalSpendingValidator });
-
-    // this.fsm.valueChanges.subscribe(() => {
-    //   let apiRefreshNecessary = true;
-    //   debugger;
-    //  }
-    // );
   }
 
   ngOnInit() {
@@ -142,7 +105,12 @@ export class EditDataComponent implements OnInit {
       this.scenarioInEdit = this.scenariosService.getSecondScenario(this.urn);
       this.scenarioLoaded = true;
       this.buildForm();
+      this.focusOnAddField();
     }
+  }
+
+  ngAfterViewInit() {
+    this.focusOnAddField();
   }
 
   onSubmit() {
@@ -272,9 +240,18 @@ export class EditDataComponent implements OnInit {
   }
 
   transformAmount(element, formControl) {
-    this.formattedAmount = this.numberToCurrency(this.currencyToNumber(formControl));
+    element.target.value = this.numberToCurrency(this.currencyToNumber(formControl));
+  }
 
-    element.target.value = this.formattedAmount;
+  transformDecimal(element, formControl) {
+    element.target.value = this.numberToDecimal(formControl);
+  }
+
+  private numberToDecimal(val: number): number {
+    if (val === null) {
+      return null;
+    }
+    return Number(val.toFixed(2));
   }
 
   private numberToCurrency(val: number): string {
@@ -283,10 +260,65 @@ export class EditDataComponent implements OnInit {
 
   private currencyToNumber(val: any): number {
     if (typeof (val) === 'string') {
+      if (val === '') {
+        return null;
+      }
       return Number(val.replace(new RegExp('[^.0-9-]', 'g'), ''));
     }
-
     return val;
+  }
+
+  private focusOnAddField() {
+    switch (this.missingField) {
+      case 'Teacher contact ratio (less than 1)':
+        setTimeout(() => this.teacherContactRatioElement.nativeElement.focus());
+        break;
+      case 'Predicted percentage pupil number change in 3-5 years':
+        setTimeout(() => this.predictedPupilElement.nativeElement.focus());
+        break;
+      case 'Average Class size':
+        setTimeout(() => this.averageClassSizeElement.nativeElement.focus());
+        break;
+      default:
+        break;
+    }
+  }
+
+  private buildForm() {
+    this.editDataForm = this.fb.group({
+      scenarioDetails: this.fb.group({
+        scenarioName: [this.scenarioInEdit.scenarioName, [Validators.required, Validators.minLength(3)]],
+        scenarioTerm: [this.scenarioInEdit.termOfScenario]
+      }),
+      schoolDetails: this.fb.group({
+        numberOfPupils: [this.scenarioInEdit.numberOfPupils, [Validators.required, Validators.min(1)]],
+        schoolWorkforce: [this.scenarioInEdit.workforceTotal, [Validators.required, Validators.min(1)]],
+        numberOfTeachers: [this.scenarioInEdit.teachersTotal, [Validators.required, Validators.min(1)]],
+        seniorLeadership: [this.scenarioInEdit.teachersLeader, [Validators.required, Validators.min(0)]],
+        fsm: [this.scenarioInEdit.fsm, [Validators.required, Validators.min(0)]],
+        teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)'),
+          [Validators.min(0), Validators.max(1)]],
+        predictedPupil: [this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
+          this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null, Validators.min(-100)],
+        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size'), Validators.min(0)],
+      }),
+      spending: this.fb.group({
+        teachingStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching staff'))],
+        supplyStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Supply staff'))],
+        educationSupportStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Education support staff'))],
+        adminStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Administrative and clerical staff'))],
+        otherStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Other staff costs'))],
+        premises: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Premises costs'))],
+        teachingResources: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching resources'))],
+        energy: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Energy'))],
+      }),
+      reserveBalance: this.fb.group({
+        totalIncome: [this.numberToCurrency(this.scenarioInEdit.totalIncome)],
+        totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure)],
+        rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
+      })
+    }, { validators: mustBeLowerThanTotalSpendingValidator });
+
   }
 
 }

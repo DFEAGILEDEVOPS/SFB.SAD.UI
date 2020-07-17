@@ -74,7 +74,9 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="number"
           formControlName='numberOfPupils'
-          [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}" required>
+          [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfPupils)">
         <div *ngIf="numberOfPupils.invalid && numberOfPupils.dirty">
           <span *ngIf="numberOfPupils.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of pupils is required
@@ -95,7 +97,9 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number"
           formControlName='schoolWorkforce'
-          [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}" required>
+          [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.schoolWorkforce)">
         <div *ngIf="schoolWorkforce.invalid && schoolWorkforce.dirty">
           <span *ngIf="schoolWorkforce.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> School workforce count is required
@@ -116,7 +120,9 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number"
           formControlName='numberOfTeachers'
-          [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}" required>
+          [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfTeachers)">
         <div *ngIf="numberOfTeachers.invalid && numberOfTeachers.dirty">
           <span *ngIf="numberOfTeachers.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of teachers is required
@@ -137,7 +143,9 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number"
           formControlName='seniorLeadership'
-          [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}" required>
+          [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.seniorLeadership)">
         <div *ngIf="seniorLeadership.invalid && seniorLeadership.dirty">
           <span *ngIf="seniorLeadership.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Senior leadership number is required
@@ -157,7 +165,9 @@
             class="govuk-!-font-weight-bold">{{scenarioInEdit.fsmLatestTerm}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" formControlName='fsm'
-          [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}" required>
+          [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
         <div *ngIf="fsm.invalid && fsm.dirty">
           <span *ngIf="fsm.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM is required
@@ -172,9 +182,9 @@
         <label class="govuk-label" for="tcr">
           Teacher contact ratio (less than 1)
         </label>
-        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number"
-          formControlName='teacherContactRatio'
-          [class]="{'govuk-input--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}">
+        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number" formControlName='teacherContactRatio' #teacherContactRatioElement
+          [class]="{'govuk-input--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}"
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.teacherContactRatio)">
         <div *ngIf="teacherContactRatio.invalid && teacherContactRatio.dirty">
           <span *ngIf="teacherContactRatio.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Teacher contact ratio must be minimum 0
@@ -189,8 +199,9 @@
         <label class="govuk-label" for="ppl">
           Predicted percentage pupil number change in 3-5 years
         </label>
-        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil'
-        [class]="{'govuk-input--error' : !predictedPupil.valid && !predictedPupil.pristine}">
+        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil' #predictedPupilElement
+        [class]="{'govuk-input--error' : !predictedPupil.valid && !predictedPupil.pristine}"
+        (blur)="transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
         <div *ngIf="predictedPupil.invalid && predictedPupil.dirty">
           <span *ngIf="predictedPupil.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Predicted pupil number change percentage must be minimum -100
@@ -203,8 +214,9 @@
         <label class="govuk-label" for="acs">
           Average Class size
         </label>
-        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number" formControlName='averageClassSize'
-          [class]="{'govuk-input--error' : !averageClassSize.valid && !averageClassSize.pristine}">
+        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number" formControlName='averageClassSize' #averageClassSizeElement
+          [class]="{'govuk-input--error' : !averageClassSize.valid && !averageClassSize.pristine}"
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.averageClassSize)">
         <div *ngIf="averageClassSize.invalid && averageClassSize.dirty">
           <span *ngIf="averageClassSize.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Average class size must be minimum 0
