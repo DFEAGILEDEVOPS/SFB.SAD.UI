@@ -16,31 +16,24 @@ function asyncData<T>(data: T) {
 
 describe('Component: Dashboard', () => {
   let comp: DashboardComponent;
-  let saScenariosServiceSpy: jasmine.SpyObj<SaScenariosService>;
-  let activatedRouteStub: ActivatedRouteStub;
-  let routerSpy: jasmine.SpyObj<Router>;
+  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'isSecondScenarioEditedAndStored']);
+  let routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+  let activatedRouteStub = new ActivatedRouteStub();
+
 
   beforeEach(() => {
-    activatedRouteStub = new ActivatedRouteStub();
 
     TestBed.configureTestingModule({
       providers: [
         DashboardComponent,
-        // tslint:disable-next-line:max-line-length
-        { provide: SaScenariosService, useValue: jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'isSecondScenarioEditedAndStored']) },
+        { provide: SaScenariosService, useValue:  saScenariosServiceSpy},
         { provide: BsModalService, useValue: jasmine.createSpyObj('BsModalService', ['_']) },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
-        { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) },
+        { provide: Router, useValue: routerSpy },
       ]
     });
 
-    // inject both the component and the dependent service.
-    activatedRouteStub.setParamMap({ urn: 123 });
-
     comp = TestBed.inject(DashboardComponent);
-    saScenariosServiceSpy = TestBed.inject(SaScenariosService) as jasmine.SpyObj<SaScenariosService>;
-    const bsModalServiceSpy = TestBed.inject(BsModalService) as jasmine.SpyObj<BsModalService>;
-    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 
   it('should load the first scenario upon initialization, if there is no stored second scenario', () => {
@@ -48,6 +41,8 @@ describe('Component: Dashboard', () => {
     stubSaData.urn = 123;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
     saScenariosServiceSpy.isSecondScenarioEditedAndStored.and.returnValue(false);
+
+    activatedRouteStub.setParamMap({ urn: 123 });
 
     comp.ngOnInit();
 
@@ -62,6 +57,8 @@ describe('Component: Dashboard', () => {
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
     saScenariosServiceSpy.isSecondScenarioEditedAndStored.and.returnValue(true);
 
+    activatedRouteStub.setParamMap({ urn: 123 });
+    
     comp.ngOnInit();
 
     expect(routerSpy.navigate).toHaveBeenCalledWith(['self-assessment/side-by-side']);

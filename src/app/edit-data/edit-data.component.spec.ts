@@ -22,11 +22,11 @@ function asyncData<T>(data: T) {
 
 describe('Component: Edit-data', () => {
   let comp: EditDataComponent;
-  let saScenariosServiceSpy: jasmine.SpyObj<SaScenariosService>;
-  let saSizeLookupServiceSpy: jasmine.SpyObj<SaSizeLookupService>;
-  let saFSMLookupServiceSpy: jasmine.SpyObj<SaFsmLookupService>;
-  let currencyPipeSpy: jasmine.SpyObj<CurrencyPipe>;
-  let routerSpy: jasmine.SpyObj<Router>;
+  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario']);
+  let saSizeLookupServiceSpy = jasmine.createSpyObj('SaSizeLookupService', ['getSizeLookup']);
+  let saFSMLookupServiceSpy = jasmine.createSpyObj('SaFsmLookupService', ['getFSMLookup']);
+  let currencyPipeSpy = jasmine.createSpyObj('CurrencyPipe', ['transform']);
+  let routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   let activatedRouteStub: ActivatedRouteStub;
   let fixture: ComponentFixture<EditDataComponent>;
 
@@ -35,25 +35,17 @@ describe('Component: Edit-data', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        { provide: SaScenariosService, useValue: jasmine.createSpyObj('SaScenariosService', ['getFirstScenario']) },
-        { provide: SaSizeLookupService, useValue: jasmine.createSpyObj('SaSizeLookupService', ['getSizeLookup']) },
-        { provide: SaFsmLookupService, useValue: jasmine.createSpyObj('SaFsmLookupService', ['getFSMLookup']) },
-        { provide: CurrencyPipe, useValue: jasmine.createSpyObj('CurrencyPipe', ['transform']) },
+        { provide: SaScenariosService, useValue:  saScenariosServiceSpy},
+        { provide: SaSizeLookupService, useValue: saSizeLookupServiceSpy },
+        { provide: SaFsmLookupService, useValue: saFSMLookupServiceSpy },
+        { provide: CurrencyPipe, useValue: currencyPipeSpy},
         { provide: ActivatedRoute, useValue: activatedRouteStub },
+        { provide: Router, useValue: routerSpy },
         { provide: FormBuilder, useClass: FormBuilder },
-        { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) },
       ],
       declarations: [EditDataComponent, AaValueFormatPipe]
     })
       .compileComponents();
-
-    activatedRouteStub.setParamMap({ urn: 123 });
-
-    saScenariosServiceSpy = TestBed.inject(SaScenariosService) as jasmine.SpyObj<SaScenariosService>;
-    saSizeLookupServiceSpy = TestBed.inject(SaSizeLookupService) as jasmine.SpyObj<SaSizeLookupService>;
-    saFSMLookupServiceSpy = TestBed.inject(SaFsmLookupService) as jasmine.SpyObj<SaFsmLookupService>;
-    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-    currencyPipeSpy = TestBed.inject(CurrencyPipe) as jasmine.SpyObj<CurrencyPipe>;
 
     fixture = TestBed.createComponent(EditDataComponent);
     comp = fixture.componentInstance;
@@ -62,6 +54,8 @@ describe('Component: Edit-data', () => {
 
 
   it('should display FSM field when primary or secondary school', () => {
+
+    activatedRouteStub.setParamMap({ urn: 123 });
 
     const stubSaData = new SaData();
     stubSaData.urn = 123;
@@ -79,6 +73,8 @@ describe('Component: Edit-data', () => {
 
   it('should not display FSM field when not primary or secondary school', () => {
 
+    activatedRouteStub.setParamMap({ urn: 123 });
+    
     const stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.overallPhase = 'All-through';
