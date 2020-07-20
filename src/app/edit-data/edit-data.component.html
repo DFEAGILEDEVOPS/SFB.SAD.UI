@@ -301,7 +301,8 @@
         </h2>
       </legend>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
         <label class="govuk-label" for="ts">
           Spending on teaching staff
         </label>
@@ -311,11 +312,18 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text"
         formControlName='teachingStaff'
+        [class]="{'govuk-input--error' : editDataForm.errors?.teachingStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
         (blur)="transformAmount($event, editDataForm.value.spending.teachingStaff)"
         >
+        <div *ngIf="editDataForm.errors?.teachingStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Teaching staff expenditure can not be higher than total expenditure
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.supplyStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
         <label class="govuk-label" for="ss">
           Spending on supply staff
         </label>
@@ -325,11 +333,18 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text"
         formControlName='supplyStaff'
+        [class]="{'govuk-input--error' : editDataForm.errors?.supplyStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
         (blur)="transformAmount($event, editDataForm.value.spending.supplyStaff)"
         >
+        <div *ngIf="editDataForm.errors?.supplyStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Supply staff expenditure can not be higher than total expenditure
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.educationSupportStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
         <label class="govuk-label" for="ess">
           Spending on education support staff
         </label>
@@ -339,11 +354,18 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text"
           formControlName='educationSupportStaff'
+          [class]="{'govuk-input--error' : editDataForm.errors?.educationSupportStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
           (blur)="transformAmount($event, editDataForm.value.spending.educationSupportStaff)"
           >
+        <div *ngIf="editDataForm.errors?.educationSupportStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Education support staff expenditure can not be higher than total expenditure
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.adminStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
         <label class="govuk-label" for="acs">
           Spending on administrative and clerical staff
         </label>
@@ -353,11 +375,18 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text"
         formControlName='adminStaff'
+        [class]="{'govuk-input--error' : editDataForm.errors?.adminStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
         (blur)="transformAmount($event, editDataForm.value.spending.adminStaff)"
         >
+        <div *ngIf="editDataForm.errors?.adminStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Administrative and clerical staff expenditure can not be higher than total expenditure
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.otherStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
         <label class="govuk-label" for="osc">
           Spending on other staff costs
         </label>
@@ -367,11 +396,18 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text"
         formControlName='otherStaff'
+        [class]="{'govuk-input--error' : editDataForm.errors?.otherStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
         (blur)="transformAmount($event, editDataForm.value.spending.otherStaff)"
         >
+        <div *ngIf="editDataForm.errors?.otherStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Other staff costs can not be higher than total expenditure
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.premisesExceeded && (editDataForm.touched || editDataForm.dirty)}">
         <label class="govuk-label" for="prc">
           Spending on premises costs
         </label>
@@ -381,11 +417,18 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text"
         formControlName='premises'
+        [class]="{'govuk-input--error' : editDataForm.errors?.premisesExceeded && (editDataForm.touched || editDataForm.dirty)}"
         (blur)="transformAmount($event, editDataForm.value.spending.premises)"
         >
+        <div *ngIf="editDataForm.errors?.premisesExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Premises costs can not be higher than total expenditure
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingResourcesExceeded && (editDataForm.touched || editDataForm.dirty)}">
         <label class="govuk-label" for="tr">
           Spending on teaching resources
         </label>
@@ -395,11 +438,18 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text"
           formControlName='teachingResources'
+          [class]="{'govuk-input--error' : editDataForm.errors?.teachingResourcesExceeded && (editDataForm.touched || editDataForm.dirty)}"
           (blur)="transformAmount($event, editDataForm.value.spending.teachingResources)"
           >
+        <div *ngIf="editDataForm.errors?.teachingResourcesExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Teaching resources spending can not be higher than total expenditure
+          </span>
+        </div>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.energyExceeded && (editDataForm.touched || editDataForm.dirty)}">
         <label class="govuk-label" for="en">
           Spending on energy
         </label>
@@ -409,8 +459,14 @@
         </span>
         <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text"
         formControlName='energy'
+        [class]="{'govuk-input--error' : editDataForm.errors?.energyExceeded && (editDataForm.touched || editDataForm.dirty)}"
         (blur)="transformAmount($event, editDataForm.value.spending.energy)"
         >
+        <div *ngIf="editDataForm.errors?.energyExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Energy spending can not be higher than total expenditure
+          </span>
+        </div>
       </div>
 
     </fieldset>

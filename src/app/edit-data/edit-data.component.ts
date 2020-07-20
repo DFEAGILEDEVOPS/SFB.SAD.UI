@@ -75,6 +75,38 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     return this.editDataForm.get('schoolDetails').get('averageClassSize');
   }
 
+  get teachingStaff() {
+    return this.editDataForm.get('spending').get('teachingStaff');
+  }
+
+  get supplyStaff() {
+    return this.editDataForm.get('spending').get('supplyStaff');
+  }
+
+  get educationSupportStaff() {
+    return this.editDataForm.get('spending').get('educationSupportStaff');
+  }
+
+  get adminStaff() {
+    return this.editDataForm.get('spending').get('adminStaff');
+  }
+
+  get otherStaff() {
+    return this.editDataForm.get('spending').get('otherStaff');
+  }
+
+  get premises() {
+    return this.editDataForm.get('spending').get('premises');
+  }
+
+  get teachingResources() {
+    return this.editDataForm.get('spending').get('teachingResources');
+  }
+
+  get energy() {
+    return this.editDataForm.get('spending').get('energy');
+  }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
