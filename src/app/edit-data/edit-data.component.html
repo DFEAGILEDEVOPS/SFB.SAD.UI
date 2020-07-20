@@ -1,5 +1,95 @@
-<app-edit-data-breadcrumb [name]='scenarioInEdit?.name' [urn]='scenarioInEdit?.urn' [viewType]='viewType'>
-</app-edit-data-breadcrumb>
+<app-edit-data-breadcrumb [name]='scenarioInEdit?.name' [urn]='scenarioInEdit?.urn' [viewType]='viewType'></app-edit-data-breadcrumb>
+
+<div *ngIf='editDataForm.invalid && formSubmitted' #errorSummaryElement class="govuk-error-summary govuk-!-margin-top-2" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+  <h2 class="govuk-error-summary__title" id="error-summary-title">
+    There is a problem
+  </h2>
+  <div class="govuk-error-summary__body">
+    <ul class="govuk-list govuk-error-summary__list">
+      <li *ngIf='scenarioName.errors?.required'>
+        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Scenario name is required</a>
+      </li>
+      <li *ngIf='scenarioName.errors?.minlength'>
+        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Scenario name must be minimum 3 characters</a>
+      </li>
+      <li *ngIf="numberOfPupils.errors?.required">
+        <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Number of pupils is required</a>
+      </li>
+      <li *ngIf="numberOfPupils.errors?.min">
+        <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Number of pupils must be minimum 1</a>
+      </li>
+      <li *ngIf="schoolWorkforce.errors?.required">
+        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count is required</a>
+      </li>
+      <li *ngIf="schoolWorkforce.errors?.min">
+        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count must be minimum 1</a>
+      </li>
+      <li *ngIf="numberOfTeachers.errors?.required">
+        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers is required</a>
+      </li>
+      <li *ngIf="numberOfTeachers.errors?.min">
+        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers must be minimum 1</a>
+      </li>
+      <li *ngIf="seniorLeadership.errors?.required">
+        <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership number is required</a>
+      </li>
+      <li *ngIf="seniorLeadership.errors?.min">
+        <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership number must be minimum 0</a>
+      </li>
+      <!-- <li *ngIf="fsm?.errors?.required">
+        <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM is required</a>
+      </li>
+      <li *ngIf="fsm?.errors?.min">
+        <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM number must be minimum 0</a>
+      </li> -->
+      <li *ngIf="teacherContactRatio.errors?.min">
+        <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ration must be minimum 0</a>
+      </li>
+      <li *ngIf="teacherContactRatio.errors?.max">
+        <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ratio must be maximum 1</a>
+      </li>
+      <li *ngIf="predictedPupil.errors?.min">
+        <a [routerLink]='' (click)="setFocus(predictedPupilElement)">Predicted pupil number change percentage must be minimum -100</a>
+      </li>
+      <li *ngIf="averageClassSize.errors?.min">
+        <a [routerLink]='' (click)="setFocus(averageClassSizeElement)">Average class size must be minimum 0</a>
+      </li>
+      <li *ngIf="totalIncome.errors?.required">
+        <a [routerLink]='' (click)="setFocus(totalIncomeInput)">Total income is required</a>
+      </li>
+      <li *ngIf="totalExpenditure.errors?.required">
+        <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Total expenditure is required</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.maxExpenditureExceeded">
+        <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Total expenditure can not be lower than sum of expenditures</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.teachingStaffExceeded">
+        <a [routerLink]='' (click)="setFocus(teachingStaffInput)">Teaching staff expenditure can not be higher than total expenditure</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.supplyStaffExceeded">
+        <a [routerLink]='' (click)="setFocus(supplyStaffInput)">Supply staff expenditure can not be higher than total expenditure</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.educationSupportStaffExceeded">
+        <a [routerLink]='' (click)="setFocus(educationSupportStaffInput)">Education support staff expenditure can not be higher than total expenditure</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.adminStaffExceeded">
+        <a [routerLink]='' (click)="setFocus(adminStaffInput)">Admin staff expenditure can not be higher than total expenditure</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.otherStaffExceeded">
+        <a [routerLink]='' (click)="setFocus(otherStaffInput)">Other staff expenditure can not be higher than total expenditure</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.premisesExceeded">
+        <a [routerLink]='' (click)="setFocus(premisesInput)">Premises costs can not be higher than total expenditure</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.teachingResourcesExceeded">
+        <a [routerLink]='' (click)="setFocus(teachingResourcesInput)">Teaching resources spending can not be higher than total expenditure</a>
+      </li>
+      <li *ngIf="editDataForm.errors?.energyExceeded">
+        <a [routerLink]='' (click)="setFocus(energyInput)">Energy spending can not be higher than total expenditure</a>
+      </li>
+    </ul>
+  </div>
+</div>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -30,9 +120,6 @@
         <label class="govuk-label" for="scenario-name">
           Name of scenario
         </label>
-        <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text"
-          formControlName='scenarioName' [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}"
-          required>
         <div *ngIf="scenarioName.invalid && scenarioName.dirty">
           <span *ngIf="scenarioName.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Scenario name is required
@@ -41,6 +128,9 @@
             <span class="govuk-visually-hidden">Error:</span> Scenario name must be minimum 3 characters
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text" #scenarioNameInput
+          formControlName='scenarioName' [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}"
+          required>
       </div>
 
       <div class="govuk-form-group">
@@ -72,11 +162,6 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.numberOfPupilsLatestTerm}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="number"
-          formControlName='numberOfPupils'
-          [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}"
-          required
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfPupils)">
         <div *ngIf="numberOfPupils.invalid && numberOfPupils.dirty">
           <span *ngIf="numberOfPupils.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of pupils is required
@@ -85,6 +170,11 @@
             <span class="govuk-visually-hidden">Error:</span> Number of pupils must be minimum 1
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="number" #numberOfPupilsInput
+          formControlName='numberOfPupils'
+          [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfPupils)">
       </div>
 
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}">
@@ -95,11 +185,6 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.workforceTotalLastTerm}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number"
-          formControlName='schoolWorkforce'
-          [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}"
-          required
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.schoolWorkforce)">
         <div *ngIf="schoolWorkforce.invalid && schoolWorkforce.dirty">
           <span *ngIf="schoolWorkforce.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> School workforce count is required
@@ -108,6 +193,11 @@
             <span class="govuk-visually-hidden">Error:</span> School workforce count must be minimum 1
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number" #schoolWorkforceInput
+          formControlName='schoolWorkforce'
+          [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.schoolWorkforce)">
       </div>
 
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}">
@@ -118,11 +208,6 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.teachersTotalLastTerm}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number"
-          formControlName='numberOfTeachers'
-          [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}"
-          required
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfTeachers)">
         <div *ngIf="numberOfTeachers.invalid && numberOfTeachers.dirty">
           <span *ngIf="numberOfTeachers.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of teachers is required
@@ -131,6 +216,11 @@
             <span class="govuk-visually-hidden">Error:</span> Number of teachers must be minimum 1
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number" #numberOfTeachersInput
+          formControlName='numberOfTeachers'
+          [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfTeachers)">
       </div>
 
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !seniorLeadership.valid && !seniorLeadership.pristine}">
@@ -141,11 +231,6 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.teachersLeaderLastTerm}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number"
-          formControlName='seniorLeadership'
-          [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}"
-          required
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.seniorLeadership)">
         <div *ngIf="seniorLeadership.invalid && seniorLeadership.dirty">
           <span *ngIf="seniorLeadership.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Senior leadership number is required
@@ -154,6 +239,11 @@
             <span class="govuk-visually-hidden">Error:</span> Senior leadership number must be minimum 0
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number" #seniorLeadershipInput
+          formControlName='seniorLeadership'
+          [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.seniorLeadership)">
       </div>
 
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !fsm.valid && !fsm.pristine}"
@@ -165,10 +255,6 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.fsmLatestTerm}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" formControlName='fsm'
-          [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}"
-          required
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
         <div *ngIf="fsm.invalid && fsm.dirty">
           <span *ngIf="fsm.errors.required" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM is required
@@ -177,15 +263,17 @@
             <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM must be minimum 0
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" formControlName='fsm' #fsmInput
+          [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}"
+          required
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
       </div>
+
       <div class="govuk-form-group"
         [class]="{'govuk-form-group--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}">
         <label class="govuk-label" for="tcr">
           Teacher contact ratio (less than 1)
         </label>
-        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number" formControlName='teacherContactRatio' #teacherContactRatioElement
-          [class]="{'govuk-input--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}"
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.teacherContactRatio)">
         <div *ngIf="teacherContactRatio.invalid && teacherContactRatio.dirty">
           <span *ngIf="teacherContactRatio.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Teacher contact ratio must be minimum 0
@@ -194,20 +282,23 @@
             <span class="govuk-visually-hidden">Error:</span> Teacher contact ratio must be maximum 1
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number" formControlName='teacherContactRatio' #teacherContactRatioElement
+          [class]="{'govuk-input--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}"
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.teacherContactRatio)">
       </div>
 
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !predictedPupil.valid && !predictedPupil.pristine}">
         <label class="govuk-label" for="ppl">
           Predicted percentage pupil number change in 3-5 years
         </label>
-        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil' #predictedPupilElement
-        [class]="{'govuk-input--error' : !predictedPupil.valid && !predictedPupil.pristine}"
-        (blur)="transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
         <div *ngIf="predictedPupil.invalid && predictedPupil.dirty">
           <span *ngIf="predictedPupil.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Predicted pupil number change percentage must be minimum -100
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil' #predictedPupilElement
+        [class]="{'govuk-input--error' : !predictedPupil.valid && !predictedPupil.pristine}"
+        (blur)="transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
       </div>
 
       <div class="govuk-form-group"
@@ -215,14 +306,14 @@
         <label class="govuk-label" for="acs">
           Average Class size
         </label>
-        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number" formControlName='averageClassSize' #averageClassSizeElement
-          [class]="{'govuk-input--error' : !averageClassSize.valid && !averageClassSize.pristine}"
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.averageClassSize)">
         <div *ngIf="averageClassSize.invalid && averageClassSize.dirty">
           <span *ngIf="averageClassSize.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Average class size must be minimum 0
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number" formControlName='averageClassSize' #averageClassSizeElement
+          [class]="{'govuk-input--error' : !averageClassSize.valid && !averageClassSize.pristine}"
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.averageClassSize)">
       </div>
 
     </fieldset>
@@ -241,16 +332,16 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
+        <div *ngIf="totalIncome.invalid && totalIncome.dirty">
+          <span class="govuk-error-message" *ngIf='totalIncome.errors.required'>
+            <span class="govuk-visually-hidden">Error:</span> Total income is required
+          </span>
+        </div>
+        <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text" #totalIncomeInput
           formControlName='totalIncome'
           [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
           (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)"
           required>
-        <div [hidden]="totalIncome.valid || totalIncome.pristine">
-          <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Total income is required
-          </span>
-        </div>
       </div>
 
       <div class="govuk-form-group"
@@ -262,21 +353,21 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditureLatestTerm | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
+        <div *ngIf="totalExpenditure.invalid && totalExpenditure.dirty">
+          <span class="govuk-error-message" *ngIf='totalExpenditure.errors.required'>
+            <span class="govuk-visually-hidden">Error:</span> Total expenditure is required
+          </span>
+        </div>
+        <div *ngIf="editDataForm.errors?.maxExpenditureExceeded" class="govuk-error-message">
+          <span class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Total expenditure can not be lower than sum of expenditures
+          </span>
+        </div>
+        <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text" #totalExpenditureInput
           formControlName='totalExpenditure'
           [class]="{'govuk-input--error' : (!totalExpenditure.valid && !totalExpenditure.pristine) || editDataForm.errors?.maxExpenditureExceeded}"
           (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalExpenditure)"
           required>
-        <div [hidden]="totalExpenditure.valid || totalExpenditure.pristine">
-          <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Total expenditure is required
-          </span>
-        </div>
-        <div *ngIf="editDataForm.errors?.maxExpenditureExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
-          <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Total expenditure can not be lower than sum of expenditures below
-          </span>
-        </div>
       </div>
 
       <div class="govuk-form-group">
@@ -302,7 +393,7 @@
       </legend>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingStaffExceeded}">
         <label class="govuk-label" for="ts">
           Spending on teaching staff
         </label>
@@ -310,20 +401,20 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching staff') | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text"
-        formControlName='teachingStaff'
-        [class]="{'govuk-input--error' : editDataForm.errors?.teachingStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
-        (blur)="transformAmount($event, editDataForm.value.spending.teachingStaff)"
-        >
-        <div *ngIf="editDataForm.errors?.teachingStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+        <div *ngIf="editDataForm.errors?.teachingStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Teaching staff expenditure can not be higher than total expenditure
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text" #teachingStaffInput
+        formControlName='teachingStaff'
+        [class]="{'govuk-input--error' : editDataForm.errors?.teachingStaffExceeded}"
+        (blur)="transformAmount($event, editDataForm.value.spending.teachingStaff)"
+        >
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.supplyStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.supplyStaffExceeded}">
         <label class="govuk-label" for="ss">
           Spending on supply staff
         </label>
@@ -331,20 +422,20 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Supply staff') | aaValueFormat }}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text"
-        formControlName='supplyStaff'
-        [class]="{'govuk-input--error' : editDataForm.errors?.supplyStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
-        (blur)="transformAmount($event, editDataForm.value.spending.supplyStaff)"
-        >
-        <div *ngIf="editDataForm.errors?.supplyStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+        <div *ngIf="editDataForm.errors?.supplyStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Supply staff expenditure can not be higher than total expenditure
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text" #supplyStaffInput
+        formControlName='supplyStaff'
+        [class]="{'govuk-input--error' : editDataForm.errors?.supplyStaffExceeded}"
+        (blur)="transformAmount($event, editDataForm.value.spending.supplyStaff)"
+        >
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.educationSupportStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.educationSupportStaffExceeded}">
         <label class="govuk-label" for="ess">
           Spending on education support staff
         </label>
@@ -352,20 +443,20 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Education support staff') | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text"
-          formControlName='educationSupportStaff'
-          [class]="{'govuk-input--error' : editDataForm.errors?.educationSupportStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
-          (blur)="transformAmount($event, editDataForm.value.spending.educationSupportStaff)"
-          >
-        <div *ngIf="editDataForm.errors?.educationSupportStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+        <div *ngIf="editDataForm.errors?.educationSupportStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Education support staff expenditure can not be higher than total expenditure
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text" #educationSupportStaffInput
+          formControlName='educationSupportStaff'
+          [class]="{'govuk-input--error' : editDataForm.errors?.educationSupportStaffExceeded}"
+          (blur)="transformAmount($event, editDataForm.value.spending.educationSupportStaff)"
+          >
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.adminStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.adminStaffExceeded}">
         <label class="govuk-label" for="acs">
           Spending on administrative and clerical staff
         </label>
@@ -373,20 +464,20 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Administrative and clerical staff') | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text"
-        formControlName='adminStaff'
-        [class]="{'govuk-input--error' : editDataForm.errors?.adminStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
-        (blur)="transformAmount($event, editDataForm.value.spending.adminStaff)"
-        >
-        <div *ngIf="editDataForm.errors?.adminStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+        <div *ngIf="editDataForm.errors?.adminStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Administrative and clerical staff expenditure can not be higher than total expenditure
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text" #adminStaffInput
+        formControlName='adminStaff'
+        [class]="{'govuk-input--error' : editDataForm.errors?.adminStaffExceeded}"
+        (blur)="transformAmount($event, editDataForm.value.spending.adminStaff)"
+        >
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.otherStaffExceeded && (editDataForm.touched || editDataForm.dirty)}">
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.otherStaffExceeded}">
         <label class="govuk-label" for="osc">
           Spending on other staff costs
         </label>
@@ -394,20 +485,20 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Other staff costs') | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text"
-        formControlName='otherStaff'
-        [class]="{'govuk-input--error' : editDataForm.errors?.otherStaffExceeded && (editDataForm.touched || editDataForm.dirty)}"
-        (blur)="transformAmount($event, editDataForm.value.spending.otherStaff)"
-        >
-        <div *ngIf="editDataForm.errors?.otherStaffExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+        <div *ngIf="editDataForm.errors?.otherStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Other staff costs can not be higher than total expenditure
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text" #otherStaffInput
+        formControlName='otherStaff'
+        [class]="{'govuk-input--error' : editDataForm.errors?.otherStaffExceeded}"
+        (blur)="transformAmount($event, editDataForm.value.spending.otherStaff)"
+        >
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.premisesExceeded && (editDataForm.touched || editDataForm.dirty)}">
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.premisesExceeded}">
         <label class="govuk-label" for="prc">
           Spending on premises costs
         </label>
@@ -415,20 +506,20 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Premises costs') | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text"
-        formControlName='premises'
-        [class]="{'govuk-input--error' : editDataForm.errors?.premisesExceeded && (editDataForm.touched || editDataForm.dirty)}"
-        (blur)="transformAmount($event, editDataForm.value.spending.premises)"
-        >
-        <div *ngIf="editDataForm.errors?.premisesExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+        <div *ngIf="editDataForm.errors?.premisesExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Premises costs can not be higher than total expenditure
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text" #premisesInput
+        formControlName='premises'
+        [class]="{'govuk-input--error' : editDataForm.errors?.premisesExceeded}"
+        (blur)="transformAmount($event, editDataForm.value.spending.premises)"
+        >
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingResourcesExceeded && (editDataForm.touched || editDataForm.dirty)}">
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingResourcesExceeded}">
         <label class="govuk-label" for="tr">
           Spending on teaching resources
         </label>
@@ -436,20 +527,20 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching resources') | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text"
-          formControlName='teachingResources'
-          [class]="{'govuk-input--error' : editDataForm.errors?.teachingResourcesExceeded && (editDataForm.touched || editDataForm.dirty)}"
-          (blur)="transformAmount($event, editDataForm.value.spending.teachingResources)"
-          >
-        <div *ngIf="editDataForm.errors?.teachingResourcesExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+        <div *ngIf="editDataForm.errors?.teachingResourcesExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Teaching resources spending can not be higher than total expenditure
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text" #teachingResourcesInput
+          formControlName='teachingResources'
+          [class]="{'govuk-input--error' : editDataForm.errors?.teachingResourcesExceeded}"
+          (blur)="transformAmount($event, editDataForm.value.spending.teachingResources)"
+          >
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.energyExceeded && (editDataForm.touched || editDataForm.dirty)}">
+        [class]="{'govuk-form-group--error' : editDataForm.errors?.energyExceeded}">
         <label class="govuk-label" for="en">
           Spending on energy
         </label>
@@ -457,16 +548,16 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Energy') | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text"
-        formControlName='energy'
-        [class]="{'govuk-input--error' : editDataForm.errors?.energyExceeded && (editDataForm.touched || editDataForm.dirty)}"
-        (blur)="transformAmount($event, editDataForm.value.spending.energy)"
-        >
-        <div *ngIf="editDataForm.errors?.energyExceeded && (editDataForm.touched || editDataForm.dirty)" class="govuk-error-message">
+        <div *ngIf="editDataForm.errors?.energyExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Energy spending can not be higher than total expenditure
           </span>
         </div>
+        <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text" #energyInput
+        formControlName='energy'
+        [class]="{'govuk-input--error' : editDataForm.errors?.energyExceeded}"
+        (blur)="transformAmount($event, editDataForm.value.spending.energy)"
+        >
       </div>
 
     </fieldset>

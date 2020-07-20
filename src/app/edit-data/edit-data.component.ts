@@ -8,6 +8,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isNumber } from 'util';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-data',
@@ -22,10 +23,13 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   scenarioNo: number;
   scenarioLoaded: boolean;
   missingField: string;
+  formSubmitted: boolean;
 
   @ViewChild('averageClassSizeElement') averageClassSizeElement: ElementRef;
   @ViewChild('predictedPupilElement') predictedPupilElement: ElementRef;
   @ViewChild('teacherContactRatioElement') teacherContactRatioElement: ElementRef;
+
+  @ViewChild('errorSummaryElement') errorSummaryElement: ElementRef;
 
   get scenarioName() {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
@@ -115,7 +119,8 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     private sizeLookupService: SaSizeLookupService,
     private fsmLookupService: SaFsmLookupService,
     private currencyPipe: CurrencyPipe,
-    private location: Location) {
+    private location: Location,
+    private titleService: Title ) {
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
       this.viewType = pmap.get('viewType') ?? 'edit';
@@ -146,6 +151,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+    this.formSubmitted = true;
     if (this.editDataForm.valid) {
 
       const editedScenario: SaScenarioModel = this.scenarioInEdit;
@@ -265,6 +271,12 @@ export class EditDataComponent implements OnInit, AfterViewInit {
         }
       }
     }
+    else {
+      setTimeout(() => {
+        this.errorSummaryElement.nativeElement.focus();
+        this.titleService.setTitle("Error: " + this.titleService.getTitle());
+      });
+    }
   }
 
   onBack() {
@@ -277,6 +289,10 @@ export class EditDataComponent implements OnInit, AfterViewInit {
 
   transformDecimal(element, formControl) {
     element.target.value = this.numberToDecimal(formControl);
+  }
+
+  setFocus(input){
+    input.focus();
   }
 
   private numberToDecimal(val: number): number {
@@ -345,8 +361,8 @@ export class EditDataComponent implements OnInit, AfterViewInit {
         energy: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Energy'))],
       }),
       reserveBalance: this.fb.group({
-        totalIncome: [this.numberToCurrency(this.scenarioInEdit.totalIncome)],
-        totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure)],
+        totalIncome: [this.numberToCurrency(this.scenarioInEdit.totalIncome), [Validators.required]],
+        totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure), [Validators.required]],
         rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
       })
     }, { validators: mustBeLowerThanTotalSpendingValidator });
