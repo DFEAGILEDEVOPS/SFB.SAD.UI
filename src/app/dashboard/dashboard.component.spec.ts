@@ -8,7 +8,6 @@ import { defer } from 'rxjs/internal/observable/defer';
 import { SaData } from 'app/Models/SaData';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs/internal/observable/of';
-import { FnParam } from '@angular/compiler/src/output/output_ast';
 import { ActivatedRouteStub } from 'testing/activated-route-stub';
 
 function asyncData<T>(data: T) {

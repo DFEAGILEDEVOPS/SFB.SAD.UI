@@ -84,11 +84,11 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     private fsmLookupService: SaFsmLookupService,
     private currencyPipe: CurrencyPipe,
     private location: Location) {
-    this.route.params.subscribe(params => {
-      this.urn = +params.urn;
-      this.viewType = params.viewType ?? 'edit';
-      this.missingField = params.field;
-      this.scenarioNo = params.scenarioNo ? Number(params.scenarioNo) : null;
+    this.route.paramMap.subscribe(pmap => {
+      this.urn = +pmap.get('urn');
+      this.viewType = pmap.get('viewType') ?? 'edit';
+      this.missingField = pmap.get('field');
+      this.scenarioNo = pmap.get('scenarioNo') ? Number(pmap.get('scenarioNo')) : null;
     });
     this.scenarioLoaded = false;
   }
