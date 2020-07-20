@@ -165,7 +165,7 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.fsmLatestTerm}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20 fsm" id="fsm" name="fsm" type="number" formControlName='fsm'
+        <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" formControlName='fsm'
           [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}"
           required
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
