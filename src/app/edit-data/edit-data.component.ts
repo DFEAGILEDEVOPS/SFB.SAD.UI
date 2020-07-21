@@ -274,7 +274,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     else {
       setTimeout(() => {
         this.errorSummaryElement.nativeElement.focus();
-        this.titleService.setTitle("Error: " + this.titleService.getTitle());
+        this.titleService.setTitle("Error: " + this.titleService.getTitle().replace("Error: ", ""));
       });
     }
   }
