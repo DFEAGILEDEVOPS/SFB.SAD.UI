@@ -12,8 +12,6 @@ describe('Component: DashboardCharacteristics', () => {
 
   let comp: DashboardCharacteristicsComponent;
   let fixture: ComponentFixture<DashboardCharacteristicsComponent>;
-  let tableDe: DebugElement;
-  let tableEl: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,14 +31,62 @@ describe('Component: DashboardCharacteristics', () => {
     comp.SizeLookup = new SizeLookupModel(900, null, 'Large', 'Primary', true, '2019-2020');
     comp.FSMLookup = new FSMLookupModel(0, 10, 'small', 'Primary', true, '2019-2020');
 
-    tableDe  = fixture.debugElement.query(By.css('.govuk-table__body'));
-    tableEl = tableDe.nativeElement;
-
     // trigger initial data binding
     fixture.detectChanges();
   });
 
   it('should display correct text on no limit upper boundary cases', () => {
+
+    let tableDe  = fixture.debugElement.query(By.css('.govuk-table__body'));
+    let tableEl = tableDe.nativeElement;
+
     expect(tableEl.textContent).toContain('Schools with 900 or more pupils');
   });
+
+  it('should display "London" when weighting is "Inner"', () => {
+    comp.londonWeight = 'Inner';
+    fixture.detectChanges();
+    let lw1De = fixture.debugElement.query(By.css('#lw1'));
+    expect(lw1De.nativeElement.textContent).toEqual('London');
+  });
+
+
+  it('should display "London" when weighting is "Outer"', () => {
+    comp.londonWeight = 'Outer';
+    fixture.detectChanges();
+    let lw1De = fixture.debugElement.query(By.css('#lw1'));
+    expect(lw1De.nativeElement.textContent).toEqual('London');
+  });
+
+  it('should display "Not London" when weighting is "Neither"', () => {
+    comp.londonWeight = 'Neither';
+    fixture.detectChanges();
+    let lw1De = fixture.debugElement.query(By.css('#lw1'));
+    expect(lw1De.nativeElement.textContent).toEqual('Not London');
+  });
+
+  it('should display Size row when size lookup is there', () => {
+    let sizeDe = fixture.debugElement.query(By.css('#size'));
+    expect(sizeDe).not.toBeNull();
+  });
+
+  it('should not display Size row when size lookup is not there', () => {
+    comp.SizeLookup = null;
+    fixture.detectChanges();
+    let sizeDe = fixture.debugElement.query(By.css('#size'));
+    expect(sizeDe).toBeNull();
+  });
+
+  it('should display FSM row when size lookup is there', () => {
+    let sizeDe = fixture.debugElement.query(By.css('#fsm'));
+    expect(sizeDe).not.toBeNull();
+  });
+
+  it('should not display FSM row when size lookup is not there', () => {
+    comp.FSMLookup = null;
+    fixture.detectChanges();
+    let sizeDe = fixture.debugElement.query(By.css('#fsm'));
+    expect(sizeDe).toBeNull();
+  });
+
 });
