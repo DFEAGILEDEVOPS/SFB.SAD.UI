@@ -74,7 +74,7 @@ describe('Component: Edit-data', () => {
   it('should not display FSM field when not primary or secondary school', () => {
 
     activatedRouteStub.setParamMap({ urn: 123 });
-    
+
     const stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.overallPhase = 'All-through';
@@ -86,6 +86,44 @@ describe('Component: Edit-data', () => {
     let fsmDe = fixture.debugElement.query(By.css('#fsm'));
 
     expect(fsmDe).toBeNull();
+  });
+
+  it('should not display error summary when there are no validation errors in form', () => {
+
+    activatedRouteStub.setParamMap({ urn: 123 });
+
+    const stubSaData = new SaData();
+    stubSaData.urn = 123;
+    stubSaData.overallPhase = 'Primary';
+    stubSaData.name = 'test';
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
+
+    fixture.detectChanges();
+
+    let fsmDe = fixture.debugElement.query(By.css('.govuk-error-summary'));
+
+    expect(fsmDe).toBeNull();
+  });
+
+  it('should display error summary when there are validation errors in form', () => {
+
+    activatedRouteStub.setParamMap({ urn: 123 });
+
+    const stubSaData = new SaData();
+    stubSaData.urn = 123;
+    stubSaData.overallPhase = 'Primary';
+    stubSaData.name = 'test';
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
+
+    fixture.detectChanges();
+
+    comp.onSubmit();
+
+    fixture.detectChanges();
+
+    let fsmDe = fixture.debugElement.query(By.css('.govuk-error-summary'));
+
+    expect(fsmDe).not.toBeNull();
   });
 
 });
