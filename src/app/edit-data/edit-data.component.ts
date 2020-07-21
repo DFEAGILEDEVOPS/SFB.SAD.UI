@@ -151,6 +151,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+
     this.formSubmitted = true;
     if (this.editDataForm.valid) {
 
@@ -343,7 +344,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
         schoolWorkforce: [this.scenarioInEdit.workforceTotal, [Validators.required, Validators.min(1)]],
         numberOfTeachers: [this.scenarioInEdit.teachersTotal, [Validators.required, Validators.min(1)]],
         seniorLeadership: [this.scenarioInEdit.teachersLeader, [Validators.required, Validators.min(0)]],
-        fsm: [this.scenarioInEdit.fsm, [Validators.required, Validators.min(0)]],
+        fsm: [this.scenarioInEdit.fsm],
         teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)'),
           [Validators.min(0), Validators.max(1)]],
         predictedPupil: [this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
@@ -366,6 +367,11 @@ export class EditDataComponent implements OnInit, AfterViewInit {
         rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
       })
     }, { validators: mustBeLowerThanTotalSpendingValidator });
+
+    if(this.scenarioInEdit.overallPhase === "Primary" || this.scenarioInEdit.overallPhase === "Secondary") {
+      this.fsm.setValidators(Validators.required);
+      this.fsm.setValidators(Validators.min(0));
+    }
 
   }
 

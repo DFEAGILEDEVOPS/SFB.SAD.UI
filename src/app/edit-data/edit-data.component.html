@@ -36,12 +36,12 @@
       <li *ngIf="seniorLeadership.errors?.min">
         <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership number must be minimum 0</a>
       </li>
-      <!-- <li *ngIf="fsm?.errors?.required">
+      <li *ngIf="fsm.errors?.required">
         <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM is required</a>
       </li>
-      <li *ngIf="fsm?.errors?.min">
+      <li *ngIf="fsm.errors?.min">
         <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM number must be minimum 0</a>
-      </li> -->
+      </li>
       <li *ngIf="teacherContactRatio.errors?.min">
         <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ration must be minimum 0</a>
       </li>
@@ -247,7 +247,7 @@
       </div>
 
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !fsm.valid && !fsm.pristine}"
-        *ngIf='scenarioInEdit.overallPhase === "Primary" || scenarioInEdit.overallPhase === "Secondary"'>
+        [hidden]='scenarioInEdit.overallPhase !== "Primary" && scenarioInEdit.overallPhase !== "Secondary"'>
         <label class="govuk-label" for="fsm">
           Percentage of pupils eligible for FSM
         </label>
@@ -263,9 +263,9 @@
             <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM must be minimum 0
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" formControlName='fsm' #fsmInput
+        <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" #fsmInput
+          formControlName='fsm'
           [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}"
-          required
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
       </div>
 
