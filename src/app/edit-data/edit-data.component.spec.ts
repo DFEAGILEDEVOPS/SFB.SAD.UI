@@ -83,9 +83,11 @@ describe('Component: Edit-data', () => {
 
     fixture.detectChanges();
 
-    let fsmDe = fixture.debugElement.query(By.css('#fsm'));
+    let fsmDe = fixture.debugElement.query(By.css('#fsm')).parent;
+    let fsmNe = fsmDe.nativeElement;
 
-    expect(fsmDe).toBeNull();
+    expect(fsmNe.attributes["hidden"]).not.toBeUndefined();
+
   });
 
   it('should not display error summary when there are no validation errors in form', () => {
