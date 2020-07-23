@@ -369,8 +369,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     }, { validators: mustBeLowerThanTotalSpendingValidator });
 
     if(this.scenarioInEdit.overallPhase === "Primary" || this.scenarioInEdit.overallPhase === "Secondary") {
-      this.fsm.setValidators(Validators.required);
-      this.fsm.setValidators(Validators.min(0));
+      this.fsm.setValidators([Validators.required, Validators.min(0)]);
     }
 
   }
