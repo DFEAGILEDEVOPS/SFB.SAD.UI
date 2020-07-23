@@ -5,6 +5,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <h1 class="govuk-heading-xl">Self-assessment dashboard</h1>
+      <div class="govuk-caption-m date-caption" *ngIf='activeScenario.isEdited'>Page last edited: {{activeScenario.lastEditTimeStamp | date: 'dd/MM/yy, HH:mm'}}</div>
       <p class="govuk-body-s">
         Assessing
         <span class="highlight">

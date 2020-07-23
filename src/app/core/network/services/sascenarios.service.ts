@@ -156,6 +156,8 @@ export class SaScenariosService {
 
     newModel.initAAsWithCalculatedData();
     newModel.isEdited = true;
+    newModel.lastEditTimeStamp = savedModel.lastEditTimeStamp;
+    
     return newModel;
   }
 

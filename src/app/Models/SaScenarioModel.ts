@@ -38,8 +38,8 @@ export class SaScenarioModel {
   scenarioNo: number;
   isEdited: boolean;
   isTresholdsRefreshed: boolean;
+  lastEditTimeStamp: Date;
   data: SaData;
-
 
   constructor(data: SaData) {
     this.data = data;

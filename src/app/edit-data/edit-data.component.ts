@@ -185,6 +185,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       editedScenario.setAAValue('Revenue reserve', this.currencyToNumber(this.editDataForm.value.reserveBalance.rr));
 
       editedScenario.isEdited = true;
+      editedScenario.lastEditTimeStamp = new Date();
 
       if (this.viewType === 'edit' && this.scenarioNo === null) {
         if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
