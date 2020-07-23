@@ -4,7 +4,9 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <h1 class="govuk-heading-xl">Side-by-side scenario</h1>
+      <h1 class="govuk-heading-xl">Self-assessment dashboard</h1>
+      <div class="govuk-caption-m date-caption" *ngIf='firstScenario.lastEditTimeStamp > secondScenario.lastEditTimeStamp'>Page last edited: {{firstScenario.lastEditTimeStamp | date: 'dd/MM/yy, HH:mm'}}</div>
+      <div class="govuk-caption-m date-caption" *ngIf='secondScenario.lastEditTimeStamp > firstScenario.lastEditTimeStamp'>Page last edited: {{secondScenario.lastEditTimeStamp | date: 'dd/MM/yy, HH:mm'}}</div>
       <p class="govuk-body-s">
         Assessing
         <span class="highlight">
