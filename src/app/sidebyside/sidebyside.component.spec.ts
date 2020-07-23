@@ -34,6 +34,21 @@ describe('Component: SideBySide', () => {
     comp = TestBed.inject(SidebysideComponent);
   });
 
+  it('should load both scenarios on initialization', () => {
+    const stubSaData1 = new SaData();
+    stubSaData1.urn = 111;
+    const stubSaData2 = new SaData();
+    stubSaData2.urn = 222;
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData1)));
+    saScenariosServiceSpy.getSecondScenario.and.returnValue(new SaScenarioModel(stubSaData2));
+
+    comp.ngOnInit();
+
+    expect(comp.firstScenarioLoaded).toBeTrue();
+    expect(comp.secondScenarioLoaded).toBeTrue();
+
+  });
+
   it('should delete the first scenario and replace with second when removed first', () => {
     const stubSaData1 = new SaData();
     stubSaData1.urn = 111;
