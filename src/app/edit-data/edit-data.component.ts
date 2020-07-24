@@ -28,6 +28,15 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   @ViewChild('averageClassSizeElement') averageClassSizeElement: ElementRef;
   @ViewChild('predictedPupilElement') predictedPupilElement: ElementRef;
   @ViewChild('teacherContactRatioElement') teacherContactRatioElement: ElementRef;
+  @ViewChild('teachingStaffInput') teachingStaffInput: ElementRef;
+  @ViewChild('supplyStaffInput') supplyStaffInput: ElementRef;
+  @ViewChild('educationSupportStaffInput') educationSupportStaffInput: ElementRef;
+  @ViewChild('adminStaffInput') adminStaffInput: ElementRef;
+  @ViewChild('otherStaffInput') otherStaffInput: ElementRef;
+  @ViewChild('premisesInput') premisesInput: ElementRef;
+  @ViewChild('teachingResourcesInput') teachingResourcesInput: ElementRef;
+  @ViewChild('energyInput') energyInput: ElementRef;
+  @ViewChild('revenueReserveInput') revenueReserveInput: ElementRef;
 
   @ViewChild('errorSummaryElement') errorSummaryElement: ElementRef;
 
@@ -142,7 +151,6 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       this.scenarioInEdit = this.scenariosService.getSecondScenario(this.urn);
       this.scenarioLoaded = true;
       this.buildForm();
-      this.focusOnAddField();
     }
   }
 
@@ -320,6 +328,34 @@ export class EditDataComponent implements OnInit, AfterViewInit {
 
   private focusOnAddField() {
     switch (this.missingField) {
+      case 'Revenue reserve':
+        setTimeout(() => this.revenueReserveInput.nativeElement.focus());
+        break;
+      case 'Teaching staff':
+      case 'Average teacher cost':
+        setTimeout(() => this.teachingStaffInput.nativeElement.focus());
+        break;
+      case 'Supply staff':
+        setTimeout(() => this.supplyStaffInput.nativeElement.focus());
+        break;
+      case 'Education support staff':
+        setTimeout(() => this.educationSupportStaffInput.nativeElement.focus());
+        break;
+      case 'Administrative and clerical staff':
+        setTimeout(() => this.adminStaffInput.nativeElement.focus());
+        break;
+      case 'Other staff costs':
+        setTimeout(() => this.otherStaffInput.nativeElement.focus());
+        break;
+      case 'Premises costs':
+        setTimeout(() => this.premisesInput.nativeElement.focus());
+        break;
+      case 'Teaching resources':
+        setTimeout(() => this.teachingResourcesInput.nativeElement.focus());
+        break;
+      case 'Energy':
+        setTimeout(() => this.energyInput.nativeElement.focus());
+        break;
       case 'Teacher contact ratio (less than 1)':
         setTimeout(() => this.teacherContactRatioElement.nativeElement.focus());
         break;

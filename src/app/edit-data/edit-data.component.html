@@ -303,7 +303,7 @@
 
       <div class="govuk-form-group"
         [class]="{'govuk-form-group--error' : !averageClassSize.valid && !averageClassSize.pristine}">
-        <label class="govuk-label" for="acs">
+        <label class="govuk-label" for="acsize">
           Average Class size
         </label>
         <div *ngIf="averageClassSize.invalid && averageClassSize.dirty">
@@ -311,7 +311,7 @@
             <span class="govuk-visually-hidden">Error:</span> Average class size must be minimum 0
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="number" formControlName='averageClassSize' #averageClassSizeElement
+        <input class="govuk-input govuk-input--width-20" id="acsize" name="acsize" type="number" formControlName='averageClassSize' #averageClassSizeElement
           [class]="{'govuk-input--error' : !averageClassSize.valid && !averageClassSize.pristine}"
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.averageClassSize)">
       </div>
@@ -378,7 +378,7 @@
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve') | aaValueFormat}}</span>
         </span>
-        <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text"
+        <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text" #revenueReserveInput
         formControlName='rr'
         (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr)"
         >
