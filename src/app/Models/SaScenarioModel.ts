@@ -81,7 +81,7 @@ export class SaScenarioModel {
 
   get overallPhaseWSixthForm(): string {
     if (this.hasSixthForm && this.overallPhase !== 'All-through') {
-     return this.overallPhase + ' with sixth form';
+      return this.overallPhase + ' with sixth form';
     }
     return this.overallPhase;
   }
@@ -230,9 +230,13 @@ export class SaScenarioModel {
   }
 
   private setAAsMatchingTreshold(aa: AssessmentAreaModel) {
-    aa.matchingTreshold = aa.allTresholds
-      .find(t => (aa.calculatedSchoolData >= t.scoreLow || t.scoreLow == null)
-        && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh === null));
+    if (aa.calculatedSchoolData) {
+      aa.matchingTreshold = aa.allTresholds
+        .find(t => (aa.calculatedSchoolData >= t.scoreLow || t.scoreLow == null)
+          && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh === null));
+    } else {
+      aa.matchingTreshold = null;
+    }
   }
 }
 

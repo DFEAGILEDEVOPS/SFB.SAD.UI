@@ -89,7 +89,8 @@
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'>Add data</a>
           </span>
-          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" />
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          (click)="openModalWithComponent(aa.assessmentAreaName)" />
         </td>
       </tr>
     </tbody>
@@ -121,7 +122,8 @@
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'>Add data</a>
           </span>
-          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" />
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          (click)="openModalWithComponent(aa.assessmentAreaName)" />
         </td>
       </tr>
     </tbody>
@@ -154,7 +156,8 @@
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'>Add data</a>
           </span>
-          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon" />
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          (click)="openModalWithComponent(aa.assessmentAreaName)" />
         </td>
       </tr>
     </tbody>
