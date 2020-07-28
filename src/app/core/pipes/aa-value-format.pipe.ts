@@ -22,7 +22,7 @@ export class AaValueFormatPipe implements PipeTransform {
       case 'Pupil to adult ratio':
       case 'Teacher contact ratio (less than 1)':
       case 'Average Class size':
-        return value;
+        return value?.toFixed(2);
       default:
         if (value === null || value === undefined) {
           return '';
