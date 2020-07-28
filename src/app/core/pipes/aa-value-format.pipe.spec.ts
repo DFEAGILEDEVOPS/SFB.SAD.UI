@@ -14,7 +14,7 @@ describe('Pipe: aaValueFormat', () => {
   });
 
   it('transforms ratios correctly', () => {
-    expect(pipe.transform(10, 'Pupil to teacher ratio')).toBe(10);
+    expect(pipe.transform(10, 'Pupil to teacher ratio')).toBe("10.00");
   });
 
   it('transforms percentages correctly', () => {
