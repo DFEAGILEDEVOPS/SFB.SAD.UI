@@ -1,3 +1,4 @@
+import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { SaScenarioModel } from '../Models/SaScenarioModel';
@@ -6,6 +7,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
+import { AAModalModel } from 'app/Models/AAModalModel';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,20 +44,41 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    openModalWithComponent(assessmentArea: string) {
-      const modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
-      const assessmentAreas = this.activeScenario.sadAssessmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
-      const initialState = {
-        assessmentArea : modalContent.assessmentArea,
-        title: modalContent.title,
-        textContent: modalContent.textContent,
-        tresholds: assessmentAreas.allTresholds,
-        matchingTreshold: assessmentAreas.matchingTreshold,
-        tresholdFormat: getAADataFormat(modalContent.assessmentArea)
-      };
+  openModalWithComponent(assessmentArea: string) {
+    let modalContent: AAModalModel;
+    let initialState: any;
+    let assessmentAreas: AssessmentAreaModel;
 
-      this.modalRef = this.modalService.show(DashboardAaModalComponent, {initialState});
+    switch (assessmentArea) {
+      case 'Ofsted':
+      case 'KS2':
+      case 'P8':
+        modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
+        initialState = {
+          assessmentArea: assessmentArea,
+          title: modalContent.title,
+          textContent: modalContent.textContent,
+        };
+
+        this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+        break;
+
+      default:
+        modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
+        assessmentAreas = this.activeScenario.sadAssessmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
+        initialState = {
+          assessmentArea: modalContent.assessmentArea,
+          title: modalContent.title,
+          textContent: modalContent.textContent,
+          tresholds: assessmentAreas.allTresholds,
+          matchingTreshold: assessmentAreas.matchingTreshold,
+          tresholdFormat: getAADataFormat(modalContent.assessmentArea)
+        };
+
+        this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+        break;
     }
+  }
 
     onReset() {
       this.saScenariosService.deleteFirstScenario();

@@ -2,6 +2,9 @@
   display: inline-block;
   width: 40%;
   vertical-align: top;
+  &.Ofsted, &.P8, &.KS2{
+    width: 100%;
+  }
 }
 
 .aa-modal-right-section{

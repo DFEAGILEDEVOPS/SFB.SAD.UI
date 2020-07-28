@@ -4,6 +4,27 @@ export class AAModalModels {
   constructor() {
     this.models = [
       {
+        assessmentArea : 'Ofsted',
+        title : 'Ofsted rating',
+        textContent : `<p>Schools Ofsted rating is taken from the most recent rating available to DfE through Get Information about schools serves.  There can be a few days delay between the Ofsted publication of a rating and linking through to GIAS and ultimately to Schools Financial Benchmarking.</p>
+        <p>Schools rated Inadequate receive a red rating; schools rated Requires Improvement receive an amber rating; schools rated Good receive a light green rating; and schools rated Outstanding receive a dark green rating.</p>`
+      },
+      {
+        assessmentArea : 'KS2',
+        title : 'KS 2 Average progress score',
+        textContent : `<p>KS 2 Average progress score is an average of the reading, writing and maths progress scores. Individually these show how much progress pupils have made between the end of key stage 1 and the end of key stage 2, compared to pupils across all of England who achieved similar results at the end of key stage 1. This measure only applies to schools with key stage 2 classes.</p>
+        <p>Schools will receive an amber or red rating if their KS 2 Average progress score is below average.</p>
+        <p>Progress scores can be found on the <a href="https://www.gov.uk/school-performance-tables" class="govuk-link" target="_blank" rel="external noopener noreferrer">school performance tables website</a>.</p>`
+      },
+      {
+        assessmentArea : 'P8',
+        title : 'Progress 8 score',
+        textContent : `<p>Progress 8 scores show how much progress pupils have made between the end of key stage 2 and the end of key stage 4, compared to pupils across all of England who got similar results at the end of key stage 2. This measure only applies to schools with key stage 4.</p>
+        <p>Schools will receive an amber or red rating if their progress score is below average.</p>
+        <p>Progress scores can be found on the <a href="https://www.gov.uk/school-performance-tables" class="govuk-link" target="_blank" rel="external noopener noreferrer">school performance tables website</a>.</p>
+        <p>Thresholds have been set using the department’s progress measure bandings.</p>`
+      },
+      {
         assessmentArea : 'Teaching staff',
         title : 'Spend on teaching staff as a percentage of total expenditure',
         textContent : `<p>Spend on teaching staff typically takes up the largest proportion of a school’s overall spending.</p>
