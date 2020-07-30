@@ -4,6 +4,10 @@ import { SaScenarioModel } from 'app/Models/SaScenarioModel';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Router } from '@angular/router';
+import { AAModalModel } from 'app/Models/AAModalModel';
+import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
+import { DashboardAaModalComponent } from 'app/dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
+import { getAADataFormat } from '@core/network/services/getAADataFormat';
 
 
 @Component({
@@ -44,6 +48,42 @@ export class SidebysideComponent implements OnInit {
       if (scenarioNo === 1) {
         this.saScenariosService.deleteSecondScenario();
         this.router.navigate(['self-assessment/', this.firstScenario.urn]);
+      }
+    }
+
+    openModalWithComponent(assessmentArea: string, activeScenario: SaScenarioModel) {
+      let modalContent: AAModalModel;
+      let initialState: any;
+      let assessmentAreas: AssessmentAreaModel;
+
+      switch (assessmentArea) {
+        case 'Ofsted':
+        case 'KS2':
+        case 'P8':
+          modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
+          initialState = {
+            assessmentArea: assessmentArea,
+            title: modalContent.title,
+            textContent: modalContent.textContent,
+          };
+
+          this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+          break;
+
+        default:
+          modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
+          assessmentAreas = activeScenario.sadAssessmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
+          initialState = {
+            assessmentArea: modalContent.assessmentArea,
+            title: modalContent.title,
+            textContent: modalContent.textContent,
+            tresholds: assessmentAreas.allTresholds,
+            matchingTreshold: assessmentAreas.matchingTreshold,
+            tresholdFormat: getAADataFormat(modalContent.assessmentArea)
+          };
+
+          this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+          break;
       }
     }
 

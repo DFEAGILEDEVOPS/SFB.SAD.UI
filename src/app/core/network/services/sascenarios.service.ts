@@ -80,6 +80,7 @@ export class SaScenariosService {
       secondScenario.sadAssessmentAreas?.forEach(aa => {
         aa.schoolData = null;
         aa.calculatedSchoolData = null;
+        aa.matchingTreshold = null;
       });
       return secondScenario;
     }
@@ -157,13 +158,12 @@ export class SaScenariosService {
     newModel.initAAsWithCalculatedData();
     newModel.isEdited = true;
     newModel.lastEditTimeStamp = savedModel.lastEditTimeStamp;
-    
+
     return newModel;
   }
 
   private refreshAATresholdsWithApiData(scenario: SaScenarioModel) {
     return from(new Promise((resolve) => {
-
       scenario.isTresholdsRefreshed = false;
       scenario.sadAssessmentAreas.forEach(aa => {
         aa.allTresholds = null;
@@ -181,9 +181,10 @@ export class SaScenariosService {
           scenario.termOfScenario)
           .subscribe(results => {
             aa.allTresholds = results;
-            aa.matchingTreshold = aa.allTresholds
-              .find(t => (aa.calculatedSchoolData >= t.scoreLow || t.scoreLow == null)
-                && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh === null));
+            if (aa.calculatedSchoolData != null) {
+              aa.matchingTreshold = aa.allTresholds
+                .find(t => (aa.calculatedSchoolData >= t.scoreLow || t.scoreLow == null) && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh === null));
+            }
             scenario.isTresholdsRefreshed = scenario.sadAssessmentAreas.every(a => a.allTresholds);
             if (scenario.isTresholdsRefreshed) {
               resolve();

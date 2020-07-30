@@ -26,23 +26,23 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService) {
-      this.route.paramMap.subscribe(pmap => {
-        this.urn = +pmap.get('urn');
-      });
-      this.aaModalModels = new AAModalModels();
-      this.scenarioLoaded = false;
-    }
+    this.route.paramMap.subscribe(pmap => {
+      this.urn = +pmap.get('urn');
+    });
+    this.aaModalModels = new AAModalModels();
+    this.scenarioLoaded = false;
+  }
 
-    ngOnInit() {
-      this.saScenariosService.getFirstScenario(this.urn).
-        subscribe(result => {
-          if (this.saScenariosService.isSecondScenarioEditedAndStored(this.urn)) {
-            this.router.navigate(['self-assessment/side-by-side']);
-          }
-          this.activeScenario = result;
-          this.scenarioLoaded = true;
-        });
-    }
+  ngOnInit() {
+    this.saScenariosService.getFirstScenario(this.urn).
+      subscribe(result => {
+        if (this.saScenariosService.isSecondScenarioEditedAndStored(this.urn)) {
+          this.router.navigate(['self-assessment/side-by-side']);
+        }
+        this.activeScenario = result;
+        this.scenarioLoaded = true;
+      });
+  }
 
   openModalWithComponent(assessmentArea: string) {
     let modalContent: AAModalModel;
@@ -80,8 +80,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-    onReset() {
-      this.saScenariosService.deleteFirstScenario();
-      this.ngOnInit();
-    }
+  onReset() {
+    this.saScenariosService.deleteFirstScenario();
+    this.ngOnInit();
+  }
 }

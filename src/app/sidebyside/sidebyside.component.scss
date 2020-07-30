@@ -2,6 +2,13 @@
 
 .rating-box{
   font-size: 14px;
+  width: 64%;
+  padding: 6px 12px;
+  vertical-align: middle;
+}
+
+.rating-box.gray a{
+  display: block;
 }
 
 td.cell-separate, th.cell-separate{
@@ -33,10 +40,7 @@ td.cell-separate, th.cell-separate{
 }
 
 .rating-help-icon{
-  float: right;
-  position: relative;
-  top: 5px;
-  right: 5px;
+  margin-left: 10px;
   cursor: pointer;
 }
 
@@ -79,9 +83,9 @@ td.cell-separate, th.cell-separate{
   text-align: center;
   padding: 3px;
   min-width: 50px;
-  display: inline-block;
   border-radius: 3px;
-  width: 99%;
+  width: 93%;
+  float: left;
 
   &--well-below {
     background-color: #df3034;

@@ -91,9 +91,11 @@
         <td class="govuk-table__cell">
           {{firstScenario.reserveAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.reserveAAs[i].assessmentAreaName}}
         </td>
-        <td *ngIf="firstScenario.reserveAAs[i].schoolData !== null" class="govuk-table__cell">
+        <td *ngIf="firstScenario.reserveAAs[i].schoolData != null" class="govuk-table__cell">
           <span class="rating-box"
             [class]='firstScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+            (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)" />
         </td>
         <td *ngIf="firstScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
@@ -101,15 +103,19 @@
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.reserveAAs[i].assessmentAreaName}}/0'>Add data</a>
           </span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
+          (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)" />
         </td>
         <!---->
         <td class="govuk-table__cell cell-separate" nowrap>{{secondScenario.reserveAAs[i].schoolData | aaValueFormat}}</td>
         <td class="govuk-table__cell">
           {{secondScenario.reserveAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.reserveAAs[i].assessmentAreaName}}
         </td>
-        <td *ngIf="secondScenario.reserveAAs[i].schoolData !== null" class="govuk-table__cell">
+        <td *ngIf="secondScenario.reserveAAs[i].schoolData != null" class="govuk-table__cell">
           <span class="rating-box"
             [class]='secondScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)" />
         </td>
         <td *ngIf="secondScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
@@ -117,6 +123,8 @@
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.reserveAAs[i].assessmentAreaName}}/1'>Add data</a>
           </span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
+          (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)" />
         </td>
       </tr>
     </tbody>
@@ -149,9 +157,11 @@
         <td class="govuk-table__cell">
           {{firstScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.spendingAAs[i].assessmentAreaName }}
         </td>
-        <td *ngIf="firstScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
+        <td *ngIf="firstScenario.spendingAAs[i].schoolData != null" class="govuk-table__cell">
           <span class="rating-box"
             [class]='firstScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario)" />
         </td>
         <td *ngIf="firstScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
@@ -159,15 +169,19 @@
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.spendingAAs[i].assessmentAreaName}}/0'>Add data</a>
           </span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
+          (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario)" />
         </td>
         <!---->
         <td class="govuk-table__cell cell-separate" nowrap>{{secondScenario.spendingAAs[i].schoolData | aaValueFormat}}</td>
         <td class="govuk-table__cell">
           {{secondScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.spendingAAs[i].assessmentAreaName }}
         </td>
-        <td *ngIf="secondScenario.spendingAAs[i].schoolData !== null" class="govuk-table__cell">
+        <td *ngIf="secondScenario.spendingAAs[i].schoolData != null" class="govuk-table__cell">
           <span class="rating-box"
             [class]='secondScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario)" />
         </td>
         <td *ngIf="secondScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
@@ -175,6 +189,8 @@
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.spendingAAs[i].assessmentAreaName}}/1'>Add data</a>
           </span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
+          (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario)" />
         </td>
       </tr>
     </tbody>
@@ -204,24 +220,30 @@
         <td class="govuk-table__cell cell-separate" nowrap>
           <span>{{firstScenario.characteristicAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.characteristicAAs[i].assessmentAreaName}}</span>
         </td>
-        <td *ngIf="firstScenario.characteristicAAs[i].schoolData !== null" class="govuk-table__cell">
+        <td *ngIf="firstScenario.characteristicAAs[i].schoolData" class="govuk-table__cell">
           <span class="rating-box"
             [class]='firstScenario.characteristicAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold?.ratingText}}</span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+            (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, firstScenario)" />
         </td>
-        <td *ngIf="firstScenario.characteristicAAs[i].schoolData === null" class="govuk-table__cell">
+        <td *ngIf="!firstScenario.characteristicAAs[i].schoolData" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.characteristicAAs[i].assessmentAreaName}}/0'>Add data</a>
           </span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
+          (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, firstScenario)" />
         </td>
         <!---->
         <td class="govuk-table__cell cell-separate" nowrap>
           <span>{{secondScenario.characteristicAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.characteristicAAs[i].assessmentAreaName}}</span>
         </td>
-        <td *ngIf="secondScenario.characteristicAAs[i].schoolData !== null" class="govuk-table__cell">
+        <td *ngIf="secondScenario.characteristicAAs[i].schoolData != null" class="govuk-table__cell">
           <span class="rating-box"
             [class]='secondScenario.characteristicAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.characteristicAAs[i].matchingTreshold?.ratingText}}</span>
+            <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+            (click)="openModalWithComponent(secondScenario.characteristicAAs[i].assessmentAreaName, secondScenario)" />
         </td>
         <td *ngIf="secondScenario.characteristicAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
@@ -229,6 +251,8 @@
             <a class="govuk-link ml-2 button-link"
             routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.characteristicAAs[i].assessmentAreaName}}/1'>Add data</a>
           </span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
+          (click)="openModalWithComponent(secondScenario.characteristicAAs[i].assessmentAreaName, secondScenario)" />
         </td>
       </tr>
     </tbody>
@@ -264,6 +288,8 @@
             report</a>
           <span *ngIf='firstScenario.ofstedInspectionDate'> | Inspected
             {{ firstScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
+            <img style="float: right; margin-right: 11px;" src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+            (click)="openModalWithComponent('Ofsted', null)"/>
         </td>
       </tr>
       <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'KS2 score'">
@@ -287,6 +313,8 @@
             </span>
           </div>
           <span [hidden]='firstScenario.progressScore' style="float: left">N/A</span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          (click)="openModalWithComponent('KS2', null)"/>
         </td>
       </tr>
       <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'Progress 8 score'">
@@ -310,6 +338,8 @@
             </span>
           </div>
           <span [hidden]='firstScenario.progressScore' style="float: left">N/A</span>
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          (click)="openModalWithComponent('P8', null)"/>
         </td>
       </tr>
     </tbody>

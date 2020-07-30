@@ -126,7 +126,7 @@ export class SaScenarioModel {
     if (averageTeacherCostAA) {
       averageTeacherCostAA.totalForAreaType = this.teachersTotal;
       averageTeacherCostAA.schoolData = this.getAAValue('Teaching staff');
-      if (averageTeacherCostAA.schoolData !== null) {
+      if (averageTeacherCostAA.schoolData != null) {
         averageTeacherCostAA.calculatedSchoolData = parseFloat((averageTeacherCostAA.schoolData
           / averageTeacherCostAA.totalForAreaType).toFixed(2));
       } else {
@@ -139,7 +139,7 @@ export class SaScenarioModel {
     if (seniorLeadersAA) {
       seniorLeadersAA.totalForAreaType = this.workforceTotal;
       seniorLeadersAA.schoolData = this.teachersLeader;
-      if (seniorLeadersAA.schoolData !== null) {
+      if (seniorLeadersAA.schoolData != null) {
         seniorLeadersAA.calculatedSchoolData = parseFloat((seniorLeadersAA.schoolData
           / seniorLeadersAA.totalForAreaType).toFixed(2));
       } else {
@@ -152,7 +152,7 @@ export class SaScenarioModel {
     if (pupilToTeacherAA) {
       pupilToTeacherAA.totalForAreaType = this.teachersTotal;
       pupilToTeacherAA.schoolData = this.numberOfPupils;
-      if (pupilToTeacherAA.schoolData !== null) {
+      if (pupilToTeacherAA.schoolData != null) {
         pupilToTeacherAA.calculatedSchoolData = parseFloat((pupilToTeacherAA.schoolData
           / pupilToTeacherAA.totalForAreaType).toFixed(2));
       } else {
@@ -165,7 +165,7 @@ export class SaScenarioModel {
     if (pupilToAdultAA) {
       pupilToAdultAA.totalForAreaType = this.workforceTotal;
       pupilToAdultAA.schoolData = this.numberOfPupils;
-      if (pupilToAdultAA.schoolData !== null) {
+      if (pupilToAdultAA.schoolData != null) {
         pupilToAdultAA.calculatedSchoolData = parseFloat((pupilToAdultAA.schoolData
           / pupilToAdultAA.totalForAreaType).toFixed(2));
       } else {
@@ -202,7 +202,7 @@ export class SaScenarioModel {
         aa.schoolData = aa.schoolDataLatestTerm;
       }
 
-      if (aa.schoolData !== null) {
+      if (aa.schoolData != null) {
         aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
       } else {
         aa.calculatedSchoolData = null;
@@ -219,7 +219,7 @@ export class SaScenarioModel {
         aa.schoolData = aa.schoolDataLatestTerm;
       }
 
-      if (aa.schoolData !== null) {
+      if (aa.schoolData != null) {
         aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
       } else {
         aa.calculatedSchoolData = null;
