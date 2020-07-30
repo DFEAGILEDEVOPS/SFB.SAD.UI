@@ -27,7 +27,7 @@ export class AaValueFormatPipe implements PipeTransform {
         if (value === null || value === undefined) {
           return '';
         }
-        return `${(value * 100).toFixed(0)}%`;
+        return `${(value * 100).toFixed(1)}%`;
     }
   }
 
