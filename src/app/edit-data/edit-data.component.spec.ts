@@ -14,6 +14,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { ActivatedRouteStub } from 'testing/activated-route-stub';
 import { SaSizeLookupService } from '@core/network/services/sasizelookup.service';
 import { By } from '@angular/platform-browser';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 
 function asyncData<T>(data: T) {
@@ -42,6 +43,7 @@ describe('Component: Edit-data', () => {
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: Router, useValue: routerSpy },
         { provide: FormBuilder, useClass: FormBuilder },
+        { provide: BsModalService, useValue: jasmine.createSpyObj('BsModalService', ['_']) },
       ],
       declarations: [EditDataComponent, AaValueFormatPipe]
     })

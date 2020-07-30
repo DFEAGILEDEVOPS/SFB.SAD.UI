@@ -1,3 +1,4 @@
+import { EditDataInfoModalComponent } from './edit-data-info-modal/edit-data-info-modal.component';
 import { mustBeLowerThanTotalSpendingValidator } from './../core/directives/mustBeLowerThanTotalSpendingValidator.directive';
 import { Location, CurrencyPipe } from '@angular/common';
 import { SaFsmLookupService } from './../core/network/services/safsmlookup.service';
@@ -9,6 +10,9 @@ import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isNumber } from 'util';
 import { Title } from '@angular/platform-browser';
+import { AAModalModel } from 'app/Models/AAModalModel';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { EditModalModels } from 'app/Models/EditModalModels';
 
 @Component({
   selector: 'app-edit-data',
@@ -24,6 +28,8 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   scenarioLoaded: boolean;
   missingField: string;
   formSubmitted: boolean;
+  modalRef: BsModalRef;
+  editDataModels: EditModalModels;
 
   @ViewChild('averageClassSizeElement') averageClassSizeElement: ElementRef;
   @ViewChild('predictedPupilElement') predictedPupilElement: ElementRef;
@@ -129,7 +135,8 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     private fsmLookupService: SaFsmLookupService,
     private currencyPipe: CurrencyPipe,
     private location: Location,
-    private titleService: Title ) {
+    private titleService: Title,
+    private modalService: BsModalService, ) {
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
       this.viewType = pmap.get('viewType') ?? 'edit';
@@ -137,6 +144,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       this.scenarioNo = pmap.get('scenarioNo') ? Number(pmap.get('scenarioNo')) : null;
     });
     this.scenarioLoaded = false;
+    this.editDataModels = new EditModalModels();
   }
 
   ngOnInit() {
@@ -303,6 +311,16 @@ export class EditDataComponent implements OnInit, AfterViewInit {
 
   setFocus(input){
     input.focus();
+  }
+
+  openModalWithComponent(formControlName: string) {
+    let modalContent = this.editDataModels.models.find(aa => aa.formControlName === formControlName);
+    let initialState = {
+      title: modalContent.title,
+      textContent: modalContent.textContent,
+    };
+
+    this.modalRef = this.modalService.show(EditDataInfoModalComponent, { initialState });
   }
 
   private numberToDecimal(val: number): number {

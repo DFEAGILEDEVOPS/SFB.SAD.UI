@@ -2,3 +2,7 @@ select {
   width: 100%;
   max-width: 41ex;
 }
+
+.edit-help-icon {
+  cursor: pointer;
+}

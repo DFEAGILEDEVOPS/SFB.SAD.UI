@@ -136,6 +136,7 @@
       <div class="govuk-form-group">
         <label class="govuk-label" for="scenario-term">
           Year of scenario
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('scenarioTerm')"/>
         </label>
         <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm'>
           <option value="2017/2018">2017/2018</option>
@@ -157,6 +158,7 @@
         [class]="{'govuk-form-group--error' : !numberOfPupils.valid && !numberOfPupils.pristine}">
         <label class="govuk-label" for="number-pupils">
           Number of pupils (FTE)
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('numberOfPupils')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -180,6 +182,7 @@
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}">
         <label class="govuk-label" for="school-workforce">
           School workforce (FTE)
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('schoolWorkforce')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -203,6 +206,7 @@
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}">
         <label class="govuk-label" for="number-teachers">
           Number of teachers (FTE)
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('numberOfTeachers')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -226,6 +230,7 @@
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !seniorLeadership.valid && !seniorLeadership.pristine}">
         <label class="govuk-label" for="senior-leadership">
           Senior leadership (FTE)
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('seniorLeadership')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -250,6 +255,7 @@
         [hidden]='scenarioInEdit.overallPhase !== "Primary" && scenarioInEdit.overallPhase !== "Secondary"'>
         <label class="govuk-label" for="fsm">
           Percentage of pupils eligible for FSM
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('fsm')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -273,6 +279,7 @@
         [class]="{'govuk-form-group--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}">
         <label class="govuk-label" for="tcr">
           Teacher contact ratio (less than 1)
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('teacherContactRatio')"/>
         </label>
         <div *ngIf="teacherContactRatio.invalid && teacherContactRatio.dirty">
           <span *ngIf="teacherContactRatio.errors.min" class="govuk-error-message">
@@ -290,6 +297,7 @@
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !predictedPupil.valid && !predictedPupil.pristine}">
         <label class="govuk-label" for="ppl">
           Predicted percentage pupil number change in 3-5 years
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('predictedPupil')"/>
         </label>
         <div *ngIf="predictedPupil.invalid && predictedPupil.dirty">
           <span *ngIf="predictedPupil.errors.min" class="govuk-error-message">
@@ -305,6 +313,7 @@
         [class]="{'govuk-form-group--error' : !averageClassSize.valid && !averageClassSize.pristine}">
         <label class="govuk-label" for="acsize">
           Average Class size
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('averageClassSize')"/>
         </label>
         <div *ngIf="averageClassSize.invalid && averageClassSize.dirty">
           <span *ngIf="averageClassSize.errors.min" class="govuk-error-message">
@@ -327,6 +336,7 @@
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !totalIncome.valid && !totalIncome.pristine}">
         <label class="govuk-label" for="total-income">
           Total income
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('totalIncome')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -348,6 +358,7 @@
         [class]="{'govuk-form-group--error' : (!totalExpenditure.valid && !totalExpenditure.pristine) || editDataForm.errors?.maxExpenditureExceeded}">
         <label class="govuk-label" for="total-expenditure">
           Total expenditure
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('totalExpenditure')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -373,6 +384,7 @@
       <div class="govuk-form-group">
         <label class="govuk-label" for="rr">
           Revenue reserve
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('rr')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -396,6 +408,7 @@
         [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingStaffExceeded}">
         <label class="govuk-label" for="ts">
           Spending on teaching staff
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('teachingStaff')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -417,6 +430,7 @@
         [class]="{'govuk-form-group--error' : editDataForm.errors?.supplyStaffExceeded}">
         <label class="govuk-label" for="ss">
           Spending on supply staff
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('supplyStaff')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -438,6 +452,7 @@
         [class]="{'govuk-form-group--error' : editDataForm.errors?.educationSupportStaffExceeded}">
         <label class="govuk-label" for="ess">
           Spending on education support staff
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('educationSupportStaff')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -459,6 +474,7 @@
         [class]="{'govuk-form-group--error' : editDataForm.errors?.adminStaffExceeded}">
         <label class="govuk-label" for="acs">
           Spending on administrative and clerical staff
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('adminStaff')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -480,6 +496,7 @@
         [class]="{'govuk-form-group--error' : editDataForm.errors?.otherStaffExceeded}">
         <label class="govuk-label" for="osc">
           Spending on other staff costs
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('otherStaff')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -501,6 +518,7 @@
         [class]="{'govuk-form-group--error' : editDataForm.errors?.premisesExceeded}">
         <label class="govuk-label" for="prc">
           Spending on premises costs
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('premises')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -522,6 +540,7 @@
         [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingResourcesExceeded}">
         <label class="govuk-label" for="tr">
           Spending on teaching resources
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('teachingResources')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
@@ -543,6 +562,7 @@
         [class]="{'govuk-form-group--error' : editDataForm.errors?.energyExceeded}">
         <label class="govuk-label" for="en">
           Spending on energy
+          <img src="assets/images/help-icon.png" class="small-icon edit-help-icon" (click)="openModalWithComponent('energy')"/>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
