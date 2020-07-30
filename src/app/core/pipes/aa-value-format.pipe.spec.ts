@@ -18,7 +18,7 @@ describe('Pipe: aaValueFormat', () => {
   });
 
   it('transforms percentages correctly', () => {
-    expect(pipe.transform(0.49, null)).toBe('49%');
+    expect(pipe.transform(0.49, null)).toBe('49.0%');
   });
 
 });
