@@ -4,6 +4,24 @@
 @import "govuk-frontend/govuk/all";
 @import "bootstrap/scss/bootstrap";
 
+@media print {
+  .show-in-print {
+    display: block;
+  }
+
+  .hide-in-print {
+    display: none;
+  }
+
+  table {
+    page-break-inside: avoid;
+  }
+
+  .rating-help-icon {
+    display: none;
+  }
+}
+
 *, *::before, *::after {
     box-sizing: content-box;//changed to fix check boxes
 }
@@ -235,3 +253,5 @@ caption{
   margin-top: -40px;
   margin-bottom: 40px;
 }
+
+
