@@ -230,7 +230,7 @@ export class SaScenarioModel {
   }
 
   private setAAsMatchingTreshold(aa: AssessmentAreaModel) {
-    if (aa.calculatedSchoolData) {
+    if (aa.calculatedSchoolData != null) {
       aa.matchingTreshold = aa.allTresholds
         .find(t => (aa.calculatedSchoolData >= t.scoreLow || t.scoreLow == null)
           && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh === null));
