@@ -94,4 +94,8 @@ export class SidebysideComponent implements OnInit {
       this.router.navigate(['self-assessment/', urn]);
     }
 
+    onPrintPage() {
+      window.print();
+    }
+
 }

@@ -84,4 +84,9 @@ export class DashboardComponent implements OnInit {
     this.saScenariosService.deleteFirstScenario();
     this.ngOnInit();
   }
+
+  onPrintPage() {
+    window.print();
+  }
+  
 }
