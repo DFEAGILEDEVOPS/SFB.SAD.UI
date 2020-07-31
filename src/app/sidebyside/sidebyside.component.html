@@ -1,6 +1,6 @@
 <div *ngIf='firstScenarioLoaded && firstScenario.isTresholdsRefreshed && secondScenarioLoaded && secondScenario.isTresholdsRefreshed'>
 
-  <app-sidebyside-breadcrumb [urn]='firstScenario.urn' [name]='firstScenario.name'></app-sidebyside-breadcrumb>
+  <app-sidebyside-breadcrumb [urn]='firstScenario.urn' [name]='firstScenario.name' class="hide-in-print"></app-sidebyside-breadcrumb>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -25,7 +25,7 @@
     [noPupils2]='secondScenario.numberOfPupils' [FSM2]='secondScenario.fsm' [SizeLookup2]='secondScenario.sadSizeLookup'
     [FSMLookup2]='secondScenario.sadFSMLookup'></app-sidebyside-characteristics>
 
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row hide-in-print">
     <div class="govuk-grid-column-one-half">
       <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold">
         <img src="assets/images/icon-file-download.png" style="max-width: 17px;" class="small-icon" />
@@ -50,7 +50,7 @@
         <th scope="col" class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" colspan="3">
           <span class="govuk-!-font-size-24">{{firstScenario.scenarioName}}</span>
           <div class="govuk-caption-m">Scenario year {{firstScenario.termOfScenario}}</div>
-          <div class="govuk-!-margin-top-1">
+          <div class="govuk-!-margin-top-1 hide-in-print">
             <a routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0' class="govuk-link link-button">Edit data</a>
             <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(0)'>Remove</a>
@@ -59,7 +59,7 @@
         <th scope="col" class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" colspan="3">
           <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
           <div class="govuk-caption-m">Scenario year {{secondScenario.termOfScenario}}</div>
-          <div class="govuk-!-margin-top-1">
+          <div class="govuk-!-margin-top-1 hide-in-print">
             <a routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1' class="govuk-link link-button">Edit data</a>
             <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(1)'>Remove</a>
@@ -100,7 +100,7 @@
         <td *ngIf="firstScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
-            <a class="govuk-link ml-2 button-link"
+            <a class="govuk-link ml-2 button-link hide-in-print"
             routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.reserveAAs[i].assessmentAreaName}}/0'>Add data</a>
           </span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
@@ -120,7 +120,7 @@
         <td *ngIf="secondScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
-            <a class="govuk-link ml-2 button-link"
+            <a class="govuk-link ml-2 button-link hide-in-print"
             routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.reserveAAs[i].assessmentAreaName}}/1'>Add data</a>
           </span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
@@ -166,7 +166,7 @@
         <td *ngIf="firstScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
-            <a class="govuk-link ml-2 button-link"
+            <a class="govuk-link ml-2 button-link hide-in-print"
             routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.spendingAAs[i].assessmentAreaName}}/0'>Add data</a>
           </span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
@@ -186,7 +186,7 @@
         <td *ngIf="secondScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
-            <a class="govuk-link ml-2 button-link"
+            <a class="govuk-link ml-2 button-link hide-in-print"
             routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.spendingAAs[i].assessmentAreaName}}/1'>Add data</a>
           </span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
@@ -229,7 +229,7 @@
         <td *ngIf="!firstScenario.characteristicAAs[i].schoolData" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
-            <a class="govuk-link ml-2 button-link"
+            <a class="govuk-link ml-2 button-link hide-in-print"
             routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.characteristicAAs[i].assessmentAreaName}}/0'>Add data</a>
           </span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"
@@ -248,7 +248,7 @@
         <td *ngIf="secondScenario.characteristicAAs[i].schoolData === null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span>
-            <a class="govuk-link ml-2 button-link"
+            <a class="govuk-link ml-2 button-link hide-in-print"
             routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.characteristicAAs[i].assessmentAreaName}}/1'>Add data</a>
           </span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon na"

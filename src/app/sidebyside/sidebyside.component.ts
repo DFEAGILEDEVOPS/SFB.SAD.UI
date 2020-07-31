@@ -95,6 +95,15 @@ export class SidebysideComponent implements OnInit {
     }
 
     onPrintPage() {
+      var detailses = document.getElementsByTagName("details");
+      var details;
+      var i = -1;
+
+      while (details = detailses[++i]) {
+        //DOM API
+        details["open"] = true;
+      }
+      
       window.print();
     }
 

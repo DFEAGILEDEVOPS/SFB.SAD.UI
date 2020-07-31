@@ -94,6 +94,7 @@ export class DashboardComponent implements OnInit {
       //DOM API
       details["open"] = true;
     }
+    
     window.print();
   }
 

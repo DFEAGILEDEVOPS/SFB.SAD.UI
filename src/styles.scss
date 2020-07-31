@@ -6,15 +6,11 @@
 
 @media print {
   .show-in-print {
-    display: block;
+    display: block!important;
   }
 
   .hide-in-print {
-    display: none;
-  }
-
-  table {
-    page-break-inside: avoid;
+    display: none!important;
   }
 
   .rating-help-icon {
