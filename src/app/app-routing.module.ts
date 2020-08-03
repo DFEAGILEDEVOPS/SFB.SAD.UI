@@ -1,3 +1,5 @@
+import { ServiceProblemComponent } from './core/error-handling/ServiceProblem/ServiceProblem.component';
+import { NotFoundErrorComponent } from './core/error-handling/NotFoundError/NotFoundError.component';
 
 import { EditDataComponent } from './edit-data/edit-data.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: 'self-assessment/add-missing-data/:urn/:field/:scenarioNo', component: EditDataComponent},
   { path: 'self-assessment/add-missing-data/:urn/:field', component: EditDataComponent},
   { path: 'self-assessment/:urn', component: DashboardComponent},
-  { path: '**', component: NotFoundComponent }
+  { path: 'service-problem', component: ServiceProblemComponent},
+  { path: '**', component: NotFoundErrorComponent }
 ];
 
 @NgModule({

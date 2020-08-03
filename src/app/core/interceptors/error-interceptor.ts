@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorHandlerService } from '@core/error-handling/error-handler.service';
+import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 
 /**
  * Intercepts the HTTP responses, and in case that an error/exception is thrown, handles it
@@ -11,17 +11,13 @@ import { ErrorHandlerService } from '@core/error-handling/error-handler.service'
  */
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private errorHandler: ErrorHandlerService) { }
+  constructor(private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        // if (error instanceof HttpErrorResponse && error.status === 401) {
-        //   localStorage.removeItem('token');
-        //   this.router.navigateByUrl('/login');
-        // }
-        const errorMessage = this.errorHandler.getErrorMessage(error);
-        return throwError(errorMessage);
+        this.router.navigate(['service-problem']);
+        return throwError(error.message);
       })
     );
   }
