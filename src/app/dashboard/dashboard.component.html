@@ -22,7 +22,13 @@
       </p>
     </div>
   </div>
-
+  <div class="govuk-warning-text" *ngIf='!activeScenario.isReturnsComplete' id="partialWarning">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+      <span class="govuk-warning-text__assistive">Warning</span>
+      This school doesn't have a complete set of financial data for this period. You should edit the values with more up to date information.
+    </strong>
+  </div>
   <app-dashboard-characteristics [phase]='activeScenario.overallPhaseWSixthForm'
     [londonWeight]='activeScenario.londonWeighting' [noPupils]='activeScenario.numberOfPupils'
     [FSM]='activeScenario.fsm' [SizeLookup]='activeScenario.sadSizeLookup' [FSMLookup]='activeScenario.sadFSMLookup'>

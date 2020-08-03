@@ -8,6 +8,7 @@ export class SaData {
   financeType: string;
   hasSixthForm: boolean;
   overallPhase: string;
+  isReturnsComplete: boolean;
   londonWeighting: string;
   numberOfPupilsLatestTerm: number;
   fsmLatestTerm: number;

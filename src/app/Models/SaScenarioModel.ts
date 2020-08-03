@@ -12,6 +12,7 @@ export class SaScenarioModel {
   overallPhase: string;
   hasSixthForm: boolean;
   londonWeighting: string;
+  isReturnsComplete: boolean;
   numberOfPupils: number;
   numberOfPupilsLatestTerm: number;
   fsm: number;
@@ -49,6 +50,7 @@ export class SaScenarioModel {
     this.financeType = data.financeType;
     this.hasSixthForm = data.hasSixthForm;
     this.overallPhase = data.overallPhase;
+    this.isReturnsComplete = data.isReturnsComplete;
     this.londonWeighting = data.londonWeighting;
     this.numberOfPupilsLatestTerm = data.numberOfPupilsLatestTerm;
     this.fsmLatestTerm = data.fsmLatestTerm;
