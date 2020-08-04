@@ -100,8 +100,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onDownload() {
-    //throwError("test error");
-    throw new Error("Downlod function is not implemented yet!");
+    //throwError("test error"); // returns observable!
+    throw new Error("Download feature is not implemented yet!");
   }
 
 }
