@@ -1,3 +1,4 @@
+import { throwError } from 'rxjs';
 import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
@@ -94,8 +95,13 @@ export class DashboardComponent implements OnInit {
       //DOM API
       details["open"] = true;
     }
-    
+
     window.print();
+  }
+
+  onDownload() {
+    //throwError("test error");
+    throw new Error("Test error");
   }
 
 }
