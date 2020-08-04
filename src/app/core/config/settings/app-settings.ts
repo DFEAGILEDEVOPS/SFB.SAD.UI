@@ -5,6 +5,7 @@ export class AppSettings {
   sfbDomain: string;
   apiDomain: string;
   customErrorPage: boolean;
+  consoleErrors: boolean;
   azureMapsAPIKey: string;
   domain: string;
   name: string;

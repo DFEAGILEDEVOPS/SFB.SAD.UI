@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -11,12 +11,15 @@ import { appSettings, AppSettings } from '@core/config/settings/app-settings';
  */
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private injector: Injector) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.router.navigate(['service-problem']);
+        const settings = this.injector.get(appSettings);
+        if (settings.customErrorPage) {
+          this.router.navigate(['service-problem']);
+        }
         return throwError(error.message);
       })
     );
