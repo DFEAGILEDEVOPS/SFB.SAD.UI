@@ -14,6 +14,7 @@
     "sfbDomain": "http://localhost",
     "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api",
     "customErrorPage": true,
-    "consoleErrors": true
+    "consoleErrors": true,
+    "logExceptions": false
   }
 }

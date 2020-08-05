@@ -6,7 +6,8 @@ export class AppSettings {
   apiDomain: string;
   customErrorPage: boolean;
   consoleErrors: boolean;
-  azureMapsAPIKey: string;
+  logExceptions: boolean;
+  ai_instrumentationKey: string;
   domain: string;
   name: string;
   version: string;

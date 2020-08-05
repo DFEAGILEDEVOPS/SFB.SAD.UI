@@ -27,6 +27,7 @@
     "@angular/platform-server": "~9.0.3",
     "@angular/router": "~9.0.3",
     "@asymmetrik/ngx-leaflet": "^7.0.0",
+    "@microsoft/applicationinsights-web": "^2.5.6",
     "@nguniversal/express-engine": "^9.0.1",
     "@ngx-config/core": "^8.0.1",
     "@ngx-config/http-loader": "^8.0.2",

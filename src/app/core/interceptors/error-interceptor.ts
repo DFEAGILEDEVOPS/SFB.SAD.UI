@@ -24,7 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           router.navigate(['service-problem']);
         }
 
-        return throwError(error.message);
+        return throwError(error);
       })
     );
   }

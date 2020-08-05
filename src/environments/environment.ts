@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   name: 'dev',
-  assetsPath: './assets'
+  assetsPath: './assets',
+  appInsights: {
+    instrumentationKey: '0db44457-f04a-4b56-8a75-d259cc5394c0'
+  }
 };
 
 /*
