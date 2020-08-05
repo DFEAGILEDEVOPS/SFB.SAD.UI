@@ -9,11 +9,10 @@ import { environment } from '@env/environment';
 export class LoggingService {
   appInsights: ApplicationInsights;
   constructor() {
-    debugger;
     this.appInsights = new ApplicationInsights({
       config: {
         instrumentationKey: environment.appInsights.instrumentationKey,
-        enableAutoRouteTracking: true // option to log all route changes
+        enableAutoRouteTracking: false // option to log all route changes
       }
     });
     this.appInsights.loadAppInsights();

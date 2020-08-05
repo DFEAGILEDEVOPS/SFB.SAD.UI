@@ -15,6 +15,6 @@
     "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api",
     "customErrorPage": true,
     "consoleErrors": true,
-    "logExceptions": false
+    "logExceptions": true
   }
 }
