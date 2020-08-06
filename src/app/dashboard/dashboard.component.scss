@@ -18,13 +18,17 @@
 
 .progress-icon, .ofsted-icon {
   float: right;
-  margin-right: 20px;
+  margin-right: 5px;
   position: relative;
   top: 3px;
 
+  @include govuk-media-query($from: tablet) {
+    margin-right: 20px;
+  }
+
   @include govuk-media-query($from: desktop) {
     margin-right: 13px;
-}
+  }
 }
 
 .govuk-table {
@@ -32,8 +36,11 @@
 }
 
 .rating-help-icon{
-  margin-left: 15px;
+  margin-left: 5px;
   cursor: pointer;
+  @include govuk-media-query($from: tablet) {
+    margin-left: 15px;
+}
 }
 
 .rating {
@@ -107,7 +114,12 @@
 .progress-text-wrapper {
     display: inline;
     float: left;
-    width: 87%;
+    width: 80%;
+
+    @include govuk-media-query($from: tablet) {
+      width: 87%;
+    }
+
     @include govuk-media-query($from: desktop) {
       width: 92%;
     }
@@ -139,5 +151,17 @@
 .reset-button{
   @include govuk-media-query($from: tablet) {
     margin-left: 10px;
+  }
+}
+
+.mobile-tables {
+  th{
+    width: 125px;
+  }
+
+  .ofsted-info-wrapper{
+    max-width: 151px;
+    display: inline-block;
+    font-size: 14px;
   }
 }

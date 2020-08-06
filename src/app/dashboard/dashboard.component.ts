@@ -3,7 +3,7 @@ import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { SaScenarioModel } from '../Models/SaScenarioModel';
-import { Component, OnInit, DebugElement } from '@angular/core';
+import { Component, OnInit, DebugElement, HostListener } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit {
   modalRef: BsModalRef;
   aaModalModels: AAModalModels;
   scenarioLoaded: boolean;
+  isMobileScreen: boolean;
+  tabletBreakPoint = 641;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +34,7 @@ export class DashboardComponent implements OnInit {
     });
     this.aaModalModels = new AAModalModels();
     this.scenarioLoaded = false;
+    this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
   }
 
   ngOnInit() {
@@ -43,6 +46,11 @@ export class DashboardComponent implements OnInit {
         this.activeScenario = result;
         this.scenarioLoaded = true;
       });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
   }
 
   openModalWithComponent(assessmentArea: string) {

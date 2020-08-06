@@ -194,12 +194,16 @@ caption{
   font-size: 16px;
   padding: 6px 15px;
   border-radius: 3px;
-  width: 70%;
+  width: 68%;
   display: inline-block;
   margin-right: auto;
   margin-left: auto;
   text-align: center;
   vertical-align: middle;
+
+  @include govuk-media-query($from: desktop) {
+    width: 70%;
+  }
 
   @include govuk-media-query($from: desktop) {
     width: 80%;
