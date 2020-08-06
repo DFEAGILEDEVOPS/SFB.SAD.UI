@@ -45,13 +45,13 @@
         <span>Print page</span>
       </a>
     </div>
-    <div class="govuk-grid-column-one-half">
-      <div class="float-right">
-        <button class="govuk-button govuk-!-margin-right-4 hide-in-print" data-module="govuk-button"
+    <div class="govuk-grid-column-one-half sbs-buttons-wrapper">
+      <div class="sbs-buttons">
+        <button class="govuk-button hide-in-print" data-module="govuk-button"
           routerLink='/self-assessment/edit-data/{{urn}}/enter' [disabled]='!this.scenarioLoaded'>
           Add a side-by-side scenario
         </button>
-        <button *ngIf='activeScenario.isEdited' class="govuk-button govuk-button--secondary float-right" data-module="govuk-button"
+        <button *ngIf='activeScenario.isEdited' class="govuk-button govuk-button--secondary reset-button" data-module="govuk-button"
           (click)='onReset()'>
           Reset dashboard
         </button>

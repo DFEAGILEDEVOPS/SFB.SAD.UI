@@ -101,3 +101,32 @@
     float: left;
     width: 92%;
 }
+
+.sbs-buttons-wrapper {
+  @include govuk-media-query($from: tablet) {
+    width: 100%;
+  }
+
+  @include govuk-media-query($from: desktop) {
+    width: 50%;
+  }
+}
+
+.sbs-buttons {
+  margin-top: 25px;
+
+  @include govuk-media-query($from: tablet) {
+    width: 100%;
+  }
+
+  @include govuk-media-query($from: desktop) {
+      margin-left: 45px;
+      margin-top: 0;
+
+  }
+}
+.reset-button{
+  @include govuk-media-query($from: tablet) {
+    margin-left: 10px;
+  }
+}

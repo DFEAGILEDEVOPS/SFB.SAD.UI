@@ -246,8 +246,14 @@ caption{
 }
 
 .date-caption {
-  margin-top: -40px;
-  margin-bottom: 40px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+
+  @include govuk-media-query($from: tablet) {
+    margin-top: -40px;
+    margin-bottom: 40px;
+  }
+
 }
 
 

@@ -128,4 +128,11 @@ td.cell-separate, th.cell-separate{
   color: $govuk-secondary-text-colour;
 }
 
+.reset-button{
+  margin-top: 25px;
+
+  @include govuk-media-query($from: tablet) {
+    margin-top: 0;
+  }
+}
 
