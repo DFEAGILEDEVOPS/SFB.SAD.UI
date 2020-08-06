@@ -14,9 +14,13 @@
 
 .rating-box{
   font-size: 14px;
-  width: 64%;
+  width: 48%;
   padding: 6px 12px;
   vertical-align: middle;
+
+  @include govuk-media-query($from: desktop) {
+    width: 64%;
+  }
 }
 
 .rating-box.gray a{
@@ -52,7 +56,7 @@ td.cell-separate, th.cell-separate{
 }
 
 .rating-help-icon{
-  margin-left: 10px;
+  margin-left: 7px;
   cursor: pointer;
 }
 
@@ -96,8 +100,12 @@ td.cell-separate, th.cell-separate{
   padding: 3px;
   min-width: 50px;
   border-radius: 3px;
-  width: 93%;
+  width: 90%;
   float: left;
+
+  @include govuk-media-query($from: desktop) {
+    width: 93%;
+  }
 
   &--well-below {
     background-color: #df3034;

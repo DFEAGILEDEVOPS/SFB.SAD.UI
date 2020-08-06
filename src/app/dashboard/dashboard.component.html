@@ -193,7 +193,7 @@
             report</a>
           <span *ngIf='activeScenario.ofstedInspectionDate'> | Inspected
             {{ activeScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
-          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon ofsted-icon"
           (click)="openModalWithComponent('Ofsted')"/>
         </td>
       </tr>
@@ -219,7 +219,7 @@
             </span>
             <span [hidden]='activeScenario.progressScore' style="float: left;">N/A</span>
           </div>
-          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon progress-icon"
           (click)="openModalWithComponent('KS2')"/>
         </td>
       </tr>
@@ -244,7 +244,7 @@
             </span>
             <span [hidden]='activeScenario.progressScore' style="float: left;">N/A</span>
           </div>
-          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+          <img src="assets/images/help-icon.png" class="small-icon rating-help-icon progress-icon"
           (click)="openModalWithComponent('P8')"/>
         </td>
       </tr>

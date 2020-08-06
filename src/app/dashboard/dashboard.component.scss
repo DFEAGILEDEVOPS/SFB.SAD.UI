@@ -16,15 +16,23 @@
 
 }
 
+.progress-icon, .ofsted-icon {
+  float: right;
+  margin-right: 20px;
+  position: relative;
+  top: 3px;
+
+  @include govuk-media-query($from: desktop) {
+    margin-right: 13px;
+}
+}
+
 .govuk-table {
   font-size: 16px;
 }
 
 .rating-help-icon{
-  float: right;
-  position: relative;
-  top: 5px;
-  right: 5px;
+  margin-left: 15px;
   cursor: pointer;
 }
 
@@ -99,7 +107,10 @@
 .progress-text-wrapper {
     display: inline;
     float: left;
-    width: 92%;
+    width: 87%;
+    @include govuk-media-query($from: desktop) {
+      width: 92%;
+    }
 }
 
 .sbs-buttons-wrapper {
