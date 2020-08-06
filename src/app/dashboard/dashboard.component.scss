@@ -126,8 +126,8 @@
 .sbs-buttons {
   margin-top: 25px;
 
-  @include govuk-media-query($from: tablet) {
-    width: 100%;
+  @include govuk-media-query($from: desktop) {
+    float: right;
   }
 
   @include govuk-media-query($from: desktop) {
