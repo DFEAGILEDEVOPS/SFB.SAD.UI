@@ -40,7 +40,7 @@
   cursor: pointer;
   @include govuk-media-query($from: tablet) {
     margin-left: 15px;
-}
+  }
 }
 
 .rating {

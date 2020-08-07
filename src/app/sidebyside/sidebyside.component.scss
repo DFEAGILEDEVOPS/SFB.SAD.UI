@@ -56,8 +56,12 @@ td.cell-separate, th.cell-separate{
 }
 
 .rating-help-icon{
-  margin-left: 7px;
+  margin-left: 4px;
   cursor: pointer;
+
+  @include govuk-media-query($from: tablet) {
+    margin-left: 7px;
+  }
 }
 
 .rating {
@@ -141,6 +145,19 @@ td.cell-separate, th.cell-separate{
 
   @include govuk-media-query($from: tablet) {
     margin-top: 0;
+  }
+}
+
+.mobile-tables {
+  .govuk-table__cell, .govuk-table__header {
+    @include govuk-media-query(mobile) {
+      background-color: govuk-colour("white");
+      font-size: 14px;
+    }
+  }
+
+  .bottom-border {
+    border-bottom: 1px solid $govuk-border-colour;
   }
 }
 

@@ -3,7 +3,7 @@ import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { SaScenarioModel } from '../Models/SaScenarioModel';
-import { Component, OnInit, DebugElement, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize() {
     this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
   }
 

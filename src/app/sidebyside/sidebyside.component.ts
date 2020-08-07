@@ -1,5 +1,5 @@
 import { AAModalModels } from './../Models/AAModalModels';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SaScenarioModel } from 'app/Models/SaScenarioModel';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
@@ -22,12 +22,15 @@ export class SidebysideComponent implements OnInit {
   aaModalModels: AAModalModels;
   firstScenarioLoaded: boolean;
   secondScenarioLoaded: boolean;
+  isMobileScreen: boolean;
+  tabletBreakPoint = 641;
 
   constructor(
     private router: Router,
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService) {
       this.aaModalModels = new AAModalModels();
+      this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
     }
 
     ngOnInit() {
@@ -38,6 +41,11 @@ export class SidebysideComponent implements OnInit {
           this.secondScenario = this.saScenariosService.getSecondScenario(this.firstScenario.urn);
           this.secondScenarioLoaded = true;
         });
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+      this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
     }
 
     removeScenario(scenarioNo: number) {
@@ -103,7 +111,7 @@ export class SidebysideComponent implements OnInit {
         //DOM API
         details["open"] = true;
       }
-      
+
       window.print();
     }
 
