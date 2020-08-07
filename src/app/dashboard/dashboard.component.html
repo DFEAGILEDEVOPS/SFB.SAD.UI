@@ -92,7 +92,7 @@
             <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
               (click)="openModalWithComponent(aa.assessmentAreaName)" />
           </td>
-          <td *ngIf="aa.schoolData === null" class="govuk-table__cell">
+          <td *ngIf="aa.schoolData == null" class="govuk-table__cell">
             <span class="rating-box gray">
               <span>Not available.</span>
               <a class="govuk-link ml-2 button-link hide-in-print"
@@ -125,7 +125,7 @@
             <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
               (click)="openModalWithComponent(aa.assessmentAreaName)" />
           </td>
-          <td *ngIf="aa.schoolData === null" class="govuk-table__cell">
+          <td *ngIf="aa.schoolData == null" class="govuk-table__cell">
             <span class="rating-box gray">
               <span>Not available.</span>
               <a class="govuk-link ml-2 button-link hide-in-print"
@@ -159,7 +159,7 @@
             <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
               (click)="openModalWithComponent(aa.assessmentAreaName)" />
           </td>
-          <td *ngIf='aa.schoolData === null || aa.schoolData === undefined' class="govuk-table__cell">
+          <td *ngIf='aa.schoolData == null || aa.schoolData === undefined' class="govuk-table__cell">
             <span class="rating-box gray">
               <span>Not available.</span>
               <a class="govuk-link ml-2 button-link hide-in-print"
@@ -260,10 +260,10 @@
   <!-- - - - M O B I L E   T A B L E - - -  -->
   <div *ngIf='isMobileScreen' class="mobile-tables">
 
-    <h3 class="govuk-heading-m">Reserve and balance</h3>
+    <h3 class="govuk-heading-m govuk-!-margin-top-9">Reserve and balance</h3>
 
     <table class="govuk-table" *ngFor='let aa of activeScenario.reserveAAs'>
-      <caption class="govuk-table__caption">{{aa.assessmentAreaName}}</caption>
+      <caption class="govuk-table__caption bottom-border">{{aa.assessmentAreaName}}</caption>
       <tr class="govuk-table__row" >
         <th scope="row" class="govuk-table__header">School data</th>
         <td class="govuk-table__cell">{{aa.schoolData | aaValueFormat}}</td>
@@ -279,7 +279,7 @@
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
             (click)="openModalWithComponent(aa.assessmentAreaName)" />
         </td>
-        <td *ngIf="aa.schoolData === null" class="govuk-table__cell">
+        <td *ngIf="aa.schoolData == null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span><br>
             <a class="govuk-link ml-2 button-link hide-in-print"
@@ -291,10 +291,10 @@
       </tr>
     </table>
 
-    <h3 class="govuk-heading-m">Spending</h3>
+    <h3 class="govuk-heading-m govuk-!-margin-top-9">Spending</h3>
 
     <table class="govuk-table" *ngFor='let aa of activeScenario.spendingAAs'>
-      <caption class="govuk-table__caption">{{aa.assessmentAreaName}}</caption>
+      <caption class="govuk-table__caption bottom-border">{{aa.assessmentAreaName}}</caption>
       <tr class="govuk-table__row" >
         <th scope="row" class="govuk-table__header">School data</th>
         <td class="govuk-table__cell">{{aa.schoolData | aaValueFormat}}</td>
@@ -310,7 +310,7 @@
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
             (click)="openModalWithComponent(aa.assessmentAreaName)" />
         </td>
-        <td *ngIf="aa.schoolData === null" class="govuk-table__cell">
+        <td *ngIf="aa.schoolData == null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span><br>
             <a class="govuk-link ml-2 button-link hide-in-print"
@@ -322,10 +322,10 @@
       </tr>
     </table>
 
-    <h3 class="govuk-heading-m">School characteristics</h3>
+    <h3 class="govuk-heading-m govuk-!-margin-top-9">School characteristics</h3>
 
     <table class="govuk-table" *ngFor='let aa of activeScenario.characteristicAAs'>
-      <caption class="govuk-table__caption">{{aa.assessmentAreaName}}</caption>
+      <caption class="govuk-table__caption bottom-border">{{aa.assessmentAreaName}}</caption>
       <tr class="govuk-table__row" >
         <th scope="row" class="govuk-table__header">School data</th>
         <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
@@ -337,7 +337,7 @@
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
             (click)="openModalWithComponent(aa.assessmentAreaName)" />
         </td>
-        <td *ngIf='aa.schoolData === null || aa.schoolData === undefined' class="govuk-table__cell">
+        <td *ngIf='aa.schoolData == null || aa.schoolData === undefined' class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span><br>
             <a class="govuk-link ml-2 button-link hide-in-print"
@@ -349,10 +349,10 @@
       </tr>
     </table>
 
-    <h3 class="govuk-heading-m">Outcomes</h3>
+    <h3 class="govuk-heading-m govuk-!-margin-top-9">Outcomes</h3>
 
     <table class="govuk-table">
-      <caption class="govuk-table__caption">Ofsted rating</caption>
+      <caption class="govuk-table__caption bottom-border">Ofsted rating</caption>
       <tr class="govuk-table__row" >
         <th scope="row" class="govuk-table__header">School data</th>
         <td class="govuk-table__cell">
@@ -377,7 +377,7 @@
     </table>
 
     <table class="govuk-table" *ngIf="activeScenario.progressScoreType === 'KS2 score'">
-      <caption class="govuk-table__caption">{{activeScenario.progressScoreType}}</caption>
+      <caption class="govuk-table__caption bottom-border">{{activeScenario.progressScoreType}}</caption>
       <tr class="govuk-table__row" >
         <th scope="row" class="govuk-table__header">School data</th>
         <td class="govuk-table__cell progress-td">
@@ -407,7 +407,7 @@
     </table>
 
     <table class="govuk-table" *ngIf="activeScenario.progressScoreType === 'Progress 8 score'">
-      <caption class="govuk-table__caption">{{activeScenario.progressScoreType}}</caption>
+      <caption class="govuk-table__caption bottom-border">{{activeScenario.progressScoreType}}</caption>
       <tr class="govuk-table__row" >
         <th scope="row" class="govuk-table__header">School data</th>
         <td class="govuk-table__cell progress-td">
