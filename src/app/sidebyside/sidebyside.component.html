@@ -365,7 +365,7 @@
   <div *ngIf='isMobileScreen' class="mobile-tables">
     <table class="govuk-table">
       <tr class="govuk-table__row">
-        <td class="govuk-table__header width-fifty-percent">
+        <td class="govuk-table__header width-fifty-percent va-bottom">
           <span class="govuk-!-font-size-24 govuk-!-margin-right-5">{{firstScenario.scenarioName}}</span>
           <div class="govuk-caption-m">Scenario year {{firstScenario.termOfScenario}}</div>
           <div class="govuk-!-margin-top-1 hide-in-print">
@@ -375,7 +375,7 @@
             <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(0)'>Remove</a>
           </div>
         </td>
-        <td class="govuk-table__header width-fifty-percent">
+        <td class="govuk-table__header width-fifty-percent va-bottom">
           <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
           <div class="govuk-caption-m">Scenario year {{secondScenario.termOfScenario}}</div>
           <div class="govuk-!-margin-top-1 hide-in-print">
