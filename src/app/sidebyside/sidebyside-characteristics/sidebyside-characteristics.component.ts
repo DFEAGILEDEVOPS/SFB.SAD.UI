@@ -23,6 +23,7 @@ export class SidebysideCharacteristicsComponent implements OnInit {
   @Input() FSM2: number;
   @Input() FSMLookup2: FSMLookupModel;
   @Input() SizeLookup2: SizeLookupModel;
+  @Input() IsMobileScreen: Boolean;
   constructor() { }
 
   ngOnInit() {

@@ -6,7 +6,9 @@
   </summary>
   <div class="govuk-details__text govuk-!-font-size-16">
     <p>This benchmark was created using the following criteria.</p>
-    <table class="govuk-table govuk-!-font-size-16">
+
+  <!-- - - - D E S K T O P   T A B L E - - -  -->
+    <table class="govuk-table govuk-!-font-size-16" *ngIf='!IsMobileScreen'>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header no-bottom"></th>
@@ -66,5 +68,95 @@
         </tr>
       </tbody>
     </table>
+    <!-- - - - D E S K T O P   T A B L E - - -  -->
+
+    <!-- - - - M O B I L E   T A B L E - - -  -->
+    <table class="govuk-table govuk-!-font-size-16" *ngIf='IsMobileScreen'>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header no-bottom" colspan="2">{{scenarioName1}}</th>
+          <th scope="col" class="govuk-table__header no-bottom"></th>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header width-thirty-four-percent">Characteristic</th>
+          <th scope="col" class="govuk-table__header width-thirty-three-percent">Your school</th>
+          <th scope="col" class="govuk-table__header width-thirty-three-percent">Comparison criteria</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">School phase</td>
+          <td class="govuk-table__cell">{{phase1}}</td>
+          <td class="govuk-table__cell">{{phase1}}</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">London weighting</td>
+          <td class="govuk-table__cell">{{londonWeight1 === 'Neither' ? 'Not London' : 'London'}}</td>
+          <td class="govuk-table__cell">{{londonWeight1 === 'Neither' ? 'Not London' : 'London'}}</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" *ngIf="SizeLookup1">Number of pupils</td>
+          <td class="govuk-table__cell" *ngIf="SizeLookup1">{{noPupils1}}</td>
+          <td class="govuk-table__cell" *ngIf="SizeLookup1">
+            <span *ngIf='SizeLookup1.noPupilsMax != null'>
+              Schools with {{SizeLookup1.noPupilsMin}} - {{SizeLookup1.noPupilsMax}} pupils
+            </span>
+            <span *ngIf='SizeLookup1.noPupilsMax == null'>
+              Schools with {{SizeLookup1.noPupilsMin}} or more pupils
+            </span>
+          </td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" *ngIf="FSMLookup1">FSM</td>
+          <td class="govuk-table__cell" *ngIf="FSMLookup1">{{FSM1 | number : '1.0-1'}}%</td>
+          <td class="govuk-table__cell" *ngIf="FSMLookup1"><span *ngIf='FSMLookup1'>Schools with {{FSMLookup1.fsmMin | number : '1.0-1'}} - {{FSMLookup1.fsmMax | number: '1.0-1'}}% FSM</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="govuk-table govuk-!-font-size-16" *ngIf='IsMobileScreen'>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header no-bottom" colspan="2">{{scenarioName2}}</th>
+          <th scope="col" class="govuk-table__header no-bottom"></th>
+        </tr>
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header width-thirty-four-percent">Characteristic</th>
+          <th scope="col" class="govuk-table__header width-thirty-three-percent">Your school</th>
+          <th scope="col" class="govuk-table__header width-thirty-three-percent">Comparison criteria</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">School phase</td>
+          <td class="govuk-table__cell">{{phase2}}</td>
+          <td class="govuk-table__cell">{{phase2}}</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">London weighting</td>
+          <td class="govuk-table__cell">{{londonWeight2 === 'Neither' ? 'Not London' : 'London'}}</td>
+          <td class="govuk-table__cell">{{londonWeight2 === 'Neither' ? 'Not London' : 'London'}}</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" *ngIf="SizeLookup2">Number of pupils</td>
+          <td class="govuk-table__cell" *ngIf="SizeLookup2">{{noPupils2}}</td>
+          <td class="govuk-table__cell" *ngIf="SizeLookup2">
+            <span *ngIf='SizeLookup2.noPupilsMax != null'>
+              Schools with {{SizeLookup2.noPupilsMin}} - {{SizeLookup2.noPupilsMax}} pupils
+            </span>
+            <span *ngIf='SizeLookup2.noPupilsMax == null'>
+              Schools with {{SizeLookup2.noPupilsMin}} or more pupils
+            </span>
+          </td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" *ngIf="FSMLookup2">FSM</td>
+          <td class="govuk-table__cell" *ngIf="FSMLookup2">{{FSM2 | number : '1.0-1'}}%</td>
+          <td class="govuk-table__cell" *ngIf="FSMLookup2"><span *ngIf='FSMLookup2'>Schools with {{FSMLookup2.fsmMin | number : '1.0-1'}} - {{FSMLookup2.fsmMax | number: '1.0-1'}}% FSM</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- - - - M O B I L E   T A B L E - - -  -->
+
   </div>
 </details>
