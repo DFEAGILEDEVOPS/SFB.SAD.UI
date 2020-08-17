@@ -164,9 +164,7 @@
 <table class="govuk-table">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th scope="col"
-        class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">School
-        characteristics</th>
+      <th scope="col" class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">School characteristics</th>
       <th scope="col" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="2"></th>
       <th scope="col" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="2"></th>
     </tr>
@@ -185,13 +183,13 @@
       <td class="govuk-table__cell cell-separate" nowrap>
         <span>{{firstScenario.characteristicAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.characteristicAAs[i].assessmentAreaName}}</span>
       </td>
-      <td *ngIf="firstScenario.characteristicAAs[i].schoolData" class="govuk-table__cell">
+      <td *ngIf="firstScenario.characteristicAAs[i].calculatedSchoolData != null" class="govuk-table__cell">
         <span class="rating-box"
           [class]='firstScenario.characteristicAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold?.ratingText}}</span>
         <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
           (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, firstScenario)" />
       </td>
-      <td *ngIf="!firstScenario.characteristicAAs[i].schoolData" class="govuk-table__cell">
+      <td *ngIf="firstScenario.characteristicAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
         <span class="rating-box gray">
           <span>Not available.</span>
           <a class="govuk-link ml-2 button-link hide-in-print"
@@ -205,13 +203,13 @@
       <td class="govuk-table__cell cell-separate" nowrap>
         <span>{{secondScenario.characteristicAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.characteristicAAs[i].assessmentAreaName}}</span>
       </td>
-      <td *ngIf="secondScenario.characteristicAAs[i].schoolData != null" class="govuk-table__cell">
+      <td *ngIf="secondScenario.characteristicAAs[i].calculatedSchoolData != null" class="govuk-table__cell">
         <span class="rating-box"
           [class]='secondScenario.characteristicAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.characteristicAAs[i].matchingTreshold?.ratingText}}</span>
         <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
           (click)="openModalWithComponent(secondScenario.characteristicAAs[i].assessmentAreaName, secondScenario)" />
       </td>
-      <td *ngIf="secondScenario.characteristicAAs[i].schoolData === null" class="govuk-table__cell">
+      <td *ngIf="secondScenario.characteristicAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
         <span class="rating-box gray">
           <span>Not available.</span>
           <a class="govuk-link ml-2 button-link hide-in-print"

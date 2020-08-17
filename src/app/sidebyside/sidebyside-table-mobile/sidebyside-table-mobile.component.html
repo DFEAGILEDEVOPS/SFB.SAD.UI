@@ -185,14 +185,14 @@
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Rating against tresholds</th>
         <td
-          *ngIf="firstScenario.characteristicAAs[i].schoolData != null && firstScenario.characteristicAAs[i].matchingTreshold"
+          *ngIf="firstScenario.characteristicAAs[i].calculatedSchoolData != null && firstScenario.characteristicAAs[i].matchingTreshold"
           class="govuk-table__cell">
           <span class="rating-box"
             [class]='firstScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
             (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, firstScenario)" />
         </td>
-        <td *ngIf="firstScenario.characteristicAAs[i].schoolData == null" class="govuk-table__cell">
+        <td *ngIf="firstScenario.characteristicAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span><br>
             <a class="govuk-link button-link hide-in-print"
@@ -203,14 +203,14 @@
             (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, firstScenario)" />
         </td>
         <td
-          *ngIf="secondScenario.characteristicAAs[i].schoolData != null && secondScenario.characteristicAAs[i].matchingTreshold"
+          *ngIf="secondScenario.characteristicAAs[i].calculatedSchoolData != null && secondScenario.characteristicAAs[i].matchingTreshold"
           class="govuk-table__cell">
           <span class="rating-box"
             [class]='secondScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{secondScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
             (click)="openModalWithComponent(secondScenario.characteristicAAs[i].assessmentAreaName, secondScenario)" />
         </td>
-        <td *ngIf="secondScenario.characteristicAAs[i].schoolData == null" class="govuk-table__cell">
+        <td *ngIf="secondScenario.characteristicAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span><br>
             <a class="govuk-link button-link hide-in-print"

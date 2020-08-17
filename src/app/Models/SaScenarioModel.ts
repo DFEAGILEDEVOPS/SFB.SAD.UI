@@ -128,7 +128,7 @@ export class SaScenarioModel {
     if (averageTeacherCostAA) {
       averageTeacherCostAA.totalForAreaType = this.teachersTotal;
       averageTeacherCostAA.schoolData = this.getAAValue('Teaching staff');
-      if (averageTeacherCostAA.schoolData != null) {
+      if (averageTeacherCostAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         averageTeacherCostAA.calculatedSchoolData = parseFloat((averageTeacherCostAA.schoolData
           / averageTeacherCostAA.totalForAreaType).toFixed(2));
       } else {
@@ -141,7 +141,7 @@ export class SaScenarioModel {
     if (seniorLeadersAA) {
       seniorLeadersAA.totalForAreaType = this.workforceTotal;
       seniorLeadersAA.schoolData = this.teachersLeader;
-      if (seniorLeadersAA.schoolData != null) {
+      if (seniorLeadersAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         seniorLeadersAA.calculatedSchoolData = parseFloat((seniorLeadersAA.schoolData
           / seniorLeadersAA.totalForAreaType).toFixed(2));
       } else {
@@ -154,7 +154,7 @@ export class SaScenarioModel {
     if (pupilToTeacherAA) {
       pupilToTeacherAA.totalForAreaType = this.teachersTotal;
       pupilToTeacherAA.schoolData = this.numberOfPupils;
-      if (pupilToTeacherAA.schoolData != null) {
+      if (pupilToTeacherAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         pupilToTeacherAA.calculatedSchoolData = parseFloat((pupilToTeacherAA.schoolData
           / pupilToTeacherAA.totalForAreaType).toFixed(2));
       } else {
@@ -167,7 +167,7 @@ export class SaScenarioModel {
     if (pupilToAdultAA) {
       pupilToAdultAA.totalForAreaType = this.workforceTotal;
       pupilToAdultAA.schoolData = this.numberOfPupils;
-      if (pupilToAdultAA.schoolData != null) {
+      if (pupilToAdultAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         pupilToAdultAA.calculatedSchoolData = parseFloat((pupilToAdultAA.schoolData
           / pupilToAdultAA.totalForAreaType).toFixed(2));
       } else {
@@ -182,7 +182,6 @@ export class SaScenarioModel {
       this.setAAsMatchingTreshold(teacherContactRatioAA);
     }
 
-    // tslint:disable-next-line:max-line-length
     const pupilChangeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years');
     if (pupilChangeAA) {
       pupilChangeAA.calculatedSchoolData = pupilChangeAA.schoolData;
