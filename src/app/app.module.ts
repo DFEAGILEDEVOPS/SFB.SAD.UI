@@ -1,3 +1,7 @@
+import { DashboardTableMobileComponent } from './dashboard/dashboard-table-mobile/dashboard-table-mobile.component';
+import { DashboardTableDesktopComponent } from './dashboard/dashboard-table-desktop/dashboard-table-desktop.component';
+import { SidebysideTableMobileComponent } from './sidebyside/sidebyside-table-mobile/sidebyside-table-mobile.component';
+import { SidebysideTableDesktopComponent } from './sidebyside/sidebyside-table-desktop/sidebyside-table-desktop.component';
 import { AaValueFormatPipe } from './core/pipes/aa-value-format.pipe';
 import { EditDataBreadcrumbComponent } from './edit-data/edit-data-breadcrumb/edit-data-breadcrumb.component';
 import { EditDataComponent } from './edit-data/edit-data.component';
@@ -47,7 +51,11 @@ import { CurrencyPipe } from '@angular/common';
     SidebysideComponent,
     SidebysideBreadcrumbComponent,
     SidebysideCharacteristicsComponent,
-    AaValueFormatPipe
+    AaValueFormatPipe,
+    SidebysideTableDesktopComponent,
+    SidebysideTableMobileComponent,
+    DashboardTableDesktopComponent,
+    DashboardTableMobileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

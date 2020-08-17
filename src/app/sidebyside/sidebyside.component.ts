@@ -59,7 +59,9 @@ export class SidebysideComponent implements OnInit {
       }
     }
 
-    openModalWithComponent(assessmentArea: string, activeScenario: SaScenarioModel) {
+    openModalWithComponent(parameters: any[]) {
+      let assessmentArea: string = parameters[0];
+      let activeScenario: SaScenarioModel = parameters[1];
       let modalContent: AAModalModel;
       let initialState: any;
       let assessmentAreas: AssessmentAreaModel;
