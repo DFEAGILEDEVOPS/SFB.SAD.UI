@@ -54,14 +54,14 @@
       </tr>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Rating against tresholds</th>
-        <td *ngIf="firstScenario.reserveAAs[i].schoolData != null && firstScenario.reserveAAs[i].matchingTreshold"
+        <td *ngIf="firstScenario.reserveAAs[i].schoolData != null && firstScenario.reserveAAs[i].calculatedSchoolData != null && firstScenario.reserveAAs[i].matchingTreshold"
           class="govuk-table__cell">
           <span class="rating-box"
             [class]='firstScenario.reserveAAs[i].matchingTreshold.ratingColour'>{{firstScenario.reserveAAs[i].matchingTreshold.ratingText}}</span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
             (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)" />
         </td>
-        <td *ngIf="firstScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
+        <td *ngIf="firstScenario.reserveAAs[i].schoolData === null || firstScenario.reserveAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span><br>
             <a class="govuk-link button-link hide-in-print"
@@ -71,14 +71,14 @@
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
             (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)" />
         </td>
-        <td *ngIf="secondScenario.reserveAAs[i].schoolData != null && secondScenario.reserveAAs[i].matchingTreshold"
+        <td *ngIf="secondScenario.reserveAAs[i].schoolData != null && secondScenario.reserveAAs[i].calculatedSchoolData != null && secondScenario.reserveAAs[i].matchingTreshold"
           class="govuk-table__cell">
           <span class="rating-box"
             [class]='secondScenario.reserveAAs[i].matchingTreshold.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold.ratingText}}</span>
           <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
             (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)" />
         </td>
-        <td *ngIf="secondScenario.reserveAAs[i].schoolData === null" class="govuk-table__cell">
+        <td *ngIf="secondScenario.reserveAAs[i].schoolData == null || secondScenario.reserveAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
           <span class="rating-box gray">
             <span>Not available.</span><br>
             <a class="govuk-link button-link hide-in-print"

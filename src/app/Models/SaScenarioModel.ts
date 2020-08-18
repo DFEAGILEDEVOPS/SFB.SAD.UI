@@ -203,7 +203,7 @@ export class SaScenarioModel {
         aa.schoolData = aa.schoolDataLatestTerm;
       }
 
-      if (aa.schoolData != null) {
+      if (aa.schoolData != null && aa.totalForAreaType !== 0) {
         aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
       } else {
         aa.calculatedSchoolData = null;
@@ -220,7 +220,7 @@ export class SaScenarioModel {
         aa.schoolData = aa.schoolDataLatestTerm;
       }
 
-      if (aa.schoolData != null) {
+      if (aa.schoolData != null && aa.totalForAreaType !== 0) {
         aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
       } else {
         aa.calculatedSchoolData = null;

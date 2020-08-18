@@ -45,6 +45,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   @ViewChild('seniorLeadershipInput') seniorLeadersInput: ElementRef;
   @ViewChild('numberOfTeachersInput') numberOfTeachersInput: ElementRef;
   @ViewChild('schoolWorkforceInput') schoolWorkforceInput: ElementRef;
+  @ViewChild('totalIncomeInput') totalIncomeInput: ElementRef;
 
   @ViewChild('errorSummaryElement') errorSummaryElement: ElementRef;
 
@@ -351,8 +352,15 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       case 'Senior leaders as a percentage of workforce':
         setTimeout(() => this.seniorLeadersInput.nativeElement.focus());
         break;
+      case 'In-year balance':
+        setTimeout(() => this.totalIncomeInput.nativeElement.focus());
+        break;
       case 'Revenue reserve':
-        setTimeout(() => this.revenueReserveInput.nativeElement.focus());
+        if(this.scenarioInEdit.totalIncome === 0) {
+          setTimeout(() => this.totalIncomeInput.nativeElement.focus());
+        }else {
+          setTimeout(() => this.revenueReserveInput.nativeElement.focus());
+        }
         break;
       case 'Teaching staff':
         setTimeout(() => this.teachingStaffInput.nativeElement.focus());
