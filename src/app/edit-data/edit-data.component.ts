@@ -10,7 +10,6 @@ import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isNumber } from 'util';
 import { Title } from '@angular/platform-browser';
-import { AAModalModel } from 'app/Models/AAModalModel';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditModalModels } from 'app/Models/EditModalModels';
 
@@ -43,6 +42,9 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   @ViewChild('teachingResourcesInput') teachingResourcesInput: ElementRef;
   @ViewChild('energyInput') energyInput: ElementRef;
   @ViewChild('revenueReserveInput') revenueReserveInput: ElementRef;
+  @ViewChild('seniorLeadershipInput') seniorLeadersInput: ElementRef;
+  @ViewChild('numberOfTeachersInput') numberOfTeachersInput: ElementRef;
+  @ViewChild('schoolWorkforceInput') schoolWorkforceInput: ElementRef;
 
   @ViewChild('errorSummaryElement') errorSummaryElement: ElementRef;
 
@@ -346,12 +348,21 @@ export class EditDataComponent implements OnInit, AfterViewInit {
 
   private focusOnAddField() {
     switch (this.missingField) {
+      case 'Senior leaders as a percentage of workforce':
+        setTimeout(() => this.seniorLeadersInput.nativeElement.focus());
+        break;
       case 'Revenue reserve':
         setTimeout(() => this.revenueReserveInput.nativeElement.focus());
         break;
       case 'Teaching staff':
-      case 'Average teacher cost':
         setTimeout(() => this.teachingStaffInput.nativeElement.focus());
+        break;
+      case 'Pupil to teacher ratio':
+      case 'Average teacher cost':
+        setTimeout(() => this.numberOfTeachersInput.nativeElement.focus());
+        break;
+      case 'Pupil to adult ratio':
+        setTimeout(() => this.schoolWorkforceInput.nativeElement.focus());
         break;
       case 'Supply staff':
         setTimeout(() => this.supplyStaffInput.nativeElement.focus());
