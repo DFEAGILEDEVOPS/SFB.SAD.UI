@@ -1,28 +1,47 @@
+@import "govuk-frontend/govuk/all";
 .aa-modal-left-section{
-  display: inline-block;
-  width: 40%;
-  vertical-align: top;
+  font-size: 14px;
+
+  @include govuk-media-query($from: tablet) {
+    font-size: 16px;
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+  }
   &.Ofsted, &.P8, &.KS2{
     width: 100%;
   }
 }
 
 .aa-modal-right-section{
-  display: inline-block;
-  width: 55%;
-  vertical-align: top;
-  padding-left: 5%;
+  margin-top: 15px;
+
+  @include govuk-media-query($from: tablet) {
+    margin-top: 0;
+    display: inline-block;
+    width: 55%;
+    vertical-align: top;
+    padding-left: 5%;
+  }
 }
 
 .aa-modal-right-section__table {
   th, td{
-    font-size: 16px;
+    font-size: 14px;
+
+    @include govuk-media-query($from: tablet) {
+      font-size: 16px;
+    }
   }
 }
 
 .highlighted-percentage{
     background-color: #d53880;
     color: white;
-    padding: 5px;
+    padding: 0 5px;
     font-weight: bold;
+    @include govuk-media-query($from: tablet) {
+      padding: 5px;
+    }
+
 }
