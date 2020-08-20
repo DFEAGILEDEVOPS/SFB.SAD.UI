@@ -1,3 +1,4 @@
+import { PdfService } from './../services/pdf.service';
 import { throwError } from 'rxjs';
 import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
@@ -28,7 +29,8 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private modalService: BsModalService,
-    private saScenariosService: SaScenariosService) {
+    private saScenariosService: SaScenariosService,
+    private pdfService: PdfService) {
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
     });
@@ -109,7 +111,8 @@ export class DashboardComponent implements OnInit {
 
   onDownload() {
     //throwError("test error"); // returns observable!
-    throw new Error("Download feature is not implemented yet!");
+    //throw new Error("Download feature is not implemented yet!");
+    this.pdfService.generatePdfForDashboard();
   }
 
 }

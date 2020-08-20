@@ -6,7 +6,7 @@
     <div class="govuk-grid-column-full">
       <h1 class="govuk-heading-xl">Self-assessment dashboard</h1>
       <div class="govuk-caption-m date-caption" *ngIf='activeScenario.isEdited'>Page last edited: {{activeScenario.lastEditTimeStamp | date: 'dd/MM/yy, HH:mm'}}</div>
-      <p class="govuk-body-s">
+      <p class="govuk-body-s" id="assessing">
         Assessing
         <span class="highlight">
           <span class="govuk-!-font-weight-bold">{{activeScenario.name}}</span>
@@ -26,7 +26,9 @@
     <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
     <strong class="govuk-warning-text__text">
       <span class="govuk-warning-text__assistive">Warning</span>
+      <span id="partialWarning__text">
       This school doesn't have a complete set of financial data for this period. You should edit the values with more up to date information.
+      </span>
     </strong>
   </div>
   <app-dashboard-characteristics [phase]='activeScenario.overallPhaseWSixthForm'
@@ -37,12 +39,12 @@
   <div class="govuk-grid-row hide-in-print">
     <div class="govuk-grid-column-one-half">
       <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold" (click)='onDownload()'>
-        <img src="assets/images/icon-file-download.png" style="max-width: 17px;" class="small-icon" />
-        <span>Download page</span>
+        <img src="assets/images/icon-file-download.png" class="small-icon" />
+        <span> Download page</span>
       </a>
       <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold ml-4" (click)='onPrintPage()'>
         <img src="assets/images/icon-print.png" class="small-icon" />
-        <span>Print page</span>
+        <span> Print page</span>
       </a>
     </div>
     <div class="govuk-grid-column-one-half sbs-buttons-wrapper">
@@ -59,9 +61,9 @@
     </div>
   </div>
 
-  <h2 class="govuk-heading-m">{{activeScenario.scenarioName}}</h2>
+  <h2 class="govuk-heading-m" id="scenarioName">{{activeScenario.scenarioName}}</h2>
 
-  <div class="govuk-caption-m">Scenario year {{activeScenario.termOfScenario}}</div>
+  <div class="govuk-caption-m" id="scenarioYear">Scenario year {{activeScenario.termOfScenario}}</div>
 
   <div class="govuk-!-margin-bottom-3">
     <a class="govuk-link hide-in-print" routerLink='/self-assessment/edit-data/{{urn}}/edit' [hidden]='!this.scenarioLoaded'>

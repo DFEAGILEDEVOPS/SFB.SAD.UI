@@ -1,6 +1,5 @@
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { Injectable, Inject } from '@angular/core';
-import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 import { environment } from '@env/environment';
 
 @Injectable({
