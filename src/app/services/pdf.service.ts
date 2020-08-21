@@ -21,12 +21,19 @@ export class PdfService {
     this.doc = new jsPDF({ unit: 'px', format: 'a3' });
     this.writeHeadings();
     this.writeWarnings();
-    this.writeCriteriaAndTables();
+    this.writeDashboardCriteriaAndTables();
+  }
+
+  public generatePdfForSideBySide() {
+    this.offset = 60;
+    this.doc = new jsPDF({ unit: 'px', format: 'a3' });
+    this.writeHeadings();
+    this.writeSideBySideCriteriaAndTables();
   }
 
   private writeHeadings() {
 
-    this.pdfWriteLine('H1', 'Self-assessment dashboard');
+    this.pdfWriteLine('H1', $('#h1').get(0).innerText);
     this.offset -= 20;
     if($('#dateCaption').length > 0) {
       this.pdfWriteLine('Grayed', $('#dateCaption').get(0).innerText);
@@ -52,7 +59,7 @@ export class PdfService {
     }
   }
 
-  private writeCriteriaAndTables() {
+  private writeDashboardCriteriaAndTables() {
     $("#downloadPage").text(" Loading...");
     let criteriaText = $('#criteriaText').get(0).innerText;
     this.pdfWriteLine('Normal', criteriaText);
@@ -65,6 +72,33 @@ export class PdfService {
         this.writeTable("reserveTable")
           .then(() => {
             this.offset -= 30;
+            this.writeTable("spendingTable")
+              .then(() => {
+                this.pdfAddNewPage();
+                this.writeTable("charTable")
+                  .then(() => {
+                    this.offset -= 150;
+                    this.writeTable("outcomesTable")
+                      .then(() => {
+                        this.pdfSave("Self-assessment-dashboard.pdf");
+                        $("#downloadPage").text(" Download page");
+                      })
+                  })
+              })
+          })
+      });
+  }
+
+  private writeSideBySideCriteriaAndTables() {
+    $("#downloadPage").text(" Loading...");
+    let criteriaText = $('#criteriaText').get(0).innerText;
+    this.pdfWriteLine('Normal', criteriaText);
+    this.expandDetails();
+    this.writeTable("criteriaTable")
+      .then(() => {
+        this.writeTable("reserveTable")
+          .then(() => {
+            this.pdfAddNewPage();
             this.writeTable("spendingTable")
               .then(() => {
                 this.pdfAddNewPage();

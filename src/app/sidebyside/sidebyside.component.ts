@@ -1,3 +1,4 @@
+import { PdfService } from './../services/pdf.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { SaScenarioModel } from 'app/Models/SaScenarioModel';
@@ -28,7 +29,8 @@ export class SidebysideComponent implements OnInit {
   constructor(
     private router: Router,
     private modalService: BsModalService,
-    private saScenariosService: SaScenariosService) {
+    private saScenariosService: SaScenariosService,
+    private pdfService: PdfService) {
       this.aaModalModels = new AAModalModels();
       this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
     }
@@ -115,6 +117,10 @@ export class SidebysideComponent implements OnInit {
       }
 
       window.print();
+    }
+
+    onDownload() {
+      this.pdfService.generatePdfForSideBySide();
     }
 
 }

@@ -5,10 +5,10 @@
     </span>
   </summary>
   <div class="govuk-details__text govuk-!-font-size-16">
-    <p>This benchmark was created using the following criteria.</p>
+    <p id="criteriaText">This benchmark was created using the following criteria.</p>
 
   <!-- - - - D E S K T O P   T A B L E - - -  -->
-    <table class="govuk-table govuk-!-font-size-16" *ngIf='!IsMobileScreen'>
+    <table class="govuk-table govuk-!-font-size-16" *ngIf='!IsMobileScreen' id="criteriaTable">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header no-bottom"></th>
@@ -71,7 +71,7 @@
     <!-- - - - D E S K T O P   T A B L E - - -  -->
 
     <!-- - - - M O B I L E   T A B L E - - -  -->
-    <table class="govuk-table govuk-!-font-size-16" *ngIf='IsMobileScreen'>
+    <table class="govuk-table govuk-!-font-size-16" *ngIf='IsMobileScreen' id="criteriaTable">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header no-bottom" colspan="2">{{scenarioName1}}</th>

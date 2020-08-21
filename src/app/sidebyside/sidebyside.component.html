@@ -1,19 +1,17 @@
-<div
-  *ngIf='firstScenarioLoaded && firstScenario.isTresholdsRefreshed && secondScenarioLoaded && secondScenario.isTresholdsRefreshed'>
+<div *ngIf='firstScenarioLoaded && firstScenario.isTresholdsRefreshed && secondScenarioLoaded && secondScenario.isTresholdsRefreshed'>
 
-  <app-sidebyside-breadcrumb [urn]='firstScenario.urn' [name]='firstScenario.name' class="hide-in-print">
-  </app-sidebyside-breadcrumb>
+  <app-sidebyside-breadcrumb [urn]='firstScenario.urn' [name]='firstScenario.name' class="hide-in-print"></app-sidebyside-breadcrumb>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <h1 class="govuk-heading-xl">Self-assessment dashboard</h1>
+      <h1 class="govuk-heading-xl" id="h1">Self-assessment dashboard</h1>
       <div class="govuk-caption-m date-caption"
         *ngIf='firstScenario.lastEditTimeStamp > secondScenario.lastEditTimeStamp'>Page last edited:
         {{firstScenario.lastEditTimeStamp | date: 'dd/MM/yy, HH:mm'}}</div>
       <div class="govuk-caption-m date-caption"
         *ngIf='secondScenario.lastEditTimeStamp > firstScenario.lastEditTimeStamp'>Page last edited:
         {{secondScenario.lastEditTimeStamp | date: 'dd/MM/yy, HH:mm'}}</div>
-      <p class="govuk-body-s">
+      <p class="govuk-body-s" id="assessing">
         Assessing
         <span class="highlight">
           <span class="govuk-!-font-weight-bold">{{firstScenario.name}}</span>
@@ -33,7 +31,7 @@
 
   <div class="govuk-grid-row hide-in-print">
     <div class="govuk-grid-column-one-half">
-      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold">
+      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold" (click)="onDownload()">
         <img src="assets/images/icon-file-download.png" class="small-icon" />
         <span id="downloadPage"> Download page</span>
       </a>
@@ -60,7 +58,6 @@
 
 </div>
 
-<div
-  [hidden]='firstScenarioLoaded && firstScenario.isTresholdsRefreshed && secondScenarioLoaded && secondScenario.isTresholdsRefreshed'>
+<div [hidden]='firstScenarioLoaded && firstScenario.isTresholdsRefreshed && secondScenarioLoaded && secondScenario.isTresholdsRefreshed'>
   Loading...
 </div>
