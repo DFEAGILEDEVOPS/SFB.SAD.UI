@@ -5,7 +5,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <h1 class="govuk-heading-xl">Self-assessment dashboard</h1>
-      <div class="govuk-caption-m date-caption" *ngIf='activeScenario.isEdited'>Page last edited: {{activeScenario.lastEditTimeStamp | date: 'dd/MM/yy, HH:mm'}}</div>
+      <div class="govuk-caption-m date-caption" id="dateCaption" *ngIf='activeScenario.isEdited'>Page last edited: {{activeScenario.lastEditTimeStamp | date: 'dd/MM/yy, HH:mm'}}</div>
       <p class="govuk-body-s" id="assessing">
         Assessing
         <span class="highlight">
@@ -40,7 +40,7 @@
     <div class="govuk-grid-column-one-half">
       <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold" (click)='onDownload()'>
         <img src="assets/images/icon-file-download.png" class="small-icon" />
-        <span> Download page</span>
+        <span id="downloadPage"> Download page</span>
       </a>
       <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold ml-4" (click)='onPrintPage()'>
         <img src="assets/images/icon-print.png" class="small-icon" />
