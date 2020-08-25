@@ -2,7 +2,7 @@
 
   <h3 class="govuk-heading-m govuk-!-margin-top-9">Reserve and balance</h3>
 
-  <table class="govuk-table" *ngFor='let aa of activeScenario.reserveAAs'>
+  <table class="govuk-table" id="reserveTable-{{i}}" *ngFor='let aa of activeScenario.reserveAAs; let i = index'>
     <caption class="govuk-table__caption bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row" >
       <th scope="row" class="govuk-table__header">School data</th>
@@ -33,7 +33,7 @@
 
   <h3 class="govuk-heading-m govuk-!-margin-top-9">Spending</h3>
 
-  <table class="govuk-table" *ngFor='let aa of activeScenario.spendingAAs'>
+  <table class="govuk-table" id="spendingTable-{{i}}" *ngFor='let aa of activeScenario.spendingAAs; let i = index'>
     <caption class="govuk-table__caption bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row" >
       <th scope="row" class="govuk-table__header">School data</th>
@@ -64,7 +64,7 @@
 
   <h3 class="govuk-heading-m govuk-!-margin-top-9">School characteristics</h3>
 
-  <table class="govuk-table" *ngFor='let aa of activeScenario.characteristicAAs'>
+  <table class="govuk-table" id="charTable-{{i}}" *ngFor='let aa of activeScenario.characteristicAAs; let i = index'>
     <caption class="govuk-table__caption bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row" >
       <th scope="row" class="govuk-table__header">School data</th>
@@ -91,7 +91,7 @@
 
   <h3 class="govuk-heading-m govuk-!-margin-top-9">Outcomes</h3>
 
-  <table class="govuk-table">
+  <table class="govuk-table" id="ofstedTable">
     <caption class="govuk-table__caption bottom-border">Ofsted rating</caption>
     <tr class="govuk-table__row" >
       <th scope="row" class="govuk-table__header">School data</th>
@@ -116,7 +116,7 @@
     </tr>
   </table>
 
-  <table class="govuk-table" *ngIf="activeScenario.progressScoreType === 'KS2 score'">
+  <table class="govuk-table" id="ks2Table" *ngIf="activeScenario.progressScoreType === 'KS2 score'">
     <caption class="govuk-table__caption bottom-border">{{activeScenario.progressScoreType}}</caption>
     <tr class="govuk-table__row" >
       <th scope="row" class="govuk-table__header">School data</th>
@@ -146,7 +146,7 @@
     </tr>
   </table>
 
-  <table class="govuk-table" *ngIf="activeScenario.progressScoreType === 'Progress 8 score'">
+  <table class="govuk-table" id="progress8Table" *ngIf="activeScenario.progressScoreType === 'Progress 8 score'">
     <caption class="govuk-table__caption bottom-border">{{activeScenario.progressScoreType}}</caption>
     <tr class="govuk-table__row" >
       <th scope="row" class="govuk-table__header">School data</th>

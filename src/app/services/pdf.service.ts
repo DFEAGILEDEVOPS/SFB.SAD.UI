@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import html2canvas from "html2canvas";
 import * as $ from 'jquery';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,94 @@ export class PdfService {
   MARGIN_LEFT: number;
   doc: any;
   offset: number;
+  canvassesForTables: any[];
 
   constructor() {
     this.MARGIN_LEFT = 50;
   }
 
-  public generatePdfForDashboard() {
+  public generatePdfForDesktopDashboard() {
+
+    $("#downloadPage").text(" Loading...");
+    this.expandDetails();
     this.offset = 60;
-    this.doc = new jsPDF({ unit: 'px', format: 'a3' });
+    this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
     this.writeHeadings();
     this.writeWarnings();
-    this.writeDashboardCriteriaAndTables();
+    let criteriaText = $('#criteriaText').get(0).innerText;
+    this.pdfWriteLine('Normal', criteriaText);
+    this.generateCanvassesForDesktopDashboardTables().subscribe(() => {
+
+      this.writeTableFromCanvasForDesktop("criteriaTable");
+      this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText);
+      this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText);
+
+      this.writeTableFromCanvasForDesktop("reserveTable");
+      this.offset -= 30;
+      this.writeTableFromCanvasForDesktop("spendingTable");
+      this.pdfAddNewPage();
+      this.writeTableFromCanvasForDesktop("charTable");
+      this.offset -= 150;
+      this.writeTableFromCanvasForDesktop("outcomesTable");
+
+      this.pdfSave("Self-assessment-dashboard.pdf");
+      $("#downloadPage").text(" Download page");
+    });
+  }
+
+  public generatePdfForMobileDashboard() {
+    $("#downloadPage").text(" Loading...");
+    this.expandDetails();
+    this.offset = 60;
+    this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
+    this.writeHeadings();
+    this.writeWarnings();
+    let criteriaText = $('#criteriaText').get(0).innerText;
+    this.pdfWriteLine('Normal', criteriaText, true);
+    this.generateCanvassesForMobileDashboardTables().subscribe(() => {
+
+      this.writeTableFromCanvasForMobile("criteriaTable");
+      this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText, true);
+      this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText, true);
+
+      this.pdfWriteLine('H3', 'Reserve and balance', true);
+      this.writeTableFromCanvasForMobile("reserveTable-0");
+      this.writeTableFromCanvasForMobile("reserveTable-1");
+
+      this.pdfAddNewPage();
+      this.pdfWriteLine('H3', 'Spending', true);
+      this.writeTableFromCanvasForMobile("spendingTable-0");
+      this.writeTableFromCanvasForMobile("spendingTable-1");
+      this.writeTableFromCanvasForMobile("spendingTable-2");
+      this.writeTableFromCanvasForMobile("spendingTable-3");
+      this.writeTableFromCanvasForMobile("spendingTable-4");
+      this.writeTableFromCanvasForMobile("spendingTable-5");
+      this.writeTableFromCanvasForMobile("spendingTable-6");
+      this.writeTableFromCanvasForMobile("spendingTable-7");
+
+      this.pdfAddNewPage();
+      this.pdfWriteLine('H3', 'School characteristics', true);
+      this.writeTableFromCanvasForMobile("charTable-0");
+      this.writeTableFromCanvasForMobile("charTable-1");
+      this.writeTableFromCanvasForMobile("charTable-2");
+      this.writeTableFromCanvasForMobile("charTable-3");
+      this.writeTableFromCanvasForMobile("charTable-4");
+      this.writeTableFromCanvasForMobile("charTable-5");
+      this.writeTableFromCanvasForMobile("charTable-6");
+
+      this.pdfAddNewPage();
+      this.pdfWriteLine('H3', 'Outcomes', true);
+      this.writeTableFromCanvasForMobile("ofstedTable");
+      if($("#progress8Table").length > 0){
+        this.writeTableFromCanvasForMobile("progress8Table");
+      }
+      if($("#ks2Table").length > 0){
+        this.writeTableFromCanvasForMobile("ks2Table");
+      }
+
+      this.pdfSave("Self-assessment-dashboard.pdf");
+      $("#downloadPage").text(" Download page");
+    });
   }
 
   public generatePdfForSideBySide() {
@@ -31,11 +109,31 @@ export class PdfService {
     this.writeSideBySideCriteriaAndTables();
   }
 
-  private writeHeadings() {
+  private writeTableFromCanvasForMobile(id: string) {
+    let canvas = this.canvassesForTables.find(ct => ct.id === id).canvas;
+    let ratio = canvas.width / canvas.height;
+    let width = 200;
+    let height = 200 / ratio;
+    if (this.offset + height > 900) {
+      this.pdfAddNewPage();
+    }
+    this.pdfAddImage(canvas, width, height);
+    this.offset += height + 50;
+  }
 
+  private writeTableFromCanvasForDesktop(id: string) {
+    let canvas = this.canvassesForTables.find(ct => ct.id === id).canvas;
+    if (this.offset + canvas.height > 900) {
+      this.pdfAddNewPage();
+    }
+    this.pdfAddImage(canvas, null, null);
+    this.offset += canvas.height + 50;
+  }
+
+  private writeHeadings() {
     this.pdfWriteLine('H1', $('#h1').get(0).innerText);
     this.offset -= 20;
-    if($('#dateCaption').length > 0) {
+    if ($('#dateCaption').length > 0) {
       this.pdfWriteLine('Grayed', $('#dateCaption').get(0).innerText);
     }
     this.offset += 10;
@@ -43,10 +141,9 @@ export class PdfService {
     let part1 = assessingText.substring(0, assessingText.indexOf('.') + 1);
     let part2 = assessingText.substring(assessingText.indexOf('.') + 2);
     this.pdfWriteLine('Bold', part1);
-    if(part2){
+    if (part2) {
       this.pdfWriteLine('Bold', part2);
     }
-
   }
 
   private writeWarnings() {
@@ -59,7 +156,7 @@ export class PdfService {
     }
   }
 
-  private writeDashboardCriteriaAndTables() {
+  private writeDashboardCriteriaAndTablesForDesktop() {
     $("#downloadPage").text(" Loading...");
     let criteriaText = $('#criteriaText').get(0).innerText;
     this.pdfWriteLine('Normal', criteriaText);
@@ -82,6 +179,39 @@ export class PdfService {
                       .then(() => {
                         this.pdfSave("Self-assessment-dashboard.pdf");
                         $("#downloadPage").text(" Download page");
+                      })
+                  })
+              })
+          })
+      });
+  }
+
+  private writeDashboardCriteriaAndTablesForMobile() {
+    $("#downloadPage").text(" Loading...");
+    let criteriaText = $('#criteriaText').get(0).innerText;
+    this.pdfWriteLine('Normal', criteriaText);
+    this.expandDetails();
+    this.writeTableForMobile("criteriaTable")
+      .then(() => {
+        this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText);
+        this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText);
+        this.pdfWriteLine('Bold', 'Reserve and balance');
+        this.writeTableForMobile("reserveTable-0")
+          .then(() => {
+            this.pdfWriteLine('Bold', 'Spending');
+            this.writeTableForMobile("spendingTable-0")
+              .then(() => {
+                this.pdfWriteLine('Bold', 'School characteristics');
+                this.writeTableForMobile("charTable-0")
+                  .then(() => {
+                    this.pdfWriteLine('Bold', 'Outcomes');
+                    this.writeTableForMobile("ofstedTable")
+                      .then(() => {
+                        this.writeTableForMobile("progress8Table")
+                          .then(() => {
+                            this.pdfSave("Self-assessment-dashboard.pdf");
+                            $("#downloadPage").text(" Download page");
+                          })
                       })
                   })
               })
@@ -133,11 +263,27 @@ export class PdfService {
         } else {
           this.pdfAddImage(canvas, null, null);
         }
-        debugger;
         this.offset += canvas.height;
-        if(canvas.height > 130) {
+        if (canvas.height > 130) {
           this.offset -= 40;
         }
+        resolve();
+      });
+
+    });
+  }
+
+  private writeTableForMobile(tableClass: string) {
+    return new Promise((resolve) => {
+      this.pdfGenerateImage('#' + tableClass).then((canvas) => {
+        let ratio = canvas.width / canvas.height;
+        let width = 200;
+        let height = 200 / ratio;
+        if (this.offset + height > 900) {
+          this.pdfAddNewPage();
+        }
+        this.pdfAddImage(canvas, width, height);
+        this.offset += height + 50;
         resolve();
       });
 
@@ -183,7 +329,7 @@ export class PdfService {
     this.doc.save(pdfName);
   }
 
-  private pdfWriteLine(type, text) {
+  private pdfWriteLine(type: string, text: string, isMobile?: boolean) {
     this.doc.setFont("helvetica");
     this.doc.setTextColor(0, 0, 0);
     let fontSize;
@@ -209,7 +355,7 @@ export class PdfService {
         fontSize = 12;
         break;
       case 'Grayed':
-        this.doc.setTextColor(177,180,182);
+        this.doc.setTextColor(177, 180, 182);
         fontSize = 14;
         break;
       case 'Info':
@@ -227,8 +373,78 @@ export class PdfService {
     }
 
     this.doc.setFontSize(fontSize);
-    this.doc.text(this.MARGIN_LEFT + 5, this.offset, text);
+    if (isMobile) {
+      this.doc.text(this.MARGIN_LEFT, this.offset, text);
+    }else{
+      this.doc.text(this.MARGIN_LEFT + 5, this.offset, text);
+    }
     this.offset += fontSize + 8;
+  }
+
+  private generateCanvassesForMobileDashboardTables() {
+    this.canvassesForTables = [
+      { id: "criteriaTable" },
+      { id: "reserveTable-0" },
+      { id: "reserveTable-1" },
+      { id: "spendingTable-0" },
+      { id: "spendingTable-1" },
+      { id: "spendingTable-2" },
+      { id: "spendingTable-3" },
+      { id: "spendingTable-4" },
+      { id: "spendingTable-5" },
+      { id: "spendingTable-6" },
+      { id: "spendingTable-7" },
+      { id: "charTable-0" },
+      { id: "charTable-1" },
+      { id: "charTable-2" },
+      { id: "charTable-3" },
+      { id: "charTable-4" },
+      { id: "charTable-5" },
+      { id: "charTable-6" },
+      { id: "ofstedTable" }
+    ]
+
+    if($("#progress8Table").length > 0){
+      this.canvassesForTables.push({ id: "progress8Table" });
+    }
+
+    if($("#ks2Table").length > 0){
+      this.canvassesForTables.push({ id: "ks2Table" });
+    }
+
+    return from(new Promise((resolve) => {
+      this.canvassesForTables.forEach(tableCanvas => {
+        this.pdfGenerateImage('#' + tableCanvas.id).then((canvas) => {
+          tableCanvas.canvas = canvas;
+          if (this.canvassesForTables.every(ct => ct.canvas)) {
+            resolve();
+          }
+        })
+      });
+    }));
+
+  }
+
+  private generateCanvassesForDesktopDashboardTables() {
+    this.canvassesForTables = [
+      { id: "criteriaTable" },
+      { id: "reserveTable" },
+      { id: "spendingTable" },
+      { id: "charTable" },
+      { id: "outcomesTable" }
+    ]
+
+    return from(new Promise((resolve) => {
+      this.canvassesForTables.forEach(tableCanvas => {
+        this.pdfGenerateImage('#' + tableCanvas.id).then((canvas) => {
+          tableCanvas.canvas = canvas;
+          if (this.canvassesForTables.every(ct => ct.canvas)) {
+            resolve();
+          }
+        })
+      });
+    }));
+
   }
 
 }
