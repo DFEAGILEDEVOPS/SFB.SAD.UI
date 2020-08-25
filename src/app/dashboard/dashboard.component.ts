@@ -113,9 +113,9 @@ export class DashboardComponent implements OnInit {
     //throwError("test error"); // returns observable!
     //throw new Error("Download feature is not implemented yet!");
     if(this.isMobileScreen) {
-      this.pdfService.generatePdfForMobileDashboard();
+      this.pdfService.generatePdfForMobile();
     } else {
-      this.pdfService.generatePdfForDesktopDashboard();
+      this.pdfService.generatePdfForDesktop();
     }
   }
 

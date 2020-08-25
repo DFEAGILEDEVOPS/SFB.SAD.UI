@@ -120,7 +120,11 @@ export class SidebysideComponent implements OnInit {
     }
 
     onDownload() {
-      this.pdfService.generatePdfForSideBySide();
+      if(this.isMobileScreen) {
+        this.pdfService.generatePdfForMobile();
+      } else {
+        this.pdfService.generatePdfForDesktop();
+      }
     }
 
 }
