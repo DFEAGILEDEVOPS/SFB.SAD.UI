@@ -86,7 +86,7 @@ a{
 }
 
 .highlight {
-  background-color: #d53880;
+  background-color: #d4357f;
   display: inline;
   padding: 5px 5px;
 
@@ -284,3 +284,15 @@ caption{
 .va-bottom {
   vertical-align: bottom!important;
  }
+
+ .nowrap {
+   white-space: nowrap;
+ }
+
+ .progress--na, .ofsted--na {
+  float: left;
+  background-color: govuk-colour("blue");
+  color: govuk-colour("white");
+  padding: 0 5px;
+  margin-right: 2px;
+}

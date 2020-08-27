@@ -232,7 +232,8 @@
       <th scope="row" class="govuk-table__header width-thirty-four-percent">School data</th>
       <td class="govuk-table__cell">
         <div class="ofsted-info-wrapper">
-          <span class="rating rating-{{firstScenario.ofstedRating}}"> {{firstScenario.ofstedRating}} </span>
+          <span class="rating rating-{{firstScenario.ofstedRating}} " *ngIf='firstScenario.ofstedRating !== "0"'> {{firstScenario.ofstedRating}} </span>
+          <span class="ofsted--na" *ngIf='firstScenario.ofstedRating === "0"'> No data available</span>
           <span [ngSwitch]="firstScenario.ofstedRating">
             <span class="govuk-!-font-weight-bold" *ngSwitchCase="'1'"> Outstanding</span>
             <span class="govuk-!-font-weight-bold" *ngSwitchCase="'2'"> Good</span>
@@ -265,15 +266,15 @@
                   'progress-text--well-above': firstScenario.progressScore > 3}">
             {{firstScenario.progressScore | number: '1.2-2'}}
             <span *ngIf="firstScenario.progressScore < -3">&nbsp; Well below average</span>
-            <span *ngIf="firstScenario.progressScore >= -3 && firstScenario.progressScore < -2">&nbsp; Below
+            <span style="color: #0C0C0C;" *ngIf="firstScenario.progressScore >= -3 && firstScenario.progressScore < -2">&nbsp; Below
               average</span>
             <span *ngIf="firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2">&nbsp;
               Average</span>
-            <span *ngIf="firstScenario.progressScore <= 3 && firstScenario.progressScore > 2">&nbsp; Above
+            <span style="color: #0C0C0C;" *ngIf="firstScenario.progressScore <= 3 && firstScenario.progressScore > 2">&nbsp; Above
               average</span>
             <span *ngIf="firstScenario.progressScore > 3">&nbsp; Well above average</span>
           </span>
-          <span [hidden]='firstScenario.progressScore' style="float: left;">N/A</span>
+          <span [hidden]='firstScenario.progressScore' class="progress--na">No data available</span>
         </div>
         <img src="assets/images/help-icon.png" class="small-icon rating-help-icon progress-icon"
           (click)="openModalWithComponent('KS2', firstScenario)" />
@@ -296,13 +297,13 @@
             {{firstScenario.progressScore | number: '1.2-2'}}
             <span [ngSwitch]="firstScenario.progress8Banding">
               <span *ngSwitchCase="5">&nbsp; Well below average</span>
-              <span *ngSwitchCase="4">&nbsp; Below average</span>
+              <span *ngSwitchCase="4" style="color: #0C0C0C;">&nbsp; Below average</span>
               <span *ngSwitchCase="3">&nbsp; Average</span>
-              <span *ngSwitchCase="2">&nbsp; Above average</span>
+              <span *ngSwitchCase="2" style="color: #0C0C0C;">&nbsp; Above average</span>
               <span *ngSwitchCase="1">&nbsp; Well above average</span>
             </span>
           </span>
-          <span [hidden]='firstScenario.progressScore' style="float: left;">N/A</span>
+          <span [hidden]='firstScenario.progressScore' class="progress--na">No data available</span>
         </div>
         <img src="assets/images/help-icon.png" class="small-icon rating-help-icon progress-icon"
           (click)="openModalWithComponent('P8', firstScenario)" />

@@ -16,7 +16,7 @@
       <th scope="row" class="govuk-table__header">Rating against tresholds</th>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon"
           (click)="openModalWithComponent(aa.assessmentAreaName)" />
       </td>
       <td *ngIf="aa.schoolData == null || aa.calculatedSchoolData == null" class="govuk-table__cell">
@@ -25,7 +25,7 @@
           <a class="govuk-link ml-2 button-link hide-in-print"
           routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'>Add data</a>
         </span>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon"
         (click)="openModalWithComponent(aa.assessmentAreaName)" />
       </td>
     </tr>
@@ -47,7 +47,7 @@
       <th scope="row" class="govuk-table__header">Rating against tresholds</th>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon"
           (click)="openModalWithComponent(aa.assessmentAreaName)" />
       </td>
       <td *ngIf="aa.schoolData == null" class="govuk-table__cell">
@@ -56,7 +56,7 @@
           <a class="govuk-link ml-2 button-link hide-in-print"
           routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'>Add data</a>
         </span>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon"
         (click)="openModalWithComponent(aa.assessmentAreaName)" />
       </td>
     </tr>
@@ -74,7 +74,7 @@
       <th scope="row" class="govuk-table__header">Rating against tresholds</th>
       <td *ngIf="aa.calculatedSchoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon"
           (click)="openModalWithComponent(aa.assessmentAreaName)" />
       </td>
       <td *ngIf='aa.calculatedSchoolData == null' class="govuk-table__cell">
@@ -83,7 +83,7 @@
           <a class="govuk-link ml-2 button-link hide-in-print"
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'>Add data</a>
         </span>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon"
           (click)="openModalWithComponent(aa.assessmentAreaName)" />
       </td>
     </tr>
@@ -97,7 +97,8 @@
       <th scope="row" class="govuk-table__header">School data</th>
       <td class="govuk-table__cell">
         <div class="ofsted-info-wrapper">
-          <span class="rating rating-{{activeScenario.ofstedRating}}"> {{activeScenario.ofstedRating}} </span>
+          <span class="rating rating-{{activeScenario.ofstedRating}}" *ngIf='activeScenario.ofstedRating !== "0"'> {{activeScenario.ofstedRating}} </span>
+          <span class="ofsted--na" *ngIf='activeScenario.ofstedRating === "0"'> No data available</span>
           <span [ngSwitch]="activeScenario.ofstedRating">
             <span class="govuk-!-font-weight-bold" *ngSwitchCase="'1'"> Outstanding</span>
             <span class="govuk-!-font-weight-bold" *ngSwitchCase="'2'"> Good</span>
@@ -110,7 +111,7 @@
           <span *ngIf='activeScenario.ofstedInspectionDate'>Inspected
             {{ activeScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
         </div>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon ofsted-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon ofsted-icon"
         (click)="openModalWithComponent('Ofsted')" />
       </td>
     </tr>
@@ -130,17 +131,17 @@
                 'progress-text--well-above': activeScenario.progressScore > 3}">
             {{activeScenario.progressScore | number: '1.2-2'}}
             <span *ngIf="activeScenario.progressScore < -3">&nbsp; Well below average</span>
-            <span *ngIf="activeScenario.progressScore >= -3 && activeScenario.progressScore < -2">&nbsp; Below
+            <span style="color: #0C0C0C;" *ngIf="activeScenario.progressScore >= -3 && activeScenario.progressScore < -2">&nbsp; Below
               average</span>
             <span *ngIf="activeScenario.progressScore >= -2 && activeScenario.progressScore <= 2">&nbsp;
               Average</span>
-            <span *ngIf="activeScenario.progressScore <= 3 && activeScenario.progressScore > 2">&nbsp; Above
+            <span style="color: #0C0C0C;" *ngIf="activeScenario.progressScore <= 3 && activeScenario.progressScore > 2">&nbsp; Above
               average</span>
             <span *ngIf="activeScenario.progressScore > 3">&nbsp; Well above average</span>
           </span>
-          <span [hidden]='activeScenario.progressScore' style="float: left;">N/A</span>
+          <span [hidden]='activeScenario.progressScore' class="progress--na">No data available</span>
         </div>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon progress-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon progress-icon"
         (click)="openModalWithComponent('KS2')"/>
       </td>
     </tr>
@@ -161,15 +162,15 @@
             {{activeScenario.progressScore | number: '1.2-2'}}
             <span [ngSwitch]="activeScenario.progress8Banding">
               <span *ngSwitchCase="5">&nbsp; Well below average</span>
-              <span *ngSwitchCase="4">&nbsp; Below average</span>
+              <span style="color: #0C0C0C;" *ngSwitchCase="4">&nbsp; Below average</span>
               <span *ngSwitchCase="3">&nbsp; Average</span>
-              <span *ngSwitchCase="2">&nbsp; Above average</span>
+              <span style="color: #0C0C0C;" *ngSwitchCase="2">&nbsp; Above average</span>
               <span *ngSwitchCase="1">&nbsp; Well above average</span>
             </span>
           </span>
-          <span [hidden]='activeScenario.progressScore' style="float: left;">N/A</span>
+          <span [hidden]='activeScenario.progressScore' class="progress--na">No data available</span>
         </div>
-        <img src="assets/images/help-icon.png" class="small-icon rating-help-icon progress-icon"
+        <img src="assets/images/help-icon.png" alt="Help" class="small-icon rating-help-icon progress-icon"
         (click)="openModalWithComponent('P8')"/>
       </td>
     </tr>
