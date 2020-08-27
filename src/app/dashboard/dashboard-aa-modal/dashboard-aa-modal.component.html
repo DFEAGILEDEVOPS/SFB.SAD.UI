@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title pull-left">{{title}}</h4>
-  <a class="pull-right govuk-link modal-close-link" aria-label="Close" (click)="bsModalRef.hide()">
+  <a class="pull-right modal-close-link" aria-label="Close" [routerLink]='' (click)="bsModalRef.hide()">
     <span aria-hidden="true">Close</span>
   </a>
 </div>
@@ -13,8 +13,8 @@
   <table class="govuk-table aa-modal-right-section__table">
     <thead class="govuk-table__head">
       <tr class="govuk-table__row">
-        <th scope="col" class="govuk-table__header" *ngIf="tresholdFormat==='percentageOfExp'" >% of exp.</th>
-        <th scope="col" class="govuk-table__header" *ngIf="tresholdFormat==='percentageOfInc'" >% of inc.</th>
+        <th scope="col" class="govuk-table__header" *ngIf="tresholdFormat==='percentageOfExp'" >% of expenditure</th>
+        <th scope="col" class="govuk-table__header" *ngIf="tresholdFormat==='percentageOfInc'" >% of income</th>
         <th scope="col" class="govuk-table__header" *ngIf="tresholdFormat==='percentageOfWf'" >% of workforce</th>
         <th scope="col" class="govuk-table__header" *ngIf="tresholdFormat==='currency'" >Treshold</th>
         <th scope="col" class="govuk-table__header" *ngIf="tresholdFormat==='number'" >Treshold</th>

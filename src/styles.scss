@@ -162,17 +162,14 @@ caption{
 
 .modal-close-link{
   cursor: pointer;
-  color: #1d70b8;
+  color: #0b0c0c !important;
+  text-decoration: none;
+  font-family: "GDS Transport", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-.modal-close-link:visited{
-  color: #4c2c92;
-}
-.modal-close-link:link{
-  color: #1d70b8;
-}
 .modal-close-link:hover {
-  color: #003078;
+
   text-decoration: underline!important;
 }
 .modal-close-link:active, .modal-close-link:focus {

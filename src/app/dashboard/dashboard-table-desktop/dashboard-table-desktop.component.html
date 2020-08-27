@@ -4,7 +4,7 @@
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-forty-percent">Assessment area</th>
       <th scope="col" class="govuk-table__header width-ten-percent">School data</th>
-      <th scope="col" class="govuk-table__header width-ten-percent">% of income</th>
+      <th scope="col" class="govuk-table__header width-ten-percent">% of <abbr title="income">inc.</abbr></th>
       <th scope="col" class="govuk-table__header width-forty-percent">Rating against tresholds</th>
     </tr>
   </thead>
@@ -15,8 +15,9 @@
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}"  class="small-icon rating-help-icon"
-          (click)="openModalWithComponent(aa.assessmentAreaName)" />
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon" />
+        </a>
       </td>
       <td *ngIf="aa.schoolData == null || aa.calculatedSchoolData == null" class="govuk-table__cell">
         <span class="rating-box gray">
@@ -25,8 +26,9 @@
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'
             attr.aria-label="Add data for {{aa.assessmentAreaName}}">Add data</a>
         </span>
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}"  class="small-icon rating-help-icon"
-          (click)="openModalWithComponent(aa.assessmentAreaName)" />
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon"/>
+        </a>
       </td>
     </tr>
   </tbody>
@@ -38,7 +40,7 @@
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-forty-percent">Assessment area</th>
       <th scope="col" class="govuk-table__header width-ten-percent">School data</th>
-      <th scope="col" class="govuk-table__header width-ten-percent">% of exp.</th>
+      <th scope="col" class="govuk-table__header width-ten-percent">% of <abbr title="expenditure">exp.</abbr></th>
       <th scope="col" class="govuk-table__header width-forty-percent">Rating against tresholds</th>
     </tr>
   </thead>
@@ -49,8 +51,9 @@
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon rating-help-icon"
-          (click)="openModalWithComponent(aa.assessmentAreaName)" />
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon"/>
+        </a>
       </td>
       <td *ngIf="aa.schoolData == null" class="govuk-table__cell">
         <span class="rating-box gray">
@@ -59,8 +62,9 @@
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'
             attr.aria-label="Add data for {{aa.assessmentAreaName}}">Add data</a>
         </span>
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon rating-help-icon"
-          (click)="openModalWithComponent(aa.assessmentAreaName)" />
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon"/>
+        </a>
       </td>
     </tr>
   </tbody>
@@ -83,8 +87,9 @@
       </td>
       <td *ngIf="aa.calculatedSchoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon rating-help-icon"
-          (click)="openModalWithComponent(aa.assessmentAreaName)" />
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon " />
+        </a>
       </td>
       <td *ngIf='aa.calculatedSchoolData == null' class="govuk-table__cell">
         <span class="rating-box gray">
@@ -93,8 +98,9 @@
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'
             attr.aria-label="Add data for {{aa.assessmentAreaName}}">Add data</a>
         </span>
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}"  class="small-icon rating-help-icon"
-          (click)="openModalWithComponent(aa.assessmentAreaName)" />
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" attr.alt="Help for {{aa.assessmentAreaName}}"  class="small-icon" />
+        </a>
       </td>
     </tr>
   </tbody>
@@ -121,12 +127,12 @@
           <span class="govuk-!-font-weight-bold" *ngSwitchCase="'4'"> Inadequate</span>
         </span> |
         <a class="govuk-link" target="_blank" rel="external noopener noreferrer"
-          href="https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/{{activeScenario.urn}}">Ofsted
-          report</a>
+          href="https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/{{activeScenario.urn}}">Ofsted report</a>
         <span *ngIf='activeScenario.ofstedInspectionDate'> | Inspected
           {{ activeScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
-        <img src="assets/images/help-icon.png" alt="Help for ofsted score" class="small-icon rating-help-icon ofsted-icon"
-          (click)="openModalWithComponent('Ofsted')" />
+        <a [routerLink]='' (click)="openModalWithComponent('Ofsted')" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" alt="Help for ofsted score" class="small-icon progress-icon" />
+        </a>
       </td>
     </tr>
     <tr class="govuk-table__row" *ngIf="activeScenario.progressScoreType === 'KS2 score'">
@@ -151,8 +157,9 @@
           </span>
           <span [hidden]='activeScenario.progressScore' class="progress--na">No data available</span>
         </div>
-        <img src="assets/images/help-icon.png" alt="Help for KS2 score" class="small-icon rating-help-icon progress-icon"
-          (click)="openModalWithComponent('KS2')" />
+        <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" alt="Help for KS2 score" class="small-icon progress-icon" />
+        </a>
       </td>
     </tr>
     <tr class="govuk-table__row" *ngIf="activeScenario.progressScoreType === 'Progress 8 score'">
@@ -176,8 +183,9 @@
           </span>
           <span [hidden]='activeScenario.progressScore' class="progress--na">No data available</span>
         </div>
-        <img src="assets/images/help-icon.png" alt="Help for P8 score" class="small-icon rating-help-icon progress-icon"
-          (click)="openModalWithComponent('P8')" />
+        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon">
+          <img src="assets/images/help-icon.png" alt="Help for P8 score" class="small-icon progress-icon" />
+        </a>
       </td>
     </tr>
   </tbody>
