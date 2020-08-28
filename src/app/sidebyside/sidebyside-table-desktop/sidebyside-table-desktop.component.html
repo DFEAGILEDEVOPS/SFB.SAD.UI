@@ -1,36 +1,35 @@
-<table class="govuk-table" id="reserveTable">
+<div>
+    <div class="govuk-table__header no-bottom width-twenty-percent" style="display: inline-block; width: 18%;"></div>
+    <div class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" style="display: inline-block; width: 39%;">
+      <span class="govuk-!-font-size-24">{{firstScenario.scenarioName}}</span>
+      <div class="govuk-caption-m">Scenario year {{firstScenario.termOfScenario}}</div>
+      <div class="govuk-!-margin-top-1 hide-in-print">
+        <a routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0' class="govuk-link link-button"
+        attr.aria-label="Edit data for {{firstScenario.scenarioName}} scenario">Edit data</a>
+        <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(0)'
+        attr.aria-label="Remove {{firstScenario.scenarioName}} scenario">Remove</a>
+      </div>
+    </div>
+    <div class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" style="display: inline-block; width: 36%;">
+      <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
+      <div class="govuk-caption-m">Scenario year {{secondScenario.termOfScenario}}</div>
+      <div class="govuk-!-margin-top-1 hide-in-print">
+        <a routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1' class="govuk-link link-button"
+        attr.aria-label="Edit data for {{secondScenario.scenarioName}} scenario">Edit data</a>
+        <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(1)'
+        attr.aria-label="Remove {{secondScenario.scenarioName}} scenario">Remove</a>
+      </div>
+    </div>
+</div>
+
+<table class="govuk-table" id="reserveTable" aria-label="Reserve and balance">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <td class="govuk-table__header no-bottom width-twenty-percent"></td>
-      <th scope="col" class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" colspan="3">
-        <span class="govuk-!-font-size-24">{{firstScenario.scenarioName}}</span>
-        <div class="govuk-caption-m">Scenario year {{firstScenario.termOfScenario}}</div>
-        <div class="govuk-!-margin-top-1 hide-in-print">
-          <a routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0' class="govuk-link link-button"
-          attr.aria-label="Edit data for {{firstScenario.scenarioName}} scenario">Edit data</a>
-          <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(0)'
-          attr.aria-label="Remove {{firstScenario.scenarioName}} scenario">Remove</a>
-        </div>
-      </th>
-      <th scope="col" class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" colspan="3">
-        <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
-        <div class="govuk-caption-m">Scenario year {{secondScenario.termOfScenario}}</div>
-        <div class="govuk-!-margin-top-1 hide-in-print">
-          <a routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1' class="govuk-link link-button"
-          attr.aria-label="Edit data for {{secondScenario.scenarioName}} scenario">Edit data</a>
-          <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(1)'
-          attr.aria-label="Remove {{secondScenario.scenarioName}} scenario">Remove</a>
-        </div>
-      </th>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="col"
-        class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Reserve
-        and balance</th>
-      <td class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="3"></td>
-      <td class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"></td>
+      <th class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Reserve and balance</th>
+      <th scope="colgroup" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="3"><span class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
+      <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"><span class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
     </tr>
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
@@ -97,14 +96,12 @@
   </tbody>
 </table>
 
-<table class="govuk-table" id="spendingTable">
+<table class="govuk-table" id="spendingTable" aria-label="Spending">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">
-        Spending
-      </th>
-      <td class="govuk-table__header no-bottom  cell-separate width-forty-percent" colspan="3"></td>
-      <td class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"></td>
+      <th class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Spending</th>
+      <th scope="colgroup" class="govuk-table__header no-bottom  cell-separate width-forty-percent" colspan="3"><span class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
+      <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"><span class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
     </tr>
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
@@ -171,12 +168,12 @@
   </tbody>
 </table>
 
-<table class="govuk-table" id="charTable">
+<table class="govuk-table" id="charTable" aria-label="School characteristics">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">School characteristics</th>
-      <td class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="2"></td>
-      <td class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="2"></td>
+      <th class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">School characteristics</th>
+      <th scope="colgroup" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="2"><span class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
+      <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="2"><span class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
     </tr>
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
@@ -237,16 +234,15 @@
   </tbody>
 </table>
 
-<table class="govuk-table" id="outcomesTable">
+<table class="govuk-table" id="outcomesTable" aria-label="Outcomes">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Outcomes</th>
-      <td class="govuk-table__header no-bottom cell-separate width-forty-percent"></td>
-      <td class="govuk-table__header no-bottom width-forty-percent"></td>
+      <th class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Outcomes</th>
+      <th scope="col" class="govuk-table__header no-bottom cell-separate width-eighty-percent" colspan="2"></th>
     </tr>
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-      <th scope="col" class="govuk-table__header cell-separate width-forty-percent" colspan="2">School data</th>
+      <th scope="col" class="govuk-table__header cell-separate width-eighty-percent" colspan="2">School data</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
