@@ -26,8 +26,6 @@ export class PdfService {
     this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
     this.writeHeadings();
     this.writeWarnings();
-    let criteriaText = $('#criteriaText').get(0).innerText;
-    this.pdfWriteLine('Normal', criteriaText);
     this.generateCanvassesForDesktopTables().subscribe(() => {
 
       this.writeTableFromCanvasForDesktop("criteriaTable");
@@ -73,7 +71,7 @@ export class PdfService {
       if($("#scenariosTable").length > 0){
         this.writeTableFromCanvasForMobile("scenariosTable");
       }
-      
+
       this.pdfWriteLine('H3', 'Reserve and balance', true);
       this.writeTableFromCanvasForMobile("reserveTable-0");
       this.writeTableFromCanvasForMobile("reserveTable-1");

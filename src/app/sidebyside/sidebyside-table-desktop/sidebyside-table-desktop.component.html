@@ -25,153 +25,211 @@
 </div>
 
 <table class="govuk-table" id="reserveTable" aria-label="Reserve and balance">
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Reserve and balance</th>
-      <th scope="colgroup" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="3"><span class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
-      <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"><span class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-      <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-      <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of income">% of <abbr title="income">inc.</abbr></th>
-      <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
-      <!---->
-      <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-      <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of income">% of <abbr title="income">inc.</abbr></th>
-      <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
-    <tr class="govuk-table__row" *ngFor='let _ of firstScenario.reserveAAs; let i=index'>
-      <td class="govuk-table__cell aa-cell">{{firstScenario.reserveAAs[i].assessmentAreaName}}</td>
-      <td class="govuk-table__cell cell-separate nowrap">{{firstScenario.reserveAAs[i].schoolData | aaValueFormat}}
-      </td>
-      <td class="govuk-table__cell">
-        {{firstScenario.reserveAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.reserveAAs[i].assessmentAreaName}}
-      </td>
-      <td *ngIf="firstScenario.reserveAAs[i].schoolData != null && firstScenario.reserveAAs[i].calculatedSchoolData != null" class="govuk-table__cell">
-        <span class="rating-box"
-          [class]='firstScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
-          <a [routerLink]='' (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)" class="rating-help-icon">
-            <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.reserveAAs[i].assessmentAreaName}}" class="small-icon" />
-          </a>
-      </td>
-      <td *ngIf="firstScenario.reserveAAs[i].schoolData == null || firstScenario.reserveAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
-        <span class="rating-box gray">
-          <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link hide-in-print"
-            routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.reserveAAs[i].assessmentAreaName}}/0'
-            attr.aria-label="Add data for {{firstScenario.reserveAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add data</a>
-        </span>
-        <a [routerLink]='' (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)" class="rating-help-icon">
-          <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.reserveAAs[i].assessmentAreaName}}" class="small-icon na" />
-        </a>
-      </td>
-      <!---->
-      <td class="govuk-table__cell cell-separate nowrap">{{secondScenario.reserveAAs[i].schoolData | aaValueFormat}}
-      </td>
-      <td class="govuk-table__cell">
-        {{secondScenario.reserveAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.reserveAAs[i].assessmentAreaName}}
-      </td>
-      <td *ngIf="secondScenario.reserveAAs[i].schoolData != null && secondScenario.reserveAAs[i].calculatedSchoolData != null" class="govuk-table__cell">
-        <span class="rating-box"
-          [class]='secondScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
-          <a [routerLink]='' (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)" class="rating-help-icon">
-            <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.reserveAAs[i].assessmentAreaName}}" class="small-icon" />
-          </a>
-      </td>
-      <td *ngIf="secondScenario.reserveAAs[i].schoolData == null || secondScenario.reserveAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
-        <span class="rating-box gray">
-          <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link hide-in-print"
-            routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.reserveAAs[i].assessmentAreaName}}/1'
-            attr.aria-label="Add data for {{secondScenario.reserveAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add data</a>
-        </span>
-        <a [routerLink]='' (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)" class="rating-help-icon">
-          <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.reserveAAs[i].assessmentAreaName}}" class="small-icon na" />
-        </a>
-      </td>
-    </tr>
-  </tbody>
+  <col>
+  <colgroup span="3"></colgroup>
+  <colgroup span="3"></colgroup>
+  <tr class="govuk-table__row">
+    <td class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">
+      <span aria-hidden="true">Reserve and balance</span>
+    </td>
+    <th scope="colgroup" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="3"><span
+        class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
+    <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"><span
+        class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
+  </tr>
+  <tr class="govuk-table__row">
+    <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
+    <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
+    <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of income">% of <abbr
+        title="income">inc.</abbr></th>
+    <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
+    <!---->
+    <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
+    <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of income">% of <abbr
+        title="income">inc.</abbr></th>
+    <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
+  </tr>
+
+  <tr class="govuk-table__row" *ngFor='let _ of firstScenario.reserveAAs; let i=index'>
+    <th scope="row" class="govuk-table__cell aa-cell">{{firstScenario.reserveAAs[i].assessmentAreaName}}</th>
+    <td class="govuk-table__cell cell-separate nowrap">{{firstScenario.reserveAAs[i].schoolData | aaValueFormat}}
+    </td>
+    <td class="govuk-table__cell">
+      {{firstScenario.reserveAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.reserveAAs[i].assessmentAreaName}}
+    </td>
+    <td
+      *ngIf="firstScenario.reserveAAs[i].schoolData != null && firstScenario.reserveAAs[i].calculatedSchoolData != null"
+      class="govuk-table__cell">
+      <span class="rating-box"
+        [class]='firstScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
+      <a [routerLink]='' (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)"
+        class="rating-help-icon">
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.reserveAAs[i].assessmentAreaName}}"
+          class="small-icon" />
+      </a>
+    </td>
+    <td
+      *ngIf="firstScenario.reserveAAs[i].schoolData == null || firstScenario.reserveAAs[i].calculatedSchoolData == null"
+      class="govuk-table__cell">
+      <span class="rating-box gray">
+        <span>Not available.</span>
+        <a class="govuk-link ml-2 button-link hide-in-print"
+          routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.reserveAAs[i].assessmentAreaName}}/0'
+          attr.aria-label="Add data for {{firstScenario.reserveAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add
+          data</a>
+      </span>
+      <a [routerLink]='' (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)"
+        class="rating-help-icon">
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.reserveAAs[i].assessmentAreaName}}"
+          class="small-icon na" />
+      </a>
+    </td>
+    <!---->
+    <td class="govuk-table__cell cell-separate nowrap">{{secondScenario.reserveAAs[i].schoolData | aaValueFormat}}
+    </td>
+    <td class="govuk-table__cell">
+      {{secondScenario.reserveAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.reserveAAs[i].assessmentAreaName}}
+    </td>
+    <td
+      *ngIf="secondScenario.reserveAAs[i].schoolData != null && secondScenario.reserveAAs[i].calculatedSchoolData != null"
+      class="govuk-table__cell">
+      <span class="rating-box"
+        [class]='secondScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
+      <a [routerLink]=''
+        (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)"
+        class="rating-help-icon">
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.reserveAAs[i].assessmentAreaName}}"
+          class="small-icon" />
+      </a>
+    </td>
+    <td
+      *ngIf="secondScenario.reserveAAs[i].schoolData == null || secondScenario.reserveAAs[i].calculatedSchoolData == null"
+      class="govuk-table__cell">
+      <span class="rating-box gray">
+        <span>Not available.</span>
+        <a class="govuk-link ml-2 button-link hide-in-print"
+          routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.reserveAAs[i].assessmentAreaName}}/1'
+          attr.aria-label="Add data for {{secondScenario.reserveAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add
+          data</a>
+      </span>
+      <a [routerLink]=''
+        (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)"
+        class="rating-help-icon">
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.reserveAAs[i].assessmentAreaName}}"
+          class="small-icon na" />
+      </a>
+    </td>
+  </tr>
 </table>
 
 <table class="govuk-table" id="spendingTable" aria-label="Spending">
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Spending</th>
-      <th scope="colgroup" class="govuk-table__header no-bottom  cell-separate width-forty-percent" colspan="3"><span class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
-      <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"><span class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-      <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-      <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of expenditure">% of <abbr title="expenditure">exp.</abbr></th>
-      <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
-      <!---->
-      <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-      <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of expenditure">% of <abbr title="expenditure">exp.</abbr></th>
-      <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
-    <tr class="govuk-table__row" *ngFor='let _ of firstScenario.spendingAAs; let i=index'>
-      <td class="govuk-table__cell aa-cell">{{firstScenario.spendingAAs[i].assessmentAreaName}}</td>
-      <td class="govuk-table__cell cell-separate nowrap" >{{firstScenario.spendingAAs[i].schoolData | aaValueFormat}}
-      </td>
-      <td class="govuk-table__cell">
-        {{firstScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.spendingAAs[i].assessmentAreaName }}
-      </td>
-      <td *ngIf="firstScenario.spendingAAs[i].schoolData != null && firstScenario.spendingAAs[i].calculatedSchoolData != null" class="govuk-table__cell">
-        <span class="rating-box"
-          [class]='firstScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
-          <a [routerLink]='' (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario)" class="rating-help-icon">
-            <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.spendingAAs[i].assessmentAreaName}}" class="small-icon" />
-          </a>
-      </td>
-      <td *ngIf="firstScenario.spendingAAs[i].schoolData == null || firstScenario.spendingAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
-        <span class="rating-box gray">
-          <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link hide-in-print"
-            routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.spendingAAs[i].assessmentAreaName}}/0'
-            attr.aria-label="Add data for {{firstScenario.spendingAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add data</a>
-        </span>
-        <a [routerLink]='' (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario)" class="rating-help-icon">
-          <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.spendingAAs[i].assessmentAreaName}}" class="small-icon na" />
-        </a>
-      </td>
-      <!---->
-      <td class="govuk-table__cell cell-separate nowrap">{{secondScenario.spendingAAs[i].schoolData | aaValueFormat}}
-      </td>
-      <td class="govuk-table__cell">
-        {{secondScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.spendingAAs[i].assessmentAreaName }}
-      </td>
-      <td *ngIf="secondScenario.spendingAAs[i].schoolData != null && secondScenario.spendingAAs[i].calculatedSchoolData != null" class="govuk-table__cell">
-        <span class="rating-box"
-          [class]='secondScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
-          <a [routerLink]='' (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario)" class="rating-help-icon">
-           <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}}" class="small-icon" />
-          </a>
-      </td>
-      <td *ngIf="secondScenario.spendingAAs[i].schoolData == null || secondScenario.spendingAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
-        <span class="rating-box gray">
-          <span>Not available.</span>
-          <a class="govuk-link ml-2 button-link hide-in-print"
-            routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.spendingAAs[i].assessmentAreaName}}/1'
-            attr.aria-label="Add data for {{secondScenario.spendingAAs[i].assessmentAreaName}}  in {{secondScenario.scenarioName}} scenario">Add data</a>
-        </span>
-        <a [routerLink]='' (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario)" class="rating-help-icon">
-          <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}}" class="small-icon na" />
-        </a>
-      </td>
-    </tr>
-  </tbody>
+  <col>
+  <colgroup span="3"></colgroup>
+  <colgroup span="3"></colgroup>
+  <tr class="govuk-table__row">
+    <td class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">
+      <span aria-hidden="true">Spending</span>
+    </td>
+    <th scope="colgroup" class="govuk-table__header no-bottom  cell-separate width-forty-percent" colspan="3"><span
+        class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
+    <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"><span
+        class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
+  </tr>
+  <tr class="govuk-table__row">
+    <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
+    <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
+    <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of expenditure">% of <abbr
+        title="expenditure">exp.</abbr></th>
+    <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
+    <!---->
+    <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
+    <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of expenditure">% of <abbr
+        title="expenditure">exp.</abbr></th>
+    <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
+  </tr>
+
+  <tr class="govuk-table__row" *ngFor='let _ of firstScenario.spendingAAs; let i=index'>
+    <th scope="row" class="govuk-table__cell aa-cell">{{firstScenario.spendingAAs[i].assessmentAreaName}}</th>
+    <td class="govuk-table__cell cell-separate nowrap">{{firstScenario.spendingAAs[i].schoolData | aaValueFormat}}
+    </td>
+    <td class="govuk-table__cell">
+      {{firstScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.spendingAAs[i].assessmentAreaName }}
+    </td>
+    <td
+      *ngIf="firstScenario.spendingAAs[i].schoolData != null && firstScenario.spendingAAs[i].calculatedSchoolData != null"
+      class="govuk-table__cell">
+      <span class="rating-box"
+        [class]='firstScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
+      <a [routerLink]=''
+        (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario)"
+        class="rating-help-icon">
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.spendingAAs[i].assessmentAreaName}}"
+          class="small-icon" />
+      </a>
+    </td>
+    <td
+      *ngIf="firstScenario.spendingAAs[i].schoolData == null || firstScenario.spendingAAs[i].calculatedSchoolData == null"
+      class="govuk-table__cell">
+      <span class="rating-box gray">
+        <span>Not available.</span>
+        <a class="govuk-link ml-2 button-link hide-in-print"
+          routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.spendingAAs[i].assessmentAreaName}}/0'
+          attr.aria-label="Add data for {{firstScenario.spendingAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add
+          data</a>
+      </span>
+      <a [routerLink]=''
+        (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario)"
+        class="rating-help-icon">
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.spendingAAs[i].assessmentAreaName}}"
+          class="small-icon na" />
+      </a>
+    </td>
+    <!---->
+    <td class="govuk-table__cell cell-separate nowrap">{{secondScenario.spendingAAs[i].schoolData | aaValueFormat}}
+    </td>
+    <td class="govuk-table__cell">
+      {{secondScenario.spendingAAs[i].calculatedSchoolData | aaValueFormat : secondScenario.spendingAAs[i].assessmentAreaName }}
+    </td>
+    <td
+      *ngIf="secondScenario.spendingAAs[i].schoolData != null && secondScenario.spendingAAs[i].calculatedSchoolData != null"
+      class="govuk-table__cell">
+      <span class="rating-box"
+        [class]='secondScenario.spendingAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold?.ratingText}}</span>
+      <a [routerLink]=''
+        (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario)"
+        class="rating-help-icon">
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}}"
+          class="small-icon" />
+      </a>
+    </td>
+    <td
+      *ngIf="secondScenario.spendingAAs[i].schoolData == null || secondScenario.spendingAAs[i].calculatedSchoolData == null"
+      class="govuk-table__cell">
+      <span class="rating-box gray">
+        <span>Not available.</span>
+        <a class="govuk-link ml-2 button-link hide-in-print"
+          routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.spendingAAs[i].assessmentAreaName}}/1'
+          attr.aria-label="Add data for {{secondScenario.spendingAAs[i].assessmentAreaName}}  in {{secondScenario.scenarioName}} scenario">Add
+          data</a>
+      </span>
+      <a [routerLink]=''
+        (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario)"
+        class="rating-help-icon">
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}}"
+          class="small-icon na" />
+      </a>
+    </td>
+  </tr>
+
 </table>
 
 <table class="govuk-table" id="charTable" aria-label="School characteristics">
-  <thead class="govuk-table__head">
+    <col>
+    <colgroup span="2"></colgroup>
+    <colgroup span="2"></colgroup>
     <tr class="govuk-table__row">
-      <th class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">School characteristics</th>
+      <td class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">
+        <span aria-hidden="true">School characteristics</span></td>
       <th scope="colgroup" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="2"><span class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
       <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="2"><span class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
     </tr>
@@ -183,10 +241,9 @@
       <th scope="col" class="govuk-table__header cell-separate width-twenty-percent">School data</th>
       <th scope="col" class="govuk-table__header width-twenty-percent">Rating against tresholds</th>
     </tr>
-  </thead>
-  <tbody class="govuk-table__body">
+
     <tr class="govuk-table__row" *ngFor='let _ of firstScenario.characteristicAAs; let i=index'>
-      <td class="govuk-table__cell aa-cell">{{firstScenario.characteristicAAs[i].assessmentAreaName}}</td>
+      <th scope="row" class="govuk-table__cell aa-cell">{{firstScenario.characteristicAAs[i].assessmentAreaName}}</th>
       <td class="govuk-table__cell cell-separate nowrap">
         <span>{{firstScenario.characteristicAAs[i].calculatedSchoolData | aaValueFormat : firstScenario.characteristicAAs[i].assessmentAreaName}}</span>
       </td>
@@ -231,91 +288,97 @@
           </a>
       </td>
     </tr>
-  </tbody>
-</table>
 
+</table>
 <table class="govuk-table" id="outcomesTable" aria-label="Outcomes">
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Outcomes</th>
-      <th scope="col" class="govuk-table__header no-bottom cell-separate width-eighty-percent" colspan="2"></th>
-    </tr>
-    <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-      <th scope="col" class="govuk-table__header cell-separate width-eighty-percent" colspan="2">School data</th>
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell aa-cell">Ofsted rating</td>
-      <td class="govuk-table__cell cell-separate" colspan="2">
-        <span class="rating rating-{{firstScenario.ofstedRating}}" *ngIf='firstScenario.ofstedRating !== "0"'> {{firstScenario.ofstedRating}} </span>
-        <span class="ofsted--na" *ngIf='firstScenario.ofstedRating === "0"'> No data available</span>
-        <span [ngSwitch]="firstScenario.ofstedRating">
-          <span class="govuk-!-font-weight-bold" *ngSwitchCase="'1'"> Outstanding</span>
-          <span class="govuk-!-font-weight-bold" *ngSwitchCase="'2'"> Good</span>
-          <span class="govuk-!-font-weight-bold" *ngSwitchCase="'3'"> Requires improvement</span>
-          <span class="govuk-!-font-weight-bold" *ngSwitchCase="'4'"> Inadequate</span>
-        </span> |
-        <a class="govuk-link" target="_blank" rel="external noopener noreferrer"
-          href="https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/{{firstScenario.urn}}">Ofsted report</a>
-        <span *ngIf='firstScenario.ofstedInspectionDate'> | Inspected {{ firstScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
-        <a [routerLink]='' (click)="openModalWithComponent('Ofsted', null)" class="rating-help-icon">
-          <img style="float: right; margin-right: 11px;" src="assets/images/help-icon.png" alt="Help for Ofsted report" class="small-icon" />
-        </a>
-      </td>
-    </tr>
-    <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'KS2 score'">
-      <td class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</td>
-      <td class="govuk-table__cell progress-td cell-separate" colspan="2">
-        <div *ngIf='firstScenario.progressScore'>
-          <span class="progress-text" [ngClass]="{
+  <col>
+  <colgroup span="2"></colgroup>
+  <tr class="govuk-table__row" aria-hidden="true">
+    <td class="govuk-table__header no-bottom govuk-table__caption govuk-!-font-size-24 width-twenty-percent">Outcomes
+    </td>
+    <td class="govuk-table__header no-bottom cell-separate width-eighty-percent" colspan="2"></td>
+  </tr>
+  <tr class="govuk-table__row">
+    <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
+    <th scope="col" class="govuk-table__header cell-separate width-eighty-percent" colspan="2">School data</th>
+  </tr>
+  <tr class="govuk-table__row">
+    <th scope="row" class="govuk-table__cell aa-cell">Ofsted rating</th>
+    <td class="govuk-table__cell cell-separate" colspan="2">
+      <span class="rating rating-{{firstScenario.ofstedRating}}" *ngIf='firstScenario.ofstedRating !== "0"'>
+        {{firstScenario.ofstedRating}} </span>
+      <span class="ofsted--na" *ngIf='firstScenario.ofstedRating === "0"'> No data available</span>
+      <span [ngSwitch]="firstScenario.ofstedRating">
+        <span class="govuk-!-font-weight-bold" *ngSwitchCase="'1'"> Outstanding</span>
+        <span class="govuk-!-font-weight-bold" *ngSwitchCase="'2'"> Good</span>
+        <span class="govuk-!-font-weight-bold" *ngSwitchCase="'3'"> Requires improvement</span>
+        <span class="govuk-!-font-weight-bold" *ngSwitchCase="'4'"> Inadequate</span>
+      </span> |
+      <a class="govuk-link" target="_blank" rel="external noopener noreferrer"
+        href="https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/{{firstScenario.urn}}">Ofsted
+        report</a>
+      <span *ngIf='firstScenario.ofstedInspectionDate'> | Inspected
+        {{ firstScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
+      <a [routerLink]='' (click)="openModalWithComponent('Ofsted', null)" class="rating-help-icon">
+        <img style="float: right; margin-right: 11px;" src="assets/images/help-icon.png" alt="Help for Ofsted report"
+          class="small-icon" />
+      </a>
+    </td>
+  </tr>
+  <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'KS2 score'">
+    <th scope="row" class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</th>
+    <td class="govuk-table__cell progress-td cell-separate" colspan="2">
+      <div *ngIf='firstScenario.progressScore'>
+        <span class="progress-text" [ngClass]="{
                             'progress-text-well-below': firstScenario.progressScore < -3 ,
                             'progress-text--below': firstScenario.progressScore >= -3 && firstScenario.progressScore < -2,
                             'progress-text--average': firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2,
                             'progress-text--above': firstScenario.progressScore <= 3 && firstScenario.progressScore > 2,
                             'progress-text--well-above': firstScenario.progressScore > 3}">
-            {{firstScenario.progressScore | number: '1.2-2'}}
-            <span *ngIf="firstScenario.progressScore < -3">&nbsp; Well below average</span>
-            <span style="color: #0C0C0C;" *ngIf="firstScenario.progressScore >= -3 && firstScenario.progressScore < -2">&nbsp; Below
-              average</span>
-            <span *ngIf="firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2">&nbsp; Average</span>
-            <span style="color: #0C0C0C;" *ngIf="firstScenario.progressScore <= 3 && firstScenario.progressScore > 2">&nbsp; Above
-              average</span>
-            <span *ngIf="firstScenario.progressScore > 3">&nbsp; Well above average</span>
-          </span>
-        </div>
-        <span [hidden]='firstScenario.progressScore' class="progress--na">No data available</span>
-        <a [routerLink]='' (click)="openModalWithComponent('KS2', null)" class="rating-help-icon">
-          <img src="assets/images/help-icon.png" alt="Help for key stage 2 score" class="small-icon" style="float: right; margin-right: 11px; margin-top: 4px;" />
-        </a>
-      </td>
-    </tr>
-    <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'Progress 8 score'">
-      <td class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</td>
-      <td class="govuk-table__cell progress-td cell-separate" colspan="2">
-        <div *ngIf='firstScenario.progressScore'>
-          <span class="progress-text" [ngClass]="{
+          {{firstScenario.progressScore | number: '1.2-2'}}
+          <span *ngIf="firstScenario.progressScore < -3">&nbsp; Well below average</span>
+          <span style="color: #0C0C0C;"
+            *ngIf="firstScenario.progressScore >= -3 && firstScenario.progressScore < -2">&nbsp; Below
+            average</span>
+          <span *ngIf="firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2">&nbsp; Average</span>
+          <span style="color: #0C0C0C;"
+            *ngIf="firstScenario.progressScore <= 3 && firstScenario.progressScore > 2">&nbsp; Above
+            average</span>
+          <span *ngIf="firstScenario.progressScore > 3">&nbsp; Well above average</span>
+        </span>
+      </div>
+      <span [hidden]='firstScenario.progressScore' class="progress--na">No data available</span>
+      <a [routerLink]='' (click)="openModalWithComponent('KS2', null)" class="rating-help-icon">
+        <img src="assets/images/help-icon.png" alt="Help for key stage 2 score" class="small-icon"
+          style="float: right; margin-right: 11px; margin-top: 4px;" />
+      </a>
+    </td>
+  </tr>
+  <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'Progress 8 score'">
+    <th scope="row" class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</th>
+    <td class="govuk-table__cell progress-td cell-separate" colspan="2">
+      <div *ngIf='firstScenario.progressScore'>
+        <span class="progress-text" [ngClass]="{
                             'progress-text--well-below': firstScenario.progress8Banding === 5,
                             'progress-text--below': firstScenario.progress8Banding === 4,
                             'progress-text--average': firstScenario.progress8Banding === 3,
                             'progress-text--above': firstScenario.progress8Banding === 2,
                             'progress-text--well-above': firstScenario.progress8Banding === 1}">
-            {{firstScenario.progressScore | number: '1.2-2'}}
-            <span [ngSwitch]="firstScenario.progress8Banding">
-              <span *ngSwitchCase="5">&nbsp; Well below average</span>
-              <span *ngSwitchCase="4" style="color: #0C0C0C;">&nbsp; Below average</span>
-              <span *ngSwitchCase="3">&nbsp; Average</span>
-              <span *ngSwitchCase="2" style="color: #0C0C0C;">&nbsp; Above average</span>
-              <span *ngSwitchCase="1">&nbsp; Well above average</span>
-            </span>
+          {{firstScenario.progressScore | number: '1.2-2'}}
+          <span [ngSwitch]="firstScenario.progress8Banding">
+            <span *ngSwitchCase="5">&nbsp; Well below average</span>
+            <span *ngSwitchCase="4" style="color: #0C0C0C;">&nbsp; Below average</span>
+            <span *ngSwitchCase="3">&nbsp; Average</span>
+            <span *ngSwitchCase="2" style="color: #0C0C0C;">&nbsp; Above average</span>
+            <span *ngSwitchCase="1">&nbsp; Well above average</span>
           </span>
-        </div>
-        <span [hidden]='firstScenario.progressScore' class="progress--na">No data available</span>
-        <a [routerLink]='' (click)="openModalWithComponent('P8', null)" class="rating-help-icon">
-          <img src="assets/images/help-icon.png" alt="Help for progress 8 score" class="small-icon " style="float: right; margin-right: 11px; margin-top: 4px;" />
-        </a>
-      </td>
-    </tr>
-  </tbody>
+        </span>
+      </div>
+      <span [hidden]='firstScenario.progressScore' class="progress--na">No data available</span>
+      <a [routerLink]='' (click)="openModalWithComponent('P8', null)" class="rating-help-icon">
+        <img src="assets/images/help-icon.png" alt="Help for progress 8 score" class="small-icon "
+          style="float: right; margin-right: 11px; margin-top: 4px;" />
+      </a>
+    </td>
+  </tr>
 </table>

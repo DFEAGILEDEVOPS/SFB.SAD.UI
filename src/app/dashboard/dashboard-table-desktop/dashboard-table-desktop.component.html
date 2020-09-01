@@ -10,7 +10,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row" *ngFor='let aa of activeScenario.reserveAAs'>
-      <td class="govuk-table__cell">{{aa.assessmentAreaName}}</td>
+      <th scope="row" class="govuk-table__cell">{{aa.assessmentAreaName}}</th>
       <td class="govuk-table__cell nowrap">{{aa.schoolData | aaValueFormat}}</td>
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
@@ -46,7 +46,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row" *ngFor='let aa of activeScenario.spendingAAs'>
-      <td class="govuk-table__cell">{{aa.assessmentAreaName}}</td>
+      <th scope="row" class="govuk-table__cell">{{aa.assessmentAreaName}}</th>
       <td class="govuk-table__cell nowrap">{{aa.schoolData | aaValueFormat}}</td>
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
@@ -81,7 +81,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row" *ngFor='let aa of activeScenario.characteristicAAs'>
-      <td class="govuk-table__cell">{{aa.assessmentAreaName}}</td>
+      <th scope="row" class="govuk-table__cell">{{aa.assessmentAreaName}}</th>
       <td class="govuk-table__cell nowrap">
         <span>{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</span>
       </td>
@@ -116,7 +116,7 @@
   </thead>
   <tbody class="govuk-table__body">
     <tr class="govuk-table__row">
-      <td class="govuk-table__cell">Ofsted rating</td>
+      <th scope="row" class="govuk-table__cell">Ofsted rating</th>
       <td class="govuk-table__cell">
         <span class="rating rating-{{activeScenario.ofstedRating}}"  *ngIf='activeScenario.ofstedRating !== "0"'> {{activeScenario.ofstedRating}} </span>
         <span class="ofsted--na" *ngIf='activeScenario.ofstedRating === "0"'> No data available</span>
@@ -136,7 +136,7 @@
       </td>
     </tr>
     <tr class="govuk-table__row" *ngIf="activeScenario.progressScoreType === 'KS2 score'">
-      <td class="govuk-table__cell">{{activeScenario.progressScoreType}}</td>
+      <th scope="row" class="govuk-table__cell">{{activeScenario.progressScoreType}}</th>
       <td class="govuk-table__cell progress-td">
         <div class="progress-text-wrapper">
           <span *ngIf='activeScenario.progressScore' class="progress-text" [ngClass]="{
@@ -163,7 +163,7 @@
       </td>
     </tr>
     <tr class="govuk-table__row" *ngIf="activeScenario.progressScoreType === 'Progress 8 score'">
-      <td class="govuk-table__cell">{{activeScenario.progressScoreType}}</td>
+      <th scope="row" class="govuk-table__cell">{{activeScenario.progressScoreType}}</th>
       <td class="govuk-table__cell progress-td">
         <div class="progress-text-wrapper">
           <span *ngIf='activeScenario.progressScore' class="progress-text" [ngClass]="{
