@@ -1,3 +1,5 @@
+@import "govuk-frontend/govuk/all";
+
 #skiplink-container {
   text-align: center;
   background: #0b0c0c;
@@ -24,9 +26,14 @@
   left: 0;
   z-index: 1;
 
-    outline: 3px solid transparent;
-    color: #0b0c0c;
-    background-color: #ffdd00;
-    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
-    text-decoration: none;
+  outline: 3px solid transparent;
+  color: #0b0c0c;
+  background-color: #ffdd00;
+  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  text-decoration: none;
+
+  @include govuk-media-query(mobile) {
+    position: inherit!important;
+    margin: 0!important;
+  }
 }

@@ -113,8 +113,8 @@
 
 .progress-text-wrapper {
     display: inline;
-    float: left;
-    width: 80%;
+    // float: left;
+    // width: 80%;
 
     @include govuk-media-query($from: tablet) {
       width: 87%;

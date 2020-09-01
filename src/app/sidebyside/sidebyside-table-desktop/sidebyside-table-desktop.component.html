@@ -64,7 +64,7 @@
         [class]='firstScenario.reserveAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.reserveAAs[i].matchingTreshold?.ratingText}}</span>
       <a [routerLink]='' (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)"
         class="rating-help-icon">
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.reserveAAs[i].assessmentAreaName}}"
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.reserveAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}}"
           class="small-icon" />
       </a>
     </td>
@@ -80,7 +80,7 @@
       </span>
       <a [routerLink]='' (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)"
         class="rating-help-icon">
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.reserveAAs[i].assessmentAreaName}}"
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.reserveAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}}"
           class="small-icon na" />
       </a>
     </td>
@@ -98,7 +98,7 @@
       <a [routerLink]=''
         (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)"
         class="rating-help-icon">
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.reserveAAs[i].assessmentAreaName}}"
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.reserveAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}"
           class="small-icon" />
       </a>
     </td>
@@ -115,7 +115,7 @@
       <a [routerLink]=''
         (click)="openModalWithComponent(secondScenario.reserveAAs[i].assessmentAreaName, secondScenario)"
         class="rating-help-icon">
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.reserveAAs[i].assessmentAreaName}}"
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.reserveAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}"
           class="small-icon na" />
       </a>
     </td>
@@ -163,7 +163,7 @@
       <a [routerLink]=''
         (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario)"
         class="rating-help-icon">
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.spendingAAs[i].assessmentAreaName}}"
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.spendingAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}}"
           class="small-icon" />
       </a>
     </td>
@@ -180,7 +180,7 @@
       <a [routerLink]=''
         (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario)"
         class="rating-help-icon">
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.spendingAAs[i].assessmentAreaName}}"
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.spendingAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}}"
           class="small-icon na" />
       </a>
     </td>
@@ -198,7 +198,7 @@
       <a [routerLink]=''
         (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario)"
         class="rating-help-icon">
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}}"
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}"
           class="small-icon" />
       </a>
     </td>
@@ -215,7 +215,7 @@
       <a [routerLink]=''
         (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario)"
         class="rating-help-icon">
-        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}}"
+        <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}"
           class="small-icon na" />
       </a>
     </td>
@@ -251,7 +251,7 @@
         <span class="rating-box"
           [class]='firstScenario.characteristicAAs[i].matchingTreshold?.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold?.ratingText}}</span>
           <a [routerLink]='' (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, firstScenario)" class="rating-help-icon">
-           <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.characteristicAAs[i].assessmentAreaName}}" class="small-icon"  />
+           <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}}" class="small-icon"  />
           </a>
       </td>
       <td *ngIf="firstScenario.characteristicAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
@@ -262,7 +262,7 @@
             attr.aria-label="Add data for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add data</a>
         </span>
         <a [routerLink]='' (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, firstScenario)" class="rating-help-icon">
-          <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.characteristicAAs[i].assessmentAreaName}}" class="small-icon na" />
+          <img src="assets/images/help-icon.png" attr.alt="Help for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}}" class="small-icon na" />
         </a>
       </td>
       <!---->
@@ -273,7 +273,7 @@
         <span class="rating-box"
           [class]='secondScenario.characteristicAAs[i].matchingTreshold?.ratingColour'>{{secondScenario.characteristicAAs[i].matchingTreshold?.ratingText}}</span>
           <a [routerLink]='' (click)="openModalWithComponent(secondScenario.characteristicAAs[i].assessmentAreaName, secondScenario)" class="rating-help-icon">
-            <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.characteristicAAs[i].assessmentAreaName}}" class="small-icon" />
+            <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}" class="small-icon" />
           </a>
       </td>
       <td *ngIf="secondScenario.characteristicAAs[i].calculatedSchoolData == null" class="govuk-table__cell">
@@ -284,7 +284,7 @@
             attr.aria-label="Add data for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add data</a>
         </span>
         <a [routerLink]='' (click)="openModalWithComponent(secondScenario.characteristicAAs[i].assessmentAreaName, secondScenario)" class="rating-help-icon">
-         <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.characteristicAAs[i].assessmentAreaName}}" class="small-icon na" />
+         <img src="assets/images/help-icon.png" attr.alt="Help for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}" class="small-icon na" />
           </a>
       </td>
     </tr>

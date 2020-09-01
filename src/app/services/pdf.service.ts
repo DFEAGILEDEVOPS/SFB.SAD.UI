@@ -56,8 +56,6 @@ export class PdfService {
     this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
     this.writeHeadings();
     this.writeWarnings();
-    let criteriaText = $('#criteriaText').get(0).innerText;
-    this.pdfWriteLine('Normal', criteriaText, true);
     this.generateCanvassesForMobileTables().subscribe(() => {
 
       this.writeTableFromCanvasForMobile("criteriaTable");

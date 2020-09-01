@@ -171,6 +171,10 @@ td.cell-separate, th.cell-separate{
     vertical-align: super;
     }
   }
+
+  #scenariosTable td {
+    border-bottom: 0!important;
+  }
 }
 
 
