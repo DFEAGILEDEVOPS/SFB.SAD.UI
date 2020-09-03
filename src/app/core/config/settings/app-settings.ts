@@ -4,6 +4,7 @@ import { MetaTag } from '../../seo/models';
 export class AppSettings {
   sfbDomain: string;
   apiDomain: string;
+  cookieDomain: string;
   customErrorPage: boolean;
   consoleErrors: boolean;
   logExceptions: boolean;

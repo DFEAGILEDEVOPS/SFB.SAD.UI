@@ -13,6 +13,7 @@
     },
     "sfbDomain": "https://as-t1stg-sfb.azurewebsites.net",
     "apiDomain": "https://aa-t1stg-sfb.azurewebsites.net/api",
+    "cookieDomain": "as-t1stg-sfb.azurewebsites.net",
     "customErrorPage": true,
     "consoleErrors": false,
     "logExceptions": true

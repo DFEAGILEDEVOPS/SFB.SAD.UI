@@ -1,20 +1,57 @@
-<app-header></app-header>
-
-<div class="govuk-width-container app-width-container--wide">
-  <div class="govuk-phase-banner">
-    <p class="govuk-phase-banner__content">
-      <strong class="govuk-tag govuk-phase-banner__content__tag">
-        beta
-      </strong>
-      <span class="govuk-phase-banner__text">
-        This is a new service – your <a class="govuk-link" [routerLink]="['/']">feedback</a> will help us to improve it.
-      </span>
-    </p>
+<div id="global-cookie-message" class="gem-c-cookie-banner govuk-clearfix" role="region" aria-label="cookie banner" data-nosnippet="" style="display: none;">
+  <div class="gem-c-cookie-banner__wrapper govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <div class="gem-c-cookie-banner__message">
+          <span class="govuk-heading-m">Tell us whether you accept cookies</span>
+          <p class="govuk-body">We use <a class="govuk-link" href="{{settings.sfbDomain}}/help/cookie-details">cookies to collect information</a>
+            about how you use School Financial Benchmarking. We use this information to make the website work as well as
+            possible and improve government services.</p>
+        </div>
+        <div class="gem-c-cookie-banner__buttons">
+          <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-accept govuk-grid-column-one-half">
+            <button id="acceptAllCookies" class="govuk-button gem-c-button gem-c-button--inline" type="submit"
+            (click)='acceptAllCookies()'>Accept all cookies</button>
+          </div>
+          <div class="gem-c-cookie-banner__button gem-c-cookie-banner__button-settings govuk-grid-column-one-half">
+            <a class="govuk-button gem-c-button gem-c-button--inline" role="button" href="{{settings.sfbDomain}}/help/cookies">Set
+              cookie preferences</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
-    <router-outlet></router-outlet>
-  </main>
+  <div class="gem-c-cookie-banner__confirmation govuk-width-container" tabindex="-1" style="display: none">
+    <p class="gem-c-cookie-banner__confirmation-message">
+      You’ve accepted all cookies. You can <a class="govuk-link" href="{{settings.sfbDomain}}/help/cookies" data-module="track-click"
+        data-track-category="cookieBanner" data-track-action="Cookie banner settings clicked from confirmation">change
+        your cookie settings</a> at any time.
+    </p>
+    <a [routerLink]='' id="acceptAllCookiesHide" class="govuk-link gem-c-cookie-banner__hide-button" (click)='acceptedHide()'>Hide</a>
+  </div>
 </div>
 
-<app-footer></app-footer>
+<div id="cookie-overlay-wrapper">
+  <app-header></app-header>
+
+  <div class="govuk-width-container app-width-container--wide">
+    <div class="govuk-phase-banner">
+      <p class="govuk-phase-banner__content">
+        <strong class="govuk-tag govuk-phase-banner__content__tag">
+          beta
+        </strong>
+        <span class="govuk-phase-banner__text">
+          This is a new service – your <a class="govuk-link" [routerLink]="['/']">feedback</a> will help us to improve
+          it.
+        </span>
+      </p>
+    </div>
+
+    <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <app-footer></app-footer>
+</div>

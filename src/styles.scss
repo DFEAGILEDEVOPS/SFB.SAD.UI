@@ -147,7 +147,7 @@ span.table-cell-highlight {
 
 .govuk-main-wrapper
 {
-  padding-top: 0;
+  padding-top: 0!important;
 }
 
 .govuk-breadcrumbs
@@ -307,4 +307,16 @@ caption{
   margin: -1px;
   padding: 0;
   border: 0;
+}
+
+.cookie-overlay {
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  top: 0px;
+  left: 0px;
+  opacity: .5; /* in FireFox */
+  filter: alpha(opacity=50); /* in IE */
 }

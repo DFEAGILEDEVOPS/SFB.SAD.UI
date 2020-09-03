@@ -13,6 +13,7 @@
     },
     "sfbDomain": "http://localhost",
     "apiDomain": "https://aa-t1dv-sfb.azurewebsites.net/api",
+    "cookieDomain": "localhost",
     "customErrorPage": true,
     "consoleErrors": true,
     "logExceptions": false
