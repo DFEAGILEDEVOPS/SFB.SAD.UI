@@ -13,7 +13,7 @@
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
     </tr>
     <tr class="govuk-table__row" >
-      <th scope="row" class="govuk-table__header">Rating against tresholds</th>
+      <th scope="row" class="govuk-table__header">Rating against thresholds</th>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
         <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
@@ -47,7 +47,7 @@
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
     </tr>
     <tr class="govuk-table__row" >
-      <th scope="row" class="govuk-table__header">Rating against tresholds</th>
+      <th scope="row" class="govuk-table__header">Rating against thresholds</th>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
         <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
@@ -77,7 +77,7 @@
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
     </tr>
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">Rating against tresholds</th>
+      <th scope="row" class="govuk-table__header">Rating against thresholds</th>
       <td *ngIf="aa.calculatedSchoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
         <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
