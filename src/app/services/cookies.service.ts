@@ -42,10 +42,7 @@ private manageCookiePreferencesCookies() {
   if (!this.getCookie("cookies_preferences_set")) {
       $("#global-cookie-message").show();
       this.renderCookieOverlay();
-  } else {
-      $("#global-cookie-message").hide();
-      this.unRenderCookieOverlay();
-  }
+  } 
 }
 
 private setDomainCookie (name, value, options, domain) {
