@@ -4,11 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppConfigModule } from './config/app-config.module';
 
-import { httpInterceptors } from './interceptors';
-
-const coreProviders = [
-  ...httpInterceptors
-];
+const coreProviders = [];
 
 @NgModule({
   imports: [

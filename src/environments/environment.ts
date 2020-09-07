@@ -7,7 +7,7 @@ export const environment = {
   name: 'dev',
   assetsPath: './assets',
   appInsights: {
-    instrumentationKey: '0db44457-f04a-4b56-8a75-d259cc5394c0'
+    instrumentationKey: '2ef38abf-b139-4b3d-8067-a8254e4b8bf8'
   }
 };
 
