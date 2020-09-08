@@ -152,4 +152,13 @@ td.cell-separate, th.cell-separate{
   }
 }
 
+.width-twenty-percent{
+  @include govuk-media-query($from: tablet) {
+    width: 140px
+  }
+  @include govuk-media-query($from: desktop) {
+    width: 180px
+  }
+}
+
 

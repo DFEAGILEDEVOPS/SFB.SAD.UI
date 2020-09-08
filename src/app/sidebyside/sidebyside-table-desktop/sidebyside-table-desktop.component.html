@@ -1,6 +1,6 @@
 <div>
-    <div class="govuk-table__header no-bottom width-twenty-percent" style="display: inline-block; width: 18%;"></div>
-    <div class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" style="display: inline-block; width: 39%;">
+    <div class="govuk-table__header no-bottom width-twenty-percent" style="display: inline-block;"></div>
+    <div class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" style="display: inline-block; width: 38%;">
       <span class="govuk-!-font-size-24">{{firstScenario.scenarioName}}</span>
       <div class="govuk-caption-m">Scenario year {{firstScenario.termOfScenario}}</div>
       <div class="govuk-!-margin-top-1 hide-in-print">
@@ -11,7 +11,7 @@
         attr.aria-label="Remove {{firstScenario.scenarioName}} scenario">Remove</a>
       </div>
     </div>
-    <div class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" style="display: inline-block; width: 36%;">
+    <div class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" style="display: inline-block; width: 32%;">
       <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
       <div class="govuk-caption-m">Scenario year {{secondScenario.termOfScenario}}</div>
       <div class="govuk-!-margin-top-1 hide-in-print">
@@ -38,16 +38,16 @@
         class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
   </tr>
   <tr class="govuk-table__row">
-    <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-    <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-    <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of income">% of <abbr
+    <th scope="col" class="govuk-table__header">Assessment area</th>
+    <th scope="col" class="govuk-table__header cell-separate nowrap">School data</th>
+    <th scope="col" class="govuk-table__header nowrap" aria-label="% of income">% of <abbr
         title="income">inc.</abbr></th>
-    <th scope="col" class="govuk-table__header width-twenty-percent">Rating against thresholds</th>
+    <th scope="col" class="govuk-table__header">Rating against thresholds</th>
     <!---->
-    <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-    <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of income">% of <abbr
+    <th scope="col" class="govuk-table__header cell-separate nowrap">School data</th>
+    <th scope="col" class="govuk-table__header nowrap" aria-label="% of income">% of <abbr
         title="income">inc.</abbr></th>
-    <th scope="col" class="govuk-table__header width-twenty-percent">Rating against thresholds</th>
+    <th scope="col" class="govuk-table__header">Rating against thresholds</th>
   </tr>
 
   <tr class="govuk-table__row" *ngFor='let _ of firstScenario.reserveAAs; let i=index'>
@@ -136,16 +136,16 @@
         class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
   </tr>
   <tr class="govuk-table__row">
-    <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-    <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-    <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of expenditure">% of <abbr
+    <th scope="col" class="govuk-table__header">Assessment area</th>
+    <th scope="col" class="govuk-table__header cell-separate nowrap">School data</th>
+    <th scope="col" class="govuk-table__header nowrap" aria-label="% of expenditure">% of <abbr
         title="expenditure">exp.</abbr></th>
-    <th scope="col" class="govuk-table__header width-twenty-percent">Rating against thresholds</th>
+    <th scope="col" class="govuk-table__header">Rating against thresholds</th>
     <!---->
-    <th scope="col" class="govuk-table__header cell-separate width-ten-percent">School data</th>
-    <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of expenditure">% of <abbr
+    <th scope="col" class="govuk-table__header cell-separate nowrap">School data</th>
+    <th scope="col" class="govuk-table__header nowrap" aria-label="% of expenditure">% of <abbr
         title="expenditure">exp.</abbr></th>
-    <th scope="col" class="govuk-table__header width-twenty-percent">Rating against thresholds</th>
+    <th scope="col" class="govuk-table__header">Rating against thresholds</th>
   </tr>
 
   <tr class="govuk-table__row" *ngFor='let _ of firstScenario.spendingAAs; let i=index'>
@@ -234,12 +234,12 @@
       <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="2"><span class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
     </tr>
     <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-      <th scope="col" class="govuk-table__header cell-separate width-twenty-percent">School data</th>
-      <th scope="col" class="govuk-table__header width-twenty-percent">Rating against thresholds</th>
+      <th scope="col" class="govuk-table__header">Assessment area</th>
+      <th scope="col" class="govuk-table__header cell-separate nowrap">School data</th>
+      <th scope="col" class="govuk-table__header">Rating against thresholds</th>
       <!---->
-      <th scope="col" class="govuk-table__header cell-separate width-twenty-percent">School data</th>
-      <th scope="col" class="govuk-table__header width-twenty-percent">Rating against thresholds</th>
+      <th scope="col" class="govuk-table__header cell-separate nowrap">School data</th>
+      <th scope="col" class="govuk-table__header">Rating against thresholds</th>
     </tr>
 
     <tr class="govuk-table__row" *ngFor='let _ of firstScenario.characteristicAAs; let i=index'>
@@ -299,8 +299,8 @@
     <td class="govuk-table__header no-bottom cell-separate width-eighty-percent" colspan="2"></td>
   </tr>
   <tr class="govuk-table__row">
-    <th scope="col" class="govuk-table__header width-twenty-percent">Assessment area</th>
-    <th scope="col" class="govuk-table__header cell-separate width-eighty-percent" colspan="2">School data</th>
+    <th scope="col" class="govuk-table__header">Assessment area</th>
+    <th scope="col" class="govuk-table__header cell-separate nowrap" colspan="2">School data</th>
   </tr>
   <tr class="govuk-table__row">
     <th scope="row" class="govuk-table__cell aa-cell">Ofsted rating</th>
