@@ -177,9 +177,9 @@ export class PdfService {
   private pdfAddImage(canvas, width, height) {
     let img = canvas.toDataURL("image/png");
     if (width && height) {
-      this.doc.addImage(img, 'JPEG', this.MARGIN_LEFT, this.offset, width, height);
+      this.doc.addImage(img, 'PNG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
     } else {
-      this.doc.addImage(img, 'JPEG', this.MARGIN_LEFT, this.offset);
+      this.doc.addImage(img, 'PNG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
     }
   }
 
