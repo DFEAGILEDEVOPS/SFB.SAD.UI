@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Injectable } from '@angular/core';
 import html2canvas from "html2canvas";
 import * as $ from 'jquery';
@@ -18,95 +19,102 @@ export class PdfService {
   }
 
   public generatePdfForDesktop() {
-
-    $("#downloadPage").text(" Loading...");
     this.expandDetails();
+    $("#downloadPage").text(" Loading...");
+    $("body").css("cursor", "wait");
     this.offset = 60;
     this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
     this.writeHeadings();
     this.writeWarnings();
-    this.generateCanvassesForDesktopTables().subscribe(() => {
+    setTimeout(() => {
+      this.generateCanvassesForDesktopTables().subscribe(() => {
 
-      this.writeTableFromCanvasForDesktop("criteriaTable");
-      if($('#scenarioName').length > 0) {
-        this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText);
-      }
-      if($('#scenarioYear').length > 0) {
-        this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText);
-      }
+        this.writeTableFromCanvasForDesktop("criteriaTable");
+        if ($('#scenarioName').length > 0) {
+          this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText);
+        }
+        if ($('#scenarioYear').length > 0) {
+          this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText);
+        }
 
-      this.writeTableFromCanvasForDesktop("reserveTable");
-      this.offset -= 30;
-      this.writeTableFromCanvasForDesktop("spendingTable");
-      this.pdfAddNewPage();
-      this.writeTableFromCanvasForDesktop("charTable");
-      this.offset -= 150;
-      this.writeTableFromCanvasForDesktop("outcomesTable");
+        this.writeTableFromCanvasForDesktop("reserveTable");
+        this.offset -= 30;
+        this.writeTableFromCanvasForDesktop("spendingTable");
+        this.pdfAddNewPage();
+        this.writeTableFromCanvasForDesktop("charTable");
+        this.offset -= 150;
+        this.writeTableFromCanvasForDesktop("outcomesTable");
 
-      this.pdfSave("Self-assessment-dashboard.pdf");
-      $("#downloadPage").text(" Download page");
-    });
+        this.pdfSave("Self-assessment-dashboard.pdf");
+        $("#downloadPage").text(" Download page");
+        $("body").css("cursor", "");
+      });
+    }, 100);
   }
 
   public generatePdfForMobile() {
-    $("#downloadPage").text(" Loading...");
     this.expandDetails();
+    $("#downloadPage").text(" Loading...");
+    $("body").css("cursor", "wait");
     this.offset = 60;
     this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
     this.writeHeadings();
     this.writeWarnings();
-    this.generateCanvassesForMobileTables().subscribe(() => {
+    setTimeout(() => {
+      this.generateCanvassesForMobileTables().subscribe(() => {
 
-      this.writeTableFromCanvasForMobile("criteriaTable");
-      if($('#scenarioName').length > 0) {
-        this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText, true);
-      }
-      if($('#scenarioYear').length > 0) {
-        this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText, true);
-      }
+        this.writeTableFromCanvasForMobile("criteriaTable");
+        if ($('#scenarioName').length > 0) {
+          this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText, true);
+        }
+        if ($('#scenarioYear').length > 0) {
+          this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText, true);
+        }
 
-      if($("#scenariosTable").length > 0){
-        this.writeTableFromCanvasForMobile("scenariosTable");
-      }
+        if ($("#scenariosTable").length > 0) {
+          this.writeTableFromCanvasForMobile("scenariosTable");
+        }
 
-      this.pdfWriteLine('H3', 'Reserve and balance', true);
-      this.writeTableFromCanvasForMobile("reserveTable-0");
-      this.writeTableFromCanvasForMobile("reserveTable-1");
+        this.pdfWriteLine('H3', 'Reserve and balance', true);
+        this.writeTableFromCanvasForMobile("reserveTable-0");
+        this.writeTableFromCanvasForMobile("reserveTable-1");
 
-      this.pdfAddNewPage();
-      this.pdfWriteLine('H3', 'Spending', true);
-      this.writeTableFromCanvasForMobile("spendingTable-0");
-      this.writeTableFromCanvasForMobile("spendingTable-1");
-      this.writeTableFromCanvasForMobile("spendingTable-2");
-      this.writeTableFromCanvasForMobile("spendingTable-3");
-      this.writeTableFromCanvasForMobile("spendingTable-4");
-      this.writeTableFromCanvasForMobile("spendingTable-5");
-      this.writeTableFromCanvasForMobile("spendingTable-6");
-      this.writeTableFromCanvasForMobile("spendingTable-7");
+        this.pdfAddNewPage();
+        this.pdfWriteLine('H3', 'Spending', true);
+        this.writeTableFromCanvasForMobile("spendingTable-0");
+        this.writeTableFromCanvasForMobile("spendingTable-1");
+        this.writeTableFromCanvasForMobile("spendingTable-2");
+        this.writeTableFromCanvasForMobile("spendingTable-3");
+        this.writeTableFromCanvasForMobile("spendingTable-4");
+        this.writeTableFromCanvasForMobile("spendingTable-5");
+        this.writeTableFromCanvasForMobile("spendingTable-6");
+        this.writeTableFromCanvasForMobile("spendingTable-7");
 
-      this.pdfAddNewPage();
-      this.pdfWriteLine('H3', 'School characteristics', true);
-      this.writeTableFromCanvasForMobile("charTable-0");
-      this.writeTableFromCanvasForMobile("charTable-1");
-      this.writeTableFromCanvasForMobile("charTable-2");
-      this.writeTableFromCanvasForMobile("charTable-3");
-      this.writeTableFromCanvasForMobile("charTable-4");
-      this.writeTableFromCanvasForMobile("charTable-5");
-      this.writeTableFromCanvasForMobile("charTable-6");
+        this.pdfAddNewPage();
+        this.pdfWriteLine('H3', 'School characteristics', true);
+        this.writeTableFromCanvasForMobile("charTable-0");
+        this.writeTableFromCanvasForMobile("charTable-1");
+        this.writeTableFromCanvasForMobile("charTable-2");
+        this.writeTableFromCanvasForMobile("charTable-3");
+        this.writeTableFromCanvasForMobile("charTable-4");
+        this.writeTableFromCanvasForMobile("charTable-5");
+        this.writeTableFromCanvasForMobile("charTable-6");
 
-      this.pdfAddNewPage();
-      this.pdfWriteLine('H3', 'Outcomes', true);
-      this.writeTableFromCanvasForMobile("ofstedTable");
-      if($("#progress8Table").length > 0){
-        this.writeTableFromCanvasForMobile("progress8Table");
-      }
-      if($("#ks2Table").length > 0){
-        this.writeTableFromCanvasForMobile("ks2Table");
-      }
+        this.pdfAddNewPage();
+        this.pdfWriteLine('H3', 'Outcomes', true);
+        this.writeTableFromCanvasForMobile("ofstedTable");
+        if ($("#progress8Table").length > 0) {
+          this.writeTableFromCanvasForMobile("progress8Table");
+        }
+        if ($("#ks2Table").length > 0) {
+          this.writeTableFromCanvasForMobile("ks2Table");
+        }
 
-      this.pdfSave("Self-assessment-dashboard.pdf");
-      $("#downloadPage").text(" Download page");
-    });
+        this.pdfSave("Self-assessment-dashboard.pdf");
+        $("#downloadPage").text(" Download page");
+        $("body").css("cursor", "");
+      });
+    }, 100);
   }
 
   private writeTableFromCanvasForMobile(id: string) {
@@ -162,25 +170,23 @@ export class PdfService {
     this.offset = 70;
   }
 
-  private pdfGenerateImage(element) {
-    function getCanvas(element) {
-      return html2canvas($(element)[0], {
-        imageTimeout: 20000,
-        removeContainer: true
-      });
-    }
+  private pdfGenerateImage(elementId) {
+    let element = $(elementId)[0];
+    console.log(element.clientWidth + ","  + element.clientHeight);
+    return html2canvas(element, {
+      imageTimeout: 0,
+      removeContainer: true,
+      logging: true,
+      width: element.clientWidth,
+      height: element.clientHeight
 
-    return getCanvas(element);
+    });
   }
 
 
   private pdfAddImage(canvas, width, height) {
     let img = canvas.toDataURL("image/png");
-    if (width && height) {
-      this.doc.addImage(img, 'PNG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
-    } else {
-      this.doc.addImage(img, 'PNG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
-    }
+    this.doc.addImage(img, 'PNG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
   }
 
   private pdfSave(pdfName: string) {
