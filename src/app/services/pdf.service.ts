@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import * as jsPDF from 'jspdf';
 import html2canvas from "html2canvas";
 import * as $ from 'jquery';
 import { from } from 'rxjs';
+import { jsPDF } from "jspdf";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PdfService {
-  declare html2canvas;
   MARGIN_LEFT: number;
   doc: any;
   offset: number;
@@ -166,7 +165,7 @@ export class PdfService {
   private pdfGenerateImage(element) {
     function getCanvas(element) {
       return html2canvas($(element)[0], {
-        imageTimeout: 2000,
+        imageTimeout: 20000,
         removeContainer: true
       });
     }
@@ -189,27 +188,26 @@ export class PdfService {
   }
 
   private pdfWriteLine(type: string, text: string, isMobile?: boolean) {
-    this.doc.setFont("helvetica");
     this.doc.setTextColor(0, 0, 0);
     let fontSize;
     switch (type) {
       case 'H1':
         this.offset += 4;
-        this.doc.setFontType("bold");
+        this.doc.setFont("helvetica", "bold");
         fontSize = 40;
         break;
       case 'H2':
         this.offset += 3;
-        this.doc.setFontType("bold");
+        this.doc.setFont("helvetica", "bold");
         fontSize = 30;
         break;
       case 'H3':
         this.offset += 2;
-        this.doc.setFontType("bold");
+        this.doc.setFont("helvetica", "bold");
         fontSize = 20;
         break;
       case 'Warning':
-        this.doc.setFontType("italic");
+        this.doc.setFont("helvetica", "italic");
         this.doc.setTextColor(244, 119, 56);
         fontSize = 12;
         break;
@@ -218,15 +216,15 @@ export class PdfService {
         fontSize = 14;
         break;
       case 'Info':
-        this.doc.setFontType("italic");
+        this.doc.setFont("helvetica", "italic");
         fontSize = 14;
         break;
       case 'Bold':
-        this.doc.setFontType("bold");
+        this.doc.setFont("helvetica", "bold");
         fontSize = 14;
         break;
       default:
-        this.doc.setFontType("normal");
+        this.doc.setFont("helvetica");
         fontSize = 12;
         this.offset += 2;
     }
