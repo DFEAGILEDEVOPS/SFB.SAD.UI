@@ -11,7 +11,8 @@ export class PdfService {
   MARGIN_LEFT: number;
   doc: any;
   offset: number;
-  canvassesForTables: any[];
+  canvassesForDesktopTables: any[];
+  canvassesForMobileTables: any[];
 
   constructor() {
     this.MARGIN_LEFT = 50;
@@ -27,7 +28,7 @@ export class PdfService {
     this.writeWarnings();
     setTimeout(() => {
       this.generateCanvassesForDesktopTables().subscribe(() => {
-
+        debugger;
         this.writeTableFromCanvasForDesktop("criteriaTable");
         if ($('#scenarioName').length > 0) {
           this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText);
@@ -64,9 +65,7 @@ export class PdfService {
 
         this.writeTableFromCanvasForMobile("criteriaTables");
         this.writeTableFromCanvasForMobile("page1Tables");
-        //this.pdfAddNewPage();
         this.writeTableFromCanvasForMobile("page2Tables");
-        //this.pdfAddNewPage();
         this.writeTableFromCanvasForMobile("page3Tables");
 
         this.pdfSave("Self-assessment-dashboard.pdf");
@@ -77,7 +76,7 @@ export class PdfService {
   }
 
   private writeTableFromCanvasForMobile(id: string) {
-    let canvas = this.canvassesForTables.find(ct => ct.id === id).canvas;
+    let canvas = this.canvassesForMobileTables.find(ct => ct.id === id).canvas;
     let ratio = canvas.width / canvas.height;
     let width = 200;
     let height = 200 / ratio;
@@ -89,7 +88,7 @@ export class PdfService {
   }
 
   private writeTableFromCanvasForDesktop(id: string) {
-    let canvas = this.canvassesForTables.find(ct => ct.id === id).canvas;
+    let canvas = this.canvassesForDesktopTables.find(ct => ct.id === id).canvas;
     if (this.offset + canvas.height > 900) {
       this.pdfAddNewPage();
     }
@@ -147,17 +146,19 @@ export class PdfService {
 
   private pdfGenerateImage(elementId) {
     let element = $(elementId)[0];
+    //console.log(`Element: ${element.id}:${element.clientWidth}/${element.clientHeight}`);
     return html2canvas(element, {
       imageTimeout: 20000,
       removeContainer: false,
       width: element.clientWidth,
-      height: element.clientHeight
+      height: element.clientHeight,
+      allowTaint:true
     });
   }
 
 
   private pdfAddImage(canvas, width, height) {
-    let img = canvas.toDataURL("image/JPEG");
+    let img = canvas.toDataURL("image/png");
     this.doc.addImage(img, 'JPEG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
   }
 
@@ -222,7 +223,7 @@ export class PdfService {
 
   private generateCanvassesForMobileTables() {
 
-    this.canvassesForTables = [
+    this.canvassesForMobileTables = [
       { id: "criteriaTables" },
       { id: "page1Tables" },
       { id: "page2Tables" },
@@ -230,10 +231,10 @@ export class PdfService {
     ];
 
     return from(new Promise((resolve) => {
-      this.canvassesForTables.forEach(tableCanvas => {
+      this.canvassesForMobileTables.forEach(tableCanvas => {
         this.pdfGenerateImage('#' + tableCanvas.id).then((canvas) => {
           tableCanvas.canvas = canvas;
-          if (this.canvassesForTables.every(ct => ct.canvas)) {
+          if (this.canvassesForMobileTables.every(ct => ct.canvas)) {
             resolve();
           }
         })
@@ -243,7 +244,7 @@ export class PdfService {
   }
 
   private generateCanvassesForDesktopTables() {
-    this.canvassesForTables = [
+    this.canvassesForDesktopTables = [
       { id: "criteriaTable" },
       { id: "reserveTable" },
       { id: "spendingTable" },
@@ -252,10 +253,12 @@ export class PdfService {
     ]
 
     return from(new Promise((resolve) => {
-      this.canvassesForTables.forEach(tableCanvas => {
+      this.canvassesForDesktopTables.forEach(tableCanvas => {
         this.pdfGenerateImage('#' + tableCanvas.id).then((canvas) => {
           tableCanvas.canvas = canvas;
-          if (this.canvassesForTables.every(ct => ct.canvas)) {
+          //console.log(`Canvas: ${canvas.id}:${canvas.outerHTML}`);
+          document.body.appendChild(canvas);
+          if (this.canvassesForDesktopTables.every(ct => ct.canvas)) {
             resolve();
           }
         })
