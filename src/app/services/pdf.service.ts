@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { Injectable } from '@angular/core';
 import html2canvas from "html2canvas";
 import * as $ from 'jquery';
@@ -24,7 +23,7 @@ export class PdfService {
     $("body").css("cursor", "wait");
     this.offset = 60;
     this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
-    this.writeHeadings();
+    this.writeHeadingsForDesktop();
     this.writeWarnings();
     setTimeout(() => {
       this.generateCanvassesForDesktopTables().subscribe(() => {
@@ -58,57 +57,17 @@ export class PdfService {
     $("body").css("cursor", "wait");
     this.offset = 60;
     this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
-    this.writeHeadings();
+    this.writeHeadingsForMobile();
     this.writeWarnings();
     setTimeout(() => {
       this.generateCanvassesForMobileTables().subscribe(() => {
 
-        this.writeTableFromCanvasForMobile("criteriaTable");
-        if ($('#scenarioName').length > 0) {
-          this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText, true);
-        }
-        if ($('#scenarioYear').length > 0) {
-          this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText, true);
-        }
-
-        if ($("#scenariosTable").length > 0) {
-          this.writeTableFromCanvasForMobile("scenariosTable");
-        }
-
-        this.pdfWriteLine('H3', 'Reserve and balance', true);
-        this.writeTableFromCanvasForMobile("reserveTable-0");
-        this.writeTableFromCanvasForMobile("reserveTable-1");
-
-        this.pdfAddNewPage();
-        this.pdfWriteLine('H3', 'Spending', true);
-        this.writeTableFromCanvasForMobile("spendingTable-0");
-        this.writeTableFromCanvasForMobile("spendingTable-1");
-        this.writeTableFromCanvasForMobile("spendingTable-2");
-        this.writeTableFromCanvasForMobile("spendingTable-3");
-        this.writeTableFromCanvasForMobile("spendingTable-4");
-        this.writeTableFromCanvasForMobile("spendingTable-5");
-        this.writeTableFromCanvasForMobile("spendingTable-6");
-        this.writeTableFromCanvasForMobile("spendingTable-7");
-
-        this.pdfAddNewPage();
-        this.pdfWriteLine('H3', 'School characteristics', true);
-        this.writeTableFromCanvasForMobile("charTable-0");
-        this.writeTableFromCanvasForMobile("charTable-1");
-        this.writeTableFromCanvasForMobile("charTable-2");
-        this.writeTableFromCanvasForMobile("charTable-3");
-        this.writeTableFromCanvasForMobile("charTable-4");
-        this.writeTableFromCanvasForMobile("charTable-5");
-        this.writeTableFromCanvasForMobile("charTable-6");
-
-        this.pdfAddNewPage();
-        this.pdfWriteLine('H3', 'Outcomes', true);
-        this.writeTableFromCanvasForMobile("ofstedTable");
-        if ($("#progress8Table").length > 0) {
-          this.writeTableFromCanvasForMobile("progress8Table");
-        }
-        if ($("#ks2Table").length > 0) {
-          this.writeTableFromCanvasForMobile("ks2Table");
-        }
+        this.writeTableFromCanvasForMobile("criteriaTables");
+        this.writeTableFromCanvasForMobile("page1Tables");
+        //this.pdfAddNewPage();
+        this.writeTableFromCanvasForMobile("page2Tables");
+        //this.pdfAddNewPage();
+        this.writeTableFromCanvasForMobile("page3Tables");
 
         this.pdfSave("Self-assessment-dashboard.pdf");
         $("#downloadPage").text(" Download page");
@@ -120,13 +79,13 @@ export class PdfService {
   private writeTableFromCanvasForMobile(id: string) {
     let canvas = this.canvassesForTables.find(ct => ct.id === id).canvas;
     let ratio = canvas.width / canvas.height;
-    let width = 210;
-    let height = 210 / ratio;
+    let width = 200;
+    let height = 200 / ratio;
     if (this.offset + height > 900) {
       this.pdfAddNewPage();
     }
     this.pdfAddImage(canvas, width, height);
-    this.offset += height + 50;
+    this.offset += height + 25;
   }
 
   private writeTableFromCanvasForDesktop(id: string) {
@@ -138,8 +97,24 @@ export class PdfService {
     this.offset += canvas.height + 50;
   }
 
-  private writeHeadings() {
+  private writeHeadingsForDesktop() {
     this.pdfWriteLine('H1', $('#h1').get(0).innerText);
+    this.offset -= 20;
+    if ($('#dateCaption').length > 0) {
+      this.pdfWriteLine('Grayed', $('#dateCaption').get(0).innerText);
+    }
+    this.offset += 10;
+    let assessingText = $('#assessing').get(0).innerText;
+    let part1 = assessingText.substring(0, assessingText.indexOf('.') + 1);
+    let part2 = assessingText.substring(assessingText.indexOf('.') + 2);
+    this.pdfWriteLine('H3', part1);
+    if (part2) {
+      this.pdfWriteLine('H3', part2);
+    }
+  }
+
+  private writeHeadingsForMobile() {
+    this.pdfWriteLine('H2', $('#h1').get(0).innerText);
     this.offset -= 20;
     if ($('#dateCaption').length > 0) {
       this.pdfWriteLine('Grayed', $('#dateCaption').get(0).innerText);
@@ -167,26 +142,23 @@ export class PdfService {
 
   private pdfAddNewPage() {
     this.doc.addPage('a3', 'portrait');
-    this.offset = 70;
+    this.offset = 30;
   }
 
   private pdfGenerateImage(elementId) {
     let element = $(elementId)[0];
-    console.log(element.clientWidth + ","  + element.clientHeight);
     return html2canvas(element, {
-      imageTimeout: 0,
-      removeContainer: true,
-      logging: true,
+      imageTimeout: 20000,
+      removeContainer: false,
       width: element.clientWidth,
       height: element.clientHeight
-
     });
   }
 
 
   private pdfAddImage(canvas, width, height) {
-    let img = canvas.toDataURL("image/png");
-    this.doc.addImage(img, 'PNG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
+    let img = canvas.toDataURL("image/JPEG");
+    this.doc.addImage(img, 'JPEG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
   }
 
   private pdfSave(pdfName: string) {
@@ -229,6 +201,10 @@ export class PdfService {
         this.doc.setFont("helvetica", "bold");
         fontSize = 14;
         break;
+      case 'SmallBold':
+        this.doc.setFont("helvetica", "bold");
+        fontSize = 8;
+        break;
       default:
         this.doc.setFont("helvetica");
         fontSize = 12;
@@ -245,39 +221,13 @@ export class PdfService {
   }
 
   private generateCanvassesForMobileTables() {
+
     this.canvassesForTables = [
-      { id: "criteriaTable" },
-      { id: "reserveTable-0" },
-      { id: "reserveTable-1" },
-      { id: "spendingTable-0" },
-      { id: "spendingTable-1" },
-      { id: "spendingTable-2" },
-      { id: "spendingTable-3" },
-      { id: "spendingTable-4" },
-      { id: "spendingTable-5" },
-      { id: "spendingTable-6" },
-      { id: "spendingTable-7" },
-      { id: "charTable-0" },
-      { id: "charTable-1" },
-      { id: "charTable-2" },
-      { id: "charTable-3" },
-      { id: "charTable-4" },
-      { id: "charTable-5" },
-      { id: "charTable-6" },
-      { id: "ofstedTable" }
-    ]
-
-    if($("#progress8Table").length > 0){
-      this.canvassesForTables.push({ id: "progress8Table" });
-    }
-
-    if($("#ks2Table").length > 0){
-      this.canvassesForTables.push({ id: "ks2Table" });
-    }
-
-    if($("#scenariosTable").length > 0){
-      this.canvassesForTables.push({ id: "scenariosTable" });
-    }
+      { id: "criteriaTables" },
+      { id: "page1Tables" },
+      { id: "page2Tables" },
+      { id: "page3Tables" },
+    ];
 
     return from(new Promise((resolve) => {
       this.canvassesForTables.forEach(tableCanvas => {
