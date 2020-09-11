@@ -28,7 +28,6 @@ export class PdfService {
     this.writeWarnings();
     setTimeout(() => {
       this.generateCanvassesForDesktopTables().subscribe(() => {
-        debugger;
         this.writeTableFromCanvasForDesktop("criteriaTable");
         if ($('#scenarioName').length > 0) {
           this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText);
@@ -106,9 +105,9 @@ export class PdfService {
     let assessingText = $('#assessing').get(0).innerText;
     let part1 = assessingText.substring(0, assessingText.indexOf('.') + 1);
     let part2 = assessingText.substring(assessingText.indexOf('.') + 2);
-    this.pdfWriteLine('H3', part1);
+    this.pdfWriteLine('Bold', part1);
     if (part2) {
-      this.pdfWriteLine('H3', part2);
+      this.pdfWriteLine('Bold', part2);
     }
   }
 
@@ -146,7 +145,6 @@ export class PdfService {
 
   private pdfGenerateImage(elementId) {
     let element = $(elementId)[0];
-    //console.log(`Element: ${element.id}:${element.clientWidth}/${element.clientHeight}`);
     return html2canvas(element, {
       imageTimeout: 20000,
       removeContainer: false,
@@ -256,7 +254,6 @@ export class PdfService {
       this.canvassesForDesktopTables.forEach(tableCanvas => {
         this.pdfGenerateImage('#' + tableCanvas.id).then((canvas) => {
           tableCanvas.canvas = canvas;
-          //console.log(`Canvas: ${canvas.id}:${canvas.outerHTML}`);
           document.body.appendChild(canvas);
           if (this.canvassesForDesktopTables.every(ct => ct.canvas)) {
             resolve();
