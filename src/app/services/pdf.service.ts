@@ -64,7 +64,9 @@ export class PdfService {
 
         this.writeTableFromCanvasForMobile("criteriaTables");
         this.writeTableFromCanvasForMobile("page1Tables");
+        this.pdfAddNewPage();
         this.writeTableFromCanvasForMobile("page2Tables");
+        this.pdfAddNewPage();
         this.writeTableFromCanvasForMobile("page3Tables");
 
         this.pdfSave("Self-assessment-dashboard.pdf");
@@ -77,8 +79,8 @@ export class PdfService {
   private writeTableFromCanvasForMobile(id: string) {
     let canvas = this.canvassesForMobileTables.find(ct => ct.id === id).canvas;
     let ratio = canvas.width / canvas.height;
-    let width = 200;
-    let height = 200 / ratio;
+    let width = 155;
+    let height = 155 / ratio;
     if (this.offset + height > 900) {
       this.pdfAddNewPage();
     }

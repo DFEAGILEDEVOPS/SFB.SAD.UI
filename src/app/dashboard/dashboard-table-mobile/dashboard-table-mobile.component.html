@@ -1,4 +1,4 @@
-<div class="mobile-tables" id="page1Tables">
+<div id="page1Tables">
 
   <h3 class="govuk-heading-m govuk-!-margin-top-9">Reserve and balance</h3>
 
@@ -37,7 +37,7 @@
 </div>
 
 <div id="page2Tables">
-  <h3 class="govuk-heading-m govuk-!-margin-top-9">Spending</h3>
+  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6">Spending</h3>
 
   <table class="govuk-table" id="spendingTable-{{i}}" *ngFor='let aa of activeScenario.spendingAAs; let i = index'>
     <caption class="govuk-table__caption bottom-border">{{aa.assessmentAreaName}}</caption>
@@ -73,7 +73,7 @@
 </div>
 
 <div id="page3Tables">
-  <h3 class="govuk-heading-m govuk-!-margin-top-9">School characteristics</h3>
+  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6">School characteristics</h3>
 
   <table class="govuk-table" id="charTable-{{i}}" *ngFor='let aa of activeScenario.characteristicAAs; let i = index'>
     <caption class="govuk-table__caption bottom-border">{{aa.assessmentAreaName}}</caption>
@@ -104,7 +104,7 @@
     </tr>
   </table>
 
-  <h3 class="govuk-heading-m govuk-!-margin-top-9">Outcomes</h3>
+  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6">Outcomes</h3>
 
   <table class="govuk-table" id="ofstedTable">
     <caption class="govuk-table__caption bottom-border">Ofsted rating</caption>
