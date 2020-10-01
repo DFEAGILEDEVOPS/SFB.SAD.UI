@@ -16,6 +16,6 @@
     "cookieDomain": "localhost",
     "customErrorPage": true,
     "consoleErrors": true,
-    "logExceptions": true 
+    "logExceptions": true
   }
 }
