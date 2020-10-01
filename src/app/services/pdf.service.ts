@@ -256,7 +256,6 @@ export class PdfService {
       this.canvassesForDesktopTables.forEach(tableCanvas => {
         this.pdfGenerateImage('#' + tableCanvas.id).then((canvas) => {
           tableCanvas.canvas = canvas;
-          document.body.appendChild(canvas);
           if (this.canvassesForDesktopTables.every(ct => ct.canvas)) {
             resolve();
           }
