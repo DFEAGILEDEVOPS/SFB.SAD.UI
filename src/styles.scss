@@ -3,20 +3,8 @@
 // govuk-frontend
 @import "govuk-frontend/govuk/all";
 @import "bootstrap/scss/bootstrap";
-
-@media print {
-  .show-in-print {
-    display: block!important;
-  }
-
-  .hide-in-print {
-    display: none!important;
-  }
-
-  .rating-help-icon {
-    display: none;
-  }
-}
+@import "modal.scss";
+@import "print.scss";
 
 *, *::before, *::after {
     box-sizing: content-box;//changed to fix check boxes
@@ -59,30 +47,14 @@ a{
 }
 }
 
-.small-icon{
-  //width: 20px;
-  //margin-right: 5px;
-}
-
 .large-icon{
   margin-right: 10px;
-}
-
-.modal-dialog {
-    @media (min-width: 576px){
-    max-width: 660px;
-  }
 }
 
 .ul-two-cols{
   columns: 2;
   -webkit-columns: 2;
   -moz-columns: 2;
-}
-
-.sfb-modal-dialog .close{
-  font-size: 16px;
-  text-decoration: underline;
 }
 
 .highlight {
@@ -158,33 +130,6 @@ span.table-cell-highlight {
 caption{
   caption-side: top;
   color: black;
-}
-
-.modal-close-link{
-  cursor: pointer;
-  color: #0b0c0c !important;
-  text-decoration: none;
-  font-family: "GDS Transport", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-.modal-close-link:hover {
-
-  text-decoration: underline!important;
-}
-.modal-close-link:active, .modal-close-link:focus {
-  color: #0b0c0c;
-}
-
-.modal-close-link:focus{
-  outline: 3px solid rgba(0,0,0,0);
-  background-color: #fd0;
-  box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
-  text-decoration: none;
-}
-
-.modal-dialog{
-  max-width: 900px!important;
 }
 
 .rating-box{

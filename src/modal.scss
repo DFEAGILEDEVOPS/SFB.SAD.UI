@@ -1,0 +1,62 @@
+.sfb-modal-dialog .close{
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.modal-content {
+  padding: 15px 10px;
+  border-radius: 0;
+  @include govuk-media-query($until: tablet) {
+    width: auto;
+  }
+}
+
+.modal-dialog {
+  font-family: "GDS Transport", Arial, sans-serif;
+  @include govuk-media-query($from: tablet) {
+    max-width: 660px;
+  }
+
+  @include govuk-media-query($from: desktop) {
+    max-width: 900px!important;
+  }
+}
+
+.modal-header {
+  border-bottom: none;
+  border-radius: 0;
+}
+
+.modal {
+  @include govuk-media-query($from: tablet) {
+    top: 10%;
+  }
+
+  @include govuk-media-query($from: desktop) {
+    top: 25%;
+  }
+}
+
+.modal-close-link{
+  cursor: pointer;
+  color: #0b0c0c !important;
+  text-decoration: none;
+  font-family: "GDS Transport", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.modal-close-link:hover {
+
+  text-decoration: underline!important;
+}
+
+.modal-close-link:active, .modal-close-link:focus {
+  color: #0b0c0c;
+}
+
+.modal-close-link:focus{
+  outline: 3px solid rgba(0,0,0,0);
+  background-color: #fd0;
+  box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
+  text-decoration: none;
+}

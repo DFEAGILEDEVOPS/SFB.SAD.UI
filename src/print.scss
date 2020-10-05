@@ -1,0 +1,13 @@
+@media print {
+  .show-in-print {
+    display: block!important;
+  }
+
+  .hide-in-print {
+    display: none!important;
+  }
+
+  .rating-help-icon {
+    display: none;
+  }
+}
