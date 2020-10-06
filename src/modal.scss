@@ -6,6 +6,7 @@
 .modal-content {
   padding: 15px 10px;
   border-radius: 0;
+  width: 95%;
   @include govuk-media-query($until: tablet) {
     width: auto;
   }
