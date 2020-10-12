@@ -130,7 +130,7 @@ export class SaScenarioModel {
       averageTeacherCostAA.schoolData = this.getAAValue('Teaching staff');
       if (averageTeacherCostAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         averageTeacherCostAA.calculatedSchoolData = parseFloat((averageTeacherCostAA.schoolData
-          / averageTeacherCostAA.totalForAreaType).toFixed(2));
+          / averageTeacherCostAA.totalForAreaType).toFixed(4));
       } else {
         averageTeacherCostAA.calculatedSchoolData = null;
       }
@@ -143,7 +143,7 @@ export class SaScenarioModel {
       seniorLeadersAA.schoolData = this.teachersLeader;
       if (seniorLeadersAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         seniorLeadersAA.calculatedSchoolData = parseFloat((seniorLeadersAA.schoolData
-          / seniorLeadersAA.totalForAreaType).toFixed(2));
+          / seniorLeadersAA.totalForAreaType).toFixed(4));
       } else {
         seniorLeadersAA.calculatedSchoolData = null;
       }
@@ -156,7 +156,7 @@ export class SaScenarioModel {
       pupilToTeacherAA.schoolData = this.numberOfPupils;
       if (pupilToTeacherAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         pupilToTeacherAA.calculatedSchoolData = parseFloat((pupilToTeacherAA.schoolData
-          / pupilToTeacherAA.totalForAreaType).toFixed(2));
+          / pupilToTeacherAA.totalForAreaType).toFixed(4));
       } else {
         pupilToTeacherAA.calculatedSchoolData = null;
       }
@@ -169,7 +169,7 @@ export class SaScenarioModel {
       pupilToAdultAA.schoolData = this.numberOfPupils;
       if (pupilToAdultAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         pupilToAdultAA.calculatedSchoolData = parseFloat((pupilToAdultAA.schoolData
-          / pupilToAdultAA.totalForAreaType).toFixed(2));
+          / pupilToAdultAA.totalForAreaType).toFixed(4));
       } else {
         pupilToAdultAA.calculatedSchoolData = null;
       }
@@ -204,7 +204,7 @@ export class SaScenarioModel {
       }
 
       if (aa.schoolData != null && aa.totalForAreaType !== 0) {
-        aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+        aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(4));
       } else {
         aa.calculatedSchoolData = null;
       }
@@ -221,7 +221,7 @@ export class SaScenarioModel {
       }
 
       if (aa.schoolData != null && aa.totalForAreaType !== 0) {
-        aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(2));
+        aa.calculatedSchoolData = parseFloat((aa.schoolData / aa.totalForAreaType).toFixed(4));
       } else {
         aa.calculatedSchoolData = null;
       }
