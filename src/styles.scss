@@ -51,10 +51,13 @@ a{
   width: 20px!important;
 }
 
-.small-icon{
-  width: 24px;
+.download-icon, .print-icon {
   margin-right: 5px;
   margin-left: 5px;
+}
+
+.small-icon{
+  width: 24px;
   vertical-align: middle;
 }
 
