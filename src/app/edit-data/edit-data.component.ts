@@ -194,7 +194,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       editedScenario.setAAValue('Administrative and clerical staff', this.currencyToNumber(this.editDataForm.value.spending.adminStaff));
       editedScenario.setAAValue('Other staff costs', this.currencyToNumber(this.editDataForm.value.spending.otherStaff));
       editedScenario.setAAValue('Premises costs', this.currencyToNumber(this.editDataForm.value.spending.premises));
-      editedScenario.setAAValue('Teaching resources', this.currencyToNumber(this.editDataForm.value.spending.teachingResources));
+      editedScenario.setAAValue('Educational supplies', this.currencyToNumber(this.editDataForm.value.spending.teachingResources));
       editedScenario.setAAValue('Energy', this.currencyToNumber(this.editDataForm.value.spending.energy));
 
       editedScenario.totalIncome = this.currencyToNumber(this.editDataForm.value.reserveBalance.totalIncome);
@@ -387,7 +387,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       case 'Premises costs':
         setTimeout(() => this.premisesInput.nativeElement.focus());
         break;
-      case 'Teaching resources':
+      case 'Educational supplies':
         setTimeout(() => this.teachingResourcesInput.nativeElement.focus());
         break;
       case 'Energy':
@@ -432,7 +432,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
         adminStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Administrative and clerical staff'))],
         otherStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Other staff costs'))],
         premises: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Premises costs'))],
-        teachingResources: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching resources'))],
+        teachingResources: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Educational supplies'))],
         energy: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Energy'))],
       }),
       reserveBalance: this.fb.group({

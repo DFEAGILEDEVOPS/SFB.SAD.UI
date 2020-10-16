@@ -19,26 +19,18 @@ constructor(private http: HttpClient, @Inject(appSettings) private settings: App
 getSaScenario(urn: number): Observable<SaScenarioModel> {
   return this.http.get<SaData>(`${this.settings.apiDomain}/selfassessment/${urn}`)
     .pipe(
-      tap(_ => console.log('fetched saData')),
+      //tap(_ => console.log('fetched saData')),
       map(data => new SaScenarioModel(data)),
       // catchError(this.handleError<SaScenarioModel>('getSaData', new SaScenarioModel(new SaData())))
     );
 }
 
 getSizeLookupList(): Observable<SizeLookupModel[]> {
-  return this.http.get<SizeLookupModel[]>(`${this.settings.apiDomain}/sadsizelookup`)
-    .pipe(
-      tap(_ => console.log('fetched SizeLookupList')),
-      // catchError(this.handleError<SizeLookupModel[]>('getSaData', new Array<SizeLookupModel>()))
-    );
+  return this.http.get<SizeLookupModel[]>(`${this.settings.apiDomain}/sadsizelookup`);
 }
 
 getFSMLookupList(): Observable<FSMLookupModel[]> {
-  return this.http.get<FSMLookupModel[]>(`${this.settings.apiDomain}/sadfsmlookup`)
-    .pipe(
-      tap(_ => console.log('fetched FSMLookupList')),
-      // catchError(this.handleError<FSMLookupModel[]>('getSaData', new Array<FSMLookupModel>()))
-    );
+  return this.http.get<FSMLookupModel[]>(`${this.settings.apiDomain}/sadfsmlookup`);
 }
 
 getAATresholdsList(
@@ -51,11 +43,7 @@ getAATresholdsList(
   termYears: string): Observable<TresholdModel[]> {
   return this.http.get<TresholdModel[]>(`${this.settings.apiDomain}/sadtresholds?`
     + `areaName=${areaName}&overallPhase=${overallPhase}&has6Form=${has6Form}`
-    + `&londonWeight=${londonWeight}&sizeType=${sizeType}&fsmScale=${fsmScale}&termYears=${termYears}`)
-    .pipe(
-      tap(_ => console.log('fetched AATresholdsList')),
-      // catchError(this.handleError<TresholdModel[]>('getSaData', new Array<TresholdModel>()))
-    );
+    + `&londonWeight=${londonWeight}&sizeType=${sizeType}&fsmScale=${fsmScale}&termYears=${termYears}`);
 }
 
 // private handleError<T>(operation = 'operation', result?: T) {

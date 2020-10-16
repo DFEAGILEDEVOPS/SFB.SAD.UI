@@ -78,9 +78,9 @@ export class AAModalModels {
         <p>It also includes costs associated with building and grounds maintenance, improvement and cleaning and caretaking, and PFI costs.</p>`
       },
       {
-        assessmentArea : 'Teaching resources',
-        title : 'Spend on teaching resources costs as a percentage of total expenditure',
-        textContent : `<p>Spend on teaching resources includes curriculum ICT costs and the cost of test and examination fees and any accreditation costs related to pupils.<p>
+        assessmentArea : 'Educational supplies',
+        title : 'Spend on educational supplies costs as a percentage of total expenditure',
+        textContent : `<p>Spend on educational supplies includes curriculum ICT costs and the cost of test and examination fees and any accreditation costs related to pupils.<p>
         <p>The latter includes GCSEs and A/AS levels. Primary schools are unlikely to have any costs associated with examination fees.</p>`
       },
       {

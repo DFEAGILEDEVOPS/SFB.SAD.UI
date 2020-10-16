@@ -140,8 +140,8 @@ export class EditModalModels {
       },
       {
         formControlName : 'teachingResources',
-        title : 'Spend on teaching resources',
-        textContent : `<p>Spend on teaching resources includes curriculum ICT costs and the cost of test and examination fees and any accreditation costs related to pupils. The latter includes GCSEs and A/AS levels. Primary schools are unlikely to have any costs associated with examination fees.</p>`
+        title : 'Spend on educational supplies',
+        textContent : `<p>Spend on educational supplies includes curriculum ICT costs and the cost of test and examination fees and any accreditation costs related to pupils. The latter includes GCSEs and A/AS levels. Primary schools are unlikely to have any costs associated with examination fees.</p>`
       },
       {
         formControlName : 'energy',

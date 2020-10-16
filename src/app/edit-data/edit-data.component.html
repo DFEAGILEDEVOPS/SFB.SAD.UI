@@ -82,7 +82,7 @@
         <a [routerLink]='' (click)="setFocus(premisesInput)">Premises costs can not be higher than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.teachingResourcesExceeded">
-        <a [routerLink]='' (click)="setFocus(teachingResourcesInput)">Teaching resources spending can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(teachingResourcesInput)">Educational supplies spending can not be higher than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.energyExceeded">
         <a [routerLink]='' (click)="setFocus(energyInput)">Energy spending can not be higher than total expenditure</a>
@@ -591,19 +591,19 @@
       <div class="govuk-form-group"
         [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingResourcesExceeded}">
         <label class="govuk-label" for="tr">
-          Spending on teaching resources
+          Spending on educational supplies
           <a [routerLink]='' (click)="openModalWithComponent('teachingResources')">
             <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on teaching resources"/>
+            alt="Help for spending on educational supplies"/>
           </a>
         </label>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching resources') | aaValueFormat}}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Educational supplies') | aaValueFormat}}</span>
         </span>
         <div *ngIf="editDataForm.errors?.teachingResourcesExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Teaching resources spending can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Educational supplies spending can not be higher than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text" #teachingResourcesInput
