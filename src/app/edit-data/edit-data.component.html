@@ -642,9 +642,8 @@
 
     <div class="govuk-grid-row govuk-body">
       <div class="govuk-grid-column-full">
-        <button class="govuk-button" data-module="govuk-button" type="submit">
-          Submit
-        </button>
+        <button *ngIf='viewType === "edit"' class="govuk-button" data-module="govuk-button" type="submit">Update</button>
+        <button *ngIf='viewType === "enter"' class="govuk-button" data-module="govuk-button" type="submit">View this scenario</button>
         <a (click)='onBack()' href="javascript:void(0)" class="govuk-link govuk-link--no-visited-state back-button">Back
         </a>
       </div>

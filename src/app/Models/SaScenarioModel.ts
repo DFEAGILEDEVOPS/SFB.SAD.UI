@@ -177,20 +177,20 @@ export class SaScenarioModel {
     }
 
     const teacherContactRatioAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Teacher contact ratio (less than 1)');
-    if (teacherContactRatioAA) {
-      teacherContactRatioAA.calculatedSchoolData = teacherContactRatioAA.schoolData;
+    if (teacherContactRatioAA && teacherContactRatioAA.schoolData) {
+      teacherContactRatioAA.calculatedSchoolData = parseFloat(teacherContactRatioAA.schoolData?.toFixed(2));
       this.setAAsMatchingTreshold(teacherContactRatioAA);
     }
 
     const pupilChangeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years');
-    if (pupilChangeAA) {
-      pupilChangeAA.calculatedSchoolData = pupilChangeAA.schoolData;
+    if (pupilChangeAA && pupilChangeAA.schoolData) {
+      pupilChangeAA.calculatedSchoolData = parseFloat(pupilChangeAA.schoolData?.toFixed(3));
       this.setAAsMatchingTreshold(pupilChangeAA);
     }
 
     const avClassSizeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Average Class size');
-    if (avClassSizeAA) {
-      avClassSizeAA.calculatedSchoolData = avClassSizeAA.schoolData;
+    if (avClassSizeAA && avClassSizeAA.schoolData) {
+      avClassSizeAA.calculatedSchoolData = parseFloat(avClassSizeAA.schoolData?.toFixed(2));
       this.setAAsMatchingTreshold(avClassSizeAA);
     }
 
