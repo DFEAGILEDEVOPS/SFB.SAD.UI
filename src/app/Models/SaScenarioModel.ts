@@ -156,7 +156,7 @@ export class SaScenarioModel {
       pupilToTeacherAA.schoolData = this.numberOfPupils;
       if (pupilToTeacherAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         pupilToTeacherAA.calculatedSchoolData = parseFloat((pupilToTeacherAA.schoolData
-          / pupilToTeacherAA.totalForAreaType).toFixed(3));
+          / pupilToTeacherAA.totalForAreaType).toFixed(2));
       } else {
         pupilToTeacherAA.calculatedSchoolData = null;
       }
@@ -169,7 +169,7 @@ export class SaScenarioModel {
       pupilToAdultAA.schoolData = this.numberOfPupils;
       if (pupilToAdultAA.schoolData != null && averageTeacherCostAA.totalForAreaType != 0) {
         pupilToAdultAA.calculatedSchoolData = parseFloat((pupilToAdultAA.schoolData
-          / pupilToAdultAA.totalForAreaType).toFixed(3));
+          / pupilToAdultAA.totalForAreaType).toFixed(2));
       } else {
         pupilToAdultAA.calculatedSchoolData = null;
       }
