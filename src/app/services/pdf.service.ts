@@ -22,6 +22,7 @@ export class PdfService {
     this.expandDetails();
     $("#downloadPage").text(" Loading...");
     $("body").css("cursor", "wait");
+    $(".rating-help-icon").hide();
     this.offset = 60;
     this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
     this.writeHeadingsForDesktop();
@@ -47,6 +48,7 @@ export class PdfService {
         this.pdfSave("Self-assessment-dashboard.pdf");
         $("#downloadPage").text(" Download page");
         $("body").css("cursor", "");
+        $(".rating-help-icon").show();
       });
     }, 100);
   }
