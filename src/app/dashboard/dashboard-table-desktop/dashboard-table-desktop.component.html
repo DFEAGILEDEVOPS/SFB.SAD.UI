@@ -95,6 +95,9 @@
         <span class="rating-box gray">
           <span>Not available.</span>
           <a class="govuk-link ml-2 button-link hide-in-print"
+            [ngClass]="{'sad_gtm_add_data_tcr': aa.assessmentAreaName === 'Teacher contact ratio (less than 1)',
+            'sad_gtm_add_data_pcp': aa.assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years',
+            'sad_gtm_add_data_acs': aa.assessmentAreaName === 'Average Class size'}"
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'
             attr.aria-label="Add data for {{aa.assessmentAreaName}}">Add data</a>
         </span>

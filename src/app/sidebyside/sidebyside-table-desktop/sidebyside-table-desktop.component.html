@@ -258,6 +258,9 @@
         <span class="rating-box gray">
           <span>Not available.</span>
           <a class="govuk-link ml-2 button-link hide-in-print"
+            [ngClass]="{'sad_gtm_add_data_tcr': firstScenario.characteristicAAs[i].assessmentAreaName === 'Teacher contact ratio (less than 1)',
+            'sad_gtm_add_data_pcp': firstScenario.characteristicAAs[i].assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years',
+            'sad_gtm_add_data_acs': firstScenario.characteristicAAs[i].assessmentAreaName === 'Average Class size'}"
             routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.characteristicAAs[i].assessmentAreaName}}/0'
             attr.aria-label="Add data for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add data</a>
         </span>
@@ -280,6 +283,9 @@
         <span class="rating-box gray">
           <span>Not available.</span>
           <a class="govuk-link ml-2 button-link hide-in-print"
+            [ngClass]="{'sad_gtm_add_data_tcr': secondScenario.characteristicAAs[i].assessmentAreaName === 'Teacher contact ratio (less than 1)',
+            'sad_gtm_add_data_pcp': secondScenario.characteristicAAs[i].assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years',
+            'sad_gtm_add_data_acs': secondScenario.characteristicAAs[i].assessmentAreaName === 'Average Class size'}"
             routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.characteristicAAs[i].assessmentAreaName}}/1'
             attr.aria-label="Add data for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add data</a>
         </span>
