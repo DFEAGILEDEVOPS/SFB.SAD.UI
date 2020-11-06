@@ -6,3 +6,8 @@ select {
 .edit-help-icon {
   cursor: pointer;
 }
+
+.edit-warning-icon{
+  width: 35px;
+  margin-right: 10px;
+}

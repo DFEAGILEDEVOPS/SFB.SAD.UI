@@ -93,13 +93,21 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <h1 *ngIf='viewType === "edit"' class="govuk-heading-xl">Edit data</h1>
-    <h1 *ngIf='viewType === "enter"' class="govuk-heading-xl">Enter data</h1>
+    <h1 *ngIf='viewType === "edit"' class="govuk-heading-xl">Edit dashboard</h1>
+    <h1 *ngIf='viewType === "enter"' class="govuk-heading-xl">Add a custom dashboard</h1>
     <p class="govuk-body-s">
       Assessing
       <span class="highlight">
         <span class="govuk-!-font-weight-bold">{{scenarioInEdit?.name}}</span>
       </span>
+    </p>
+    <p class="govuk-body-m" style="display: inline-flex;" *ngIf='viewType === "enter"'>
+      <img src="assets/images/warning.svg" class="edit-warning-icon" alt="Warning"/>
+      <span>Custom dashboards are <span class="govuk-!-font-weight-bold">only visible to you</span> and will be viewable on subsequent visits to this school’s self-assessment dashboard if you have selected the option to allow cookies.</span>
+    </p>
+    <p class="govuk-body-m" style="display: inline-flex;" *ngIf='viewType === "edit"'>
+      <img src="assets/images/warning.svg" class="edit-warning-icon" alt="Warning"/>
+      <span>Dashboards you have edited are <span class="govuk-!-font-weight-bold">only visible to you</span> and will be viewable on subsequent visits to this school’s self-assessment dashboard if you have selected the option to allow cookies.</span>
     </p>
   </div>
 </div>
