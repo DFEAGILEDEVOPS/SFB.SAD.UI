@@ -4,24 +4,24 @@
     <tr class="govuk-table__row">
       <td class="govuk-table__header width-fifty-percent">
         <span class="govuk-!-font-size-24 govuk-!-margin-right-5">{{firstScenario.scenarioName}}</span>
-        <div class="govuk-caption-m">Scenario year {{firstScenario.termOfScenario}}</div>
+        <div class="govuk-caption-m">Dashboard year {{firstScenario.termOfScenario}}</div>
         <div class="govuk-!-margin-top-1 hide-in-print">
           <a routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0' class="govuk-link link-button"
             attr.aria-label="Edit data for {{firstScenario.scenarioName}}">Edit data</a>
           <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(0)'
-            attr.aria-label="Remove scenario {{firstScenario.scenarioName}}">Remove</a>
+            attr.aria-label="Remove dashboard {{firstScenario.scenarioName}}">Remove</a>
         </div>
       </td>
       <td class="govuk-table__header width-fifty-percent">
         <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
-        <div class="govuk-caption-m">Scenario year {{secondScenario.termOfScenario}}</div>
+        <div class="govuk-caption-m">Dashboard year {{secondScenario.termOfScenario}}</div>
         <div class="govuk-!-margin-top-1 hide-in-print">
           <a routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1' class="govuk-link link-button"
             attr.aria-label="Edit data for {{secondScenario.scenarioName}}">Edit data</a>
           <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(1)'
-            attr.aria-label="Remove scenario {{secondScenario.scenarioName}}">Remove</a>
+            attr.aria-label="Remove dashboard {{secondScenario.scenarioName}}">Remove</a>
         </div>
       </td>
     </tr>
@@ -76,7 +76,7 @@
             <span>Not available.</span><br>
             <a class="govuk-link button-link hide-in-print"
               routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.reserveAAs[i].assessmentAreaName}}'
-              attr.aria-label="Add data for {{firstScenario.reserveAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add
+              attr.aria-label="Add data for {{firstScenario.reserveAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} dashboard">Add
               data</a>
           </span>
           <a [routerLink]=''
@@ -105,7 +105,7 @@
             <span>Not available.</span><br>
             <a class="govuk-link button-link hide-in-print"
               routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.reserveAAs[i].assessmentAreaName}}'
-              attr.aria-label="Add data for {{secondScenario.reserveAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add
+              attr.aria-label="Add data for {{secondScenario.reserveAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} dashboard">Add
               data</a>
           </span>
           <a [routerLink]=''
@@ -167,7 +167,7 @@
             <span>Not available.</span><br>
             <a class="govuk-link button-link hide-in-print"
               routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.spendingAAs[i].assessmentAreaName}}'
-              attr.aria-label="Add data for {{firstScenario.spendingAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add
+              attr.aria-label="Add data for {{firstScenario.spendingAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} dashboard">Add
               data</a>
           </span>
           <a [routerLink]=''
@@ -193,7 +193,7 @@
             <span>Not available.</span><br>
             <a class="govuk-link button-link hide-in-print"
               routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.spendingAAs[i].assessmentAreaName}}'
-              attr.aria-label="Add data for {{secondScenario.spendingAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add
+              attr.aria-label="Add data for {{secondScenario.spendingAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} dashboard">Add
               data</a>
           </span>
           <a [routerLink]=''
@@ -254,7 +254,7 @@
               'sad_gtm_add_data_pcp': firstScenario.characteristicAAs[i].assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years',
               'sad_gtm_add_data_acs': firstScenario.characteristicAAs[i].assessmentAreaName === 'Average Class size'}"
               routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.characteristicAAs[i].assessmentAreaName}}'
-              attr.aria-label="Add data for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add
+              attr.aria-label="Add data for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} dashboard">Add
               data</a>
           </span>
           <a [routerLink]=''
@@ -284,7 +284,7 @@
               'sad_gtm_add_data_pcp': secondScenario.characteristicAAs[i].assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years',
               'sad_gtm_add_data_acs': secondScenario.characteristicAAs[i].assessmentAreaName === 'Average Class size'}"
               routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.characteristicAAs[i].assessmentAreaName}}'
-              attr.aria-label="Add data for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add
+              attr.aria-label="Add data for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} dashboard">Add
               data</a>
           </span>
           <a [routerLink]=''
