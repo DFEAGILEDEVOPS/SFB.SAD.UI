@@ -34,7 +34,7 @@
   }
 
   @include govuk-media-query($from: desktop) {
-      margin-left: 45px;
+      margin-left: 30px;
       margin-top: 0;
 
   }
@@ -46,12 +46,12 @@
 }
 
 .dashboard-help-icon {
-  margin-left: 13px;
+  margin-left: 5px;
   vertical-align: -webkit-baseline-middle;
 
   @include govuk-media-query($until: tablet) {
     margin-left: 0;
-    margin-bottom: 17px;
+    margin-bottom: 10px;
     display: inline-block;
     top: -10px;
     position: relative;
