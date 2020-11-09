@@ -45,4 +45,21 @@
   }
 }
 
+.dashboard-help-icon {
+  margin-left: 13px;
+  vertical-align: -webkit-baseline-middle;
+
+  @include govuk-media-query($until: tablet) {
+    margin-left: 0;
+    margin-bottom: 17px;
+    display: inline-block;
+    top: -10px;
+    position: relative;
+  }
+}
+
+.dashboard-year-help-icon {
+  margin-left: 8px;
+}
+
 

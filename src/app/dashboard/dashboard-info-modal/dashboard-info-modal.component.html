@@ -1,0 +1,9 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <a href="javascript:void(0)" class="pull-right modal-close-link" aria-label="Close modal dialog" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">Close</span>
+  </a>
+</div>
+<div class="modal-body">
+    <div [innerHTML]='textContent'></div>
+</div>

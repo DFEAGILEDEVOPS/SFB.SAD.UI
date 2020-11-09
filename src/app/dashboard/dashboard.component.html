@@ -53,6 +53,9 @@
           routerLink='/self-assessment/edit-data/{{urn}}/enter' [disabled]='!this.scenarioLoaded'>
           Add a custom dashboard
         </button>
+        <a class="dashboard-help-icon" [routerLink]='' (click)="openModalWithComponent('add-dashboard')">
+          <img src="assets/images/info.svg" class="small-icon info-help-icon" alt="Help for add a custom dashboard"/>
+        </a>
         <button *ngIf='activeScenario.isEdited' class="govuk-button govuk-button--secondary reset-button" data-module="govuk-button"
           (click)='onReset()'>
           Reset dashboard
@@ -63,7 +66,12 @@
 
   <h2 class="govuk-heading-m" id="scenarioName">{{activeScenario.scenarioName}}</h2>
 
-  <div class="govuk-caption-m" id="scenarioYear">Dashboard year {{activeScenario.termOfScenario}}</div>
+  <div class="govuk-caption-m" id="scenarioYear">
+    <span>Dashboard year {{activeScenario.termOfScenario}}</span>
+    <a class="dashboard-year-help-icon" [routerLink]='' (click)="openModalWithComponent('dashboard-year')">
+      <img src="assets/images/info.svg" class="small-icon info-help-icon" alt="Help for dashboard year"/>
+    </a>
+  </div>
 
   <div class="govuk-!-margin-bottom-3">
     <a class="govuk-link hide-in-print" routerLink='/self-assessment/edit-data/{{urn}}/edit' [hidden]='!this.scenarioLoaded'>
