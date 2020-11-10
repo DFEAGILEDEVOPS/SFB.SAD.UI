@@ -142,23 +142,23 @@
       <th scope="row" class="govuk-table__cell">{{activeScenario.progressScoreType}}</th>
       <td class="govuk-table__cell progress-td">
         <div class="progress-text-wrapper">
-          <span *ngIf='activeScenario.progressScore' class="progress-text" [ngClass]="{
-                  'progress-text--well-below': activeScenario.progressScore < -3 ,
-                  'progress-text--below': activeScenario.progressScore >= -3 && activeScenario.progressScore < -2,
-                  'progress-text--average': activeScenario.progressScore >= -2 && activeScenario.progressScore <= 2,
-                  'progress-text--above': activeScenario.progressScore <= 3 && activeScenario.progressScore > 2,
-                  'progress-text--well-above': activeScenario.progressScore > 3}">
-            {{activeScenario.progressScore | number: '1.2-2'}}
-            <span *ngIf="activeScenario.progressScore < -3">&nbsp; Well below average</span>
-            <span style="color: #0C0C0C;" *ngIf="activeScenario.progressScore >= -3 && activeScenario.progressScore < -2">&nbsp; Below
+          <span *ngIf='activeScenario.ks2Score' class="progress-text" [ngClass]="{
+                  'progress-text--well-below': activeScenario.ks2Score < -3 ,
+                  'progress-text--below': activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2,
+                  'progress-text--average': activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2,
+                  'progress-text--above': activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2,
+                  'progress-text--well-above': activeScenario.ks2Score > 3}">
+            {{activeScenario.ks2Score | number: '1.2-2'}}
+            <span *ngIf="activeScenario.ks2Score < -3">&nbsp; Well below average</span>
+            <span style="color: #0C0C0C;" *ngIf="activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2">&nbsp; Below
               average</span>
-            <span *ngIf="activeScenario.progressScore >= -2 && activeScenario.progressScore <= 2">&nbsp;
+            <span *ngIf="activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2">&nbsp;
               Average</span>
-            <span style="color: #0C0C0C;" *ngIf="activeScenario.progressScore <= 3 && activeScenario.progressScore > 2">&nbsp; Above
+            <span style="color: #0C0C0C;" *ngIf="activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2">&nbsp; Above
               average</span>
-            <span *ngIf="activeScenario.progressScore > 3">&nbsp; Well above average</span>
+            <span *ngIf="activeScenario.ks2Score > 3">&nbsp; Well above average</span>
           </span>
-          <span [hidden]='activeScenario.progressScore' class="progress--na">No data available</span>
+          <span [hidden]='activeScenario.ks2Score' class="progress--na">No data available</span>
         </div>
         <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon">
           <img src="assets/images/info.svg" alt="Help for KS2 score" class="small-icon progress-icon" />
@@ -169,13 +169,13 @@
       <th scope="row" class="govuk-table__cell">{{activeScenario.progressScoreType}}</th>
       <td class="govuk-table__cell progress-td">
         <div class="progress-text-wrapper">
-          <span *ngIf='activeScenario.progressScore' class="progress-text" [ngClass]="{
+          <span *ngIf='activeScenario.p8Score' class="progress-text" [ngClass]="{
                       'progress-text--well-below': activeScenario.progress8Banding === 5,
                       'progress-text--below': activeScenario.progress8Banding === 4,
                       'progress-text--average': activeScenario.progress8Banding === 3,
                       'progress-text--above': activeScenario.progress8Banding === 2,
                       'progress-text--well-above': activeScenario.progress8Banding === 1}">
-            {{activeScenario.progressScore | number: '1.2-2'}}
+            {{activeScenario.p8Score | number: '1.2-2'}}
             <span [ngSwitch]="activeScenario.progress8Banding">
               <span *ngSwitchCase="5">&nbsp; Well below average</span>
               <span *ngSwitchCase="4" style="color: #0C0C0C;">&nbsp; Below average</span>
@@ -184,7 +184,60 @@
               <span *ngSwitchCase="1">&nbsp; Well above average</span>
             </span>
           </span>
-          <span [hidden]='activeScenario.progressScore' class="progress--na">No data available</span>
+          <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
+        </div>
+        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon">
+          <img src="assets/images/info.svg" alt="Help for P8 score" class="small-icon progress-icon" />
+        </a>
+      </td>
+    </tr>
+    <tr class="govuk-table__row" *ngIf="activeScenario.progressScoreType === 'All-through'">
+      <th scope="row" class="govuk-table__cell">KS2 score</th>
+      <td class="govuk-table__cell progress-td">
+        <div class="progress-text-wrapper">
+          <span *ngIf='activeScenario.ks2Score' class="progress-text" [ngClass]="{
+                  'progress-text--well-below': activeScenario.ks2Score < -3 ,
+                  'progress-text--below': activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2,
+                  'progress-text--average': activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2,
+                  'progress-text--above': activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2,
+                  'progress-text--well-above': activeScenario.ks2Score > 3}">
+            {{activeScenario.ks2Score | number: '1.2-2'}}
+            <span *ngIf="activeScenario.ks2Score < -3">&nbsp; Well below average</span>
+            <span style="color: #0C0C0C;" *ngIf="activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2">&nbsp; Below
+              average</span>
+            <span *ngIf="activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2">&nbsp;
+              Average</span>
+            <span style="color: #0C0C0C;" *ngIf="activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2">&nbsp; Above
+              average</span>
+            <span *ngIf="activeScenario.ks2Score > 3">&nbsp; Well above average</span>
+          </span>
+          <span [hidden]='activeScenario.ks2Score' class="progress--na">No data available</span>
+        </div>
+        <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon">
+          <img src="assets/images/info.svg" alt="Help for KS2 score" class="small-icon progress-icon" />
+        </a>
+      </td>
+    </tr>
+    <tr class="govuk-table__row" *ngIf="activeScenario.progressScoreType === 'All-through'">
+      <th scope="row" class="govuk-table__cell">Progress 8 score</th>
+      <td class="govuk-table__cell progress-td">
+        <div class="progress-text-wrapper">
+          <span *ngIf='activeScenario.p8Score' class="progress-text" [ngClass]="{
+                      'progress-text--well-below': activeScenario.progress8Banding === 5,
+                      'progress-text--below': activeScenario.progress8Banding === 4,
+                      'progress-text--average': activeScenario.progress8Banding === 3,
+                      'progress-text--above': activeScenario.progress8Banding === 2,
+                      'progress-text--well-above': activeScenario.progress8Banding === 1}">
+            {{activeScenario.p8Score | number: '1.2-2'}}
+            <span [ngSwitch]="activeScenario.progress8Banding">
+              <span *ngSwitchCase="5">&nbsp; Well below average</span>
+              <span *ngSwitchCase="4" style="color: #0C0C0C;">&nbsp; Below average</span>
+              <span *ngSwitchCase="3">&nbsp; Average</span>
+              <span *ngSwitchCase="2" style="color: #0C0C0C;">&nbsp; Above average</span>
+              <span *ngSwitchCase="1">&nbsp; Well above average</span>
+            </span>
+          </span>
+          <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
         </div>
         <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon">
           <img src="assets/images/info.svg" alt="Help for P8 score" class="small-icon progress-icon" />

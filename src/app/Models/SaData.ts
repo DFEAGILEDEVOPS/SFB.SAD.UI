@@ -14,7 +14,8 @@ export class SaData {
   fsmLatestTerm: number;
   ofstedRating: string;
   ofstedInspectionDate: string;
-  progressScore: number;
+  p8Score: number;
+  ks2Score: number;
   progressScoreType: string;
   progress8Banding: number;
   totalExpenditureLatestTerm: number;

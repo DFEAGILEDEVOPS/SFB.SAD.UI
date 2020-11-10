@@ -23,7 +23,8 @@ export class SaScenarioModel {
   totalIncomeLatestTerm: number;
   ofstedRating: string;
   ofstedInspectionDate: string;
-  progressScore: number;
+  p8Score: number;
+  ks2Score: number;
   progressScoreType: string;
   progress8Banding: number;
   teachersTotal: number;
@@ -56,7 +57,8 @@ export class SaScenarioModel {
     this.fsmLatestTerm = data.fsmLatestTerm;
     this.ofstedRating = data.ofstedRating;
     this.ofstedInspectionDate = data.ofstedInspectionDate;
-    this.progressScore = data.progressScore;
+    this.p8Score = data.p8Score;
+    this.ks2Score = data.ks2Score;
     this.progressScoreType = data.progressScoreType;
     this.progress8Banding = data.progress8Banding;
     this.totalExpenditureLatestTerm = data.totalExpenditureLatestTerm;
