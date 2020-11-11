@@ -49,9 +49,9 @@ private manageCookiePreferencesCookies() {
 private manageGACookies() {
   let cookiesPolicyCookie = JSON.parse(this.getCookie("cookies_policy"));
   if (!cookiesPolicyCookie.usage)  {
-      this.setCookie("_ga", null, null);
-      this.setCookie("_gat", null, null);
-      this.setCookie("_gid", null, null);
+      this.setCookie("_ga", '', { days: -1 });
+      this.setCookie("_gat", '', { days: -1 });
+      this.setCookie("_gid", '', { days: -1 });
   }
 }
 
