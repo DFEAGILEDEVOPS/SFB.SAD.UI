@@ -103,15 +103,17 @@ export class SaScenarioModel {
   }
 
   getAAValue(aaName: string): number {
-    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0]?.schoolData;
   }
 
   getAALatestTermValue(aaName: string): number {
-    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0]?.schoolDataLatestTerm;
   }
 
   setAAValue(aaName: string, value: number) {
-    this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
+    if(this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0]){
+      this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
+    }
   }
 
   initAAsWithCalculatedData() {
@@ -233,10 +235,10 @@ export class SaScenarioModel {
   }
 
   private setAAsMatchingTreshold(aa: AssessmentAreaModel) {
-    if (aa.calculatedSchoolData != null) {
+    if (aa.calculatedSchoolData != null && aa.allTresholds) {
       aa.matchingTreshold = aa.allTresholds
         .find(t => (aa.calculatedSchoolData >= t.scoreLow || t.scoreLow == null)
-          && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh === null));
+          && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh == null));
     } else {
       aa.matchingTreshold = null;
     }

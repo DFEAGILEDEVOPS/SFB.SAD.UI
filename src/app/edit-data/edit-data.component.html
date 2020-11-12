@@ -42,16 +42,16 @@
       <li *ngIf="fsm.errors?.min">
         <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM number must be minimum 0</a>
       </li>
-      <li *ngIf="teacherContactRatio.errors?.min">
+      <li *ngIf="teacherContactRatio?.errors?.min">
         <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ration must be minimum 0</a>
       </li>
-      <li *ngIf="teacherContactRatio.errors?.max">
+      <li *ngIf="teacherContactRatio?.errors?.max">
         <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ratio must be maximum 1</a>
       </li>
       <li *ngIf="predictedPupil.errors?.min">
         <a [routerLink]='' (click)="setFocus(predictedPupilElement)">Predicted pupil number change percentage must be minimum -100</a>
       </li>
-      <li *ngIf="averageClassSize.errors?.min">
+      <li *ngIf="averageClassSize?.errors?.min">
         <a [routerLink]='' (click)="setFocus(averageClassSizeElement)">Average class size must be minimum 0</a>
       </li>
       <li *ngIf="totalIncome.errors?.required">
@@ -299,7 +299,7 @@
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
       </div>
 
-      <div class="govuk-form-group"
+      <div class="govuk-form-group" *ngIf="teacherContactRatio"
         [class]="{'govuk-form-group--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}">
         <label class="govuk-label" for="tcr">
           Teacher contact ratio (less than 1)
@@ -339,7 +339,7 @@
         (blur)="transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
       </div>
 
-      <div class="govuk-form-group"
+      <div class="govuk-form-group" *ngIf="averageClassSize"
         [class]="{'govuk-form-group--error' : !averageClassSize.valid && !averageClassSize.pristine}">
         <label class="govuk-label" for="acsize">
           Average Class size
