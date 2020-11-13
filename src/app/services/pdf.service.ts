@@ -148,27 +148,15 @@ export class PdfService {
   }
 
   private pdfGenerateImage(elementId) {
-    // let element = $(elementId)[0];
-    // return html2canvas(element, {
-    //   imageTimeout: 20000,
-    //   removeContainer: false,
-    //   width: element.clientWidth,
-    //   height: element.clientHeight,
-    //   allowTaint:true
-    // });
     let element = $(elementId)[0];
-    var w = element.clientWidth;
-    var h = element.clientHeight;
-    var div = document.querySelector(elementId);
-    var canvas = document.createElement('canvas');
-    canvas.width = w * 2;
-    canvas.height = h * 2;
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    var context = canvas.getContext('2d');
-    context.scale(2, 2);
-    debugger;
-    return html2canvas(div, { canvas: canvas });
+    return html2canvas(element, {
+      imageTimeout: 20000,
+      removeContainer: false,
+      width: element.clientWidth,
+      height: element.clientHeight,
+      allowTaint:true,
+      scale: 1
+    });
   }
 
 
