@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
         initialState = {
           title: "Add a custom dashboard",
           textContent: "<p>The custom dashboard allows schools to plan for hypothetical or projected changes to their financial situation and see a RAG rating against it.</p>" +
-                       "<p>Custom dashboards are only visible to you and will be viewable on subsequent visits to this school’s self-assessment dashboard if you have selected the option to allow cookies.</p>",
+                       "<p>Custom dashboards are <span class='govuk-!-font-weight-bold'>only visible to you</span>. Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</p>",
         };
 
         this.modalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
