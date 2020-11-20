@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
       case 'add-dashboard':
         initialState = {
           title: "Add a custom dashboard",
-          textContent: "<p>The custom dashboard allows schools to plan for hypothetical or projected changes to their financial situation and see a RAG rating against it.</p>" +
+          textContent: "<p>The custom dashboard allows schools to plan for hypothetical or projected changes to their financial situation and see a red, amber or green (RAG) rating against it.</p>" +
                        "<p>Custom dashboards are <span class='govuk-!-font-weight-bold'>only visible to you</span>. Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</p>",
         };
 
