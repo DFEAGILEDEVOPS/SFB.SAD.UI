@@ -21,6 +21,7 @@ public manageCookies() {
   }
 
   this.manageCookiePreferencesCookies();
+  this.manageGACookies();
 
 }
 
@@ -42,7 +43,16 @@ private manageCookiePreferencesCookies() {
   if (!this.getCookie("cookies_preferences_set")) {
       $("#global-cookie-message").show();
       this.renderCookieOverlay();
-  } 
+  }
+}
+
+private manageGACookies() {
+  let cookiesPolicyCookie = JSON.parse(this.getCookie("cookies_policy"));
+  if (!cookiesPolicyCookie.usage)  {
+      this.setCookie("_ga", '', { days: -1 });
+      this.setCookie("_gat", '', { days: -1 });
+      this.setCookie("_gid", '', { days: -1 });
+  }
 }
 
 private setDomainCookie (name, value, options, domain) {

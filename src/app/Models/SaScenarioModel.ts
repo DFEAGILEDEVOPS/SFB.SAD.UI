@@ -23,7 +23,8 @@ export class SaScenarioModel {
   totalIncomeLatestTerm: number;
   ofstedRating: string;
   ofstedInspectionDate: string;
-  progressScore: number;
+  p8Score: number;
+  ks2Score: number;
   progressScoreType: string;
   progress8Banding: number;
   teachersTotal: number;
@@ -56,7 +57,8 @@ export class SaScenarioModel {
     this.fsmLatestTerm = data.fsmLatestTerm;
     this.ofstedRating = data.ofstedRating;
     this.ofstedInspectionDate = data.ofstedInspectionDate;
-    this.progressScore = data.progressScore;
+    this.p8Score = data.p8Score;
+    this.ks2Score = data.ks2Score;
     this.progressScoreType = data.progressScoreType;
     this.progress8Banding = data.progress8Banding;
     this.totalExpenditureLatestTerm = data.totalExpenditureLatestTerm;
@@ -101,15 +103,17 @@ export class SaScenarioModel {
   }
 
   getAAValue(aaName: string): number {
-    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData;
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0]?.schoolData;
   }
 
   getAALatestTermValue(aaName: string): number {
-    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0].schoolDataLatestTerm;
+    return this.sadAssessmentAreas?.filter(aa => aa.assessmentAreaName === aaName)[0]?.schoolDataLatestTerm;
   }
 
   setAAValue(aaName: string, value: number) {
-    this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
+    if(this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0]){
+      this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
+    }
   }
 
   initAAsWithCalculatedData() {
@@ -231,10 +235,10 @@ export class SaScenarioModel {
   }
 
   private setAAsMatchingTreshold(aa: AssessmentAreaModel) {
-    if (aa.calculatedSchoolData != null) {
+    if (aa.calculatedSchoolData != null && aa.allTresholds) {
       aa.matchingTreshold = aa.allTresholds
         .find(t => (aa.calculatedSchoolData >= t.scoreLow || t.scoreLow == null)
-          && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh === null));
+          && (aa.calculatedSchoolData <= t.scoreHigh || t.scoreHigh == null));
     } else {
       aa.matchingTreshold = null;
     }

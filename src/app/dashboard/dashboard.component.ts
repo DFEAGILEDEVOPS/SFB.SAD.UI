@@ -1,3 +1,4 @@
+import { DashboardInfoModalComponent } from './dashboard-info-modal/dashboard-info-modal.component';
 import { PdfService } from './../services/pdf.service';
 import { throwError } from 'rxjs';
 import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
@@ -61,6 +62,23 @@ export class DashboardComponent implements OnInit {
     let assessmentAreas: AssessmentAreaModel;
 
     switch (assessmentArea) {
+      case 'add-dashboard':
+        initialState = {
+          title: "Add a custom dashboard",
+          textContent: "<p>The custom dashboard allows schools to plan for hypothetical or projected changes to their financial situation and see a red, amber or green (RAG) rating against it.</p>" +
+                       "<p>Custom dashboards are for personal use and <span class='govuk-!-font-weight-bold'>only visible to you</span>. Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</p>",
+        };
+
+        this.modalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
+        break;
+      case 'dashboard-year':
+        initialState = {
+          title: "Dashboard year",
+          textContent: "<p>By choosing a different year banding figures are adjusted to align to that year. An 8.6% uplift has been applied to Teaching staff and average salary (including pensions) for 2019/20 and an 11.9% uplift on 2020/21 and future years.</p>"
+        };
+
+        this.modalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
+        break;
       case 'Ofsted':
       case 'KS2':
       case 'P8':

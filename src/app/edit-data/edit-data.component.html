@@ -7,10 +7,10 @@
   <div class="govuk-error-summary__body">
     <ul class="govuk-list govuk-error-summary__list">
       <li *ngIf='scenarioName.errors?.required'>
-        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Scenario name is required</a>
+        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Dashboard name is required</a>
       </li>
       <li *ngIf='scenarioName.errors?.minlength'>
-        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Scenario name must be minimum 3 characters</a>
+        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Dashboard name must be minimum 3 characters</a>
       </li>
       <li *ngIf="numberOfPupils.errors?.required">
         <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Number of pupils is required</a>
@@ -42,16 +42,16 @@
       <li *ngIf="fsm.errors?.min">
         <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM number must be minimum 0</a>
       </li>
-      <li *ngIf="teacherContactRatio.errors?.min">
+      <li *ngIf="teacherContactRatio?.errors?.min">
         <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ration must be minimum 0</a>
       </li>
-      <li *ngIf="teacherContactRatio.errors?.max">
+      <li *ngIf="teacherContactRatio?.errors?.max">
         <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ratio must be maximum 1</a>
       </li>
       <li *ngIf="predictedPupil.errors?.min">
         <a [routerLink]='' (click)="setFocus(predictedPupilElement)">Predicted pupil number change percentage must be minimum -100</a>
       </li>
-      <li *ngIf="averageClassSize.errors?.min">
+      <li *ngIf="averageClassSize?.errors?.min">
         <a [routerLink]='' (click)="setFocus(averageClassSizeElement)">Average class size must be minimum 0</a>
       </li>
       <li *ngIf="totalIncome.errors?.required">
@@ -93,13 +93,23 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <h1 *ngIf='viewType === "edit"' class="govuk-heading-xl">Edit data</h1>
-    <h1 *ngIf='viewType === "enter"' class="govuk-heading-xl">Enter data</h1>
+    <h1 *ngIf='viewType === "edit"' class="govuk-heading-xl">Edit dashboard</h1>
+    <h1 *ngIf='viewType === "enter"' class="govuk-heading-xl">Add a custom dashboard</h1>
     <p class="govuk-body-s">
       Assessing
       <span class="highlight">
         <span class="govuk-!-font-weight-bold">{{scenarioInEdit?.name}}</span>
       </span>
+    </p>
+    <p class="govuk-body-m" style="display: inline-flex;" *ngIf='viewType === "enter"'>
+      <img src="assets/images/warning.svg" class="edit-warning-icon" alt="Warning"/>
+      <span>Custom dashboards are for personal use and <span class="govuk-!-font-weight-bold">only visible to you</span>.
+      Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</span>
+    </p>
+    <p class="govuk-body-m" style="display: inline-flex;" *ngIf='viewType === "edit"'>
+      <img src="assets/images/warning.svg" class="edit-warning-icon" alt="Warning"/>
+      <span>Dashboards you have edited are <span class="govuk-!-font-weight-bold">only visible to you</span>.
+      Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</span>
     </p>
   </div>
 </div>
@@ -113,19 +123,19 @@
     <fieldset class="govuk-fieldset" formGroupName='scenarioDetails'>
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         <h2 class="govuk-fieldset__heading">
-          Scenario details
+          Dashboard details
         </h2>
       </legend>
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !scenarioName.valid && !scenarioName.pristine}">
         <label class="govuk-label" for="scenario-name">
-          Name of scenario
+          Name of dashboard
         </label>
         <div *ngIf="scenarioName.invalid && scenarioName.dirty">
           <span *ngIf="scenarioName.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Scenario name is required
+            <span class="govuk-visually-hidden">Error:</span> Dashboard name is required
           </span>
           <span *ngIf="scenarioName.errors.minlength" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Scenario name must be minimum 3 characters
+            <span class="govuk-visually-hidden">Error:</span> Dashboard name must be minimum 3 characters
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text" #scenarioNameInput
@@ -135,9 +145,9 @@
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="scenario-term">
-          Year of scenario
+          Year of dashboard
           <a [routerLink]='' (click)="openModalWithComponent('scenarioTerm')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for year of scenario"/>
+            <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for year of dashboard"/>
           </a>
         </label>
         <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm'>
@@ -291,7 +301,7 @@
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
       </div>
 
-      <div class="govuk-form-group"
+      <div class="govuk-form-group" *ngIf="teacherContactRatio"
         [class]="{'govuk-form-group--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}">
         <label class="govuk-label" for="tcr">
           Teacher contact ratio (less than 1)
@@ -331,7 +341,7 @@
         (blur)="transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
       </div>
 
-      <div class="govuk-form-group"
+      <div class="govuk-form-group" *ngIf="averageClassSize"
         [class]="{'govuk-form-group--error' : !averageClassSize.valid && !averageClassSize.pristine}">
         <label class="govuk-label" for="acsize">
           Average Class size
@@ -642,8 +652,8 @@
 
     <div class="govuk-grid-row govuk-body">
       <div class="govuk-grid-column-full">
-        <button *ngIf='viewType === "edit"' class="govuk-button" data-module="govuk-button" type="submit">Update</button>
-        <button *ngIf='viewType === "enter"' class="govuk-button" data-module="govuk-button" type="submit">View this scenario</button>
+        <button *ngIf='viewType === "edit"' class="govuk-button" data-module="govuk-button" type="submit">Continue to dashboard</button>
+        <button *ngIf='viewType === "enter"' class="govuk-button sad_gtm_submit_sbs" data-module="govuk-button" type="submit">Continue to custom dashboard</button>
         <a (click)='onBack()' href="javascript:void(0)" class="govuk-link govuk-link--no-visited-state back-button">Back
         </a>
       </div>

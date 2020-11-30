@@ -2,24 +2,24 @@
     <div class="govuk-table__header no-bottom width-twenty-percent" style="display: inline-block;"></div>
     <div class="govuk-table__header no-bottom pb-3 cell-separate width-forty-percent" style="display: inline-block; width: 38%;">
       <span class="govuk-!-font-size-24">{{firstScenario.scenarioName}}</span>
-      <div class="govuk-caption-m">Scenario year {{firstScenario.termOfScenario}}</div>
+      <div class="govuk-caption-m">Dashboard year {{firstScenario.termOfScenario}}</div>
       <div class="govuk-!-margin-top-1 hide-in-print">
         <a routerLink='/self-assessment/edit-data/{{firstScenario.urn}}/edit/0' class="govuk-link link-button"
-        attr.aria-label="Edit data for {{firstScenario.scenarioName}} scenario">Edit data</a>
+        attr.aria-label="Edit data for {{firstScenario.scenarioName}} dashboard">Edit data</a>
         <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(0)'
-        attr.aria-label="Remove {{firstScenario.scenarioName}} scenario">Remove</a>
+        attr.aria-label="Remove {{firstScenario.scenarioName}} dashboard">Remove</a>
       </div>
     </div>
     <div class="govuk-table__header cell-separate no-bottom pb-3 width-forty-percent" style="display: inline-block; width: 32%;">
       <span class="govuk-!-font-size-24">{{secondScenario.scenarioName}}</span>
-      <div class="govuk-caption-m">Scenario year {{secondScenario.termOfScenario}}</div>
+      <div class="govuk-caption-m">Dashboard year {{secondScenario.termOfScenario}}</div>
       <div class="govuk-!-margin-top-1 hide-in-print">
         <a routerLink='/self-assessment/edit-data/{{secondScenario.urn}}/edit/1' class="govuk-link link-button"
-        attr.aria-label="Edit data for {{secondScenario.scenarioName}} scenario">Edit data</a>
+        attr.aria-label="Edit data for {{secondScenario.scenarioName}} dashboard">Edit data</a>
         <span class="seperator">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <a [routerLink]='' class="govuk-link link-button" (click)='removeScenario(1)'
-        attr.aria-label="Remove {{secondScenario.scenarioName}} scenario">Remove</a>
+        attr.aria-label="Remove {{secondScenario.scenarioName}} dashboard">Remove</a>
       </div>
     </div>
 </div>
@@ -33,9 +33,9 @@
       <span aria-hidden="true">Reserve and balance</span>
     </td>
     <th scope="colgroup" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="3"><span
-        class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
+        class="visually-hidden">{{firstScenario.scenarioName}} dashboard</span></th>
     <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"><span
-        class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
+        class="visually-hidden">{{secondScenario.scenarioName}} dashboard</span></th>
   </tr>
   <tr class="govuk-table__row">
     <th scope="col" class="govuk-table__header">Assessment area</th>
@@ -75,7 +75,7 @@
         <span>Not available.</span>
         <a class="govuk-link ml-2 button-link hide-in-print"
           routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.reserveAAs[i].assessmentAreaName}}/0'
-          attr.aria-label="Add data for {{firstScenario.reserveAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add
+          attr.aria-label="Add data for {{firstScenario.reserveAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} dashboard">Add
           data</a>
       </span>
       <a [routerLink]='' (click)="openModalWithComponent(firstScenario.reserveAAs[i].assessmentAreaName, firstScenario)"
@@ -109,7 +109,7 @@
         <span>Not available.</span>
         <a class="govuk-link ml-2 button-link hide-in-print"
           routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.reserveAAs[i].assessmentAreaName}}/1'
-          attr.aria-label="Add data for {{secondScenario.reserveAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add
+          attr.aria-label="Add data for {{secondScenario.reserveAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} dashboard">Add
           data</a>
       </span>
       <a [routerLink]=''
@@ -131,9 +131,9 @@
       <span aria-hidden="true">Spending</span>
     </td>
     <th scope="colgroup" class="govuk-table__header no-bottom  cell-separate width-forty-percent" colspan="3"><span
-        class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
+        class="visually-hidden">{{firstScenario.scenarioName}} dashboard</span></th>
     <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="3"><span
-        class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
+        class="visually-hidden">{{secondScenario.scenarioName}} dashboard</span></th>
   </tr>
   <tr class="govuk-table__row">
     <th scope="col" class="govuk-table__header">Assessment area</th>
@@ -174,7 +174,7 @@
         <span>Not available.</span>
         <a class="govuk-link ml-2 button-link hide-in-print"
           routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.spendingAAs[i].assessmentAreaName}}/0'
-          attr.aria-label="Add data for {{firstScenario.spendingAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add
+          attr.aria-label="Add data for {{firstScenario.spendingAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} dashboard">Add
           data</a>
       </span>
       <a [routerLink]=''
@@ -209,7 +209,7 @@
         <span>Not available.</span>
         <a class="govuk-link ml-2 button-link hide-in-print"
           routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.spendingAAs[i].assessmentAreaName}}/1'
-          attr.aria-label="Add data for {{secondScenario.spendingAAs[i].assessmentAreaName}}  in {{secondScenario.scenarioName}} scenario">Add
+          attr.aria-label="Add data for {{secondScenario.spendingAAs[i].assessmentAreaName}}  in {{secondScenario.scenarioName}} dashboard">Add
           data</a>
       </span>
       <a [routerLink]=''
@@ -230,8 +230,8 @@
     <tr class="govuk-table__row">
       <td class="govuk-table__header no-bottom govuk-table__caption safari_only govuk-!-font-size-24 width-twenty-percent">
         <span aria-hidden="true">School characteristics</span></td>
-      <th scope="colgroup" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="2"><span class="visually-hidden">{{firstScenario.scenarioName}} scenario</span></th>
-      <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="2"><span class="visually-hidden">{{secondScenario.scenarioName}} scenario</span></th>
+      <th scope="colgroup" class="govuk-table__header no-bottom cell-separate width-forty-percent" colspan="2"><span class="visually-hidden">{{firstScenario.scenarioName}} dashboard</span></th>
+      <th scope="colgroup" class="govuk-table__header cell-separate no-bottom width-forty-percent" colspan="2"><span class="visually-hidden">{{secondScenario.scenarioName}} dashboard</span></th>
     </tr>
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header">Assessment area</th>
@@ -258,8 +258,11 @@
         <span class="rating-box gray">
           <span>Not available.</span>
           <a class="govuk-link ml-2 button-link hide-in-print"
+            [ngClass]="{'sad_gtm_add_data_tcr': firstScenario.characteristicAAs[i].assessmentAreaName === 'Teacher contact ratio (less than 1)',
+            'sad_gtm_add_data_pcp': firstScenario.characteristicAAs[i].assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years',
+            'sad_gtm_add_data_acs': firstScenario.characteristicAAs[i].assessmentAreaName === 'Average Class size'}"
             routerLink='/self-assessment/add-missing-data/{{firstScenario.urn}}/{{firstScenario.characteristicAAs[i].assessmentAreaName}}/0'
-            attr.aria-label="Add data for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} scenario">Add data</a>
+            attr.aria-label="Add data for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}} dashboard">Add data</a>
         </span>
         <a [routerLink]='' (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, firstScenario)" class="rating-help-icon">
           <img src="assets/images/info.svg" attr.alt="Help for {{firstScenario.characteristicAAs[i].assessmentAreaName}} in {{firstScenario.scenarioName}}" class="small-icon na" />
@@ -280,8 +283,11 @@
         <span class="rating-box gray">
           <span>Not available.</span>
           <a class="govuk-link ml-2 button-link hide-in-print"
+            [ngClass]="{'sad_gtm_add_data_tcr': secondScenario.characteristicAAs[i].assessmentAreaName === 'Teacher contact ratio (less than 1)',
+            'sad_gtm_add_data_pcp': secondScenario.characteristicAAs[i].assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years',
+            'sad_gtm_add_data_acs': secondScenario.characteristicAAs[i].assessmentAreaName === 'Average Class size'}"
             routerLink='/self-assessment/add-missing-data/{{secondScenario.urn}}/{{secondScenario.characteristicAAs[i].assessmentAreaName}}/1'
-            attr.aria-label="Add data for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} scenario">Add data</a>
+            attr.aria-label="Add data for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}} dashboard">Add data</a>
         </span>
         <a [routerLink]='' (click)="openModalWithComponent(secondScenario.characteristicAAs[i].assessmentAreaName, secondScenario)" class="rating-help-icon">
          <img src="assets/images/info.svg" attr.alt="Help for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}" class="small-icon na" />
@@ -328,26 +334,26 @@
   <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'KS2 score'">
     <th scope="row" class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</th>
     <td class="govuk-table__cell progress-td cell-separate" colspan="2">
-      <div *ngIf='firstScenario.progressScore'>
+      <div *ngIf='firstScenario.ks2Score'>
         <span class="progress-text" [ngClass]="{
-                            'progress-text-well-below': firstScenario.progressScore < -3 ,
-                            'progress-text--below': firstScenario.progressScore >= -3 && firstScenario.progressScore < -2,
-                            'progress-text--average': firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2,
-                            'progress-text--above': firstScenario.progressScore <= 3 && firstScenario.progressScore > 2,
-                            'progress-text--well-above': firstScenario.progressScore > 3}">
-          {{firstScenario.progressScore | number: '1.2-2'}}
-          <span *ngIf="firstScenario.progressScore < -3">&nbsp; Well below average</span>
+                            'progress-text--well-below': firstScenario.ks2Score < -3 ,
+                            'progress-text--below': firstScenario.ks2Score >= -3 && firstScenario.ks2Score < -2,
+                            'progress-text--average': firstScenario.ks2Score >= -2 && firstScenario.ks2Score <= 2,
+                            'progress-text--above': firstScenario.ks2Score <= 3 && firstScenario.ks2Score > 2,
+                            'progress-text--well-above': firstScenario.ks2Score > 3}">
+          {{firstScenario.ks2Score | number: '1.2-2'}}
+          <span *ngIf="firstScenario.ks2Score < -3">&nbsp; Well below average</span>
           <span style="color: #0C0C0C;"
-            *ngIf="firstScenario.progressScore >= -3 && firstScenario.progressScore < -2">&nbsp; Below
+            *ngIf="firstScenario.ks2Score >= -3 && firstScenario.ks2Score < -2">&nbsp; Below
             average</span>
-          <span *ngIf="firstScenario.progressScore >= -2 && firstScenario.progressScore <= 2">&nbsp; Average</span>
+          <span *ngIf="firstScenario.ks2Score >= -2 && firstScenario.ks2Score <= 2">&nbsp; Average</span>
           <span style="color: #0C0C0C;"
-            *ngIf="firstScenario.progressScore <= 3 && firstScenario.progressScore > 2">&nbsp; Above
+            *ngIf="firstScenario.ks2Score <= 3 && firstScenario.ks2Score > 2">&nbsp; Above
             average</span>
-          <span *ngIf="firstScenario.progressScore > 3">&nbsp; Well above average</span>
+          <span *ngIf="firstScenario.ks2Score > 3">&nbsp; Well above average</span>
         </span>
       </div>
-      <span [hidden]='firstScenario.progressScore' class="progress--na">No data available</span>
+      <span [hidden]='firstScenario.ks2Score' class="progress--na">No data available</span>
       <a [routerLink]='' (click)="openModalWithComponent('KS2', null)" class="rating-help-icon">
         <img src="assets/images/info.svg" alt="Help for key stage 2 score" class="small-icon"
           style="float: right; margin-right: 11px; margin-top: 4px;" />
@@ -357,14 +363,14 @@
   <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'Progress 8 score'">
     <th scope="row" class="govuk-table__cell aa-cell">{{firstScenario.progressScoreType}}</th>
     <td class="govuk-table__cell progress-td cell-separate" colspan="2">
-      <div *ngIf='firstScenario.progressScore'>
+      <div *ngIf='firstScenario.p8Score'>
         <span class="progress-text" [ngClass]="{
                             'progress-text--well-below': firstScenario.progress8Banding === 5,
                             'progress-text--below': firstScenario.progress8Banding === 4,
                             'progress-text--average': firstScenario.progress8Banding === 3,
                             'progress-text--above': firstScenario.progress8Banding === 2,
                             'progress-text--well-above': firstScenario.progress8Banding === 1}">
-          {{firstScenario.progressScore | number: '1.2-2'}}
+          {{firstScenario.p8Score | number: '1.2-2'}}
           <span [ngSwitch]="firstScenario.progress8Banding">
             <span *ngSwitchCase="5">&nbsp; Well below average</span>
             <span *ngSwitchCase="4" style="color: #0C0C0C;">&nbsp; Below average</span>
@@ -374,7 +380,63 @@
           </span>
         </span>
       </div>
-      <span [hidden]='firstScenario.progressScore' class="progress--na">No data available</span>
+      <span [hidden]='firstScenario.p8Score' class="progress--na">No data available</span>
+      <a [routerLink]='' (click)="openModalWithComponent('P8', null)" class="rating-help-icon">
+        <img src="assets/images/info.svg" alt="Help for progress 8 score" class="small-icon "
+          style="float: right; margin-right: 11px; margin-top: 4px;" />
+      </a>
+    </td>
+  </tr>
+  <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'All-through'">
+    <th scope="row" class="govuk-table__cell aa-cell">KS2 score</th>
+    <td class="govuk-table__cell progress-td cell-separate" colspan="2">
+      <div *ngIf='firstScenario.ks2Score'>
+        <span class="progress-text" [ngClass]="{
+                            'progress-text--well-below': firstScenario.ks2Score < -3 ,
+                            'progress-text--below': firstScenario.ks2Score >= -3 && firstScenario.ks2Score < -2,
+                            'progress-text--average': firstScenario.ks2Score >= -2 && firstScenario.ks2Score <= 2,
+                            'progress-text--above': firstScenario.ks2Score <= 3 && firstScenario.ks2Score > 2,
+                            'progress-text--well-above': firstScenario.ks2Score > 3}">
+          {{firstScenario.ks2Score | number: '1.2-2'}}
+          <span *ngIf="firstScenario.ks2Score < -3">&nbsp; Well below average</span>
+          <span style="color: #0C0C0C;"
+            *ngIf="firstScenario.ks2Score >= -3 && firstScenario.ks2Score < -2">&nbsp; Below
+            average</span>
+          <span *ngIf="firstScenario.ks2Score >= -2 && firstScenario.ks2Score <= 2">&nbsp; Average</span>
+          <span style="color: #0C0C0C;"
+            *ngIf="firstScenario.ks2Score <= 3 && firstScenario.ks2Score > 2">&nbsp; Above
+            average</span>
+          <span *ngIf="firstScenario.ks2Score > 3">&nbsp; Well above average</span>
+        </span>
+      </div>
+      <span [hidden]='firstScenario.ks2Score' class="progress--na">No data available</span>
+      <a [routerLink]='' (click)="openModalWithComponent('KS2', null)" class="rating-help-icon">
+        <img src="assets/images/info.svg" alt="Help for key stage 2 score" class="small-icon"
+          style="float: right; margin-right: 11px; margin-top: 4px;" />
+      </a>
+    </td>
+  </tr>
+  <tr class="govuk-table__row" *ngIf="firstScenario.progressScoreType === 'All-through'">
+    <th scope="row" class="govuk-table__cell aa-cell">Progress 8 score</th>
+    <td class="govuk-table__cell progress-td cell-separate" colspan="2">
+      <div *ngIf='firstScenario.p8Score'>
+        <span class="progress-text" [ngClass]="{
+                            'progress-text--well-below': firstScenario.progress8Banding === 5,
+                            'progress-text--below': firstScenario.progress8Banding === 4,
+                            'progress-text--average': firstScenario.progress8Banding === 3,
+                            'progress-text--above': firstScenario.progress8Banding === 2,
+                            'progress-text--well-above': firstScenario.progress8Banding === 1}">
+          {{firstScenario.p8Score | number: '1.2-2'}}
+          <span [ngSwitch]="firstScenario.progress8Banding">
+            <span *ngSwitchCase="5">&nbsp; Well below average</span>
+            <span *ngSwitchCase="4" style="color: #0C0C0C;">&nbsp; Below average</span>
+            <span *ngSwitchCase="3">&nbsp; Average</span>
+            <span *ngSwitchCase="2" style="color: #0C0C0C;">&nbsp; Above average</span>
+            <span *ngSwitchCase="1">&nbsp; Well above average</span>
+          </span>
+        </span>
+      </div>
+      <span [hidden]='firstScenario.p8Score' class="progress--na">No data available</span>
       <a [routerLink]='' (click)="openModalWithComponent('P8', null)" class="rating-help-icon">
         <img src="assets/images/info.svg" alt="Help for progress 8 score" class="small-icon "
           style="float: right; margin-right: 11px; margin-top: 4px;" />

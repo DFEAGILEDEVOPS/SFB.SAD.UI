@@ -446,6 +446,12 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       this.fsm.setValidators([Validators.required, Validators.min(0)]);
     }
 
+    if(this.scenarioInEdit.overallPhase === "Special"
+    || this.scenarioInEdit.overallPhase === "Nursery"
+    || this.scenarioInEdit.overallPhase === "Pupil referral unit") {
+      (this.editDataForm.get('schoolDetails') as FormGroup).removeControl("averageClassSize");
+      (this.editDataForm.get('schoolDetails') as FormGroup).removeControl("teacherContactRatio");
+    }
   }
 
 }

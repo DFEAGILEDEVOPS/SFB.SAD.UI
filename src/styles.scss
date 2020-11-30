@@ -47,8 +47,14 @@ a{
 }
 }
 
-.edit-help-icon, .rating-help-icon img{
+.edit-help-icon {
   width: 20px!important;
+}
+
+.rating-help-icon, .dashboard-help-icon, .dashboard-year-help-icon {
+  img{
+    width: 20px!important;
+  }
 }
 
 .download-icon, .print-icon {

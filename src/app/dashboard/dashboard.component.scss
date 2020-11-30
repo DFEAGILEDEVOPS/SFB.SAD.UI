@@ -34,7 +34,7 @@
   }
 
   @include govuk-media-query($from: desktop) {
-      margin-left: 45px;
+      margin-left: 30px;
       margin-top: 0;
 
   }
@@ -43,6 +43,23 @@
   @include govuk-media-query($from: tablet) {
     margin-left: 10px;
   }
+}
+
+.dashboard-help-icon {
+  margin-left: 5px;
+  vertical-align: -webkit-baseline-middle;
+
+  @include govuk-media-query($until: tablet) {
+    margin-left: 0;
+    margin-bottom: 10px;
+    display: inline-block;
+    top: -10px;
+    position: relative;
+  }
+}
+
+.dashboard-year-help-icon {
+  margin-left: 8px;
 }
 
 

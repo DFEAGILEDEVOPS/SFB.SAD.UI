@@ -38,21 +38,24 @@
 
   <div class="govuk-grid-row hide-in-print">
     <div class="govuk-grid-column-one-half">
-      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold" (click)='onDownload()'>
+      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold sad_gtm_download" (click)='onDownload()'>
         <img src="assets/images/download.svg" class="small-icon download-icon" alt="" />
         <span id="downloadPage">Download page</span>
       </a>
-      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold ml-4" (click)='onPrintPage()'>
+      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold ml-4 sad_gtm_print" (click)='onPrintPage()'>
         <img src="assets/images/print.svg" class="small-icon print-icon" alt="" />
         <span>Print page</span>
       </a>
     </div>
     <div class="govuk-grid-column-one-half sbs-buttons-wrapper">
       <div class="sbs-buttons">
-        <button class="govuk-button hide-in-print" data-module="govuk-button"
+        <button class="govuk-button hide-in-print sad_gtm_add_sbs" data-module="govuk-button"
           routerLink='/self-assessment/edit-data/{{urn}}/enter' [disabled]='!this.scenarioLoaded'>
-          Add a side-by-side scenario
+          Add a custom dashboard
         </button>
+        <a class="dashboard-help-icon" [routerLink]='' (click)="openModalWithComponent('add-dashboard')">
+          <img src="assets/images/info.svg" class="small-icon info-help-icon" alt="Help for add a custom dashboard"/>
+        </a>
         <button *ngIf='activeScenario.isEdited' class="govuk-button govuk-button--secondary reset-button" data-module="govuk-button"
           (click)='onReset()'>
           Reset dashboard
@@ -63,7 +66,12 @@
 
   <h2 class="govuk-heading-m" id="scenarioName">{{activeScenario.scenarioName}}</h2>
 
-  <div class="govuk-caption-m" id="scenarioYear">Scenario year {{activeScenario.termOfScenario}}</div>
+  <div class="govuk-caption-m" id="scenarioYear">
+    <span>Dashboard year {{activeScenario.termOfScenario}}</span>
+    <a class="dashboard-year-help-icon" [routerLink]='' (click)="openModalWithComponent('dashboard-year')">
+      <img src="assets/images/info.svg" class="small-icon info-help-icon" alt="Help for dashboard year"/>
+    </a>
+  </div>
 
   <div class="govuk-!-margin-bottom-3">
     <a class="govuk-link hide-in-print" routerLink='/self-assessment/edit-data/{{urn}}/edit' [hidden]='!this.scenarioLoaded'>
