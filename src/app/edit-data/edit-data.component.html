@@ -7,37 +7,37 @@
   <div class="govuk-error-summary__body">
     <ul class="govuk-list govuk-error-summary__list">
       <li *ngIf='scenarioName.errors?.required'>
-        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Dashboard name is required</a>
+        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Enter a scenario name to continue</a>
       </li>
       <li *ngIf='scenarioName.errors?.minlength'>
         <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Dashboard name must be minimum 3 characters</a>
       </li>
       <li *ngIf="numberOfPupils.errors?.required">
-        <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Number of pupils is required</a>
+        <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Enter the number of pupils to continue</a>
       </li>
       <li *ngIf="numberOfPupils.errors?.min">
         <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Number of pupils must be minimum 1</a>
       </li>
       <li *ngIf="schoolWorkforce.errors?.required">
-        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count is required</a>
+        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">Enter the school workforce count to continue</a>
       </li>
       <li *ngIf="schoolWorkforce.errors?.min">
         <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count must be minimum 1</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.required">
-        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers is required</a>
+        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Enter the number of teachers to continue</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.min">
         <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers must be minimum 1</a>
       </li>
       <li *ngIf="seniorLeadership.errors?.required">
-        <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership number is required</a>
+        <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Enter the school leadership number to continue</a>
       </li>
       <li *ngIf="seniorLeadership.errors?.min">
         <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership number must be minimum 0</a>
       </li>
       <li *ngIf="fsm.errors?.required">
-        <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM is required</a>
+        <a [routerLink]='' (click)="setFocus(fsmInput)">Enter the percentage of pupils eligible for FSM to continue</a>
       </li>
       <li *ngIf="fsm.errors?.min">
         <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM number must be minimum 0</a>
@@ -55,37 +55,37 @@
         <a [routerLink]='' (click)="setFocus(averageClassSizeElement)">Average class size must be minimum 0</a>
       </li>
       <li *ngIf="totalIncome.errors?.required">
-        <a [routerLink]='' (click)="setFocus(totalIncomeInput)">Total income is required</a>
+        <a [routerLink]='' (click)="setFocus(totalIncomeInput)">Enter the total income to continue</a>
       </li>
       <li *ngIf="totalExpenditure.errors?.required">
-        <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Total expenditure is required</a>
+        <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Enter the total expenditure to continue</a>
       </li>
       <li *ngIf="editDataForm.errors?.maxExpenditureExceeded">
         <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Total expenditure can not be lower than sum of expenditures</a>
       </li>
       <li *ngIf="editDataForm.errors?.teachingStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(teachingStaffInput)">Teaching staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(teachingStaffInput)">Teaching staff spending can not be greater than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.supplyStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(supplyStaffInput)">Supply staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(supplyStaffInput)">Supply staff spending can not be greater than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.educationSupportStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(educationSupportStaffInput)">Education support staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(educationSupportStaffInput)">Education support staff spending can not be greater than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.adminStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(adminStaffInput)">Admin staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(adminStaffInput)">Admin staff spending can not be greater than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.otherStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(otherStaffInput)">Other staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(otherStaffInput)">Other staff spending can not be greater than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.premisesExceeded">
-        <a [routerLink]='' (click)="setFocus(premisesInput)">Premises costs can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(premisesInput)">Premises costs spending can not be greater than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.teachingResourcesExceeded">
-        <a [routerLink]='' (click)="setFocus(teachingResourcesInput)">Educational supplies spending can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(teachingResourcesInput)">Educational supplies spending can not be greater than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.energyExceeded">
-        <a [routerLink]='' (click)="setFocus(energyInput)">Energy spending can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(energyInput)">Energy spending can not be greater than total expenditure</a>
       </li>
     </ul>
   </div>
@@ -132,7 +132,7 @@
         </label>
         <div *ngIf="scenarioName.invalid && scenarioName.dirty">
           <span *ngIf="scenarioName.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Dashboard name is required
+            <span class="govuk-visually-hidden">Error:</span> Enter a dashboard name to continue
           </span>
           <span *ngIf="scenarioName.errors.minlength" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Dashboard name must be minimum 3 characters
@@ -181,7 +181,7 @@
         </span>
         <div *ngIf="numberOfPupils.invalid && numberOfPupils.dirty">
           <span *ngIf="numberOfPupils.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Number of pupils is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the number of pupils to continue
           </span>
           <span *ngIf="numberOfPupils.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of pupils must be minimum 1
@@ -207,7 +207,7 @@
         </span>
         <div *ngIf="schoolWorkforce.invalid && schoolWorkforce.dirty">
           <span *ngIf="schoolWorkforce.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> School workforce count is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the school workforce count to continue
           </span>
           <span *ngIf="schoolWorkforce.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> School workforce count must be minimum 1
@@ -234,7 +234,7 @@
         </span>
         <div *ngIf="numberOfTeachers.invalid && numberOfTeachers.dirty">
           <span *ngIf="numberOfTeachers.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Number of teachers is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the number of teachers to continue
           </span>
           <span *ngIf="numberOfTeachers.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of teachers must be minimum 1
@@ -261,7 +261,7 @@
         </span>
         <div *ngIf="seniorLeadership.invalid && seniorLeadership.dirty">
           <span *ngIf="seniorLeadership.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Senior leadership number is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the school leadership number to continue
           </span>
           <span *ngIf="seniorLeadership.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Senior leadership number must be minimum 0
@@ -289,7 +289,7 @@
         </span>
         <div *ngIf="fsm.invalid && fsm.dirty">
           <span *ngIf="fsm.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the percentage of pupils eligible for FSM to continue
           </span>
           <span *ngIf="fsm.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM must be minimum 0
@@ -382,7 +382,7 @@
         </span>
         <div *ngIf="totalIncome.invalid && totalIncome.dirty">
           <span class="govuk-error-message" *ngIf='totalIncome.errors.required'>
-            <span class="govuk-visually-hidden">Error:</span> Total income is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the total income to continue
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text" #totalIncomeInput
@@ -407,7 +407,7 @@
         </span>
         <div *ngIf="totalExpenditure.invalid && totalExpenditure.dirty">
           <span class="govuk-error-message" *ngIf='totalExpenditure.errors.required'>
-            <span class="govuk-visually-hidden">Error:</span> Total expenditure is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the total expenditure to continue
           </span>
         </div>
         <div *ngIf="editDataForm.errors?.maxExpenditureExceeded" class="govuk-error-message">
@@ -463,7 +463,7 @@
         </span>
         <div *ngIf="editDataForm.errors?.teachingStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Teaching staff expenditure can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Teaching staff spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text" #teachingStaffInput
@@ -488,7 +488,7 @@
         </span>
         <div *ngIf="editDataForm.errors?.supplyStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Supply staff expenditure can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Supply staff spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text" #supplyStaffInput
@@ -513,7 +513,7 @@
         </span>
         <div *ngIf="editDataForm.errors?.educationSupportStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Education support staff expenditure can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Education support staff spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text" #educationSupportStaffInput
@@ -538,7 +538,7 @@
         </span>
         <div *ngIf="editDataForm.errors?.adminStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Administrative and clerical staff expenditure can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Administrative and clerical staff spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text" #adminStaffInput
@@ -563,7 +563,7 @@
         </span>
         <div *ngIf="editDataForm.errors?.otherStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Other staff costs can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Other staff costs spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text" #otherStaffInput
@@ -588,7 +588,7 @@
         </span>
         <div *ngIf="editDataForm.errors?.premisesExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Premises costs can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Premises costs spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text" #premisesInput
@@ -613,7 +613,7 @@
         </span>
         <div *ngIf="editDataForm.errors?.teachingResourcesExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Educational supplies spending can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Educational supplies spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text" #teachingResourcesInput
@@ -638,7 +638,7 @@
         </span>
         <div *ngIf="editDataForm.errors?.energyExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Energy spending can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Energy spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text" #energyInput
