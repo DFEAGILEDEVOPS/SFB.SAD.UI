@@ -153,6 +153,8 @@ caption{
 }
 
 .rating-box{
+  color-adjust: exact !important;     
+  -webkit-print-color-adjust: exact;
   font-size: 16px;
   padding: 6px 15px;
   border-radius: 3px;

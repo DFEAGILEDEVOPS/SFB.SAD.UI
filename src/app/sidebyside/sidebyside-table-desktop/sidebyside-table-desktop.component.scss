@@ -13,6 +13,8 @@
 }
 
 .rating-box{
+  color-adjust: exact !important;     
+  -webkit-print-color-adjust: exact;
   font-size: 14px;
   width: 48%;
   padding: 6px 12px;
