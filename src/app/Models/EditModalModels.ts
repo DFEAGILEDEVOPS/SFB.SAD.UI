@@ -84,7 +84,7 @@ export class EditModalModels {
         title : 'Spend on teaching staff',
         textContent : `<p>Spend on teaching staff includes the salaries and wages (including allowances, maternity pay, employer’s contributions to National Insurance, and teachers’ pensions) of permanent teaching staff.</p>
         <p>It excludes teachers employed casually and directly, such as supply teachers, and any teacher not employed directly by the school such as agency staff.</p>
-        <p>A predicted salary and pension uplift has been including in the banding profiles for the cost of teachers for years 2019/20 and 2020/21</p>`
+        <p>A predicted salary and pension uplift has been included in the banding profiles for the cost of teachers for years 2019/20 and 2020/21</p>`
       },
       {
         formControlName : 'supplyStaff',
