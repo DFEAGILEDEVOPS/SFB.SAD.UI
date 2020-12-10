@@ -646,8 +646,18 @@
         [class]="{'govuk-input--error' : editDataForm.errors?.energyExceeded}"
         (blur)="transformAmount($event, editDataForm.value.spending.energy)"
         >
-      </div>
+       </div>
+    </fieldset>
 
+    <fieldset formGroupName='scenarioDetails'>
+      <div class="govuk-form-group">
+        <div class="govuk-checkboxes__item">
+          <input class="govuk-checkboxes__input" type="checkbox" id="storeBeyondSession"
+            formControlName="storeBeyondSession">
+          <label class="govuk-label govuk-checkboxes__label" for="storeBeyondSession">Allow your browser to store this data
+            (deselecting will remove the data when you end the session)</label>
+        </div>
+      </div>
     </fieldset>
 
     <div class="govuk-grid-row govuk-body">

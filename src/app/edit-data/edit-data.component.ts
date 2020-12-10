@@ -25,6 +25,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   viewType: string;
   scenarioNo: number;
   scenarioLoaded: boolean;
+  storeScenarioBeyondSession: boolean;
   missingField: string;
   formSubmitted: boolean;
   modalRef: BsModalRef;
@@ -56,6 +57,10 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   get scenarioTerm() {
     return this.editDataForm.get('scenarioDetails').get('scenarioTerm');
   }
+
+  // get storeBeyondSession() {
+  //   return this.editDataForm.get('scenarioDetails').get('storeBeyondSession');
+  // }
 
   get totalExpenditure() {
     return this.editDataForm.get('reserveBalance').get('totalExpenditure');
@@ -147,6 +152,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       this.scenarioNo = pmap.get('scenarioNo') ? Number(pmap.get('scenarioNo')) : null;
     });
     this.scenarioLoaded = false;
+    this.storeScenarioBeyondSession = true;
     this.editDataModels = new EditModalModels();
   }
 
@@ -172,8 +178,9 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   onSubmit() {
 
     this.formSubmitted = true;
-    if (this.editDataForm.valid) {
+    this.storeScenarioBeyondSession =  this.editDataForm.value.scenarioDetails.storeBeyondSession;
 
+    if (this.editDataForm.valid) {
       const editedScenario: SaScenarioModel = this.scenarioInEdit;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
@@ -223,14 +230,14 @@ export class EditDataComponent implements OnInit, AfterViewInit {
                 editedScenario.fsm).subscribe(response => {
                   editedScenario.sadFSMLookup = response;
 
-                  this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
+                  this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
                     .subscribe(() => {
                       this.router.navigate(['self-assessment/', this.urn]);
                     });
                 });
             });
         } else {
-          this.scenariosService.setFirstScenario(editedScenario);
+          this.scenariosService.setFirstScenario(editedScenario, this.storeScenarioBeyondSession);
           this.router.navigate(['self-assessment/', this.urn]);
         }
       } else {
@@ -251,7 +258,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
                   editedScenario.fsm).subscribe(response => {
                     editedScenario.sadFSMLookup = response;
 
-                    this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
+                    this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
                       .subscribe(() => {
                         this.router.navigate(['self-assessment/side-by-side']);
                       });
@@ -259,7 +266,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
               });
 
           } else {
-            this.scenariosService.setFirstScenario(editedScenario);
+            this.scenariosService.setFirstScenario(editedScenario, this.storeScenarioBeyondSession);
             this.router.navigate(['self-assessment/side-by-side']);
           }
         } else {
@@ -279,14 +286,14 @@ export class EditDataComponent implements OnInit, AfterViewInit {
                   editedScenario.fsm).subscribe(response => {
                     editedScenario.sadFSMLookup = response;
 
-                    this.scenariosService.setSecondScenarioWithRefresh(editedScenario)
+                    this.scenariosService.setSecondScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
                       .subscribe(() => {
                         this.router.navigate(['self-assessment/side-by-side']);
                       });
                   });
               });
          } else {
-            this.scenariosService.setSecondScenario(editedScenario);
+            this.scenariosService.setSecondScenario(editedScenario, this.storeScenarioBeyondSession);
             this.router.navigate(['self-assessment/side-by-side']);
           }
         }
@@ -411,7 +418,8 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     this.editDataForm = this.fb.group({
       scenarioDetails: this.fb.group({
         scenarioName: [this.scenarioInEdit.scenarioName, [Validators.required, Validators.minLength(3)]],
-        scenarioTerm: [this.scenarioInEdit.termOfScenario]
+        scenarioTerm: [this.scenarioInEdit.termOfScenario],
+        storeBeyondSession: [this.storeScenarioBeyondSession]
       }),
       schoolDetails: this.fb.group({
         numberOfPupils: [this.scenarioInEdit.numberOfPupils, [Validators.required, Validators.min(1)]],

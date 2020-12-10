@@ -110,7 +110,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onReset() {
-    this.saScenariosService.deleteFirstScenario();
+    this.saScenariosService.deleteFirstScenarioFromEverywhere();
     this.ngOnInit();
   }
 

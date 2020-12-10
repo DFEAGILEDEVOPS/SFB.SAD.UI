@@ -16,7 +16,7 @@ function asyncData<T>(data: T) {
 
 describe('Component: SideBySide', () => {
   let comp: SidebysideComponent;
-  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'getSecondScenario', 'deleteFirstScenarioAndReplaceItWithSecond', 'deleteSecondScenario']);
+  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'getSecondScenario', 'deleteFirstScenarioAndReplaceItWithSecond', 'deleteSecondScenario', 'deleteSecondScenarioFromEverywhere']);
   let routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
 
@@ -93,7 +93,7 @@ describe('Component: SideBySide', () => {
 
     comp.removeScenario(1);
 
-    expect(saScenariosServiceSpy.deleteSecondScenario).toHaveBeenCalled();
+    expect(saScenariosServiceSpy.deleteSecondScenarioFromEverywhere).toHaveBeenCalled();
 
   });
 
