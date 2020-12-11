@@ -176,13 +176,14 @@ export class SaScenariosService {
   }
 
   deleteFirstScenarioAndReplaceItWithSecond() {
-    if(this.getScenarioFromLocalStorage(this.firstScenarioInMemory.urn, 1)) {
+    let urn = this.firstScenarioInMemory.urn;
+    if(this.getScenarioFromLocalStorage(urn, 1)) {
       this.storeScenarioInLocalStorage(this.secondScenarioInMemory, 0);
     } else {
       this.storeScenarioInSessionStorage(this.secondScenarioInMemory, 0);
     }
-    this.removeScenarioFromLocalStorage(this.firstScenarioInMemory.urn, 1);
-    this.removeScenarioFromSessionStorage(this.firstScenarioInMemory.urn, 1);
+    this.removeScenarioFromLocalStorage(urn, 1);
+    this.removeScenarioFromSessionStorage(urn, 1);
 
     this.firstScenarioInMemory = this.secondScenarioInMemory;
     this.secondScenarioInMemory = null;

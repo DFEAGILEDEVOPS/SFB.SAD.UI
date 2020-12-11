@@ -48,6 +48,48 @@ describe('Service: Sascenarios', () => {
     );
   });
 
+  it('#setFirstScenario should correctly write to local storage', () => {
+    const stubSaData = new SaData();
+    stubSaData.urn = 123;
+    let stubScenarioModel = new SaScenarioModel(stubSaData);
+
+    saScenariosService.setFirstScenario(stubScenarioModel, true);
+    expect(localStorage.getItem("urn#123-scenario_0")).not.toBeNull();
+    expect(sessionStorage.getItem("urn#123-scenario_0")).toBeNull();
+  });
+
+  it('#setFirstScenario should correctly write to session storage', () => {
+    const stubSaData = new SaData();
+    stubSaData.urn = 123;
+    let stubScenarioModel = new SaScenarioModel(stubSaData);
+
+    saScenariosService.setFirstScenario(stubScenarioModel, false);
+    expect(localStorage.getItem("urn#123-scenario_0")).toBeNull();
+    expect(sessionStorage.getItem("urn#123-scenario_0")).not.toBeNull();
+  });
+
+  it('#setSecondScenario should correctly write to local storage', () => {
+    const stubSaData = new SaData();
+    stubSaData.urn = 123;
+    let stubScenarioModel = new SaScenarioModel(stubSaData);
+    saScenariosService.scenarios.push(stubScenarioModel);
+
+    saScenariosService.setSecondScenario(stubScenarioModel, true);
+    expect(localStorage.getItem("urn#123-scenario_1")).not.toBeNull();
+    expect(sessionStorage.getItem("urn#123-scenario_1")).toBeNull();
+  });
+
+  it('#setSecondScenario should correctly write to session storage', () => {
+    const stubSaData = new SaData();
+    stubSaData.urn = 123;
+    let stubScenarioModel = new SaScenarioModel(stubSaData);
+    saScenariosService.scenarios.push(stubScenarioModel);
+
+    saScenariosService.setSecondScenario(stubScenarioModel, false);
+    expect(localStorage.getItem("urn#123-scenario_1")).toBeNull();
+    expect(sessionStorage.getItem("urn#123-scenario_1")).not.toBeNull();
+  });
+
   it('#getFirstScenario should return scenario in sessionStorage, if it does not exist in memory', done => {
     sessionStorage.setItem(`urn#144083-scenario_0`, fakeScenarioFromBrowserStorageJSON);
     saScenariosService.getFirstScenario(144083).subscribe((scenarioFromSessionStorage) => {
