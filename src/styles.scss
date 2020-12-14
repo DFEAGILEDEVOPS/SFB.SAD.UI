@@ -152,8 +152,13 @@ caption{
   color: black;
 }
 
+.progress-text{
+  color-adjust: exact !important;
+  -webkit-print-color-adjust: exact;
+}
+
 .rating-box{
-  color-adjust: exact !important;     
+  color-adjust: exact !important;
   -webkit-print-color-adjust: exact;
   font-size: 16px;
   padding: 6px 15px;
