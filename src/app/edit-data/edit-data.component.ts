@@ -328,6 +328,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     let initialState = {
       title: modalContent.title,
       textContent: modalContent.textContent,
+      referrer: "help-" + formControlName
     };
 
     this.modalRef = this.modalService.show(EditDataInfoModalComponent, { initialState });

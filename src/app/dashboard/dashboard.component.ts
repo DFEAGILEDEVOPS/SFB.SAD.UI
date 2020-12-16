@@ -67,6 +67,7 @@ export class DashboardComponent implements OnInit {
           title: "Add a custom dashboard",
           textContent: "<p>The custom dashboard allows schools to plan for hypothetical or projected changes to their financial situation and see a red, amber or green (RAG) rating against it.</p>" +
                        "<p>Custom dashboards are for personal use and <span class='govuk-!-font-weight-bold'>only visible to you</span>. Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</p>",
+          referrer: "help-add-dashboard"
         };
 
         this.modalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
@@ -74,7 +75,8 @@ export class DashboardComponent implements OnInit {
       case 'dashboard-year':
         initialState = {
           title: "Dashboard year",
-          textContent: "<p>By choosing a different year banding figures are adjusted to align to that year. An 8.6% uplift has been applied to Teaching staff and average salary (including pensions) for 2019/20 and an 11.9% uplift on 2020/21 and future years.</p>"
+          textContent: "<p>By choosing a different year banding figures are adjusted to align to that year. An 8.6% uplift has been applied to Teaching staff and average salary (including pensions) for 2019/20 and an 11.9% uplift on 2020/21 and future years.</p>",
+          referrer: "help-dashboard-year"
         };
 
         this.modalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
@@ -87,6 +89,7 @@ export class DashboardComponent implements OnInit {
           assessmentArea: assessmentArea,
           title: modalContent.title,
           textContent: modalContent.textContent,
+          referrer: "help-" + assessmentArea
         };
 
         this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
@@ -101,7 +104,8 @@ export class DashboardComponent implements OnInit {
           textContent: modalContent.textContent,
           tresholds: assessmentAreas.allTresholds,
           matchingTreshold: assessmentAreas.matchingTreshold,
-          tresholdFormat: getAADataFormat(modalContent.assessmentArea)
+          tresholdFormat: getAADataFormat(modalContent.assessmentArea),
+          referrer: "help-" + assessmentArea
         };
 
         this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });

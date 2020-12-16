@@ -15,10 +15,16 @@ export class DashboardAaModalComponent implements OnInit {
   tresholds: TresholdModel[];
   matchingTreshold: TresholdModel;
   tresholdFormat: string;
+  referrer: string;
 
   constructor(public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
+  }
+
+  onClose() {
+    this.bsModalRef.hide();
+    document.getElementById(this.referrer).focus();
   }
 
 }

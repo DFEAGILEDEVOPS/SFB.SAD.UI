@@ -16,7 +16,7 @@
       <th scope="row" class="govuk-table__header">Rating against thresholds</th>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon" id="help-{{aa.assessmentAreaName}}">
           <img src="assets/images/info.svg" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon" />
         </a>
       </td>
@@ -27,7 +27,7 @@
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'
             attr.aria-label="Add data for {{aa.assessmentAreaName}}">Add data</a>
         </span>
-        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon" id="help-{{aa.assessmentAreaName}}">
           <img src="assets/images/info.svg" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon" />
         </a>
       </td>
@@ -53,7 +53,7 @@
       <th scope="row" class="govuk-table__header">Rating against thresholds</th>
       <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon" id="help-{{aa.assessmentAreaName}}">
           <img src="assets/images/info.svg" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon" />
         </a>
       </td>
@@ -64,7 +64,7 @@
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'
             attr.aria-label="Add data for {{aa.assessmentAreaName}}">Add data</a>
         </span>
-        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon" id="help-{{aa.assessmentAreaName}}">
           <img src="assets/images/info.svg" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon" />
         </a>
       </td>
@@ -85,7 +85,7 @@
       <th scope="row" class="govuk-table__header">Rating against thresholds</th>
       <td *ngIf="aa.calculatedSchoolData != null && aa.matchingTreshold" class="govuk-table__cell">
         <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
-        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon" id="help-{{aa.assessmentAreaName}}">
           <img src="assets/images/info.svg" attr.alt="Help for {{aa.assessmentAreaName}}"
             class="small-icon rating-help-icon" />
         </a>
@@ -100,7 +100,7 @@
             routerLink='/self-assessment/add-missing-data/{{activeScenario.urn}}/{{aa.assessmentAreaName}}'
             attr.aria-label="Add data for {{aa.assessmentAreaName}}">Add data</a>
         </span>
-        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon" id="help-{{aa.assessmentAreaName}}">
           <img src="assets/images/info.svg" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon" />
         </a>
       </td>
@@ -130,7 +130,7 @@
           <span *ngIf='activeScenario.ofstedInspectionDate'>Inspected
             {{ activeScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
         </div>
-        <a [routerLink]='' (click)="openModalWithComponent('Ofsted')" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent('Ofsted')" class="rating-help-icon" id="help-Ofsted">
           <img src="assets/images/info.svg" alt="Help for ofsted rating" class="small-icon ofsted-icon" />
         </a>
       </td>
@@ -163,7 +163,7 @@
           </span>
           <span [hidden]='activeScenario.ks2Score' class="progress--na">No data available</span>
         </div>
-        <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon" id="help-KS2">
           <img src="assets/images/info.svg" alt="Help for KS2 score" class="small-icon progress-icon" />
         </a>
       </td>
@@ -193,7 +193,7 @@
           </span>
           <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
         </div>
-        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon" id="help-P8">
           <img src="assets/images/info.svg" alt="Help for progress 8 score" class="small-icon progress-icon" />
         </a>
       </td>
@@ -226,7 +226,7 @@
           </span>
           <span [hidden]='activeScenario.ks2Score' class="progress--na">No data available</span>
         </div>
-        <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon" id="help-KS2">
           <img src="assets/images/info.svg" alt="Help for KS2 score" class="small-icon progress-icon" />
         </a>
       </td>
@@ -256,11 +256,11 @@
           </span>
           <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
         </div>
-        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon">
+        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon" id="help-P8">
           <img src="assets/images/info.svg" alt="Help for progress 8 score" class="small-icon progress-icon" />
         </a>
       </td>
     </tr>
   </table>
-  
+
 </div>

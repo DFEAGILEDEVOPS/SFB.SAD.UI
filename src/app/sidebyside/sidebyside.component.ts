@@ -64,6 +64,7 @@ export class SidebysideComponent implements OnInit {
     openModalWithComponent(parameters: any[]) {
       let assessmentArea: string = parameters[0];
       let activeScenario: SaScenarioModel = parameters[1];
+      let scenarioNo: number = parameters[2];
       let modalContent: AAModalModel;
       let initialState: any;
       let assessmentAreas: AssessmentAreaModel;
@@ -77,6 +78,7 @@ export class SidebysideComponent implements OnInit {
             assessmentArea: assessmentArea,
             title: modalContent.title,
             textContent: modalContent.textContent,
+            referrer: `help-${assessmentArea}`
           };
 
           this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
@@ -91,7 +93,8 @@ export class SidebysideComponent implements OnInit {
             textContent: modalContent.textContent,
             tresholds: assessmentAreas.allTresholds,
             matchingTreshold: assessmentAreas.matchingTreshold,
-            tresholdFormat: getAADataFormat(modalContent.assessmentArea)
+            tresholdFormat: getAADataFormat(modalContent.assessmentArea),
+            referrer: `help-${assessmentArea}-${scenarioNo}`
           };
 
           this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
