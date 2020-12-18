@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleService } from 'app/services/title.service';
 
 @Component({
   selector: 'app-ServiceProblem',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServiceProblemComponent implements OnInit {
 
-  constructor() { }
+  constructor(titleService: TitleService) {
+    titleService.setWithPrefix("Sorry, there is a problem with the service");
+  }
 
   ngOnInit() {
   }

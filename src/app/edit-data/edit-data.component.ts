@@ -9,9 +9,9 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isNumber } from 'util';
-import { Title } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditModalModels } from 'app/Models/EditModalModels';
+import { TitleService } from 'app/services/title.service';
 
 @Component({
   selector: 'app-edit-data',
@@ -143,14 +143,18 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     private fsmLookupService: SaFsmLookupService,
     private currencyPipe: CurrencyPipe,
     private location: Location,
-    private titleService: Title,
-    private modalService: BsModalService, ) {
+    private modalService: BsModalService, titleService: TitleService) {
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
       this.viewType = pmap.get('viewType') ?? 'edit';
       this.missingField = pmap.get('field');
       this.scenarioNo = pmap.get('scenarioNo') ? Number(pmap.get('scenarioNo')) : null;
     });
+    if (this.viewType === "edit") {
+      titleService.setWithPrefix("Edit dashboard");
+    } else {
+      titleService.setWithPrefix("Add a custom dashboard");
+    }
     this.scenarioLoaded = false;
     this.storeScenarioBeyondSession = true;
     this.editDataModels = new EditModalModels();
@@ -302,7 +306,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     else {
       setTimeout(() => {
         this.errorSummaryElement.nativeElement.focus();
-        this.titleService.setTitle("Error: " + this.titleService.getTitle().replace("Error: ", ""));
+        //this.titleService.setTitle("Error: " + this.titleService.getTitle().replace("Error: ", ""));
       });
     }
   }

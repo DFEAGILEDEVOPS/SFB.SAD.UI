@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleService } from 'app/services/title.service';
 
 @Component({
   selector: 'app-NotFoundError',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundErrorComponent implements OnInit {
 
-  constructor() { }
+  constructor(titleService: TitleService) {
+    titleService.setWithPrefix("Page not found"); }
 
   ngOnInit() {
   }

@@ -1,3 +1,4 @@
+import { TitleService } from './../services/title.service';
 import { PdfService } from './../services/pdf.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { Component, OnInit, HostListener } from '@angular/core';
@@ -30,7 +31,8 @@ export class SidebysideComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService,
-    private pdfService: PdfService) {
+    private pdfService: PdfService, titleService: TitleService) {
+      titleService.setWithPrefix("Self-assessment dashboard");
       this.aaModalModels = new AAModalModels();
       this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
     }

@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
 import { AAModalModel } from 'app/Models/AAModalModel';
+import { TitleService } from 'app/services/title.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService,
-    private pdfService: PdfService) {
+    private pdfService: PdfService, titleService: TitleService) {
+    titleService.setWithPrefix("Self-assessment dashboard");
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
     });
