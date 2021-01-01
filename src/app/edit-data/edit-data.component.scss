@@ -1,0 +1,24 @@
+select {
+  width: 100%;
+  max-width: 41ex;
+}
+
+.edit-help-icon {
+  cursor: pointer;
+  vertical-align: text-bottom;
+}
+
+.edit-warning-icon{
+  width: 35px;
+  margin-right: 10px;
+}
+
+.govuk-select, .govuk-input
+{
+  display: block;
+}
+
+.govuk-label {
+  display: inline-block;
+  margin-right: 5px;
+}

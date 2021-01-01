@@ -16,7 +16,7 @@ import { TitleService } from 'app/services/title.service';
 @Component({
   selector: 'app-edit-data',
   templateUrl: './edit-data.component.html',
-  styleUrls: ['./edit-data.component.css']
+  styleUrls: ['./edit-data.component.scss']
 })
 export class EditDataComponent implements OnInit, AfterViewInit {
   scenarioInEdit: SaScenarioModel;
