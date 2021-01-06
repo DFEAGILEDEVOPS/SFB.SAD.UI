@@ -12,6 +12,7 @@ import { isNumber } from 'util';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditModalModels } from 'app/Models/EditModalModels';
 import { TitleService } from 'app/services/title.service';
+import { ViewModeService } from 'app/services/viewMode.service';
 
 @Component({
   selector: 'app-edit-data',
@@ -143,7 +144,9 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     private fsmLookupService: SaFsmLookupService,
     private currencyPipe: CurrencyPipe,
     private location: Location,
-    private modalService: BsModalService, titleService: TitleService) {
+    private modalService: BsModalService, titleService: TitleService,
+    viewModeService: ViewModeService) {
+    viewModeService.setEditMode();
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
       this.viewType = pmap.get('viewType') ?? 'edit';
@@ -466,6 +469,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       (this.editDataForm.get('schoolDetails') as FormGroup).removeControl("teacherContactRatio");
     }
   }
+
 
 }
 

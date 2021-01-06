@@ -1,3 +1,4 @@
+import { ViewModeService } from 'app/services/viewMode.service';
 import { TitleService } from './../services/title.service';
 import { PdfService } from './../services/pdf.service';
 import { AAModalModels } from './../Models/AAModalModels';
@@ -31,7 +32,10 @@ export class SidebysideComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService,
-    private pdfService: PdfService, titleService: TitleService) {
+    private pdfService: PdfService,
+    titleService: TitleService,
+    viewModeService: ViewModeService) {
+      viewModeService.setDashboardMode();
       titleService.setWithPrefix("Self-assessment dashboard");
       this.aaModalModels = new AAModalModels();
       this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;

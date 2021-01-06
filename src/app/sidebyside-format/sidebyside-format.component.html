@@ -1,4 +1,4 @@
-<app-sidebyside-format-breadcrumbs [urn]='urn' [name]='name'></app-sidebyside-format-breadcrumbs>
+<a (click) = 'onBack()' href="javascript:void(0)" class="govuk-back-link">Back</a>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -48,8 +48,6 @@
       <button class="govuk-button" data-module="govuk-button" type="submit">
         Continue
       </button>
-      <a (click) = 'onBack()' href="javascript:void(0)"
-        class="govuk-link govuk-link--no-visited-state back-button">Back</a>
     </div>
   </div>
 

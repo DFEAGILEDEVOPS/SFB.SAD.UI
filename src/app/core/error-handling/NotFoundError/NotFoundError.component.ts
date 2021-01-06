@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TitleService } from 'app/services/title.service';
+import { ViewModeService } from 'app/services/viewMode.service';
 
 @Component({
   selector: 'app-NotFoundError',
@@ -8,7 +9,9 @@ import { TitleService } from 'app/services/title.service';
 })
 export class NotFoundErrorComponent implements OnInit {
 
-  constructor(titleService: TitleService) {
+  constructor(titleService: TitleService,
+    viewModeService: ViewModeService) {
+    viewModeService.setDashboardMode();
     titleService.setWithPrefix("Page not found"); }
 
   ngOnInit() {

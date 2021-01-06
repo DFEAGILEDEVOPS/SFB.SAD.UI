@@ -47,6 +47,8 @@
       </p>
     </div>
 
+    <a *ngIf="isInEditMode()" (click)='onBack()' href="javascript:void(0)" class="govuk-back-link">Back</a>
+
     <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
       <router-outlet></router-outlet>
     </main>

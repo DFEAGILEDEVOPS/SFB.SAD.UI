@@ -6,7 +6,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NotFoundComponent } from '@layouts/gov-uk-layout/not-found/not-found.component';
 import { SidebysideComponent } from './sidebyside/sidebyside.component';
 
 const routes: Routes = [

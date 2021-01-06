@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TitleService } from 'app/services/title.service';
+import { ViewModeService } from 'app/services/viewMode.service';
 
 @Component({
   selector: 'app-ServiceProblem',
@@ -8,7 +9,8 @@ import { TitleService } from 'app/services/title.service';
 })
 export class ServiceProblemComponent implements OnInit {
 
-  constructor(titleService: TitleService) {
+  constructor(titleService: TitleService, viewModeService: ViewModeService) {
+    viewModeService.setDashboardMode(); 
     titleService.setWithPrefix("Sorry, there is a problem with the service");
   }
 
