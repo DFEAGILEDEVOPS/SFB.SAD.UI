@@ -33,7 +33,7 @@
     "@ngx-config/http-loader": "^8.0.2",
     "bootstrap": "^4.4.1",
     "express": "^4.15.2",
-    "govuk-frontend": "^3.6.0",
+    "govuk-frontend": "^3.10.2",
     "html2canvas": "1.0.0-alpha.10",
     "jquery": "^3.4.1",
     "jspdf": "^2.1.1",

@@ -9,14 +9,15 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isNumber } from 'util';
-import { Title } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditModalModels } from 'app/Models/EditModalModels';
+import { TitleService } from 'app/services/title.service';
+import { ViewModeService } from 'app/services/viewMode.service';
 
 @Component({
   selector: 'app-edit-data',
   templateUrl: './edit-data.component.html',
-  styleUrls: ['./edit-data.component.css']
+  styleUrls: ['./edit-data.component.scss']
 })
 export class EditDataComponent implements OnInit, AfterViewInit {
   scenarioInEdit: SaScenarioModel;
@@ -25,6 +26,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   viewType: string;
   scenarioNo: number;
   scenarioLoaded: boolean;
+  storeScenarioBeyondSession: boolean;
   missingField: string;
   formSubmitted: boolean;
   modalRef: BsModalRef;
@@ -56,6 +58,10 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   get scenarioTerm() {
     return this.editDataForm.get('scenarioDetails').get('scenarioTerm');
   }
+
+  // get storeBeyondSession() {
+  //   return this.editDataForm.get('scenarioDetails').get('storeBeyondSession');
+  // }
 
   get totalExpenditure() {
     return this.editDataForm.get('reserveBalance').get('totalExpenditure');
@@ -138,15 +144,22 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     private fsmLookupService: SaFsmLookupService,
     private currencyPipe: CurrencyPipe,
     private location: Location,
-    private titleService: Title,
-    private modalService: BsModalService, ) {
+    private modalService: BsModalService, titleService: TitleService,
+    viewModeService: ViewModeService) {
+    viewModeService.setEditMode();
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
       this.viewType = pmap.get('viewType') ?? 'edit';
       this.missingField = pmap.get('field');
       this.scenarioNo = pmap.get('scenarioNo') ? Number(pmap.get('scenarioNo')) : null;
     });
+    if (this.viewType === "edit") {
+      titleService.setWithPrefix("Edit dashboard");
+    } else {
+      titleService.setWithPrefix("Add a custom dashboard");
+    }
     this.scenarioLoaded = false;
+    this.storeScenarioBeyondSession = true;
     this.editDataModels = new EditModalModels();
   }
 
@@ -172,8 +185,9 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   onSubmit() {
 
     this.formSubmitted = true;
-    if (this.editDataForm.valid) {
+    this.storeScenarioBeyondSession =  this.editDataForm.value.scenarioDetails.storeBeyondSession;
 
+    if (this.editDataForm.valid) {
       const editedScenario: SaScenarioModel = this.scenarioInEdit;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
@@ -223,14 +237,14 @@ export class EditDataComponent implements OnInit, AfterViewInit {
                 editedScenario.fsm).subscribe(response => {
                   editedScenario.sadFSMLookup = response;
 
-                  this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
+                  this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
                     .subscribe(() => {
                       this.router.navigate(['self-assessment/', this.urn]);
                     });
                 });
             });
         } else {
-          this.scenariosService.setFirstScenario(editedScenario);
+          this.scenariosService.setFirstScenario(editedScenario, this.storeScenarioBeyondSession);
           this.router.navigate(['self-assessment/', this.urn]);
         }
       } else {
@@ -251,7 +265,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
                   editedScenario.fsm).subscribe(response => {
                     editedScenario.sadFSMLookup = response;
 
-                    this.scenariosService.setFirstScenarioWithRefresh(editedScenario)
+                    this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
                       .subscribe(() => {
                         this.router.navigate(['self-assessment/side-by-side']);
                       });
@@ -259,7 +273,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
               });
 
           } else {
-            this.scenariosService.setFirstScenario(editedScenario);
+            this.scenariosService.setFirstScenario(editedScenario, this.storeScenarioBeyondSession);
             this.router.navigate(['self-assessment/side-by-side']);
           }
         } else {
@@ -279,14 +293,14 @@ export class EditDataComponent implements OnInit, AfterViewInit {
                   editedScenario.fsm).subscribe(response => {
                     editedScenario.sadFSMLookup = response;
 
-                    this.scenariosService.setSecondScenarioWithRefresh(editedScenario)
+                    this.scenariosService.setSecondScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
                       .subscribe(() => {
                         this.router.navigate(['self-assessment/side-by-side']);
                       });
                   });
               });
          } else {
-            this.scenariosService.setSecondScenario(editedScenario);
+            this.scenariosService.setSecondScenario(editedScenario, this.storeScenarioBeyondSession);
             this.router.navigate(['self-assessment/side-by-side']);
           }
         }
@@ -295,7 +309,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     else {
       setTimeout(() => {
         this.errorSummaryElement.nativeElement.focus();
-        this.titleService.setTitle("Error: " + this.titleService.getTitle().replace("Error: ", ""));
+        //this.titleService.setTitle("Error: " + this.titleService.getTitle().replace("Error: ", ""));
       });
     }
   }
@@ -321,6 +335,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     let initialState = {
       title: modalContent.title,
       textContent: modalContent.textContent,
+      referrer: "help-" + formControlName
     };
 
     this.modalRef = this.modalService.show(EditDataInfoModalComponent, { initialState });
@@ -411,7 +426,8 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     this.editDataForm = this.fb.group({
       scenarioDetails: this.fb.group({
         scenarioName: [this.scenarioInEdit.scenarioName, [Validators.required, Validators.minLength(3)]],
-        scenarioTerm: [this.scenarioInEdit.termOfScenario]
+        scenarioTerm: [this.scenarioInEdit.termOfScenario],
+        storeBeyondSession: [this.storeScenarioBeyondSession]
       }),
       schoolDetails: this.fb.group({
         numberOfPupils: [this.scenarioInEdit.numberOfPupils, [Validators.required, Validators.min(1)]],
@@ -453,6 +469,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       (this.editDataForm.get('schoolDetails') as FormGroup).removeControl("teacherContactRatio");
     }
   }
+
 
 }
 

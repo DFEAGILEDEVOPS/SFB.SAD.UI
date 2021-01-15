@@ -18,8 +18,8 @@ export class SidebysideTableDesktopComponent implements OnInit {
   ngOnInit() {
   }
 
-  openModalWithComponent(assessmentArea: string, activeScenario: SaScenarioModel) {
-    this.modalTriggered.emit([assessmentArea, activeScenario]);
+  openModalWithComponent(assessmentArea: string, activeScenario: SaScenarioModel, scenarioNo: number) {
+    this.modalTriggered.emit([assessmentArea, activeScenario, scenarioNo]);
   }
 
   removeScenario(scenarioNo: number) {

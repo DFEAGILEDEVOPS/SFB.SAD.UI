@@ -6,7 +6,8 @@ export class EditModalModels {
       {
         formControlName : 'scenarioTerm',
         title : 'Year of dashboard',
-        textContent : '<p>This is used to apply the correct banding ratios that may differ from year to year, e.g. Teaching staff ratios and Average salary has been adjusted with a graded uplift from years 17/18 to 19/20. It is also presented on the custom dashboard to help users identified when two dashboards are for different years. </p>'
+        textContent : `<p>This is used to apply the correct banding ratios that may differ from year to year, e.g. Teaching staff ratios and Average salary has been adjusted with a graded uplift from years 17/18 to 19/20. It is also presented on the custom dashboard to help users identified when two dashboards are for different years. </p>
+        <p>By choosing a different year banding figures are adjusted to align to that year. An 8.6% uplift has been applied to Teaching staff and average salary (including pensions) for 2019/20 and an 11.9% uplift on 2020/21 and future years.</p>`
       },
       {
         formControlName : 'numberOfPupils',
@@ -59,7 +60,7 @@ export class EditModalModels {
       {
         formControlName : 'averageClassSize',
         title : 'Average class size',
-        textContent : `<p>Average class sizes are a key determinant of the cost of running a school.</p>`
+        textContent : `<p>This is the FTE number of children in your school divided by the number of classes.</p>`
       },
       {
         formControlName : 'totalIncome',
@@ -81,8 +82,9 @@ export class EditModalModels {
       {
         formControlName : 'teachingStaff',
         title : 'Spend on teaching staff',
-        textContent : `<p>Spend on teaching staff typically takes up the largest proportion of a school’s overall spending. Spend on teaching staff includes the salaries and wages (including allowances, maternity pay, employer’s contributions to National Insurance, and teachers’ pensions) of permanent teaching staff.</p>
-        <p>It excludes teachers employed casually and directly, such as supply teachers, and any teacher not employed directly by the school such as agency staff.</p>`
+        textContent : `<p>Spend on teaching staff includes the salaries and wages (including allowances, maternity pay, employer’s contributions to National Insurance, and teachers’ pensions) of permanent teaching staff.</p>
+        <p>It excludes teachers employed casually and directly, such as supply teachers, and any teacher not employed directly by the school such as agency staff.</p>
+        <p>A predicted salary and pension uplift has been included in the banding profiles for the cost of teachers for years 2019/20 and 2020/21</p>`
       },
       {
         formControlName : 'supplyStaff',

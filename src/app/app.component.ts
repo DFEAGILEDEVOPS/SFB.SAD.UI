@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { SeoService } from '@core/seo/services/seo.service';
 import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 
 @Component({
@@ -9,10 +8,8 @@ import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 })
 export class AppComponent implements OnInit {
 
-  constructor(@Inject(appSettings) private settings: AppSettings, private seo: SeoService) { }
+  constructor(@Inject(appSettings) private settings: AppSettings) { }
 
-  ngOnInit() {
-    this.seo.generateTags(this.settings.seo);
-  }
+  ngOnInit() {}
 
 }

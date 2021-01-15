@@ -1,3 +1,5 @@
+import { ViewModeService } from 'app/services/viewMode.service';
+import { TitleService } from './../services/title.service';
 import { PdfService } from './../services/pdf.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { Component, OnInit, HostListener } from '@angular/core';
@@ -30,7 +32,11 @@ export class SidebysideComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService,
-    private pdfService: PdfService) {
+    private pdfService: PdfService,
+    titleService: TitleService,
+    viewModeService: ViewModeService) {
+      viewModeService.setDashboardMode();
+      titleService.setWithPrefix("Self-assessment dashboard");
       this.aaModalModels = new AAModalModels();
       this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
     }
@@ -56,7 +62,7 @@ export class SidebysideComponent implements OnInit {
         this.router.navigate(['self-assessment/', this.secondScenario.urn]);
       }
       if (scenarioNo === 1) {
-        this.saScenariosService.deleteSecondScenario();
+        this.saScenariosService.deleteSecondScenarioFromEverywhere();
         this.router.navigate(['self-assessment/', this.firstScenario.urn]);
       }
     }
@@ -64,6 +70,7 @@ export class SidebysideComponent implements OnInit {
     openModalWithComponent(parameters: any[]) {
       let assessmentArea: string = parameters[0];
       let activeScenario: SaScenarioModel = parameters[1];
+      let scenarioNo: number = parameters[2];
       let modalContent: AAModalModel;
       let initialState: any;
       let assessmentAreas: AssessmentAreaModel;
@@ -77,6 +84,7 @@ export class SidebysideComponent implements OnInit {
             assessmentArea: assessmentArea,
             title: modalContent.title,
             textContent: modalContent.textContent,
+            referrer: `help-${assessmentArea}`
           };
 
           this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
@@ -91,7 +99,8 @@ export class SidebysideComponent implements OnInit {
             textContent: modalContent.textContent,
             tresholds: assessmentAreas.allTresholds,
             matchingTreshold: assessmentAreas.matchingTreshold,
-            tresholdFormat: getAADataFormat(modalContent.assessmentArea)
+            tresholdFormat: getAADataFormat(modalContent.assessmentArea),
+            referrer: `help-${assessmentArea}-${scenarioNo}`
           };
 
           this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
@@ -101,8 +110,8 @@ export class SidebysideComponent implements OnInit {
 
     onReset() {
       const urn = this.secondScenario.urn;
-      this.saScenariosService.deleteFirstScenario();
-      this.saScenariosService.deleteSecondScenario();
+      this.saScenariosService.deleteFirstScenarioFromEverywhere();
+      this.saScenariosService.deleteSecondScenarioFromEverywhere();
       this.router.navigate(['self-assessment/', urn]);
     }
 

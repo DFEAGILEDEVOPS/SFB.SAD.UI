@@ -1,46 +1,46 @@
-<app-edit-data-breadcrumb [name]='scenarioInEdit?.name' [urn]='scenarioInEdit?.urn' [viewType]='viewType'></app-edit-data-breadcrumb>
-
-<div *ngIf='editDataForm.invalid && formSubmitted' #errorSummaryElement class="govuk-error-summary govuk-!-margin-top-2" aria-labelledby="error-summary-title" aria-atomic="true" role="alert" tabindex="-1" data-module="govuk-error-summary">
+<div *ngIf='editDataForm.invalid && formSubmitted' #errorSummaryElement class="govuk-error-summary govuk-!-margin-top-2"
+  aria-labelledby="error-summary-title" aria-atomic="true" role="alert" tabindex="-1" data-module="govuk-error-summary">
   <h2 class="govuk-error-summary__title" id="error-summary-title">
     There is a problem
   </h2>
   <div class="govuk-error-summary__body">
     <ul class="govuk-list govuk-error-summary__list">
       <li *ngIf='scenarioName.errors?.required'>
-        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Dashboard name is required</a>
+        <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Enter a scenario name to continue</a>
       </li>
       <li *ngIf='scenarioName.errors?.minlength'>
         <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Dashboard name must be minimum 3 characters</a>
       </li>
       <li *ngIf="numberOfPupils.errors?.required">
-        <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Number of pupils is required</a>
+        <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Enter the number of pupils to continue</a>
       </li>
       <li *ngIf="numberOfPupils.errors?.min">
         <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Number of pupils must be minimum 1</a>
       </li>
       <li *ngIf="schoolWorkforce.errors?.required">
-        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count is required</a>
+        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">Enter the school workforce count to continue</a>
       </li>
       <li *ngIf="schoolWorkforce.errors?.min">
         <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count must be minimum 1</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.required">
-        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers is required</a>
+        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Enter the number of teachers to continue</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.min">
         <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers must be minimum 1</a>
       </li>
       <li *ngIf="seniorLeadership.errors?.required">
-        <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership number is required</a>
+        <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Enter the school leadership number to continue</a>
       </li>
       <li *ngIf="seniorLeadership.errors?.min">
         <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership number must be minimum 0</a>
       </li>
       <li *ngIf="fsm.errors?.required">
-        <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM is required</a>
+        <a [routerLink]='' (click)="setFocus(fsmInput)">Enter the percentage of pupils eligible for FSM to continue</a>
       </li>
       <li *ngIf="fsm.errors?.min">
-        <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM number must be minimum 0</a>
+        <a [routerLink]='' (click)="setFocus(fsmInput)">Percentage of pupils eligible for FSM number must be minimum
+          0</a>
       </li>
       <li *ngIf="teacherContactRatio?.errors?.min">
         <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ration must be minimum 0</a>
@@ -49,43 +49,52 @@
         <a [routerLink]='' (click)="setFocus(teacherContactRatioElement)">Teacher contact ratio must be maximum 1</a>
       </li>
       <li *ngIf="predictedPupil.errors?.min">
-        <a [routerLink]='' (click)="setFocus(predictedPupilElement)">Predicted pupil number change percentage must be minimum -100</a>
+        <a [routerLink]='' (click)="setFocus(predictedPupilElement)">Predicted pupil number change percentage must be
+          minimum -100</a>
       </li>
       <li *ngIf="averageClassSize?.errors?.min">
         <a [routerLink]='' (click)="setFocus(averageClassSizeElement)">Average class size must be minimum 0</a>
       </li>
       <li *ngIf="totalIncome.errors?.required">
-        <a [routerLink]='' (click)="setFocus(totalIncomeInput)">Total income is required</a>
+        <a [routerLink]='' (click)="setFocus(totalIncomeInput)">Enter the total income to continue</a>
       </li>
       <li *ngIf="totalExpenditure.errors?.required">
-        <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Total expenditure is required</a>
+        <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Enter the total expenditure to continue</a>
       </li>
       <li *ngIf="editDataForm.errors?.maxExpenditureExceeded">
-        <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Total expenditure can not be lower than sum of expenditures</a>
+        <a [routerLink]='' (click)="setFocus(totalExpenditureInput)">Total expenditure can not be lower than sum of
+          expenditures</a>
       </li>
       <li *ngIf="editDataForm.errors?.teachingStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(teachingStaffInput)">Teaching staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(teachingStaffInput)">Teaching staff spending can not be greater than total
+          expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.supplyStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(supplyStaffInput)">Supply staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(supplyStaffInput)">Supply staff spending can not be greater than total
+          expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.educationSupportStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(educationSupportStaffInput)">Education support staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(educationSupportStaffInput)">Education support staff spending can not be
+          greater than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.adminStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(adminStaffInput)">Admin staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(adminStaffInput)">Admin staff spending can not be greater than total
+          expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.otherStaffExceeded">
-        <a [routerLink]='' (click)="setFocus(otherStaffInput)">Other staff expenditure can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(otherStaffInput)">Other staff spending can not be greater than total
+          expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.premisesExceeded">
-        <a [routerLink]='' (click)="setFocus(premisesInput)">Premises costs can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(premisesInput)">Premises costs spending can not be greater than total
+          expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.teachingResourcesExceeded">
-        <a [routerLink]='' (click)="setFocus(teachingResourcesInput)">Educational supplies spending can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(teachingResourcesInput)">Educational supplies spending can not be greater
+          than total expenditure</a>
       </li>
       <li *ngIf="editDataForm.errors?.energyExceeded">
-        <a [routerLink]='' (click)="setFocus(energyInput)">Energy spending can not be higher than total expenditure</a>
+        <a [routerLink]='' (click)="setFocus(energyInput)">Energy spending can not be greater than total expenditure</a>
       </li>
     </ul>
   </div>
@@ -101,16 +110,26 @@
         <span class="govuk-!-font-weight-bold">{{scenarioInEdit?.name}}</span>
       </span>
     </p>
-    <p class="govuk-body-m" style="display: inline-flex;" *ngIf='viewType === "enter"'>
-      <img src="assets/images/warning.svg" class="edit-warning-icon" alt="Warning"/>
-      <span>Custom dashboards are for personal use and <span class="govuk-!-font-weight-bold">only visible to you</span>.
-      Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</span>
-    </p>
-    <p class="govuk-body-m" style="display: inline-flex;" *ngIf='viewType === "edit"'>
-      <img src="assets/images/warning.svg" class="edit-warning-icon" alt="Warning"/>
-      <span>Dashboards you have edited are <span class="govuk-!-font-weight-bold">only visible to you</span>.
-      Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</span>
-    </p>
+    <div class="govuk-body-m" *ngIf='viewType === "enter"'>
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Warning</span>
+          Custom dashboards are for personal use and only visible to you. Any changes you make will be viewable on
+          subsequent visits to this school’s dashboard unless you choose to reset them.
+        </strong>
+      </div>
+    </div>
+    <div class="govuk-body-m" *ngIf='viewType === "edit"'>
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Warning</span>
+          Dashboards you have edited are only visible to you. Any changes you make will be viewable on subsequent visits
+          to this school’s dashboard unless you choose to reset them.
+        </strong>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -126,30 +145,31 @@
           Dashboard details
         </h2>
       </legend>
-      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !scenarioName.valid && !scenarioName.pristine}">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : !scenarioName.valid && !scenarioName.pristine}">
         <label class="govuk-label" for="scenario-name">
           Name of dashboard
         </label>
         <div *ngIf="scenarioName.invalid && scenarioName.dirty">
           <span *ngIf="scenarioName.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Dashboard name is required
+            <span class="govuk-visually-hidden">Error:</span> Enter a dashboard name to continue
           </span>
           <span *ngIf="scenarioName.errors.minlength" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Dashboard name must be minimum 3 characters
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text" #scenarioNameInput
-          formControlName='scenarioName' [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}"
-          required>
+        <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text"
+          #scenarioNameInput formControlName='scenarioName'
+          [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}" required>
       </div>
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="scenario-term">
           Year of dashboard
-          <a [routerLink]='' (click)="openModalWithComponent('scenarioTerm')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for year of dashboard"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('scenarioTerm')" id="help-scenarioTerm">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for year of dashboard" />
+        </a>
         <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm'>
           <option value="2017/2018">2017/2018</option>
           <option value="2018/2019">2018/2019</option>
@@ -170,107 +190,103 @@
         [class]="{'govuk-form-group--error' : !numberOfPupils.valid && !numberOfPupils.pristine}">
         <label class="govuk-label" for="number-pupils">
           Number of pupils (FTE)
-          <a [routerLink]='' (click)="openModalWithComponent('numberOfPupils')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon" (click)="openModalWithComponent('numberOfPupils')"
-            alt="Help for Number of Pupils (fte)" />
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('numberOfPupils')" id="help-numberOfPupils">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for Number of Pupils (fte)" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.numberOfPupilsLatestTerm}}</span>
         </span>
         <div *ngIf="numberOfPupils.invalid && numberOfPupils.dirty">
           <span *ngIf="numberOfPupils.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Number of pupils is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the number of pupils to continue
           </span>
           <span *ngIf="numberOfPupils.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of pupils must be minimum 1
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="number" #numberOfPupilsInput
-          formControlName='numberOfPupils'
-          [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}"
-          required
+        <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="number"
+          #numberOfPupilsInput formControlName='numberOfPupils'
+          [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}" required
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfPupils)">
       </div>
 
-      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}">
         <label class="govuk-label" for="school-workforce">
           School workforce (FTE)
-          <a [routerLink]='' (click)="openModalWithComponent('schoolWorkforce')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for school workforce (FTE)" />
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('schoolWorkforce')" id="help-schoolWorkforce">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for school workforce (FTE)" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.workforceTotalLastTerm}}</span>
         </span>
         <div *ngIf="schoolWorkforce.invalid && schoolWorkforce.dirty">
           <span *ngIf="schoolWorkforce.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> School workforce count is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the school workforce count to continue
           </span>
           <span *ngIf="schoolWorkforce.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> School workforce count must be minimum 1
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number" #schoolWorkforceInput
-          formControlName='schoolWorkforce'
-          [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}"
-          required
+        <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number"
+          #schoolWorkforceInput formControlName='schoolWorkforce'
+          [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}" required
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.schoolWorkforce)">
       </div>
 
-      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}">
         <label class="govuk-label" for="number-teachers">
           Number of teachers (FTE)
-          <a [routerLink]='' (click)="openModalWithComponent('numberOfTeachers')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for number of teachers (FTE)" />
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('numberOfTeachers')" id="help-numberOfTeachers">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for number of teachers (FTE)" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.teachersTotalLastTerm}}</span>
         </span>
         <div *ngIf="numberOfTeachers.invalid && numberOfTeachers.dirty">
           <span *ngIf="numberOfTeachers.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Number of teachers is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the number of teachers to continue
           </span>
           <span *ngIf="numberOfTeachers.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of teachers must be minimum 1
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number" #numberOfTeachersInput
-          formControlName='numberOfTeachers'
-          [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}"
-          required
+        <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number"
+          #numberOfTeachersInput formControlName='numberOfTeachers'
+          [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}" required
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfTeachers)">
       </div>
 
-      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !seniorLeadership.valid && !seniorLeadership.pristine}">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : !seniorLeadership.valid && !seniorLeadership.pristine}">
         <label class="govuk-label" for="senior-leadership">
           Senior leadership (FTE)
-          <a [routerLink]='' (click)="openModalWithComponent('seniorLeadership')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for senior leadership (FTE)" />
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('seniorLeadership')" id="help-seniorLeadership">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for senior leadership (FTE)" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.teachersLeaderLastTerm}}</span>
         </span>
         <div *ngIf="seniorLeadership.invalid && seniorLeadership.dirty">
           <span *ngIf="seniorLeadership.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Senior leadership number is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the school leadership number to continue
           </span>
           <span *ngIf="seniorLeadership.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Senior leadership number must be minimum 0
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number" #seniorLeadershipInput
-          formControlName='seniorLeadership'
-          [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}"
-          required
+        <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number"
+          #seniorLeadershipInput formControlName='seniorLeadership'
+          [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}" required
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.seniorLeadership)">
       </div>
 
@@ -278,26 +294,26 @@
         [hidden]='scenarioInEdit.overallPhase !== "Primary" && scenarioInEdit.overallPhase !== "Secondary"'>
         <label class="govuk-label" for="fsm">
           Percentage of pupils eligible for FSM
-          <a [routerLink]='' (click)="openModalWithComponent('fsm')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for percentage of pupils eligible for FSM" />
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('fsm')" id="help-fsm">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon"
+            alt="Help for percentage of pupils eligible for FSM" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.fsmLatestTerm}}</span>
         </span>
         <div *ngIf="fsm.invalid && fsm.dirty">
           <span *ngIf="fsm.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the percentage of pupils eligible for FSM to
+            continue
           </span>
           <span *ngIf="fsm.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Percentage of pupils eligible for FSM must be minimum 0
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" #fsmInput
-          formControlName='fsm'
-          [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}"
+          formControlName='fsm' [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}"
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
       </div>
 
@@ -305,11 +321,10 @@
         [class]="{'govuk-form-group--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}">
         <label class="govuk-label" for="tcr">
           Teacher contact ratio (less than 1)
-          <a [routerLink]='' (click)="openModalWithComponent('teacherContactRatio')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for teacher contact ratio"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('teacherContactRatio')" id="help-teacherContactRatio">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for teacher contact ratio" />
+        </a>
         <div *ngIf="teacherContactRatio.invalid && teacherContactRatio.dirty">
           <span *ngIf="teacherContactRatio.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Teacher contact ratio must be minimum 0
@@ -318,44 +333,48 @@
             <span class="govuk-visually-hidden">Error:</span> Teacher contact ratio must be maximum 1
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number" formControlName='teacherContactRatio' #teacherContactRatioElement
+        <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number"
+          formControlName='teacherContactRatio' #teacherContactRatioElement
           [class]="{'govuk-input--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}"
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.teacherContactRatio)">
       </div>
 
-      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !predictedPupil.valid && !predictedPupil.pristine}">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : !predictedPupil.valid && !predictedPupil.pristine}">
         <label class="govuk-label" for="ppl">
           Predicted percentage pupil number change in 3-5 years
-          <a [routerLink]='' (click)="openModalWithComponent('predictedPupil')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for predicted percentage pupil number change in 3-5 years"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('predictedPupil')" id="help-predictedPupil">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon"
+            alt="Help for predicted percentage pupil number change in 3-5 years" />
+        </a>
         <div *ngIf="predictedPupil.invalid && predictedPupil.dirty">
           <span *ngIf="predictedPupil.errors.min" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Predicted pupil number change percentage must be minimum -100
+            <span class="govuk-visually-hidden">Error:</span> Predicted pupil number change percentage must be minimum
+            -100
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number" formControlName='predictedPupil' #predictedPupilElement
-        [class]="{'govuk-input--error' : !predictedPupil.valid && !predictedPupil.pristine}"
-        (blur)="transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
+        <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number"
+          formControlName='predictedPupil' #predictedPupilElement
+          [class]="{'govuk-input--error' : !predictedPupil.valid && !predictedPupil.pristine}"
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
       </div>
 
       <div class="govuk-form-group" *ngIf="averageClassSize"
         [class]="{'govuk-form-group--error' : !averageClassSize.valid && !averageClassSize.pristine}">
         <label class="govuk-label" for="acsize">
           Average Class size
-          <a [routerLink]='' (click)="openModalWithComponent('averageClassSize')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for average class size"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('averageClassSize')" id="help-averageClassSize">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for average class size" />
+        </a>
         <div *ngIf="averageClassSize.invalid && averageClassSize.dirty">
           <span *ngIf="averageClassSize.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Average class size must be minimum 0
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="acsize" name="acsize" type="number" formControlName='averageClassSize' #averageClassSizeElement
+        <input class="govuk-input govuk-input--width-20" id="acsize" name="acsize" type="number"
+          formControlName='averageClassSize' #averageClassSizeElement
           [class]="{'govuk-input--error' : !averageClassSize.valid && !averageClassSize.pristine}"
           (blur)="transformDecimal($event, editDataForm.value.schoolDetails.averageClassSize)">
       </div>
@@ -371,73 +390,68 @@
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !totalIncome.valid && !totalIncome.pristine}">
         <label class="govuk-label" for="total-income">
           Total income
-          <a [routerLink]='' (click)="openModalWithComponent('totalIncome')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for total income"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('totalIncome')" id="help-totalIncome">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for total income" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm | aaValueFormat}}</span>
         </span>
         <div *ngIf="totalIncome.invalid && totalIncome.dirty">
           <span class="govuk-error-message" *ngIf='totalIncome.errors.required'>
-            <span class="govuk-visually-hidden">Error:</span> Total income is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the total income to continue
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text" #totalIncomeInput
-          formControlName='totalIncome'
+        <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
+          #totalIncomeInput formControlName='totalIncome'
           [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
-          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)"
-          required>
+          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)" required>
       </div>
 
       <div class="govuk-form-group"
         [class]="{'govuk-form-group--error' : (!totalExpenditure.valid && !totalExpenditure.pristine) || editDataForm.errors?.maxExpenditureExceeded}">
         <label class="govuk-label" for="total-expenditure">
           Total expenditure
-          <a [routerLink]='' (click)="openModalWithComponent('totalExpenditure')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for total expenditure"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('totalExpenditure')" id="help-totalExpenditure">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for total expenditure" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditureLatestTerm | aaValueFormat}}</span>
         </span>
         <div *ngIf="totalExpenditure.invalid && totalExpenditure.dirty">
           <span class="govuk-error-message" *ngIf='totalExpenditure.errors.required'>
-            <span class="govuk-visually-hidden">Error:</span> Total expenditure is required
+            <span class="govuk-visually-hidden">Error:</span> Enter the total expenditure to continue
           </span>
         </div>
         <div *ngIf="editDataForm.errors?.maxExpenditureExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Total expenditure can not be lower than sum of expenditures
+            <span class="govuk-visually-hidden">Error:</span> Total expenditure can not be lower than sum of
+            expenditures
           </span>
         </div>
-        <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text" #totalExpenditureInput
-          formControlName='totalExpenditure'
+        <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
+          #totalExpenditureInput formControlName='totalExpenditure'
           [class]="{'govuk-input--error' : (!totalExpenditure.valid && !totalExpenditure.pristine) || editDataForm.errors?.maxExpenditureExceeded}"
-          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalExpenditure)"
-          required>
+          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalExpenditure)" required>
       </div>
 
       <div class="govuk-form-group">
         <label class="govuk-label" for="rr">
           Revenue reserve
-          <a [routerLink]='' (click)="openModalWithComponent('rr')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for revenue reserve"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('rr')" id="help-rr">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for revenue reserve" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve') | aaValueFormat}}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve') |
+            aaValueFormat}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text" #revenueReserveInput
-        formControlName='rr'
-        (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr)"
-        >
+          formControlName='rr' (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr)">
       </div>
     </fieldset>
 
@@ -448,214 +462,217 @@
         </h2>
       </legend>
 
-      <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingStaffExceeded}">
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingStaffExceeded}">
         <label class="govuk-label" for="ts">
           Spending on teaching staff
-          <a [routerLink]='' (click)="openModalWithComponent('teachingStaff')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on teacher staff"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('teachingStaff')" id="help-teachingStaff">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon"
+            alt="Help for spending on teacher staff" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching staff') | aaValueFormat}}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching staff') |
+            aaValueFormat}}</span>
         </span>
         <div *ngIf="editDataForm.errors?.teachingStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Teaching staff expenditure can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Teaching staff spending can not be greater than total
+            expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="ts" name="ts" type="text" #teachingStaffInput
-        formControlName='teachingStaff'
-        [class]="{'govuk-input--error' : editDataForm.errors?.teachingStaffExceeded}"
-        (blur)="transformAmount($event, editDataForm.value.spending.teachingStaff)"
-        >
+          formControlName='teachingStaff' [class]="{'govuk-input--error' : editDataForm.errors?.teachingStaffExceeded}"
+          (blur)="transformAmount($event, editDataForm.value.spending.teachingStaff)">
       </div>
 
-      <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.supplyStaffExceeded}">
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : editDataForm.errors?.supplyStaffExceeded}">
         <label class="govuk-label" for="ss">
           Spending on supply staff
-          <a [routerLink]='' (click)="openModalWithComponent('supplyStaff')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on suplly staff"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('supplyStaff')" id="help-supplyStaff">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for spending on suplly staff" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Supply staff') | aaValueFormat }}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Supply staff') | aaValueFormat
+            }}</span>
         </span>
         <div *ngIf="editDataForm.errors?.supplyStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Supply staff expenditure can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Supply staff spending can not be greater than total
+            expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="ss" name="ss" type="text" #supplyStaffInput
-        formControlName='supplyStaff'
-        [class]="{'govuk-input--error' : editDataForm.errors?.supplyStaffExceeded}"
-        (blur)="transformAmount($event, editDataForm.value.spending.supplyStaff)"
-        >
+          formControlName='supplyStaff' [class]="{'govuk-input--error' : editDataForm.errors?.supplyStaffExceeded}"
+          (blur)="transformAmount($event, editDataForm.value.spending.supplyStaff)">
       </div>
 
       <div class="govuk-form-group"
         [class]="{'govuk-form-group--error' : editDataForm.errors?.educationSupportStaffExceeded}">
         <label class="govuk-label" for="ess">
           Spending on education support staff
-          <a [routerLink]='' (click)="openModalWithComponent('educationSupportStaff')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on education support staff" />
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('educationSupportStaff')" id="help-educationSupportStaff">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon"
+            alt="Help for spending on education support staff" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Education support staff') | aaValueFormat}}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Education support staff') |
+            aaValueFormat}}</span>
         </span>
         <div *ngIf="editDataForm.errors?.educationSupportStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Education support staff expenditure can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Education support staff spending can not be greater than
+            total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="ess" name="ess" type="text" #educationSupportStaffInput
           formControlName='educationSupportStaff'
           [class]="{'govuk-input--error' : editDataForm.errors?.educationSupportStaffExceeded}"
-          (blur)="transformAmount($event, editDataForm.value.spending.educationSupportStaff)"
-          >
+          (blur)="transformAmount($event, editDataForm.value.spending.educationSupportStaff)">
       </div>
 
-      <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.adminStaffExceeded}">
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : editDataForm.errors?.adminStaffExceeded}">
         <label class="govuk-label" for="acs">
           Spending on administrative and clerical staff
-          <a [routerLink]='' (click)="openModalWithComponent('adminStaff')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on administrative and clerical staff" />
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('adminStaff')" id="help-adminStaff">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon"
+            alt="Help for spending on administrative and clerical staff" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Administrative and clerical staff') | aaValueFormat}}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Administrative and clerical staff')
+            | aaValueFormat}}</span>
         </span>
         <div *ngIf="editDataForm.errors?.adminStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Administrative and clerical staff expenditure can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Administrative and clerical staff spending can not be
+            greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="acs" name="acs" type="text" #adminStaffInput
-        formControlName='adminStaff'
-        [class]="{'govuk-input--error' : editDataForm.errors?.adminStaffExceeded}"
-        (blur)="transformAmount($event, editDataForm.value.spending.adminStaff)"
-        >
+          formControlName='adminStaff' [class]="{'govuk-input--error' : editDataForm.errors?.adminStaffExceeded}"
+          (blur)="transformAmount($event, editDataForm.value.spending.adminStaff)">
       </div>
 
-      <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.otherStaffExceeded}">
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : editDataForm.errors?.otherStaffExceeded}">
         <label class="govuk-label" for="osc">
           Spending on other staff costs
-          <a [routerLink]='' (click)="openModalWithComponent('otherStaff')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on other staff costs" />
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('otherStaff')" id="help-otherStaff">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon"
+            alt="Help for spending on other staff costs" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Other staff costs') | aaValueFormat}}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Other staff costs') |
+            aaValueFormat}}</span>
         </span>
         <div *ngIf="editDataForm.errors?.otherStaffExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Other staff costs can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Other staff costs spending can not be greater than total
+            expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="osc" name="osc" type="text" #otherStaffInput
-        formControlName='otherStaff'
-        [class]="{'govuk-input--error' : editDataForm.errors?.otherStaffExceeded}"
-        (blur)="transformAmount($event, editDataForm.value.spending.otherStaff)"
-        >
+          formControlName='otherStaff' [class]="{'govuk-input--error' : editDataForm.errors?.otherStaffExceeded}"
+          (blur)="transformAmount($event, editDataForm.value.spending.otherStaff)">
       </div>
 
-      <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.premisesExceeded}">
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : editDataForm.errors?.premisesExceeded}">
         <label class="govuk-label" for="prc">
           Spending on premises costs
-          <a [routerLink]='' (click)="openModalWithComponent('premises')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on premises costs"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('premises')" id="help-premises">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon"
+            alt="Help for spending on premises costs" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Premises costs') | aaValueFormat}}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Premises costs') |
+            aaValueFormat}}</span>
         </span>
         <div *ngIf="editDataForm.errors?.premisesExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Premises costs can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Premises costs spending can not be greater than total
+            expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="prc" name="prc" type="text" #premisesInput
-        formControlName='premises'
-        [class]="{'govuk-input--error' : editDataForm.errors?.premisesExceeded}"
-        (blur)="transformAmount($event, editDataForm.value.spending.premises)"
-        >
+          formControlName='premises' [class]="{'govuk-input--error' : editDataForm.errors?.premisesExceeded}"
+          (blur)="transformAmount($event, editDataForm.value.spending.premises)">
       </div>
 
       <div class="govuk-form-group"
         [class]="{'govuk-form-group--error' : editDataForm.errors?.teachingResourcesExceeded}">
         <label class="govuk-label" for="tr">
           Spending on educational supplies
-          <a [routerLink]='' (click)="openModalWithComponent('teachingResources')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on educational supplies"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('teachingResources')" id="help-teachingResources">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon"
+            alt="Help for spending on educational supplies" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
-            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Educational supplies') | aaValueFormat}}</span>
+            class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Educational supplies') |
+            aaValueFormat}}</span>
         </span>
         <div *ngIf="editDataForm.errors?.teachingResourcesExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Educational supplies spending can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Educational supplies spending can not be greater than
+            total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="tr" name="tr" type="text" #teachingResourcesInput
           formControlName='teachingResources'
           [class]="{'govuk-input--error' : editDataForm.errors?.teachingResourcesExceeded}"
-          (blur)="transformAmount($event, editDataForm.value.spending.teachingResources)"
-          >
+          (blur)="transformAmount($event, editDataForm.value.spending.teachingResources)">
       </div>
 
-      <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : editDataForm.errors?.energyExceeded}">
+      <div class="govuk-form-group" [class]="{'govuk-form-group--error' : editDataForm.errors?.energyExceeded}">
         <label class="govuk-label" for="en">
           Spending on energy
-          <a [routerLink]='' (click)="openModalWithComponent('energy')">
-            <img src="assets/images/info.svg" class="small-icon edit-help-icon"
-            alt="Help for spending on energy"/>
-          </a>
         </label>
+        <a [routerLink]='' (click)="openModalWithComponent('energy')" id="help-energy">
+          <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for spending on energy" />
+        </a>
         <span class="govuk-hint">
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Energy') | aaValueFormat}}</span>
         </span>
         <div *ngIf="editDataForm.errors?.energyExceeded" class="govuk-error-message">
           <span class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Energy spending can not be higher than total expenditure
+            <span class="govuk-visually-hidden">Error:</span> Energy spending can not be greater than total expenditure
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="en" name="en" type="text" #energyInput
-        formControlName='energy'
-        [class]="{'govuk-input--error' : editDataForm.errors?.energyExceeded}"
-        (blur)="transformAmount($event, editDataForm.value.spending.energy)"
-        >
+          formControlName='energy' [class]="{'govuk-input--error' : editDataForm.errors?.energyExceeded}"
+          (blur)="transformAmount($event, editDataForm.value.spending.energy)">
       </div>
+    </fieldset>
 
+    <fieldset formGroupName='scenarioDetails'>
+      <div class="govuk-form-group">
+        <div class="govuk-checkboxes__item">
+          <input class="govuk-checkboxes__input" type="checkbox" id="storeBeyondSession"
+            formControlName="storeBeyondSession">
+          <label class="govuk-label govuk-checkboxes__label" for="storeBeyondSession">Allow your browser to store this
+            data
+            (deselecting will remove the data when you end the session)</label>
+        </div>
+      </div>
     </fieldset>
 
     <div class="govuk-grid-row govuk-body">
       <div class="govuk-grid-column-full">
-        <button *ngIf='viewType === "edit"' class="govuk-button" data-module="govuk-button" type="submit">Continue to dashboard</button>
-        <button *ngIf='viewType === "enter"' class="govuk-button sad_gtm_submit_sbs" data-module="govuk-button" type="submit">Continue to custom dashboard</button>
-        <a (click)='onBack()' href="javascript:void(0)" class="govuk-link govuk-link--no-visited-state back-button">Back
-        </a>
+        <button *ngIf='viewType === "edit"' class="govuk-button" data-module="govuk-button" type="submit">Continue to
+          dashboard</button>
+        <button *ngIf='viewType === "enter"' class="govuk-button sad_gtm_submit_sbs" data-module="govuk-button"
+          type="submit">Continue to custom dashboard</button>
       </div>
     </div>
 

@@ -1,6 +1,8 @@
 import { CookiesService } from './../../services/cookies.service';
+import { Location } from '@angular/common';
 import { Component, OnInit, Inject } from '@angular/core';
 import { appSettings, AppSettings } from '@core/config/settings/app-settings';
+import { ViewModeService } from 'app/services/viewMode.service';
 
 @Component({
   selector: 'app-gov-uk-layout',
@@ -9,7 +11,11 @@ import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 })
 export class GovUkLayoutComponent implements OnInit {
 
-  constructor(@Inject(appSettings) public settings: AppSettings, private cookiesService: CookiesService) {  }
+  constructor(
+    @Inject(appSettings) public settings: AppSettings,
+    private cookiesService: CookiesService,
+    private location: Location,
+    private viewModeService: ViewModeService) {  }
 
   ngOnInit() {
     this.cookiesService.manageCookies();
@@ -22,5 +28,14 @@ export class GovUkLayoutComponent implements OnInit {
   acceptedHide() {
     this.cookiesService.acceptedHide();
   }
+
+  onBack() {
+    this.location.back();
+  }
+
+  isInEditMode(){
+    return this.viewModeService.isEditMode();
+  }
+
 
 }

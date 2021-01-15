@@ -37,6 +37,8 @@
 
 .highlighted-percentage{
     background-color: #d4357f;
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact;
     color: white;
     padding: 0 5px;
     font-weight: bold;
