@@ -37,6 +37,7 @@
     "html2canvas": "1.0.0-alpha.10",
     "jquery": "^3.4.1",
     "jspdf": "^2.1.1",
+    "pptxgenjs": "^2.6.0",
     "leaflet": "^1.6.0",
     "leaflet-fullscreen": "^1.0.2",
     "leaflet.markercluster": "^1.4.1",

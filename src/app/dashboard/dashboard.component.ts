@@ -1,4 +1,4 @@
-import { DownloadFormatModalComponent } from './download-format-modal/download-format-modal.component';
+import { PptService } from './../services/ppt.service';
 import { DashboardInfoModalComponent } from './dashboard-info-modal/dashboard-info-modal.component';
 import { PdfService } from './../services/pdf.service';
 import { throwError } from 'rxjs';
@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit {
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService,
     private pdfService: PdfService,
+    private pptService: PptService,
     titleService: TitleService,
     viewModeService: ViewModeService) {
     viewModeService.setDashboardMode();
@@ -139,7 +140,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onDownload() {
-    this.modalRef.hide();
+    this.onDownLoadClose();
+
     switch (this.downloadFormat) {
       case "pdf":
         if (this.isMobileScreen) {
@@ -150,19 +152,24 @@ export class DashboardComponent implements OnInit {
         break;
 
       case "ppt":
-
+        if (this.isMobileScreen) {
+          this.pptService.generatePptForMobile();
+        } else {
+          this.pptService.generatePptForDesktop();
+        }
+        break;
       default:
         break;
     }
   }
 
   onDownloadPopup(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template,
-      {
-        ariaDescribedby: 'title',
-        ariaLabelledBy: 'legend'
-      }
-    );
+    this.modalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
+  }
+
+  onDownLoadClose(){
+    this.modalRef.hide();
+    document.getElementById("downloadPageLink").focus();
   }
 
 }

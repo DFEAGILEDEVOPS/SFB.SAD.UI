@@ -11,7 +11,6 @@ import { AAModalModel } from 'app/Models/AAModalModel';
 import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
 import { DashboardAaModalComponent } from 'app/dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
-import { DownloadFormatModalComponent } from 'app/dashboard/download-format-modal/download-format-modal.component';
 
 
 @Component({
@@ -29,7 +28,7 @@ export class SidebysideComponent implements OnInit {
   isMobileScreen: boolean;
   tabletBreakPoint = 641;
   downloadFormat = "pdf";
-  
+
   constructor(
     private router: Router,
     private modalService: BsModalService,
@@ -131,7 +130,8 @@ export class SidebysideComponent implements OnInit {
     }
 
     onDownload() {
-      this.modalRef.hide();
+      this.onDownLoadClose();
+
       switch (this.downloadFormat) {
         case "pdf":
           if (this.isMobileScreen) {
@@ -149,13 +149,12 @@ export class SidebysideComponent implements OnInit {
     }
 
     onDownloadPopup(template: TemplateRef<any>) {
-      this.modalRef = this.modalService.show(template,
-        {
-          ariaDescribedby: 'title',
-          ariaLabelledBy: 'legend'
-        }
-      );
+      this.modalRef = this.modalService.show(template, {ariaDescribedby: 'title',ariaLabelledBy: 'legend'});
     }
 
+    onDownLoadClose(){
+      this.modalRef.hide();
+      document.getElementById("downloadPageLink").focus();
+    }
 
 }

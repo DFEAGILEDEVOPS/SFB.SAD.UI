@@ -93,7 +93,7 @@
 <ng-template #downloadPopupTemplate>
   <div class="modal-header">
     <h4 id="title" class="modal-title pull-left">Select file format</h4>
-    <a href="javascript:void(0)" class="pull-right modal-close-link" aria-label="Close modal dialog" (click)="modalRef.hide()">
+    <a href="javascript:void(0)" class="pull-right modal-close-link" aria-label="Close modal dialog" (click)="onDownLoadClose()">
       <span aria-hidden="true">Close</span>
     </a>
   </div>
@@ -121,7 +121,7 @@
       </fieldset>
       <div class="govuk-!-padding-top-1">
             <button class="govuk-button govuk-!-margin-right-4" data-module="govuk-button" (click)="onDownload()">Download</button>
-            <a class="govuk-link govuk-!-font-size-19" style="vertical-align: -webkit-baseline-middle;" href="javascript:void(0)" (click)="modalRef.hide()">Cancel</a>
+            <a class="govuk-link govuk-!-font-size-19" style="vertical-align: -webkit-baseline-middle;" href="javascript:void(0)" (click)="onDownLoadClose()">Cancel</a>
       </div>
   </div>
 </ng-template>

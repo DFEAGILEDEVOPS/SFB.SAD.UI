@@ -233,7 +233,7 @@ export class PdfService {
       { id: "page3Tables" },
     ];
 
-    return from(new Promise((resolve) => {
+    return from(new Promise<void>((resolve) => {
       this.canvassesForMobileTables.forEach(tableCanvas => {
         this.pdfGenerateImage('#' + tableCanvas.id).then((canvas) => {
           tableCanvas.canvas = canvas;
@@ -255,7 +255,7 @@ export class PdfService {
       { id: "outcomesTable" }
     ]
 
-    return from(new Promise((resolve) => {
+    return from(new Promise<void>((resolve) => {
       this.canvassesForDesktopTables.forEach(tableCanvas => {
         this.pdfGenerateImage('#' + tableCanvas.id).then((canvas) => {
           tableCanvas.canvas = canvas;
