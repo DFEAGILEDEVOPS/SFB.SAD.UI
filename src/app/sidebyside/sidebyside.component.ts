@@ -2,7 +2,7 @@ import { ViewModeService } from 'app/services/viewMode.service';
 import { TitleService } from './../services/title.service';
 import { PdfService } from './../services/pdf.service';
 import { AAModalModels } from './../Models/AAModalModels';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
 import { SaScenarioModel } from 'app/Models/SaScenarioModel';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
@@ -11,6 +11,7 @@ import { AAModalModel } from 'app/Models/AAModalModel';
 import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
 import { DashboardAaModalComponent } from 'app/dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
+import { DownloadFormatModalComponent } from 'app/dashboard/download-format-modal/download-format-modal.component';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class SidebysideComponent implements OnInit {
   secondScenarioLoaded: boolean;
   isMobileScreen: boolean;
   tabletBreakPoint = 641;
-
+  downloadFormat = "pdf";
+  
   constructor(
     private router: Router,
     private modalService: BsModalService,
@@ -129,11 +131,31 @@ export class SidebysideComponent implements OnInit {
     }
 
     onDownload() {
-      if(this.isMobileScreen) {
-        this.pdfService.generatePdfForMobile();
-      } else {
-        this.pdfService.generatePdfForDesktop();
+      this.modalRef.hide();
+      switch (this.downloadFormat) {
+        case "pdf":
+          if (this.isMobileScreen) {
+            this.pdfService.generatePdfForMobile();
+          } else {
+            this.pdfService.generatePdfForDesktop();
+          }
+          break;
+
+        case "ppt":
+
+        default:
+          break;
       }
     }
+
+    onDownloadPopup(template: TemplateRef<any>) {
+      this.modalRef = this.modalService.show(template,
+        {
+          ariaDescribedby: 'title',
+          ariaLabelledBy: 'legend'
+        }
+      );
+    }
+
 
 }

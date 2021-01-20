@@ -31,7 +31,7 @@
 
   <div class="govuk-grid-row hide-in-print">
     <div class="govuk-grid-column-one-half">
-      <a [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold sad_gtm_download" (click)="onDownload()">
+      <a id="downloadPageLink" [routerLink]="" class="govuk-link a-button govuk-!-font-weight-bold sad_gtm_download" (click)="onDownloadPopup(downloadPopupTemplate)">
         <img src="assets/images/download.svg" class="small-icon download-icon" alt=""/>
         <span id="downloadPage">Download page</span>
       </a>
@@ -61,3 +61,39 @@
 <div [hidden]='firstScenarioLoaded && firstScenario.isTresholdsRefreshed && secondScenarioLoaded && secondScenario.isTresholdsRefreshed'>
   Loading...
 </div>
+
+<ng-template #downloadPopupTemplate>
+  <div class="modal-header">
+    <h4 id="title" class="modal-title pull-left">Select file format</h4>
+    <a href="javascript:void(0)" class="pull-right modal-close-link" aria-label="Close modal dialog" (click)="modalRef.hide()">
+      <span aria-hidden="true">Close</span>
+    </a>
+  </div>
+  <div class="modal-body">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+          <h4 id="legend" class="govuk-fieldset__heading">
+            You can download the page in PDF or PowerPoint format.
+          </h4>
+        </legend>
+        <div class="govuk-radios govuk-form-group">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="pdf-format" name="format" type="radio" value="pdf" [(ngModel)]="downloadFormat">
+            <label class="govuk-label govuk-radios__label" for="pdf-format">
+              PDF format
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="ppt-format" name="format" type="radio" value="ppt" [(ngModel)]="downloadFormat">
+            <label class="govuk-label govuk-radios__label" for="ppt-format">
+              PowerPoint format
+            </label>
+          </div>
+        </div>
+      </fieldset>
+      <div class="govuk-!-padding-top-1">
+            <button class="govuk-button govuk-!-margin-right-4" data-module="govuk-button" (click)="onDownload()">Download</button>
+            <a class="govuk-link govuk-!-font-size-19" style="vertical-align: -webkit-baseline-middle;" href="javascript:void(0)" (click)="modalRef.hide()">Cancel</a>
+      </div>
+  </div>
+</ng-template>
