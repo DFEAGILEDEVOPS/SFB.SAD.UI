@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   scenarioLoaded: boolean;
   isMobileScreen: boolean;
   tabletBreakPoint = 641;
-  downloadFormat = "pdf";
+  downloadFormat = "ppt";
 
   constructor(
     private route: ActivatedRoute,

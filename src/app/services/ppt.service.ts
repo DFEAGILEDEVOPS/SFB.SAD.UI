@@ -22,18 +22,28 @@ export class PptService {
     this.yOffset = 0;
   }
 
+  public generatePptForMobile() {
+  }
+
   public generatePptForDesktop() {
     this.expandDetails();
-    $("#downloadPage").text(" Loading...");
     $("body").css("cursor", "wait");
     $(".rating-help-icon").hide();
 
-    this.writeHeadingsForDesktop();
-    this.writeWarnings();
     this.generateCanvassesForDesktopTables().subscribe(() => {
+      this.writeHeadingsForDesktop();
       this.writeTableFromCanvasForDesktop("criteriaTable");
-      this.save();
-      $("#downloadPage").text(" Download page");
+      this.pptAddNewSlide();
+      this.writeScenarioNameYear();
+      this.writeTableFromCanvasForDesktop("reserveTable");
+      this.pptAddNewSlide();
+      this.writeTableFromCanvasForDesktop("spendingTable");
+      this.pptAddNewSlide();
+      this.writeTableFromCanvasForDesktop("charTable");
+      this.pptAddNewSlide();
+      this.writeTableFromCanvasForDesktop("outcomesTable");
+
+      this.pptSave();
       $("body").css("cursor", "");
       $(".rating-help-icon").show();
     });
@@ -41,46 +51,63 @@ export class PptService {
 
   private writeHeadingsForDesktop() {
     this.yOffset += 0.5;
-    this.slide.addText($('#h1').get(0).innerText, { x: 0.2, y: this.yOffset, fontSize: 18, bold: true });
-    if ($('#dateCaption').length > 0) {
-      this.yOffset += 0.5;
-      this.slide.addText($('#dateCaption').get(0).innerText, { x: 0.2, y: this.yOffset, fontSize: 14, bold: true });
-    }
+    this.slide.addText($('#h1').get(0).innerText, { x: 0.2, y: this.yOffset, fontSize: 22, bold: true });
 
+    this.yOffset += 0.5;
     let assessingText = $('#assessing').get(0).innerText;
-    let part1 = assessingText.substring(0, assessingText.indexOf('.') + 1);
-    let part2 = assessingText.substring(assessingText.indexOf('.') + 2);
-    this.yOffset += 0.5;
-    this.slide.addText(part1, { x: 0.2, y: this.yOffset, fontSize: 14, bold: true });
-    if (part2) {
-      this.slide.addText(part2, { x: 0.2, y: this.yOffset, fontSize: 14, bold: true });
-    }
+    this.slide.addText(assessingText, { x: 0.2, y: this.yOffset, fontSize: 10, bold: false });
   }
 
-  private writeWarnings() {
-    this.yOffset += 0.5;
-    if ($('#partialWarning').length > 0) {
-      let warningText = $('#partialWarning__text').get(0).innerText;
-      let part1 = warningText.substring(0, warningText.indexOf('.') + 1);
-      let part2 = warningText.substring(warningText.indexOf('.') + 2);
-      this.slide.addText(part1, { x: 0.2, y: this.yOffset, fontSize: 18, bold: false });
-      if (part2) {
-        this.slide.addText(part2, { x: 0.2, y: this.yOffset, fontSize: 18, bold: false });
-      }
+  private writeScenarioNameYear() {
+    if ($('#scenarioName').length > 0) {
+      this.yOffset += 0.3;
+      this.slide.addText($('#scenarioName').get(0).innerText, { x: 0.2, y: this.yOffset, fontSize: 14, bold: true });
+      this.yOffset += 0.3;
     }
-  }
-
-
-  public generatePptForMobile() {
+    if ($('#scenarioYear').length > 0) {
+      this.slide.addText($('#scenarioYear').get(0).innerText, { x: 0.2, y: this.yOffset, fontSize: 12, bold: false });
+      this.yOffset += 0.1;
+    }
   }
 
   private writeTableFromCanvasForDesktop(id: string) {
     let canvas = this.canvassesForDesktopTables.find(ct => ct.id === id).canvas;
-    if (this.yOffset + canvas.height > 900) {
-      this.slide = this.doc.addNewSlide();
-    }
     this.pptAddImage(canvas);
-    this.yOffset += canvas.height + 50;
+    this.yOffset += canvas.height + 10;
+  }
+
+  private pptAddNewSlide(){
+    this.slide = this.doc.addNewSlide();
+    this.yOffset = 0;
+  }
+
+  private pptAddImage(canvas: any){
+    let img = canvas.toDataURL("image/png");
+    let ratio = canvas.width / canvas.height;
+    this.yOffset += 0.3;
+    let width = 6.5;
+    let height = 6.5 / ratio;
+    if (height > 7) {
+        height = 7;
+        width = height * ratio;
+    }
+    this.slide.addImage({ data: img, x: 0.25, y: this.yOffset, w: width, h: height });
+  }
+
+  private pptSave() {
+    this.doc.save('Self-assessment-dashboard');
+  }
+
+  private pptGenerateImage(elementId) {
+    let element = $(elementId)[0];
+    return html2canvas(element, {
+      imageTimeout: 20000,
+      removeContainer: false,
+      width: element.clientWidth,
+      height: element.clientHeight,
+      allowTaint: true,
+      scale: 1
+    });
   }
 
   private generateCanvassesForDesktopTables() {
@@ -104,24 +131,6 @@ export class PptService {
     }));
   }
 
-  private pptAddImage(canvas: any){
-    let img = canvas.toDataURL("image/png");
-    let ratio = canvas.width / canvas.height;
-    this.yOffset += 0.3;
-    let width = 4.5;
-    let height = 4.5 / ratio;
-    if (height > 5) {
-        height = 5;
-        width = height * ratio;
-    }
-    this.slide.addImage({ data: img, x: 0.5, y: this.yOffset, w: width, h: height });
-
-  }
-
-  private save() {
-    this.doc.save('Self-assessment-dashboard');
-  }
-
   private expandDetails() {
     let detailses = document.getElementsByTagName("details");
     let details;
@@ -129,17 +138,5 @@ export class PptService {
     while (details = detailses[++i]) {
       details["open"] = true;
     }
-  }
-
-  private pptGenerateImage(elementId) {
-    let element = $(elementId)[0];
-    return html2canvas(element, {
-      imageTimeout: 20000,
-      removeContainer: false,
-      width: element.clientWidth,
-      height: element.clientHeight,
-      allowTaint: true,
-      scale: 1
-    });
   }
 }

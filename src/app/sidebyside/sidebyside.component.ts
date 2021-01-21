@@ -11,6 +11,7 @@ import { AAModalModel } from 'app/Models/AAModalModel';
 import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
 import { DashboardAaModalComponent } from 'app/dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
+import { PptService } from 'app/services/ppt.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class SidebysideComponent implements OnInit {
     private modalService: BsModalService,
     private saScenariosService: SaScenariosService,
     private pdfService: PdfService,
+    private pptService: PptService,
     titleService: TitleService,
     viewModeService: ViewModeService) {
       viewModeService.setDashboardMode();
@@ -142,7 +144,12 @@ export class SidebysideComponent implements OnInit {
           break;
 
         case "ppt":
-
+          if (this.isMobileScreen) {
+            this.pptService.generatePptForMobile();
+          } else {
+            this.pptService.generatePptForDesktop();
+          }
+          break;
         default:
           break;
       }
