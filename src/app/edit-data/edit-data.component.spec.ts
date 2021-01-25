@@ -15,6 +15,10 @@ import { ActivatedRouteStub } from 'testing/activated-route-stub';
 import { SaSizeLookupService } from '@core/network/services/sasizelookup.service';
 import { By } from '@angular/platform-browser';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { appSettingsFactory } from '@core/config/app-config.module';
+import { AppSettings, appSettings } from '@core/config/settings/app-settings';
+import { URLService } from '@core/network/services/URL.service';
+import { ConfigService } from '@ngx-config/core';
 
 
 function asyncData<T>(data: T) {
@@ -30,6 +34,8 @@ describe('Component: Edit-data', () => {
   let routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   let activatedRouteStub: ActivatedRouteStub;
   let fixture: ComponentFixture<EditDataComponent>;
+  let configServiceSpy =  jasmine.createSpyObj('ConfigService', ['getSettings']);
+  let urlServiceSpy =  jasmine.createSpyObj('URLService', ['getDomain']);
 
   beforeEach(async(() => {
     activatedRouteStub = new ActivatedRouteStub();
@@ -44,16 +50,21 @@ describe('Component: Edit-data', () => {
         { provide: Router, useValue: routerSpy },
         { provide: FormBuilder, useClass: FormBuilder },
         { provide: BsModalService, useValue: jasmine.createSpyObj('BsModalService', ['_']) },
+        { provide: ConfigService, useValue: configServiceSpy },
+        { provide: URLService, useValue: urlServiceSpy },
+        { provide: appSettings, useFactory: appSettingsFactory, deps: [ConfigService, URLService] },
       ],
       declarations: [EditDataComponent, AaValueFormatPipe]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(EditDataComponent);
-    comp = fixture.componentInstance;
-
   }));
 
+  beforeEach(() => {
+    configServiceSpy.getSettings.and.returnValue({appSettings: new AppSettings()});
+    urlServiceSpy.getDomain.and.returnValue("localhost");
+
+  });
 
   it('should display FSM field when primary or secondary school', () => {
 
@@ -65,6 +76,8 @@ describe('Component: Edit-data', () => {
     stubSaData.name = 'test';
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
 
+    fixture = TestBed.createComponent(EditDataComponent);
+    comp = fixture.componentInstance;
     fixture.detectChanges();
 
     let fsmDe = fixture.debugElement.query(By.css('#fsm'));
@@ -83,6 +96,8 @@ describe('Component: Edit-data', () => {
     stubSaData.name = 'test';
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
 
+    fixture = TestBed.createComponent(EditDataComponent);
+    comp = fixture.componentInstance;
     fixture.detectChanges();
 
     let fsmDe = fixture.debugElement.query(By.css('#fsm')).parent;
@@ -102,6 +117,8 @@ describe('Component: Edit-data', () => {
     stubSaData.name = 'test';
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
 
+    fixture = TestBed.createComponent(EditDataComponent);
+    comp = fixture.componentInstance;
     fixture.detectChanges();
 
     let fsmDe = fixture.debugElement.query(By.css('.govuk-error-summary'));
@@ -119,6 +136,8 @@ describe('Component: Edit-data', () => {
     stubSaData.name = 'test';
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
 
+    fixture = TestBed.createComponent(EditDataComponent);
+    comp = fixture.componentInstance;
     fixture.detectChanges();
 
     comp.onSubmit();

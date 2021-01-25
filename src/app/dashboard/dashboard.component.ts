@@ -6,7 +6,7 @@ import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { SaScenarioModel } from '../Models/SaScenarioModel';
-import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef, Inject } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
@@ -14,6 +14,9 @@ import { getAADataFormat } from '@core/network/services/getAADataFormat';
 import { AAModalModel } from 'app/Models/AAModalModel';
 import { TitleService } from 'app/services/title.service';
 import { ViewModeService } from 'app/services/viewMode.service';
+import { AppSettings } from '../core/config/settings/app-settings';
+import { appSettings } from '@core/config/settings/app-settings';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -38,7 +41,8 @@ export class DashboardComponent implements OnInit {
     private pdfService: PdfService,
     private pptService: PptService,
     titleService: TitleService,
-    viewModeService: ViewModeService) {
+    viewModeService: ViewModeService,
+    @Inject(appSettings) public settings: AppSettings) {
     viewModeService.setDashboardMode();
     titleService.setWithPrefix("Self-assessment dashboard");
     this.route.paramMap.subscribe(pmap => {

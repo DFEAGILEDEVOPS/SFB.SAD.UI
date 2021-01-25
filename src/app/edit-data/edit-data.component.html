@@ -107,7 +107,9 @@
     <p class="govuk-body-s">
       Assessing
       <span class="highlight">
-        <span class="govuk-!-font-weight-bold">{{scenarioInEdit?.name}}</span>
+        <a href="{{settings.sfbDomain}}/school/detail?urn={{scenarioInEdit?.urn}}">
+          <span class="govuk-!-font-weight-bold">{{scenarioInEdit?.name}}</span>
+        </a>
       </span>
     </p>
     <div class="govuk-body-m" *ngIf='viewType === "enter"'>

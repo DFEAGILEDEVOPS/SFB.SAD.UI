@@ -2,7 +2,7 @@ import { ViewModeService } from 'app/services/viewMode.service';
 import { TitleService } from './../services/title.service';
 import { PdfService } from './../services/pdf.service';
 import { AAModalModels } from './../Models/AAModalModels';
-import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef, Inject } from '@angular/core';
 import { SaScenarioModel } from 'app/Models/SaScenarioModel';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
@@ -12,6 +12,7 @@ import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
 import { DashboardAaModalComponent } from 'app/dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
 import { PptService } from 'app/services/ppt.service';
+import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class SidebysideComponent implements OnInit {
     private pdfService: PdfService,
     private pptService: PptService,
     titleService: TitleService,
-    viewModeService: ViewModeService) {
+    viewModeService: ViewModeService,
+    @Inject(appSettings) public settings: AppSettings) {
       viewModeService.setDashboardMode();
       titleService.setWithPrefix("Self-assessment dashboard");
       this.aaModalModels = new AAModalModels();

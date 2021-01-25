@@ -10,6 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs/internal/observable/of';
 import { ActivatedRouteStub } from 'testing/activated-route-stub';
 import { By } from '@angular/platform-browser';
+import { appSettingsFactory } from '@core/config/app-config.module';
+import { AppSettings, appSettings } from '@core/config/settings/app-settings';
+import { URLService } from '@core/network/services/URL.service';
+import { ConfigService } from '@ngx-config/core';
 
 function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -22,6 +26,8 @@ describe('Component: Dashboard', () => {
   let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'isSecondScenarioEditedAndStored']);
   let routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   let activatedRouteStub = new ActivatedRouteStub();
+  let configServiceSpy =  jasmine.createSpyObj('ConfigService', ['getSettings']);
+  let urlServiceSpy =  jasmine.createSpyObj('URLService', ['getDomain']);
 
   beforeEach(() => {
 
@@ -32,8 +38,17 @@ describe('Component: Dashboard', () => {
         { provide: BsModalService, useValue: jasmine.createSpyObj('BsModalService', ['_']) },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: Router, useValue: routerSpy },
+        { provide: ConfigService, useValue: configServiceSpy },
+        { provide: URLService, useValue: urlServiceSpy },
+        { provide: appSettings, useFactory: appSettingsFactory, deps: [ConfigService, URLService] },
       ]
     }).compileComponents();
+
+  });
+
+  beforeEach(() => {
+    configServiceSpy.getSettings.and.returnValue({appSettings: new AppSettings()});
+    urlServiceSpy.getDomain.and.returnValue("localhost");
 
   });
 
