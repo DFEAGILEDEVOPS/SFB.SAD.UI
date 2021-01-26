@@ -19,12 +19,8 @@ export class PdfService {
   }
 
   public generatePdfForDesktop() {
-    this.expandDetails();
-    $("#downloadPage").text(" Loading...");
-    $("body").css("cursor", "wait");
-    $(".rating-help-icon").hide();
-    this.offset = 60;
-    this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
+    this.initDoc();
+    this.preparePage();
     this.writeHeadingsForDesktop();
     this.writeWarnings();
     setTimeout(() => {
@@ -46,19 +42,15 @@ export class PdfService {
         this.writeTableFromCanvasForDesktop("outcomesTable");
 
         this.pdfSave("Self-assessment-dashboard.pdf");
-        $("#downloadPage").text(" Download page");
-        $("body").css("cursor", "");
-        $(".rating-help-icon").show();
+
+        this.restorePage();
       });
     }, 100);
   }
 
   public generatePdfForMobile() {
-    this.expandDetails();
-    $("#downloadPage").text(" Loading...");
-    $("body").css("cursor", "wait");
-    this.offset = 60;
-    this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
+    this.initDoc();
+    this.preparePage();
     this.writeHeadingsForMobile();
     this.writeWarnings();
     setTimeout(() => {
@@ -72,20 +64,34 @@ export class PdfService {
         this.writeTableFromCanvasForMobile("page3Tables");
 
         this.pdfSave("Self-assessment-dashboard.pdf");
-        $("#downloadPage").text(" Download page");
-        $("body").css("cursor", "");
+
+        this.restorePage();
       });
     }, 100);
+  }
+
+  private initDoc() {
+    this.offset = 60;
+    this.doc = new jsPDF({ unit: 'px', format: 'a3', orientation: 'portrait' });
+  }
+
+  private restorePage() {
+    $("body").css("cursor", "");
+    $(".small-icon").show();
+  }
+
+  private preparePage() {
+    this.expandDetails();
+    $("body").css("cursor", "wait");
+    $(".small-icon").hide();
   }
 
   private writeTableFromCanvasForMobile(id: string) {
     let canvas = this.canvassesForMobileTables.find(ct => ct.id === id).canvas;
     let ratio = canvas.width / canvas.height;
-    let width = 155;
-    let height = 155 / ratio;
-    if (this.offset + height > 900) {
-      this.pdfAddNewPage();
-    }
+    let width = 145;
+    let height = 145 / ratio;
+
     this.pdfAddImage(canvas, width, height);
     this.offset += height + 25;
   }
@@ -159,10 +165,9 @@ export class PdfService {
     });
   }
 
-
   private pdfAddImage(canvas, width, height) {
     let img = canvas.toDataURL("image/png");
-    this.doc.addImage(img, 'JPEG', this.MARGIN_LEFT, this.offset, width, height, "", 'FAST');
+    this.doc.addImage(img, 'JPEG', this.MARGIN_LEFT + 5, this.offset, width, height, "", 'FAST');
   }
 
   private pdfSave(pdfName: string) {
