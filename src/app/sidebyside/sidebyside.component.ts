@@ -32,14 +32,14 @@ export class SidebysideComponent implements OnInit {
   downloadFormat = "pdf";
 
   constructor(
-    private router: Router,
-    private modalService: BsModalService,
-    private saScenariosService: SaScenariosService,
-    private pdfService: PdfService,
-    private pptService: PptService,
-    titleService: TitleService,
-    viewModeService: ViewModeService,
-    @Inject(appSettings) public settings: AppSettings) {
+              private router: Router,
+              private modalService: BsModalService,
+              private saScenariosService: SaScenariosService,
+              private pdfService: PdfService,
+              private pptService: PptService,
+              titleService: TitleService,
+              viewModeService: ViewModeService,
+              @Inject(appSettings) public settings: AppSettings) {
       viewModeService.setDashboardMode();
       titleService.setWithPrefix("Self-assessment dashboard");
       this.aaModalModels = new AAModalModels();

@@ -20,7 +20,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
     if (settings.consoleErrors) {
       console.error(error);
-      window.alert(error);
+      //window.alert(error);
     }
 
     if(settings.logExceptions) {

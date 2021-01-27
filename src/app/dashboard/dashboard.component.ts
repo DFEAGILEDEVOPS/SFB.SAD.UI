@@ -34,15 +34,16 @@ export class DashboardComponent implements OnInit {
   downloadFormat = "pdf";
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private modalService: BsModalService,
-    private saScenariosService: SaScenariosService,
-    private pdfService: PdfService,
-    private pptService: PptService,
-    titleService: TitleService,
-    viewModeService: ViewModeService,
-    @Inject(appSettings) public settings: AppSettings) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private modalService: BsModalService,
+              private saScenariosService: SaScenariosService,
+              private pdfService: PdfService,
+              private pptService: PptService,
+              titleService: TitleService,
+              viewModeService: ViewModeService,
+              @Inject(appSettings) public settings: AppSettings) {
+                
     viewModeService.setDashboardMode();
     titleService.setWithPrefix("Self-assessment dashboard");
     this.route.paramMap.subscribe(pmap => {
