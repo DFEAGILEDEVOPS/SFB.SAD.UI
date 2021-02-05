@@ -36,6 +36,7 @@ export class SaScenarioModel {
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
   sadAssessmentAreas: AssessmentAreaModel[];
+  availableScenarioTerms: string[];
 
   scenarioNo: number;
   isEdited: boolean;
@@ -70,6 +71,7 @@ export class SaScenarioModel {
     this.sadFSMLookup = data.sadFSMLookup;
     this.sadAssessmentAreas = data.sadAssesmentAreas;
 
+    this.availableScenarioTerms = data.availableScenarioTerms;
     this.termOfScenario = this.latestTerm;
     this.scenarioName = this.termOfScenario ? this.termOfScenario + ' submitted data' : null;
     this.totalIncome = this.totalIncomeLatestTerm;
