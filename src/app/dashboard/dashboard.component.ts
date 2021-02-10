@@ -1,3 +1,4 @@
+import { PptService } from './../services/ppt.service';
 import { DashboardInfoModalComponent } from './dashboard-info-modal/dashboard-info-modal.component';
 import { PdfService } from './../services/pdf.service';
 import { throwError } from 'rxjs';
@@ -5,7 +6,7 @@ import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
 import { SaScenarioModel } from '../Models/SaScenarioModel';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef, Inject } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardAaModalComponent } from './dashboard-aa-modal/dashboard-aa-modal.component';
@@ -13,6 +14,9 @@ import { getAADataFormat } from '@core/network/services/getAADataFormat';
 import { AAModalModel } from 'app/Models/AAModalModel';
 import { TitleService } from 'app/services/title.service';
 import { ViewModeService } from 'app/services/viewMode.service';
+import { AppSettings } from '../core/config/settings/app-settings';
+import { appSettings } from '@core/config/settings/app-settings';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -27,15 +31,19 @@ export class DashboardComponent implements OnInit {
   scenarioLoaded: boolean;
   isMobileScreen: boolean;
   tabletBreakPoint = 641;
+  downloadFormat = "pdf";
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private modalService: BsModalService,
-    private saScenariosService: SaScenariosService,
-    private pdfService: PdfService,
-    titleService: TitleService,
-    viewModeService: ViewModeService) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private modalService: BsModalService,
+              private saScenariosService: SaScenariosService,
+              private pdfService: PdfService,
+              private pptService: PptService,
+              titleService: TitleService,
+              viewModeService: ViewModeService,
+              @Inject(appSettings) public settings: AppSettings) {
+                
     viewModeService.setDashboardMode();
     titleService.setWithPrefix("Self-assessment dashboard");
     this.route.paramMap.subscribe(pmap => {
@@ -130,7 +138,6 @@ export class DashboardComponent implements OnInit {
     var i = -1;
 
     while (details = detailses[++i]) {
-      //DOM API
       details["open"] = true;
     }
 
@@ -138,13 +145,36 @@ export class DashboardComponent implements OnInit {
   }
 
   onDownload() {
-    //throwError("test error"); // returns observable!
-    //throw new Error("Download feature is not implemented yet!");
-    if(this.isMobileScreen) {
-      this.pdfService.generatePdfForMobile();
-    } else {
-      this.pdfService.generatePdfForDesktop();
+    this.onDownLoadClose();
+
+    switch (this.downloadFormat) {
+      case "pdf":
+        if (this.isMobileScreen) {
+          this.pdfService.generatePdfForMobile();
+        } else {
+          this.pdfService.generatePdfForDesktop();
+        }
+        break;
+
+      case "ppt":
+        if (this.isMobileScreen) {
+          this.pptService.generatePptForMobile();
+        } else {
+          this.pptService.generatePptForDesktop();
+        }
+        break;
+      default:
+        break;
     }
+  }
+
+  onDownloadPopup(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
+  }
+
+  onDownLoadClose(){
+    this.modalRef.hide();
+    document.getElementById("downloadPageLink").focus();
   }
 
 }

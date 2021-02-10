@@ -107,7 +107,9 @@
     <p class="govuk-body-s">
       Assessing
       <span class="highlight">
-        <span class="govuk-!-font-weight-bold">{{scenarioInEdit?.name}}</span>
+        <a href="{{settings.sfbDomain}}/school/detail?urn={{scenarioInEdit?.urn}}">
+          <span class="govuk-!-font-weight-bold">{{scenarioInEdit?.name}}</span>
+        </a>
       </span>
     </p>
     <div class="govuk-body-m" *ngIf='viewType === "enter"'>
@@ -171,10 +173,7 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for year of dashboard" />
         </a>
         <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm'>
-          <option value="2017/2018">2017/2018</option>
-          <option value="2018/2019">2018/2019</option>
-          <option value="2019/2020">2019/2020</option>
-          <option value="2020/2021">2020/2021</option>
+          <option *ngFor="let term of scenarioInEdit.availableScenarioTerms" value="{{term}}">{{term}}</option>
         </select>
       </div>
     </fieldset>

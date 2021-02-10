@@ -2,7 +2,7 @@ import { ViewModeService } from 'app/services/viewMode.service';
 import { TitleService } from './../services/title.service';
 import { PdfService } from './../services/pdf.service';
 import { AAModalModels } from './../Models/AAModalModels';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef, Inject } from '@angular/core';
 import { SaScenarioModel } from 'app/Models/SaScenarioModel';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
@@ -11,6 +11,8 @@ import { AAModalModel } from 'app/Models/AAModalModel';
 import { AssessmentAreaModel } from 'app/Models/AssessmentAreaModel';
 import { DashboardAaModalComponent } from 'app/dashboard/dashboard-aa-modal/dashboard-aa-modal.component';
 import { getAADataFormat } from '@core/network/services/getAADataFormat';
+import { PptService } from 'app/services/ppt.service';
+import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 
 
 @Component({
@@ -27,14 +29,17 @@ export class SidebysideComponent implements OnInit {
   secondScenarioLoaded: boolean;
   isMobileScreen: boolean;
   tabletBreakPoint = 641;
+  downloadFormat = "pdf";
 
   constructor(
-    private router: Router,
-    private modalService: BsModalService,
-    private saScenariosService: SaScenariosService,
-    private pdfService: PdfService,
-    titleService: TitleService,
-    viewModeService: ViewModeService) {
+              private router: Router,
+              private modalService: BsModalService,
+              private saScenariosService: SaScenariosService,
+              private pdfService: PdfService,
+              private pptService: PptService,
+              titleService: TitleService,
+              viewModeService: ViewModeService,
+              @Inject(appSettings) public settings: AppSettings) {
       viewModeService.setDashboardMode();
       titleService.setWithPrefix("Self-assessment dashboard");
       this.aaModalModels = new AAModalModels();
@@ -129,11 +134,36 @@ export class SidebysideComponent implements OnInit {
     }
 
     onDownload() {
-      if(this.isMobileScreen) {
-        this.pdfService.generatePdfForMobile();
-      } else {
-        this.pdfService.generatePdfForDesktop();
+      this.onDownLoadClose();
+
+      switch (this.downloadFormat) {
+        case "pdf":
+          if (this.isMobileScreen) {
+            this.pdfService.generatePdfForMobile();
+          } else {
+            this.pdfService.generatePdfForDesktop();
+          }
+          break;
+
+        case "ppt":
+          if (this.isMobileScreen) {
+            this.pptService.generatePptForMobile();
+          } else {
+            this.pptService.generatePptForDesktop();
+          }
+          break;
+        default:
+          break;
       }
+    }
+
+    onDownloadPopup(template: TemplateRef<any>) {
+      this.modalRef = this.modalService.show(template, {ariaDescribedby: 'title',ariaLabelledBy: 'legend'});
+    }
+
+    onDownLoadClose(){
+      this.modalRef.hide();
+      document.getElementById("downloadPageLink").focus();
     }
 
 }

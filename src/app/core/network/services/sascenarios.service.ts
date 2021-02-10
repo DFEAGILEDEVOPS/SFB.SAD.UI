@@ -50,7 +50,7 @@ export class SaScenariosService {
         observer.next(this.firstScenarioInMemory);
         observer.complete();
       });
-    } else {
+    } else if(urn != null){
       return this.saDataService.getSaScenario(urn)
         .pipe(
           tap(scenario => {

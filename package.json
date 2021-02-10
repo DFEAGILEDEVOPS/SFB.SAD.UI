@@ -41,9 +41,11 @@
     "leaflet-fullscreen": "^1.0.2",
     "leaflet.markercluster": "^1.4.1",
     "ng-bootstrap-form-validation": "^5.0.0",
-    "ngx-bootstrap": "^5.5.0",
+    "ngx-bootstrap": "^6.2.0",
     "popper.js": "^1.16.1",
+    "pptxgenjs": "^2.6.0",
     "rxjs": "~6.5.4",
+    "stream": "0.0.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

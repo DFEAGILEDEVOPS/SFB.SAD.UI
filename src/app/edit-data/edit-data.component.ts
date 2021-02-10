@@ -1,3 +1,4 @@
+import { appSettings, AppSettings } from './../core/config/settings/app-settings';
 import { EditDataInfoModalComponent } from './edit-data-info-modal/edit-data-info-modal.component';
 import { mustBeLowerThanTotalSpendingValidator } from './../core/directives/mustBeLowerThanTotalSpendingValidator.directive';
 import { Location, CurrencyPipe } from '@angular/common';
@@ -5,7 +6,7 @@ import { SaFsmLookupService } from './../core/network/services/safsmlookup.servi
 import { SaSizeLookupService } from './../core/network/services/sasizelookup.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SaScenarioModel } from '../Models/SaScenarioModel';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Inject } from '@angular/core';
 import { SaScenariosService } from '@core/network/services/sascenarios.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isNumber } from 'util';
@@ -145,7 +146,8 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     private currencyPipe: CurrencyPipe,
     private location: Location,
     private modalService: BsModalService, titleService: TitleService,
-    viewModeService: ViewModeService) {
+    viewModeService: ViewModeService,
+    @Inject(appSettings) public settings: AppSettings) {
     viewModeService.setEditMode();
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
