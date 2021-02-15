@@ -26,5 +26,4 @@ export class SaData {
   sadSizeLookup: SizeLookupModel;
   sadFSMLookup: FSMLookupModel;
   sadAssesmentAreas: AssessmentAreaModel[];
-  availableScenarioTerms: string[];
 }

@@ -173,7 +173,10 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for year of dashboard" />
         </a>
         <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm'>
-          <option *ngFor="let term of scenarioInEdit.availableScenarioTerms" value="{{term}}">{{term}}</option>
+          <option value="2017/2018">2017/2018</option>
+          <option value="2018/2019">2018/2019</option>
+          <option value="2019/2020">2019/2020</option>
+          <option value="2020/2021">2020/2021</option>
         </select>
       </div>
     </fieldset>
