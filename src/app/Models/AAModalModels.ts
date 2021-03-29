@@ -14,7 +14,8 @@ export class AAModalModels {
         title : 'KS 2 Average progress score',
         textContent : `<p>KS 2 Average progress score is an average of the reading, writing and maths progress scores. Individually these show how much progress pupils have made between the end of key stage 1 and the end of key stage 2, compared to pupils across all of England who achieved similar results at the end of key stage 1. This measure only applies to schools with key stage 2 classes.</p>
         <p>Schools will receive an amber or red rating if their KS 2 Average progress score is below average.</p>
-        <p>Progress scores can be found on the <a href="https://www.gov.uk/school-performance-tables" class="govuk-link" target="_blank" rel="external noopener noreferrer">school performance tables website</a>.</p>`
+        <p>Progress scores can be found on the <a href="https://www.gov.uk/school-performance-tables" class="govuk-link" target="_blank" rel="external noopener noreferrer">school performance tables website</a>.</p>
+        <div class='govuk-inset-text'><span class='govuk-body-s'>Due to Covid-19 the Government is not publishing the school educational performance data for 2020, the latest progress data is from 2019.</span></div>`
       },
       {
         assessmentArea : 'P8',
@@ -22,7 +23,8 @@ export class AAModalModels {
         textContent : `<p>Progress 8 scores show how much progress pupils have made between the end of key stage 2 and the end of key stage 4, compared to pupils across all of England who got similar results at the end of key stage 2. This measure only applies to schools with key stage 4.</p>
         <p>Schools will receive an amber or red rating if their progress score is below average.</p>
         <p>Progress scores can be found on the <a href="https://www.gov.uk/school-performance-tables" class="govuk-link" target="_blank" rel="external noopener noreferrer">school performance tables website</a>.</p>
-        <p>Thresholds have been set using the department’s progress measure bandings.</p>`
+        <p>Thresholds have been set using the department’s progress measure bandings.</p>
+        <div class='govuk-inset-text'><span class='govuk-body-s'>Due to Covid-19 the Government is not publishing the school educational performance data for 2020, the latest progress data is from 2019.</span></div>`
       },
       {
         assessmentArea : 'Teaching staff',
