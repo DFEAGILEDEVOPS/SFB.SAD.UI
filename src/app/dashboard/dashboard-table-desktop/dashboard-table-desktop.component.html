@@ -3,7 +3,8 @@
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-forty-percent">Assessment area</th>
-      <th scope="col" class="govuk-table__header width-ten-percent">School data</th>
+      <th scope="col" class="govuk-table__header width-ten-percent" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+      <th scope="col" class="govuk-table__header width-ten-percent" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
       <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of income">% of <abbr title="income">inc.</abbr></th>
       <th scope="col" class="govuk-table__header width-forty-percent">Rating against thresholds</th>
     </tr>
@@ -39,7 +40,8 @@
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-forty-percent">Assessment area</th>
-      <th scope="col" class="govuk-table__header width-ten-percent">School data</th>
+      <th scope="col" class="govuk-table__header width-ten-percent" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+      <th scope="col" class="govuk-table__header width-ten-percent" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
       <th scope="col" class="govuk-table__header width-ten-percent" aria-label="% of expenditure">% of <abbr title="expenditure">exp.</abbr></th>
       <th scope="col" class="govuk-table__header width-forty-percent">Rating against thresholds</th>
     </tr>
@@ -71,11 +73,13 @@
 </table>
 
 <table class="govuk-table" id="charTable">
-  <caption class="govuk-table__caption safari_only govuk-!-font-size-24">School characteristics</caption>
+  <caption class="govuk-table__caption safari_only govuk-!-font-size-24" *ngIf="activeScenario.financeType != 'Federation'">School characteristics</caption>
+  <caption class="govuk-table__caption safari_only govuk-!-font-size-24" *ngIf="activeScenario.financeType == 'Federation'">Federation characteristics</caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
       <th scope="col" class="govuk-table__header width-forty-percent">Assessment area</th>
-      <th scope="col" class="govuk-table__header width-twenty-percent">School data</th>
+      <th scope="col" class="govuk-table__header width-ten-percent" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+      <th scope="col" class="govuk-table__header width-ten-percent" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
       <th scope="col" class="govuk-table__header width-forty-percent">Rating against thresholds</th>
     </tr>
   </thead>
@@ -109,7 +113,7 @@
   </tbody>
 </table>
 
-<table class="govuk-table" id="outcomesTable">
+<table class="govuk-table" id="outcomesTable" *ngIf="activeScenario.financeType != 'Federation'">
   <caption class="govuk-table__caption safari_only govuk-!-font-size-24">Outcomes</caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">

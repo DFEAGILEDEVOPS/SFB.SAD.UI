@@ -5,7 +5,8 @@
   <table class="govuk-table" id="reserveTable-{{i}}" *ngFor='let aa of activeScenario.reserveAAs; let i = index'>
     <caption class="govuk-table__caption safari_only bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">School data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
       <td class="govuk-table__cell">{{aa.schoolData | aaValueFormat}}</td>
     </tr>
     <tr class="govuk-table__row">
@@ -42,7 +43,8 @@
   <table class="govuk-table" id="spendingTable-{{i}}" *ngFor='let aa of activeScenario.spendingAAs; let i = index'>
     <caption class="govuk-table__caption safari_only bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">School data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
       <td class="govuk-table__cell">{{aa.schoolData | aaValueFormat}}</td>
     </tr>
     <tr class="govuk-table__row">
@@ -73,12 +75,14 @@
 </div>
 
 <div id="page3Tables">
-  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6">School characteristics</h3>
+  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6" *ngIf="activeScenario.financeType != 'Federation'">School characteristics</h3>
+  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6" *ngIf="activeScenario.financeType == 'Federation'">Federation characteristics</h3>
 
   <table class="govuk-table" id="charTable-{{i}}" *ngFor='let aa of activeScenario.characteristicAAs; let i = index'>
     <caption class="govuk-table__caption safari_only bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">School data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
     </tr>
     <tr class="govuk-table__row">
@@ -107,160 +111,167 @@
     </tr>
   </table>
 
-  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6">Outcomes</h3>
+<div *ngIf="activeScenario.financeType != 'Federation'">
+    <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6">Outcomes</h3>
 
-  <table class="govuk-table" id="ofstedTable">
-    <caption class="govuk-table__caption safari_only bottom-border">Ofsted rating</caption>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">School data</th>
-      <td class="govuk-table__cell">
-        <div class="ofsted-info-wrapper">
-          <span class="rating rating-{{activeScenario.ofstedRating}}" *ngIf='activeScenario.ofstedRating !== "0"'>
-            {{activeScenario.ofstedRating}} </span>
-          <span class="ofsted--na" *ngIf='activeScenario.ofstedRating === "0"'> No data available</span>
-          <span [ngSwitch]="activeScenario.ofstedRating">
-            <span class="govuk-!-font-weight-bold" *ngSwitchCase="'1'"> Outstanding</span>
-            <span class="govuk-!-font-weight-bold" *ngSwitchCase="'2'"> Good</span>
-            <span class="govuk-!-font-weight-bold" *ngSwitchCase="'3'"> Requires improvement</span>
-            <span class="govuk-!-font-weight-bold" *ngSwitchCase="'4'"> Inadequate</span>
-          </span> |
-          <a class="govuk-link" target="_blank" rel="external noopener noreferrer"
-            href="https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/{{activeScenario.urn}}">Ofsted
-            report</a><br>
-          <span *ngIf='activeScenario.ofstedInspectionDate'>Inspected
-            {{ activeScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
-        </div>
-        <a [routerLink]='' (click)="openModalWithComponent('Ofsted')" class="rating-help-icon" id="help-Ofsted">
-          <img src="assets/images/info.svg" alt="Help for ofsted rating" class="small-icon ofsted-icon" />
-        </a>
-      </td>
-    </tr>
-  </table>
+    <table class="govuk-table" id="ofstedTable">
+      <caption class="govuk-table__caption safari_only bottom-border">Ofsted rating</caption>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <td class="govuk-table__cell">
+          <div class="ofsted-info-wrapper">
+            <span class="rating rating-{{activeScenario.ofstedRating}}" *ngIf='activeScenario.ofstedRating !== "0"'>
+              {{activeScenario.ofstedRating}} </span>
+            <span class="ofsted--na" *ngIf='activeScenario.ofstedRating === "0"'> No data available</span>
+            <span [ngSwitch]="activeScenario.ofstedRating">
+              <span class="govuk-!-font-weight-bold" *ngSwitchCase="'1'"> Outstanding</span>
+              <span class="govuk-!-font-weight-bold" *ngSwitchCase="'2'"> Good</span>
+              <span class="govuk-!-font-weight-bold" *ngSwitchCase="'3'"> Requires improvement</span>
+              <span class="govuk-!-font-weight-bold" *ngSwitchCase="'4'"> Inadequate</span>
+            </span> |
+            <a class="govuk-link" target="_blank" rel="external noopener noreferrer"
+              href="https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/{{activeScenario.urn}}">Ofsted
+              report</a><br>
+            <span *ngIf='activeScenario.ofstedInspectionDate'>Inspected
+              {{ activeScenario.ofstedInspectionDate | date : 'dd MMMM yyyy' }}</span>
+          </div>
+          <a [routerLink]='' (click)="openModalWithComponent('Ofsted')" class="rating-help-icon" id="help-Ofsted">
+            <img src="assets/images/info.svg" alt="Help for ofsted rating" class="small-icon ofsted-icon" />
+          </a>
+        </td>
+      </tr>
+    </table>
 
-  <table class="govuk-table" id="ks2Table" *ngIf="activeScenario.progressScoreType === 'KS2 score'">
-    <caption class="govuk-table__caption safari_only bottom-border">{{activeScenario.progressScoreType}}</caption>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">School data</th>
-      <td class="govuk-table__cell progress-td">
-        <div class="progress-text-wrapper">
-          <span *ngIf='activeScenario.ks2Score' class="progress-text" [ngClass]="{
-                'progress-text--well-below': activeScenario.ks2Score < -3 ,
-                'progress-text--below': activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2,
-                'progress-text--average': activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2,
-                'progress-text--above': activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2,
-                'progress-text--well-above': activeScenario.ks2Score > 3}">
-            {{activeScenario.ks2Score | number: '1.2-2'}}
-            <span *ngIf="activeScenario.ks2Score < -3">&nbsp; Well below average</span>
-            <span style="color: #0C0C0C;"
-              *ngIf="activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2">&nbsp; Below
-              average</span>
-            <span *ngIf="activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2">&nbsp;
-              Average</span>
-            <span style="color: #0C0C0C;"
-              *ngIf="activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2">&nbsp; Above
-              average</span>
-            <span *ngIf="activeScenario.ks2Score > 3">&nbsp; Well above average</span>
-          </span>
-          <span [hidden]='activeScenario.ks2Score' class="progress--na">No data available</span>
-        </div>
-        <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon" id="help-KS2">
-          <img src="assets/images/info.svg" alt="Help for KS2 score" class="small-icon progress-icon" />
-        </a>
-      </td>
-    </tr>
-  </table>
-
-  <table class="govuk-table" id="progress8Table" *ngIf="activeScenario.progressScoreType === 'Progress 8 score'">
-    <caption class="govuk-table__caption safari_only bottom-border">{{activeScenario.progressScoreType}}</caption>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">School data</th>
-      <td class="govuk-table__cell progress-td">
-        <div class="progress-text-wrapper">
-          <span *ngIf='activeScenario.p8Score' class="progress-text" [ngClass]="{
-                    'progress-text--well-below': activeScenario.progress8Banding === 5,
-                    'progress-text--below': activeScenario.progress8Banding === 4,
-                    'progress-text--average': activeScenario.progress8Banding === 3,
-                    'progress-text--above': activeScenario.progress8Banding === 2,
-                    'progress-text--well-above': activeScenario.progress8Banding === 1}">
-            {{activeScenario.p8Score | number: '1.2-2'}}
-            <span [ngSwitch]="activeScenario.progress8Banding">
-              <span *ngSwitchCase="5">&nbsp; Well below average</span>
-              <span style="color: #0C0C0C;" *ngSwitchCase="4">&nbsp; Below average</span>
-              <span *ngSwitchCase="3">&nbsp; Average</span>
-              <span style="color: #0C0C0C;" *ngSwitchCase="2">&nbsp; Above average</span>
-              <span *ngSwitchCase="1">&nbsp; Well above average</span>
+    <table class="govuk-table" id="ks2Table" *ngIf="activeScenario.progressScoreType === 'KS2 score'">
+      <caption class="govuk-table__caption safari_only bottom-border">{{activeScenario.progressScoreType}}</caption>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <td class="govuk-table__cell progress-td">
+          <div class="progress-text-wrapper">
+            <span *ngIf='activeScenario.ks2Score' class="progress-text" [ngClass]="{
+                  'progress-text--well-below': activeScenario.ks2Score < -3 ,
+                  'progress-text--below': activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2,
+                  'progress-text--average': activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2,
+                  'progress-text--above': activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2,
+                  'progress-text--well-above': activeScenario.ks2Score > 3}">
+              {{activeScenario.ks2Score | number: '1.2-2'}}
+              <span *ngIf="activeScenario.ks2Score < -3">&nbsp; Well below average</span>
+              <span style="color: #0C0C0C;"
+                *ngIf="activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2">&nbsp; Below
+                average</span>
+              <span *ngIf="activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2">&nbsp;
+                Average</span>
+              <span style="color: #0C0C0C;"
+                *ngIf="activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2">&nbsp; Above
+                average</span>
+              <span *ngIf="activeScenario.ks2Score > 3">&nbsp; Well above average</span>
             </span>
-          </span>
-          <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
-        </div>
-        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon" id="help-P8">
-          <img src="assets/images/info.svg" alt="Help for progress 8 score" class="small-icon progress-icon" />
-        </a>
-      </td>
-    </tr>
-  </table>
+            <span [hidden]='activeScenario.ks2Score' class="progress--na">No data available</span>
+          </div>
+          <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon" id="help-KS2">
+            <img src="assets/images/info.svg" alt="Help for KS2 score" class="small-icon progress-icon" />
+          </a>
+        </td>
+      </tr>
+    </table>
 
-  <table class="govuk-table" id="ks2Table" *ngIf="activeScenario.progressScoreType === 'All-through'">
-    <caption class="govuk-table__caption safari_only bottom-border">KS2 score</caption>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">School data</th>
-      <td class="govuk-table__cell progress-td">
-        <div class="progress-text-wrapper">
-          <span *ngIf='activeScenario.ks2Score' class="progress-text" [ngClass]="{
-                'progress-text--well-below': activeScenario.ks2Score < -3 ,
-                'progress-text--below': activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2,
-                'progress-text--average': activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2,
-                'progress-text--above': activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2,
-                'progress-text--well-above': activeScenario.ks2Score > 3}">
-            {{activeScenario.ks2Score | number: '1.2-2'}}
-            <span *ngIf="activeScenario.ks2Score < -3">&nbsp; Well below average</span>
-            <span style="color: #0C0C0C;"
-              *ngIf="activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2">&nbsp; Below
-              average</span>
-            <span *ngIf="activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2">&nbsp;
-              Average</span>
-            <span style="color: #0C0C0C;"
-              *ngIf="activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2">&nbsp; Above
-              average</span>
-            <span *ngIf="activeScenario.ks2Score > 3">&nbsp; Well above average</span>
-          </span>
-          <span [hidden]='activeScenario.ks2Score' class="progress--na">No data available</span>
-        </div>
-        <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon" id="help-KS2">
-          <img src="assets/images/info.svg" alt="Help for KS2 score" class="small-icon progress-icon" />
-        </a>
-      </td>
-    </tr>
-  </table>
-
-  <table class="govuk-table" id="progress8Table" *ngIf="activeScenario.progressScoreType === 'All-through'">
-    <caption class="govuk-table__caption safari_only bottom-border">Progress 8 score</caption>
-    <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">School data</th>
-      <td class="govuk-table__cell progress-td">
-        <div class="progress-text-wrapper">
-          <span *ngIf='activeScenario.p8Score' class="progress-text" [ngClass]="{
-                    'progress-text--well-below': activeScenario.progress8Banding === 5,
-                    'progress-text--below': activeScenario.progress8Banding === 4,
-                    'progress-text--average': activeScenario.progress8Banding === 3,
-                    'progress-text--above': activeScenario.progress8Banding === 2,
-                    'progress-text--well-above': activeScenario.progress8Banding === 1}">
-            {{activeScenario.p8Score | number: '1.2-2'}}
-            <span [ngSwitch]="activeScenario.progress8Banding">
-              <span *ngSwitchCase="5">&nbsp; Well below average</span>
-              <span style="color: #0C0C0C;" *ngSwitchCase="4">&nbsp; Below average</span>
-              <span *ngSwitchCase="3">&nbsp; Average</span>
-              <span style="color: #0C0C0C;" *ngSwitchCase="2">&nbsp; Above average</span>
-              <span *ngSwitchCase="1">&nbsp; Well above average</span>
+    <table class="govuk-table" id="progress8Table" *ngIf="activeScenario.progressScoreType === 'Progress 8 score'">
+      <caption class="govuk-table__caption safari_only bottom-border">{{activeScenario.progressScoreType}}</caption>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <td class="govuk-table__cell progress-td">
+          <div class="progress-text-wrapper">
+            <span *ngIf='activeScenario.p8Score' class="progress-text" [ngClass]="{
+                      'progress-text--well-below': activeScenario.progress8Banding === 5,
+                      'progress-text--below': activeScenario.progress8Banding === 4,
+                      'progress-text--average': activeScenario.progress8Banding === 3,
+                      'progress-text--above': activeScenario.progress8Banding === 2,
+                      'progress-text--well-above': activeScenario.progress8Banding === 1}">
+              {{activeScenario.p8Score | number: '1.2-2'}}
+              <span [ngSwitch]="activeScenario.progress8Banding">
+                <span *ngSwitchCase="5">&nbsp; Well below average</span>
+                <span style="color: #0C0C0C;" *ngSwitchCase="4">&nbsp; Below average</span>
+                <span *ngSwitchCase="3">&nbsp; Average</span>
+                <span style="color: #0C0C0C;" *ngSwitchCase="2">&nbsp; Above average</span>
+                <span *ngSwitchCase="1">&nbsp; Well above average</span>
+              </span>
             </span>
-          </span>
-          <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
-        </div>
-        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon" id="help-P8">
-          <img src="assets/images/info.svg" alt="Help for progress 8 score" class="small-icon progress-icon" />
-        </a>
-      </td>
-    </tr>
-  </table>
+            <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
+          </div>
+          <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon" id="help-P8">
+            <img src="assets/images/info.svg" alt="Help for progress 8 score" class="small-icon progress-icon" />
+          </a>
+        </td>
+      </tr>
+    </table>
+
+    <table class="govuk-table" id="ks2Table" *ngIf="activeScenario.progressScoreType === 'All-through'">
+      <caption class="govuk-table__caption safari_only bottom-border">KS2 score</caption>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <td class="govuk-table__cell progress-td">
+          <div class="progress-text-wrapper">
+            <span *ngIf='activeScenario.ks2Score' class="progress-text" [ngClass]="{
+                  'progress-text--well-below': activeScenario.ks2Score < -3 ,
+                  'progress-text--below': activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2,
+                  'progress-text--average': activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2,
+                  'progress-text--above': activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2,
+                  'progress-text--well-above': activeScenario.ks2Score > 3}">
+              {{activeScenario.ks2Score | number: '1.2-2'}}
+              <span *ngIf="activeScenario.ks2Score < -3">&nbsp; Well below average</span>
+              <span style="color: #0C0C0C;"
+                *ngIf="activeScenario.ks2Score >= -3 && activeScenario.ks2Score < -2">&nbsp; Below
+                average</span>
+              <span *ngIf="activeScenario.ks2Score >= -2 && activeScenario.ks2Score <= 2">&nbsp;
+                Average</span>
+              <span style="color: #0C0C0C;"
+                *ngIf="activeScenario.ks2Score <= 3 && activeScenario.ks2Score > 2">&nbsp; Above
+                average</span>
+              <span *ngIf="activeScenario.ks2Score > 3">&nbsp; Well above average</span>
+            </span>
+            <span [hidden]='activeScenario.ks2Score' class="progress--na">No data available</span>
+          </div>
+          <a [routerLink]='' (click)="openModalWithComponent('KS2')" class="rating-help-icon" id="help-KS2">
+            <img src="assets/images/info.svg" alt="Help for KS2 score" class="small-icon progress-icon" />
+          </a>
+        </td>
+      </tr>
+    </table>
+
+    <table class="govuk-table" id="progress8Table" *ngIf="activeScenario.progressScoreType === 'All-through'">
+      <caption class="govuk-table__caption safari_only bottom-border">Progress 8 score</caption>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <td class="govuk-table__cell progress-td">
+          <div class="progress-text-wrapper">
+            <span *ngIf='activeScenario.p8Score' class="progress-text" [ngClass]="{
+                      'progress-text--well-below': activeScenario.progress8Banding === 5,
+                      'progress-text--below': activeScenario.progress8Banding === 4,
+                      'progress-text--average': activeScenario.progress8Banding === 3,
+                      'progress-text--above': activeScenario.progress8Banding === 2,
+                      'progress-text--well-above': activeScenario.progress8Banding === 1}">
+              {{activeScenario.p8Score | number: '1.2-2'}}
+              <span [ngSwitch]="activeScenario.progress8Banding">
+                <span *ngSwitchCase="5">&nbsp; Well below average</span>
+                <span style="color: #0C0C0C;" *ngSwitchCase="4">&nbsp; Below average</span>
+                <span *ngSwitchCase="3">&nbsp; Average</span>
+                <span style="color: #0C0C0C;" *ngSwitchCase="2">&nbsp; Above average</span>
+                <span *ngSwitchCase="1">&nbsp; Well above average</span>
+              </span>
+            </span>
+            <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
+          </div>
+          <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon" id="help-P8">
+            <img src="assets/images/info.svg" alt="Help for progress 8 score" class="small-icon progress-icon" />
+          </a>
+        </td>
+      </tr>
+    </table>
+</div>
 
 </div>

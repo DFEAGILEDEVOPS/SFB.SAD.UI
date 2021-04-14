@@ -16,7 +16,7 @@
         finance data.
 
         <span *ngIf="this.activeScenario.financeType === 'Academies'">
-          This data includes the academy's share of 
+          This data includes the academy's share of
           <span class="govuk-!-font-weight-bold">MAT central finance</span>.
         </span>
       </p>
@@ -33,7 +33,8 @@
   </div>
   <app-dashboard-characteristics [phase]='activeScenario.overallPhaseWSixthForm'
     [londonWeight]='activeScenario.londonWeighting' [noPupils]='activeScenario.numberOfPupils'
-    [FSM]='activeScenario.fsm' [SizeLookup]='activeScenario.sadSizeLookup' [FSMLookup]='activeScenario.sadFSMLookup'>
+    [FSM]='activeScenario.fsm' [SizeLookup]='activeScenario.sadSizeLookup' [FSMLookup]='activeScenario.sadFSMLookup'
+    [financeType]='activeScenario.financeType'>
   </app-dashboard-characteristics>
 
   <div class="govuk-grid-row hide-in-print">
