@@ -213,32 +213,34 @@ caption{
   color:  $govuk-link-colour!important;
 }
 
-.width-ten-percent{
-  width: 10%;
-}
+@include govuk-media-query($from: tablet) {
+  .width-ten-percent{
+    width: 10%;
+  }
 
-.width-twenty-percent{
-  width: 20%;
-}
+  .width-twenty-percent{
+    width: 20%;
+  }
 
-.width-thirty-three-percent{
-  width: 33%;
-}
+  .width-thirty-three-percent{
+    width: 33%;
+  }
 
-.width-thirty-four-percent{
-  width: 34%;
-}
+  .width-thirty-four-percent{
+    width: 34%;
+  }
 
-.width-forty-percent{
-  width: 40%;
-}
+  .width-forty-percent{
+    width: 40%;
+  }
 
-.width-fifty-percent{
-  width: 50%;
-}
+  .width-fifty-percent{
+    width: 50%;
+  }
 
-.width-eighty-percent{
-  width: 80%;
+  .width-eighty-percent{
+    width: 80%;
+  }
 }
 
 .govuk-table__cell {
