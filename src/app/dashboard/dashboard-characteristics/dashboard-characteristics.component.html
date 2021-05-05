@@ -10,13 +10,15 @@
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header">Characteristic</th>
-          <th scope="col" class="govuk-table__header">Your school</th>
+          <th scope="col" class="govuk-table__header" *ngIf="financeType != 'Federation'">Your school</th>
+          <th scope="col" class="govuk-table__header" *ngIf="financeType == 'Federation'">Your federation</th>
           <th scope="col" class="govuk-table__header">Comparison criteria</th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
         <tr class="govuk-table__row">
-          <td class="govuk-table__cell">School phase</td>
+          <td class="govuk-table__cell" *ngIf="financeType != 'Federation'">School phase</td>
+          <td class="govuk-table__cell" *ngIf="financeType == 'Federation'">Phase</td>
           <td class="govuk-table__cell">{{phase}}</td>
           <td class="govuk-table__cell">{{phase}}</td>
         </tr>

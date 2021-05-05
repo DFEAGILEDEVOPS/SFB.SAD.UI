@@ -117,8 +117,14 @@
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
         <strong class="govuk-warning-text__text">
           <span class="govuk-warning-text__assistive">Warning</span>
+          <span *ngIf="scenarioInEdit.financeType !='Federation'">
           Custom dashboards are for personal use and only visible to you. Any changes you make will be viewable on
           subsequent visits to this school’s dashboard unless you choose to reset them.
+          </span>
+          <span *ngIf="scenarioInEdit.financeType =='Federation'">
+          Custom dashboards are for personal use and only visible to you. Any changes you make will be viewable on
+          subsequent visits to this federation’s dashboard unless you choose to reset them.
+          </span>
         </strong>
       </div>
     </div>
@@ -127,8 +133,14 @@
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
         <strong class="govuk-warning-text__text">
           <span class="govuk-warning-text__assistive">Warning</span>
+          <span *ngIf="scenarioInEdit.financeType !='Federation'">
           Dashboards you have edited are only visible to you. Any changes you make will be viewable on subsequent visits
           to this school’s dashboard unless you choose to reset them.
+          </span>
+          <span *ngIf="scenarioInEdit.financeType =='Federation'">
+            Dashboards you have edited are only visible to you. Any changes you make will be viewable on subsequent visits
+            to this federation’s dashboard unless you choose to reset them.
+            </span>
         </strong>
       </div>
     </div>
@@ -180,9 +192,8 @@
 
     <fieldset class="govuk-fieldset" formGroupName='schoolDetails'>
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-        <h2 class="govuk-fieldset__heading">
-          School details
-        </h2>
+        <h2 class="govuk-fieldset__heading" *ngIf="scenarioInEdit.financeType !='Federation'">School details</h2>
+        <h2 class="govuk-fieldset__heading" *ngIf="scenarioInEdit.financeType =='Federation'">Federation details</h2>
       </legend>
 
       <div class="govuk-form-group"

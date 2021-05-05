@@ -15,6 +15,7 @@ export class DashboardCharacteristicsComponent implements OnInit {
   @Input() FSM: number;
   @Input() FSMLookup: FSMLookupModel;
   @Input() SizeLookup: SizeLookupModel;
+  @Input() financeType: string;
   constructor() { }
 
   ngOnInit() {
