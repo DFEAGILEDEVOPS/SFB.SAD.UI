@@ -86,7 +86,7 @@ export class SaScenarioModel {
   }
 
   get overallPhaseWSixthForm(): string {
-    if (this.hasSixthForm && this.overallPhase !== 'All-through') {
+    if (this.hasSixthForm && this.overallPhase == 'Secondary') {
       return this.overallPhase + ' with sixth form';
     }
     return this.overallPhase;
