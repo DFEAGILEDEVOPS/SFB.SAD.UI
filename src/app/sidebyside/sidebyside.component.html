@@ -49,11 +49,11 @@
   </div>
 
   <app-sidebyside-table-desktop *ngIf='!isMobileScreen' [firstScenario]='firstScenario' [secondScenario]='secondScenario'
-    (modalTriggered)='openModalWithComponent($event)' (scenarioRemoveTriggered)='removeScenario($event)'>
+    (onModalTriggered)='openModalWithComponent($event)' (onScenarioRemoveTriggered)='removeScenario($event)'>
   </app-sidebyside-table-desktop>
 
   <app-sidebyside-table-mobile *ngIf='isMobileScreen' [firstScenario]='firstScenario' [secondScenario]='secondScenario'
-    (modalTriggered)='openModalWithComponent($event)' (scenarioRemoveTriggered)='removeScenario($event)'>
+    (onModalTriggered)='openModalWithComponent($event)' (onScenarioRemoveTriggered)='removeScenario($event)'>
   </app-sidebyside-table-mobile>
 
 </div>
