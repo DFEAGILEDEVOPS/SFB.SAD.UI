@@ -126,4 +126,58 @@ describe('Component: Dashboard', () => {
     expect(warning).toBeNull();
 
   });
+
+  it('should display phase correctly, if secondary and has sixth form', () => {
+
+    fixture = TestBed.createComponent(DashboardComponent);
+    comp = fixture.componentInstance;
+
+    const stubSaData = new SaData();
+    stubSaData.overallPhase = "Secondary";
+    stubSaData.hasSixthForm = true;
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
+    saScenariosServiceSpy.isSecondScenarioEditedAndStored.and.returnValue(false);
+
+    activatedRouteStub.setParamMap({ urn: 123 });
+
+    fixture.detectChanges();
+
+    expect(comp.activeScenario.overallPhaseWSixthForm).toEqual("Secondary with sixth form");
+  });
+
+  it('should display phase correctly, if secondary and has not sixth form', () => {
+
+    fixture = TestBed.createComponent(DashboardComponent);
+    comp = fixture.componentInstance;
+
+    const stubSaData = new SaData();
+    stubSaData.overallPhase = "Secondary";
+    stubSaData.hasSixthForm = false;
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
+    saScenariosServiceSpy.isSecondScenarioEditedAndStored.and.returnValue(false);
+
+    activatedRouteStub.setParamMap({ urn: 123 });
+
+    fixture.detectChanges();
+
+    expect(comp.activeScenario.overallPhaseWSixthForm).toEqual("Secondary");
+  });
+
+  it('should display phase correctly, if special and has sixth form', () => {
+
+    fixture = TestBed.createComponent(DashboardComponent);
+    comp = fixture.componentInstance;
+
+    const stubSaData = new SaData();
+    stubSaData.overallPhase = "Special";
+    stubSaData.hasSixthForm = true;
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
+    saScenariosServiceSpy.isSecondScenarioEditedAndStored.and.returnValue(false);
+
+    activatedRouteStub.setParamMap({ urn: 123 });
+
+    fixture.detectChanges();
+
+    expect(comp.activeScenario.overallPhaseWSixthForm).toEqual("Special");
+  });
 });
