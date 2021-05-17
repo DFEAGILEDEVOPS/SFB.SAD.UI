@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppConfigModule } from './config/app-config.module';
 
-const coreProviders = [];
+const CORE_PROVIDERS = [];
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: coreProviders
+      providers: CORE_PROVIDERS
     };
   }
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

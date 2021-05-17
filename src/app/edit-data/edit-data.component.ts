@@ -14,24 +14,25 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditModalModels } from 'app/Models/EditModalModels';
 import { TitleService } from 'app/services/title.service';
 import { ViewModeService } from 'app/services/viewMode.service';
+import { analyzeFileForInjectables } from '@angular/compiler';
 
 @Component({
   selector: 'app-edit-data',
   templateUrl: './edit-data.component.html',
   styleUrls: ['./edit-data.component.scss']
 })
-export class EditDataComponent implements OnInit, AfterViewInit {
+  export class EditDataComponent implements OnInit, AfterViewInit {
   scenarioInEdit: SaScenarioModel;
   urn: number;
   editDataForm: FormGroup;
   viewType: string;
   scenarioNo: number;
-  scenarioLoaded: boolean;
-  storeScenarioBeyondSession: boolean;
+  scenarioLoaded: boolean = false;
+  storeScenarioBeyondSession: boolean = true;
   missingField: string;
   formSubmitted: boolean;
   modalRef: BsModalRef;
-  editDataModels: EditModalModels;
+  editDataModels: EditModalModels = new EditModalModels();
 
   @ViewChild('averageClassSizeElement') averageClassSizeElement: ElementRef;
   @ViewChild('predictedPupilElement') predictedPupilElement: ElementRef;
@@ -49,7 +50,6 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   @ViewChild('numberOfTeachersInput') numberOfTeachersInput: ElementRef;
   @ViewChild('schoolWorkforceInput') schoolWorkforceInput: ElementRef;
   @ViewChild('totalIncomeInput') totalIncomeInput: ElementRef;
-
   @ViewChild('errorSummaryElement') errorSummaryElement: ElementRef;
 
   get scenarioName() {
@@ -160,9 +160,6 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     } else {
       titleService.setWithPrefix("Add a custom dashboard");
     }
-    this.scenarioLoaded = false;
-    this.storeScenarioBeyondSession = true;
-    this.editDataModels = new EditModalModels();
   }
 
   ngOnInit() {
@@ -190,7 +187,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     this.storeScenarioBeyondSession =  this.editDataForm.value.scenarioDetails.storeBeyondSession;
 
     if (this.editDataForm.valid) {
-      const editedScenario: SaScenarioModel = this.scenarioInEdit;
+      let editedScenario: SaScenarioModel = this.scenarioInEdit;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
       editedScenario.numberOfPupils = this.editDataForm.value.schoolDetails.numberOfPupils;

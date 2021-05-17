@@ -2,8 +2,8 @@ import { ValidatorFn, AbstractControl, FormGroup } from '@angular/forms';
 
 export function mustMatchValidator(controlName: string, matchingControlName: string): ValidatorFn {
   return (formGroup: FormGroup): { [key: string]: any } | null => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
+    let control = formGroup.controls[controlName];
+    let matchingControl = formGroup.controls[matchingControlName];
     if (matchingControl.errors && !matchingControl.errors.mustMatch) {
       // return if another validator has already found an error on the matchingControl
       return;
@@ -20,10 +20,10 @@ export function mustMatchValidator(controlName: string, matchingControlName: str
 export function allowedCharactersValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     // setup simple regex for white listed characters
-    const validCharacters = /[^\s\w,.:&\/()+%'`@-]/;
+    const VALID_CHARS = /[^\s\w,.:&\/()+%'`@-]/;
     if (control.value && control.value.length > 0) {
       // match the control value against the regular expression
-      const matches = control.value.match(validCharacters);
+      let matches = control.value.match(VALID_CHARS);
       // if there are matches return an object, else return null.
       return matches && matches.length ? { invalidCharacters: matches } : null;
     }

@@ -7,8 +7,8 @@ export class URLService {
   constructor(@Inject(DOCUMENT) private document: any) { }
 
   getDomain() {
-    const host = `${this.document.location.protocol}//${this.document.location.hostname}`;
-    const domain = this.document.location.port ? `${host}:${this.document.location.port}` : `${host}`;
+    let host = `${this.document.location.protocol}//${this.document.location.hostname}`;
+    let domain = this.document.location.port ? `${host}:${this.document.location.port}` : `${host}`;
     return domain;
   }
 

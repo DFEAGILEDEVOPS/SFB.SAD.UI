@@ -70,7 +70,7 @@ describe('Component: Edit-data', () => {
 
     activatedRouteStub.setParamMap({ urn: 123 });
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.overallPhase = 'Primary';
     stubSaData.name = 'test';
@@ -90,7 +90,7 @@ describe('Component: Edit-data', () => {
 
     activatedRouteStub.setParamMap({ urn: 123 });
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.overallPhase = 'All-through';
     stubSaData.name = 'test';
@@ -111,7 +111,7 @@ describe('Component: Edit-data', () => {
 
     activatedRouteStub.setParamMap({ urn: 123 });
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.overallPhase = 'Primary';
     stubSaData.name = 'test';
@@ -130,7 +130,7 @@ describe('Component: Edit-data', () => {
 
     activatedRouteStub.setParamMap({ urn: 123 });
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.overallPhase = 'Primary';
     stubSaData.name = 'test';

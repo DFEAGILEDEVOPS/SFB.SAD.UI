@@ -20,6 +20,6 @@ export class ViewModeService {
   }
 
   isEditMode() {
-    return this.mode == "edit";
+    return this.mode === "edit";
   }
 }

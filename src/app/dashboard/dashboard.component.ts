@@ -27,8 +27,8 @@ export class DashboardComponent implements OnInit {
   urn: number;
   activeScenario: SaScenarioModel;
   modalRef: BsModalRef;
-  aaModalModels: AAModalModels;
-  scenarioLoaded: boolean;
+  aaModalModels: AAModalModels = new AAModalModels();
+  scenarioLoaded: boolean = false;
   isMobileScreen: boolean;
   tabletBreakPoint = 641;
   downloadFormat = "pdf";
@@ -43,14 +43,12 @@ export class DashboardComponent implements OnInit {
               titleService: TitleService,
               viewModeService: ViewModeService,
               @Inject(appSettings) public settings: AppSettings) {
-                
+
     viewModeService.setDashboardMode();
     titleService.setWithPrefix("Self-assessment dashboard");
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
     });
-    this.aaModalModels = new AAModalModels();
-    this.scenarioLoaded = false;
     this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
   }
 

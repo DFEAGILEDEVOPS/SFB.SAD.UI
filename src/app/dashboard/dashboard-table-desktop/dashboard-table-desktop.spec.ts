@@ -29,7 +29,7 @@ describe('Component: DashboardTableDesktop', () => {
 
   it('should display Outcomes table when not a federation', () => {
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.financeType = "Maintained";
 
@@ -44,7 +44,7 @@ describe('Component: DashboardTableDesktop', () => {
 
   it('should not display Outcomes table when a federation', () => {
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.financeType = "Federation";
 

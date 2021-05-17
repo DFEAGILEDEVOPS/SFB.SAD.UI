@@ -6,7 +6,7 @@
     <caption class="govuk-table__caption safari_only bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
-      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType === 'Federation'">Data</th>
       <td class="govuk-table__cell">{{aa.schoolData | aaValueFormat}}</td>
     </tr>
     <tr class="govuk-table__row">
@@ -44,7 +44,7 @@
     <caption class="govuk-table__caption safari_only bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
-      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType === 'Federation'">Data</th>
       <td class="govuk-table__cell">{{aa.schoolData | aaValueFormat}}</td>
     </tr>
     <tr class="govuk-table__row">
@@ -76,13 +76,13 @@
 
 <div id="page3Tables">
   <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6" *ngIf="activeScenario.financeType != 'Federation'">School characteristics</h3>
-  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6" *ngIf="activeScenario.financeType == 'Federation'">Federation characteristics</h3>
+  <h3 class="govuk-heading-m govuk-!-margin-top-9 govuk-!-padding-top-6" *ngIf="activeScenario.financeType === 'Federation'">Federation characteristics</h3>
 
   <table class="govuk-table" id="charTable-{{i}}" *ngFor='let aa of activeScenario.characteristicAAs; let i = index'>
     <caption class="govuk-table__caption safari_only bottom-border">{{aa.assessmentAreaName}}</caption>
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
-      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+      <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType === 'Federation'">Data</th>
       <td class="govuk-table__cell">{{aa.calculatedSchoolData | aaValueFormat : aa.assessmentAreaName}}</td>
     </tr>
     <tr class="govuk-table__row">
@@ -118,7 +118,7 @@
       <caption class="govuk-table__caption safari_only bottom-border">Ofsted rating</caption>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
-        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType === 'Federation'">Data</th>
         <td class="govuk-table__cell">
           <div class="ofsted-info-wrapper">
             <span class="rating rating-{{activeScenario.ofstedRating}}" *ngIf='activeScenario.ofstedRating !== "0"'>
@@ -147,7 +147,7 @@
       <caption class="govuk-table__caption safari_only bottom-border">{{activeScenario.progressScoreType}}</caption>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
-        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType === 'Federation'">Data</th>
         <td class="govuk-table__cell progress-td">
           <div class="progress-text-wrapper">
             <span *ngIf='activeScenario.ks2Score' class="progress-text" [ngClass]="{
@@ -212,7 +212,7 @@
       <caption class="govuk-table__caption safari_only bottom-border">KS2 score</caption>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
-        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType === 'Federation'">Data</th>
         <td class="govuk-table__cell progress-td">
           <div class="progress-text-wrapper">
             <span *ngIf='activeScenario.ks2Score' class="progress-text" [ngClass]="{
@@ -246,7 +246,7 @@
       <caption class="govuk-table__caption safari_only bottom-border">Progress 8 score</caption>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType != 'Federation'">School data</th>
-        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType == 'Federation'">Data</th>
+        <th scope="row" class="govuk-table__header" *ngIf="activeScenario.financeType === 'Federation'">Data</th>
         <td class="govuk-table__cell progress-td">
           <div class="progress-text-wrapper">
             <span *ngIf='activeScenario.p8Score' class="progress-text" [ngClass]="{

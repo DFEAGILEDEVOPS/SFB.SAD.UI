@@ -53,9 +53,9 @@ describe('Component: SideBySide', () => {
 
 
   it('should load both scenarios on initialization', () => {
-    const stubSaData1 = new SaData();
+    let stubSaData1 = new SaData();
     stubSaData1.urn = 111;
-    const stubSaData2 = new SaData();
+    let stubSaData2 = new SaData();
     stubSaData2.urn = 222;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData1)));
     saScenariosServiceSpy.getSecondScenario.and.returnValue(new SaScenarioModel(stubSaData2));
@@ -70,9 +70,9 @@ describe('Component: SideBySide', () => {
   });
 
   it('should delete the first scenario and replace with second when removed first', () => {
-    const stubSaData1 = new SaData();
+    let stubSaData1 = new SaData();
     stubSaData1.urn = 111;
-    const stubSaData2 = new SaData();
+    let stubSaData2 = new SaData();
     stubSaData2.urn = 222;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData1)));
     saScenariosServiceSpy.getSecondScenario.and.returnValue(new SaScenarioModel(stubSaData2));
@@ -88,9 +88,9 @@ describe('Component: SideBySide', () => {
   });
 
   it('should redirect to dashboard view when removed first', () => {
-    const stubSaData1 = new SaData();
+    let stubSaData1 = new SaData();
     stubSaData1.urn = 111;
-    const stubSaData2 = new SaData();
+    let stubSaData2 = new SaData();
     stubSaData2.urn = 222;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData1)));
     saScenariosServiceSpy.getSecondScenario.and.returnValue(new SaScenarioModel(stubSaData2));
@@ -106,9 +106,9 @@ describe('Component: SideBySide', () => {
   });
 
   it('should delete the second scenario when removed second', () => {
-    const stubSaData1 = new SaData();
+    let stubSaData1 = new SaData();
     stubSaData1.urn = 111;
-    const stubSaData2 = new SaData();
+    let stubSaData2 = new SaData();
     stubSaData2.urn = 222;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData1)));
     saScenariosServiceSpy.getSecondScenario.and.returnValue(of(new SaScenarioModel(stubSaData2)));
@@ -124,9 +124,9 @@ describe('Component: SideBySide', () => {
   });
 
   it('should redirect to dashboard view when removed second', () => {
-    const stubSaData1 = new SaData();
+    let stubSaData1 = new SaData();
     stubSaData1.urn = 111;
-    const stubSaData2 = new SaData();
+    let stubSaData2 = new SaData();
     stubSaData2.urn = 222;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData1)));
     saScenariosServiceSpy.getSecondScenario.and.returnValue(of(new SaScenarioModel(stubSaData2)));
