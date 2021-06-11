@@ -13,6 +13,7 @@ export class SaScenarioModel {
   hasSixthForm: boolean;
   londonWeighting: string;
   isReturnsComplete: boolean;
+  doReturnsExist: boolean;
   numberOfPupils: number;
   numberOfPupilsLatestTerm: number;
   fsm: number;
@@ -53,6 +54,7 @@ export class SaScenarioModel {
     this.hasSixthForm = data.hasSixthForm;
     this.overallPhase = data.overallPhase;
     this.isReturnsComplete = data.isReturnsComplete;
+    this.doReturnsExist = data.doReturnsExist;
     this.londonWeighting = data.londonWeighting;
     this.numberOfPupilsLatestTerm = data.numberOfPupilsLatestTerm;
     this.fsmLatestTerm = data.fsmLatestTerm;

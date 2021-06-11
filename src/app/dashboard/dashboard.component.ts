@@ -43,7 +43,6 @@ export class DashboardComponent implements OnInit {
               titleService: TitleService,
               viewModeService: ViewModeService,
               @Inject(appSettings) public settings: AppSettings) {
-
     viewModeService.setDashboardMode();
     titleService.setWithPrefix("Self-assessment dashboard");
     this.route.paramMap.subscribe(pmap => {

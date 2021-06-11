@@ -9,6 +9,7 @@ export class SaData {
   hasSixthForm: boolean;
   overallPhase: string;
   isReturnsComplete: boolean;
+  doReturnsExist: boolean;
   londonWeighting: string;
   numberOfPupilsLatestTerm: number;
   fsmLatestTerm: number;

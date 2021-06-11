@@ -1,4 +1,4 @@
-<div *ngIf='editDataForm.invalid && formSubmitted' #errorSummaryElement class="govuk-error-summary govuk-!-margin-top-2"
+<div *ngIf='editDataForm?.invalid && formSubmitted' #errorSummaryElement class="govuk-error-summary govuk-!-margin-top-2"
   aria-labelledby="error-summary-title" aria-atomic="true" role="alert" tabindex="-1" data-module="govuk-error-summary">
   <h2 class="govuk-error-summary__title" id="error-summary-title">
     There is a problem
@@ -103,7 +103,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <h1 *ngIf='viewType === "edit"' class="govuk-heading-xl">Edit dashboard</h1>
-    <h1 *ngIf='viewType === "enter"' class="govuk-heading-xl">Add a custom dashboard</h1>
+    <h1 *ngIf='viewType === "enter" || viewType === "add-new"' class="govuk-heading-xl">Add a custom dashboard</h1>
     <p class="govuk-body-s">
       Assessing
       <span class="highlight">
@@ -112,16 +112,16 @@
         </a>
       </span>
     </p>
-    <div class="govuk-body-m" *ngIf='viewType === "enter"'>
+    <div class="govuk-body-m" *ngIf='viewType === "enter" || viewType === "add-new"'>
       <div class="govuk-warning-text">
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
         <strong class="govuk-warning-text__text">
           <span class="govuk-warning-text__assistive">Warning</span>
-          <span *ngIf="scenarioInEdit.financeType !='Federation'">
+          <span *ngIf="scenarioInEdit?.financeType !='Federation'">
           Custom dashboards are for personal use and only visible to you. Any changes you make will be viewable on
           subsequent visits to this school’s dashboard unless you choose to reset them.
           </span>
-          <span *ngIf="scenarioInEdit.financeType =='Federation'">
+          <span *ngIf="scenarioInEdit?.financeType =='Federation'">
           Custom dashboards are for personal use and only visible to you. Any changes you make will be viewable on
           subsequent visits to this federation’s dashboard unless you choose to reset them.
           </span>
@@ -133,11 +133,11 @@
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
         <strong class="govuk-warning-text__text">
           <span class="govuk-warning-text__assistive">Warning</span>
-          <span *ngIf="scenarioInEdit.financeType !='Federation'">
+          <span *ngIf="scenarioInEdit?.financeType !='Federation'">
           Dashboards you have edited are only visible to you. Any changes you make will be viewable on subsequent visits
           to this school’s dashboard unless you choose to reset them.
           </span>
-          <span *ngIf="scenarioInEdit.financeType =='Federation'">
+          <span *ngIf="scenarioInEdit?.financeType =='Federation'">
             Dashboards you have edited are only visible to you. Any changes you make will be viewable on subsequent visits
             to this federation’s dashboard unless you choose to reset them.
             </span>
@@ -149,7 +149,7 @@
 
 <hr class="govuk-section-break govuk-section-break--m">
 
-<div [hidden]='!scenarioLoaded'>
+<div *ngIf='editDataForm && scenarioLoaded'>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="editDataForm">
 
@@ -204,7 +204,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('numberOfPupils')" id="help-numberOfPupils">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for Number of Pupils (fte)" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.numberOfPupilsLatestTerm}}</span>
         </span>
@@ -230,7 +230,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('schoolWorkforce')" id="help-schoolWorkforce">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for school workforce (FTE)" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.workforceTotalLastTerm}}</span>
         </span>
@@ -256,7 +256,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('numberOfTeachers')" id="help-numberOfTeachers">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for number of teachers (FTE)" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.teachersTotalLastTerm}}</span>
         </span>
@@ -282,7 +282,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('seniorLeadership')" id="help-seniorLeadership">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for senior leadership (FTE)" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.teachersLeaderLastTerm}}</span>
         </span>
@@ -309,7 +309,7 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon"
             alt="Help for percentage of pupils eligible for FSM" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.fsmLatestTerm}}</span>
         </span>
@@ -404,7 +404,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('totalIncome')" id="help-totalIncome">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for total income" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.totalIncomeLatestTerm | aaValueFormat}}</span>
         </span>
@@ -427,7 +427,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('totalExpenditure')" id="help-totalExpenditure">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for total expenditure" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.totalExpenditureLatestTerm | aaValueFormat}}</span>
         </span>
@@ -455,7 +455,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('rr')" id="help-rr">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for revenue reserve" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Revenue reserve') |
             aaValueFormat}}</span>
@@ -480,7 +480,7 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon"
             alt="Help for spending on teacher staff" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Teaching staff') |
             aaValueFormat}}</span>
@@ -503,7 +503,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('supplyStaff')" id="help-supplyStaff">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for spending on suplly staff" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Supply staff') | aaValueFormat
             }}</span>
@@ -528,7 +528,7 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon"
             alt="Help for spending on education support staff" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Education support staff') |
             aaValueFormat}}</span>
@@ -553,7 +553,7 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon"
             alt="Help for spending on administrative and clerical staff" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Administrative and clerical staff')
             | aaValueFormat}}</span>
@@ -577,7 +577,7 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon"
             alt="Help for spending on other staff costs" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Other staff costs') |
             aaValueFormat}}</span>
@@ -601,7 +601,7 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon"
             alt="Help for spending on premises costs" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Premises costs') |
             aaValueFormat}}</span>
@@ -626,7 +626,7 @@
           <img src="assets/images/info.svg" class="small-icon edit-help-icon"
             alt="Help for spending on educational supplies" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Educational supplies') |
             aaValueFormat}}</span>
@@ -650,7 +650,7 @@
         <a [routerLink]='' (click)="openModalWithComponent('energy')" id="help-energy">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for spending on energy" />
         </a>
-        <span class="govuk-hint">
+        <span class="govuk-hint" *ngIf='scenarioInEdit.doReturnsExist'>
           The {{scenarioInEdit.latestTerm}} value was <span
             class="govuk-!-font-weight-bold">{{scenarioInEdit.getAALatestTermValue('Energy') | aaValueFormat}}</span>
         </span>
@@ -681,7 +681,7 @@
       <div class="govuk-grid-column-full">
         <button *ngIf='viewType === "edit"' class="govuk-button" data-module="govuk-button" type="submit">Continue to
           dashboard</button>
-        <button *ngIf='viewType === "enter"' class="govuk-button sad_gtm_submit_sbs" data-module="govuk-button"
+        <button *ngIf='viewType === "enter" || viewType === "add-new"' class="govuk-button sad_gtm_submit_sbs" data-module="govuk-button"
           type="submit">Continue to custom dashboard</button>
       </div>
     </div>

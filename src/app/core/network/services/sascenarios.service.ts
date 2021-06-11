@@ -203,6 +203,13 @@ export class SaScenariosService {
     this.secondScenarioInMemory = null;
   }
 
+  isFirstScenarioEditedAndStored(urn: number) {
+    if (this.getScenarioFromLocalStorage(urn, 0) || this.getScenarioFromSessionStorage(urn, 0)) {
+      return true;
+    }
+    return false;
+  }
+
   isSecondScenarioEditedAndStored(urn: number) {
     if (this.getScenarioFromLocalStorage(urn, 1) || this.getScenarioFromSessionStorage(urn, 1)) {
       return true;

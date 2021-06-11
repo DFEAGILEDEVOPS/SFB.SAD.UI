@@ -49,8 +49,13 @@ import { analyzeFileForInjectables } from '@angular/compiler';
   @ViewChild('seniorLeadershipInput') seniorLeadersInput: ElementRef;
   @ViewChild('numberOfTeachersInput') numberOfTeachersInput: ElementRef;
   @ViewChild('schoolWorkforceInput') schoolWorkforceInput: ElementRef;
+  @ViewChild('numberOfPupilsInput') numberOfPupilsInput: ElementRef;
   @ViewChild('totalIncomeInput') totalIncomeInput: ElementRef;
+  @ViewChild('totalExpenditureInput') totalExpenditureInput: ElementRef;
   @ViewChild('errorSummaryElement') errorSummaryElement: ElementRef;
+  @ViewChild('fsmInput') fsmInput: ElementRef;
+  @ViewChild('seniorLeadershipInput') seniorLeadershipInput: ElementRef;
+  @ViewChild('scenarioNameInput') scenarioNameInput: ElementRef;
 
   get scenarioName() {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
@@ -148,6 +153,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
     private modalService: BsModalService, titleService: TitleService,
     viewModeService: ViewModeService,
     @Inject(appSettings) public settings: AppSettings) {
+
     viewModeService.setEditMode();
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
@@ -163,9 +169,12 @@ import { analyzeFileForInjectables } from '@angular/compiler';
   }
 
   ngOnInit() {
-    if (this.viewType === 'edit' && (this.scenarioNo === null || this.scenarioNo === 0)) {
+    if ((this.viewType === 'edit' && (this.scenarioNo === null || this.scenarioNo === 0)) || this.viewType === 'add-new') {
       this.scenariosService.getFirstScenario(this.urn)
         .subscribe(result => {
+          if(this.viewType === 'add-new' && this.scenariosService.isFirstScenarioEditedAndStored(this.urn)){
+            this.router.navigate(['self-assessment/', this.urn]);
+          }
           this.scenarioInEdit = result;
           this.scenarioLoaded = true;
           this.buildForm();
@@ -219,7 +228,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
       editedScenario.isEdited = true;
       editedScenario.lastEditTimeStamp = new Date();
 
-      if (this.viewType === 'edit' && this.scenarioNo === null) {
+      if ((this.viewType === 'edit' && this.scenarioNo === null) || this.viewType === 'add-new') {
         if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
 
           this.sizeLookupService.getSizeLookup(
@@ -325,8 +334,8 @@ import { analyzeFileForInjectables } from '@angular/compiler';
     element.target.value = this.numberToDecimal(formControl);
   }
 
-  setFocus(input){
-    input.focus();
+  setFocus(input: ElementRef){
+    input.nativeElement.focus();
   }
 
   openModalWithComponent(formControlName: string) {
