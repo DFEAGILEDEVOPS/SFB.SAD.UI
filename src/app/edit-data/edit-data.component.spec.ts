@@ -27,7 +27,7 @@ function asyncData<T>(data: T) {
 
 describe('Component: Edit-data', () => {
   let comp: EditDataComponent;
-  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario']);
+  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'isFirstScenarioEditedAndStored']);
   let saSizeLookupServiceSpy = jasmine.createSpyObj('SaSizeLookupService', ['getSizeLookup']);
   let saFSMLookupServiceSpy = jasmine.createSpyObj('SaFsmLookupService', ['getFSMLookup']);
   let currencyPipeSpy = jasmine.createSpyObj('CurrencyPipe', ['transform']);
@@ -64,6 +64,24 @@ describe('Component: Edit-data', () => {
     configServiceSpy.getSettings.and.returnValue({appSettings: new AppSettings()});
     urlServiceSpy.getDomain.and.returnValue("localhost");
 
+  });
+
+  it('should redirect to dashboard page if has already a scenario and attempted to add new', () => {
+
+    activatedRouteStub.setParamMap({ urn: 123, viewType: 'add-new' });
+
+    let stubSaData = new SaData();
+    stubSaData.urn = 123;
+    stubSaData.overallPhase = 'Primary';
+    stubSaData.name = 'test';
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
+    saScenariosServiceSpy.isFirstScenarioEditedAndStored.and.returnValue(true);
+
+    fixture = TestBed.createComponent(EditDataComponent);
+    comp = fixture.componentInstance;
+    fixture.detectChanges();
+
+    expect(routerSpy.navigate).toHaveBeenCalledWith([ 'self-assessment/', 123 ]);
   });
 
   it('should display FSM field when primary or secondary school', () => {
