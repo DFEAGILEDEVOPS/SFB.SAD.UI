@@ -237,6 +237,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
             editedScenario.termOfScenario,
             editedScenario.numberOfPupils).subscribe(result => {
               editedScenario.sadSizeLookup = result;
+              editedScenario.data.sadSizeLookup = result;
 
               this.fsmLookupService.getFSMLookup(
                 editedScenario.overallPhase,
@@ -244,6 +245,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
                 editedScenario.termOfScenario,
                 editedScenario.fsm).subscribe(response => {
                   editedScenario.sadFSMLookup = response;
+                  editedScenario.data.sadFSMLookup = response;
 
                   this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
                     .subscribe(() => {
