@@ -15,7 +15,6 @@ import { EditModalModels } from 'app/Models/EditModalModels';
 import { TitleService } from 'app/services/title.service';
 import { ViewModeService } from 'app/services/viewMode.service';
 import { analyzeFileForInjectables } from '@angular/compiler';
-import { debug } from 'console';
 
 @Component({
   selector: 'app-edit-data',
