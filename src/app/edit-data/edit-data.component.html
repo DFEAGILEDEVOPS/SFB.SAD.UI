@@ -11,6 +11,9 @@
       <li *ngIf='scenarioName.errors?.minlength'>
         <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Dashboard name must be minimum 3 characters</a>
       </li>
+      <li *ngIf='scenarioTerm.errors?.required'>
+        <a [routerLink]='' (click)="setFocus(scenarioTermInput)">Enter the year of dashboard to continue</a>
+      </li>
       <li *ngIf="numberOfPupils.errors?.required">
         <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Enter the number of pupils to continue</a>
       </li>
@@ -177,14 +180,21 @@
           [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}" required>
       </div>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group"
+        [class]="{'govuk-form-group--error' : !scenarioTerm.valid && !scenarioTerm.pristine}">
         <label class="govuk-label" for="scenario-term">
           Year of dashboard
         </label>
         <a [routerLink]='' (click)="openModalWithComponent('scenarioTerm')" id="help-scenarioTerm">
           <img src="assets/images/info.svg" class="small-icon edit-help-icon" alt="Help for year of dashboard" />
         </a>
-        <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm'>
+        <div *ngIf="scenarioTerm.invalid && scenarioTerm.dirty">
+          <span *ngIf="scenarioTerm.errors.required" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Enter the year of dashboard to continue
+          </span>
+        </div>
+        <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm' #scenarioTermInput>
+          <option value="" selected>Please select</option>
           <option *ngFor="let term of scenarioInEdit.availableScenarioTerms" value="{{term}}">{{term}}</option>
         </select>
       </div>

@@ -15,6 +15,7 @@ import { EditModalModels } from 'app/Models/EditModalModels';
 import { TitleService } from 'app/services/title.service';
 import { ViewModeService } from 'app/services/viewMode.service';
 import { analyzeFileForInjectables } from '@angular/compiler';
+import { debug } from 'console';
 
 @Component({
   selector: 'app-edit-data',
@@ -56,6 +57,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
   @ViewChild('fsmInput') fsmInput: ElementRef;
   @ViewChild('seniorLeadershipInput') seniorLeadershipInput: ElementRef;
   @ViewChild('scenarioNameInput') scenarioNameInput: ElementRef;
+  @ViewChild('scenarioTermInput') scenarioTermInput: ElementRef;
 
   get scenarioName() {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
@@ -436,7 +438,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
     this.editDataForm = this.fb.group({
       scenarioDetails: this.fb.group({
         scenarioName: [this.scenarioInEdit.scenarioName, [Validators.required, Validators.minLength(3)]],
-        scenarioTerm: [this.scenarioInEdit.termOfScenario],
+        scenarioTerm: [this.scenarioInEdit.termOfScenario ?? "", [Validators.required]],
         storeBeyondSession: [this.storeScenarioBeyondSession]
       }),
       schoolDetails: this.fb.group({
