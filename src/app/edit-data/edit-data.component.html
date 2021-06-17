@@ -12,7 +12,7 @@
         <a [routerLink]='' (click)="setFocus(scenarioNameInput)">Dashboard name must be minimum 3 characters</a>
       </li>
       <li *ngIf='scenarioTerm.errors?.required'>
-        <a [routerLink]='' (click)="setFocus(scenarioTermInput)">Enter the year of dashboard to continue</a>
+        <a [routerLink]='' (click)="setFocus(scenarioTermInput)">Select the dashboard year to continue</a>
       </li>
       <li *ngIf="numberOfPupils.errors?.required">
         <a [routerLink]='' (click)="setFocus(numberOfPupilsInput)">Enter the number of pupils to continue</a>
@@ -190,7 +190,7 @@
         </a>
         <div *ngIf="scenarioTerm.invalid && scenarioTerm.dirty">
           <span *ngIf="scenarioTerm.errors.required" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Enter the year of dashboard to continue
+            <span class="govuk-visually-hidden">Error:</span> Select the dashboard year to continue
           </span>
         </div>
         <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm' #scenarioTermInput>
