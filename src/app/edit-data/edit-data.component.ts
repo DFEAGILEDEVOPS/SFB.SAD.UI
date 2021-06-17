@@ -14,24 +14,25 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditModalModels } from 'app/Models/EditModalModels';
 import { TitleService } from 'app/services/title.service';
 import { ViewModeService } from 'app/services/viewMode.service';
+import { analyzeFileForInjectables } from '@angular/compiler';
 
 @Component({
   selector: 'app-edit-data',
   templateUrl: './edit-data.component.html',
   styleUrls: ['./edit-data.component.scss']
 })
-export class EditDataComponent implements OnInit, AfterViewInit {
+  export class EditDataComponent implements OnInit, AfterViewInit {
   scenarioInEdit: SaScenarioModel;
   urn: number;
   editDataForm: FormGroup;
   viewType: string;
   scenarioNo: number;
-  scenarioLoaded: boolean;
-  storeScenarioBeyondSession: boolean;
+  scenarioLoaded: boolean = false;
+  storeScenarioBeyondSession: boolean = true;
   missingField: string;
   formSubmitted: boolean;
   modalRef: BsModalRef;
-  editDataModels: EditModalModels;
+  editDataModels: EditModalModels = new EditModalModels();
 
   @ViewChild('averageClassSizeElement') averageClassSizeElement: ElementRef;
   @ViewChild('predictedPupilElement') predictedPupilElement: ElementRef;
@@ -48,9 +49,14 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   @ViewChild('seniorLeadershipInput') seniorLeadersInput: ElementRef;
   @ViewChild('numberOfTeachersInput') numberOfTeachersInput: ElementRef;
   @ViewChild('schoolWorkforceInput') schoolWorkforceInput: ElementRef;
+  @ViewChild('numberOfPupilsInput') numberOfPupilsInput: ElementRef;
   @ViewChild('totalIncomeInput') totalIncomeInput: ElementRef;
-
+  @ViewChild('totalExpenditureInput') totalExpenditureInput: ElementRef;
   @ViewChild('errorSummaryElement') errorSummaryElement: ElementRef;
+  @ViewChild('fsmInput') fsmInput: ElementRef;
+  @ViewChild('seniorLeadershipInput') seniorLeadershipInput: ElementRef;
+  @ViewChild('scenarioNameInput') scenarioNameInput: ElementRef;
+  @ViewChild('scenarioTermInput') scenarioTermInput: ElementRef;
 
   get scenarioName() {
     return this.editDataForm.get('scenarioDetails').get('scenarioName');
@@ -148,6 +154,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     private modalService: BsModalService, titleService: TitleService,
     viewModeService: ViewModeService,
     @Inject(appSettings) public settings: AppSettings) {
+
     viewModeService.setEditMode();
     this.route.paramMap.subscribe(pmap => {
       this.urn = +pmap.get('urn');
@@ -160,15 +167,15 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     } else {
       titleService.setWithPrefix("Add a custom dashboard");
     }
-    this.scenarioLoaded = false;
-    this.storeScenarioBeyondSession = true;
-    this.editDataModels = new EditModalModels();
   }
 
   ngOnInit() {
-    if (this.viewType === 'edit' && (this.scenarioNo === null || this.scenarioNo === 0)) {
+    if ((this.viewType === 'edit' && (this.scenarioNo === null || this.scenarioNo === 0)) || this.viewType === 'add-new') {
       this.scenariosService.getFirstScenario(this.urn)
         .subscribe(result => {
+          if(this.viewType === 'add-new' && this.scenariosService.isFirstScenarioEditedAndStored(this.urn)){
+            this.router.navigate(['self-assessment/', this.urn]);
+          }
           this.scenarioInEdit = result;
           this.scenarioLoaded = true;
           this.buildForm();
@@ -190,7 +197,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     this.storeScenarioBeyondSession =  this.editDataForm.value.scenarioDetails.storeBeyondSession;
 
     if (this.editDataForm.valid) {
-      const editedScenario: SaScenarioModel = this.scenarioInEdit;
+      let editedScenario: SaScenarioModel = this.scenarioInEdit;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
       editedScenario.numberOfPupils = this.editDataForm.value.schoolDetails.numberOfPupils;
@@ -222,7 +229,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       editedScenario.isEdited = true;
       editedScenario.lastEditTimeStamp = new Date();
 
-      if (this.viewType === 'edit' && this.scenarioNo === null) {
+      if ((this.viewType === 'edit' && this.scenarioNo === null) || this.viewType === 'add-new') {
         if (this.fsm.dirty || this.numberOfPupils.dirty || this.scenarioTerm.dirty) {
 
           this.sizeLookupService.getSizeLookup(
@@ -231,6 +238,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
             editedScenario.termOfScenario,
             editedScenario.numberOfPupils).subscribe(result => {
               editedScenario.sadSizeLookup = result;
+              editedScenario.data.sadSizeLookup = result;
 
               this.fsmLookupService.getFSMLookup(
                 editedScenario.overallPhase,
@@ -238,6 +246,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
                 editedScenario.termOfScenario,
                 editedScenario.fsm).subscribe(response => {
                   editedScenario.sadFSMLookup = response;
+                  editedScenario.data.sadFSMLookup = response;
 
                   this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
                     .subscribe(() => {
@@ -328,8 +337,8 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     element.target.value = this.numberToDecimal(formControl);
   }
 
-  setFocus(input){
-    input.focus();
+  setFocus(input: ElementRef){
+    input.nativeElement.focus();
   }
 
   openModalWithComponent(formControlName: string) {
@@ -428,7 +437,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     this.editDataForm = this.fb.group({
       scenarioDetails: this.fb.group({
         scenarioName: [this.scenarioInEdit.scenarioName, [Validators.required, Validators.minLength(3)]],
-        scenarioTerm: [this.scenarioInEdit.termOfScenario],
+        scenarioTerm: [this.scenarioInEdit.termOfScenario ?? "", [Validators.required]],
         storeBeyondSession: [this.storeScenarioBeyondSession]
       }),
       schoolDetails: this.fb.group({

@@ -9,12 +9,12 @@ export class SendinblueService {
 
   sendEmail(emailMessage: EmailMessage, apiUrl: string, apiKey: string) {
 
-    const headers = new HttpHeaders()
+    const HEADERS = new HttpHeaders()
       .set('accept', 'application/json')
       .set('api-key', apiKey)
       .set('content-type', 'application/json');
 
-    return this.http.post<any>(apiUrl, emailMessage, { headers });
+    return this.http.post<any>(apiUrl, emailMessage, { headers: HEADERS });
   }
 
 }

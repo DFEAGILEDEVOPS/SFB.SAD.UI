@@ -80,10 +80,10 @@
     </a>
   </div>
 
-  <app-dashboard-table-desktop *ngIf='!isMobileScreen' [activeScenario]='activeScenario' (modalTriggered) = 'openModalWithComponent($event)'>
+  <app-dashboard-table-desktop *ngIf='!isMobileScreen' [activeScenario]='activeScenario' (onModalTriggered) = 'openModalWithComponent($event)'>
   </app-dashboard-table-desktop>
 
-  <app-dashboard-table-mobile *ngIf='isMobileScreen' [activeScenario]='activeScenario' (modalTriggered) = 'openModalWithComponent($event)'>
+  <app-dashboard-table-mobile *ngIf='isMobileScreen' [activeScenario]='activeScenario' (onModalTriggered) = 'openModalWithComponent($event)'>
   </app-dashboard-table-mobile>
 
 </div>

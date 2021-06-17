@@ -39,18 +39,11 @@ export class EditModalModels {
       {
         formControlName : 'teacherContactRatio',
         title : 'Teacher contact ratio (less than 1.0)',
-        textContent : `<ul>
-        <li>
-            <p>For secondary schools: Teacher contact ratio = total number of teaching periods timetabled for all teachers in the school ÷ total possible number of teaching periods</p>
-            <p>The total possible number of teaching periods is equivalent to the number of teaching periods in the timetable cycle multiplied by the full time equivalent number of teachers.</p>
-            <p>Full time equivalent number of teachers includes both classroom teachers and teachers in the leadership group. It excludes teaching assistants, non-classroom based school support staff, and auxiliary staff.</p>
-        </li>
-        <li>
-            <p>For primary schools: Teacher contact ratio = total number of classes ÷ full time equivalent number of teachers</p>
-            <p>Full time equivalent number of teachers includes both classroom teachers and teachers in the leadership group. It excludes teaching assistants, non-classroom based school support staff, and auxiliary staff.</p>
-        </li>
-        </ul>
-        <p>The teacher contact ratio will always be less than 1.0</p>`
+        textContent : `
+            <p class='govuk-!-font-weight-bold'>Teacher contact ratio = total amount of contact time (in hours) timetabled for all teachers in the school ÷ total possible teaching time for all teachers in the school</p>
+            <p>The contact ratio is the total time that all the teachers spend in planned teaching contact with pupils divided by the total time that the same teachers could spend in planned teaching contact if no teacher has any allocation of non-contact time on their timetable. </p>
+            <p>For the purposes of this calculation we exclude teaching assistants, non-classroom based school support staff, and auxiliary staff. Time during the timetable sessions when teachers are not teaching children because they are involved in planning and preparation (PPA Time), in school management in the widest sense (Management Time, Headship Time, NQT time and other time that the school might define for its own purposes) should not be counted as contact time.</p>
+            `
       },
       {
         formControlName : 'predictedPupil',

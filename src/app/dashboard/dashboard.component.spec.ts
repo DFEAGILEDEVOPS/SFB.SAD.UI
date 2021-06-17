@@ -57,7 +57,7 @@ describe('Component: Dashboard', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     comp = fixture.componentInstance;
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
     saScenariosServiceSpy.isSecondScenarioEditedAndStored.and.returnValue(false);
@@ -76,7 +76,7 @@ describe('Component: Dashboard', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     comp = fixture.componentInstance;
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
     saScenariosServiceSpy.isSecondScenarioEditedAndStored.and.returnValue(true);
@@ -93,7 +93,7 @@ describe('Component: Dashboard', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     comp = fixture.componentInstance;
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.isReturnsComplete = false;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
@@ -112,7 +112,7 @@ describe('Component: Dashboard', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     comp = fixture.componentInstance;
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.urn = 123;
     stubSaData.isReturnsComplete = true;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
@@ -132,7 +132,7 @@ describe('Component: Dashboard', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     comp = fixture.componentInstance;
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.overallPhase = "Secondary";
     stubSaData.hasSixthForm = true;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
@@ -150,7 +150,7 @@ describe('Component: Dashboard', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     comp = fixture.componentInstance;
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.overallPhase = "Secondary";
     stubSaData.hasSixthForm = false;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
@@ -168,7 +168,7 @@ describe('Component: Dashboard', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     comp = fixture.componentInstance;
 
-    const stubSaData = new SaData();
+    let stubSaData = new SaData();
     stubSaData.overallPhase = "Special";
     stubSaData.hasSixthForm = true;
     saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));

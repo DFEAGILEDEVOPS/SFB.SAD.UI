@@ -9,7 +9,7 @@ import { SaScenarioModel } from 'app/Models/SaScenarioModel';
 export class DashboardTableMobileComponent implements OnInit {
 
   @Input() activeScenario: SaScenarioModel;
-  @Output() modalTriggered = new EventEmitter();
+  @Output() onModalTriggered = new EventEmitter();
 
   constructor() { }
 
@@ -17,6 +17,6 @@ export class DashboardTableMobileComponent implements OnInit {
   }
 
   openModalWithComponent(assessmentArea: string) {
-    this.modalTriggered.emit(assessmentArea);
+    this.onModalTriggered.emit(assessmentArea);
   }
 }

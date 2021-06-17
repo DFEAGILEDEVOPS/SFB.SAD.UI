@@ -13,7 +13,7 @@ export class AaValueFormatPipe implements PipeTransform {
     switch (assessmentArea) {
       case undefined:
       case 'Average teacher cost':
-        const formatter = new Intl.NumberFormat('en-UK', {
+        let formatter = new Intl.NumberFormat('en-UK', {
           style: 'currency',
           currency: 'GBP',
         });

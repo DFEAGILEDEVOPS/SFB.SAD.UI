@@ -1,17 +1,16 @@
 import { ValidatorFn, FormGroup, ValidationErrors } from '@angular/forms';
 
-export const mustBeLowerThanTotalSpendingValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+export let mustBeLowerThanTotalSpendingValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
 
-  const totalExpenditure = currencyToNumber(control.get('reserveBalance').get('totalExpenditure').value);
-
-  const teachingStaff = currencyToNumber(control.get('spending').get('teachingStaff').value);
-  const supplyStaff = currencyToNumber(control.get('spending').get('supplyStaff').value);
-  const educationSupportStaff = currencyToNumber(control.get('spending').get('educationSupportStaff').value);
-  const adminStaff = currencyToNumber(control.get('spending').get('adminStaff').value);
-  const otherStaff = currencyToNumber(control.get('spending').get('otherStaff').value);
-  const premises = currencyToNumber(control.get('spending').get('premises').value);
-  const teachingResources = currencyToNumber(control.get('spending').get('teachingResources').value);
-  const energy = currencyToNumber(control.get('spending').get('energy').value);
+  let totalExpenditure = currencyToNumber(control.get('reserveBalance').get('totalExpenditure').value);
+  let teachingStaff = currencyToNumber(control.get('spending').get('teachingStaff').value);
+  let supplyStaff = currencyToNumber(control.get('spending').get('supplyStaff').value);
+  let educationSupportStaff = currencyToNumber(control.get('spending').get('educationSupportStaff').value);
+  let adminStaff = currencyToNumber(control.get('spending').get('adminStaff').value);
+  let otherStaff = currencyToNumber(control.get('spending').get('otherStaff').value);
+  let premises = currencyToNumber(control.get('spending').get('premises').value);
+  let teachingResources = currencyToNumber(control.get('spending').get('teachingResources').value);
+  let energy = currencyToNumber(control.get('spending').get('energy').value);
 
   if (teachingStaff > totalExpenditure){
     return {teachingStaffExceeded: true};

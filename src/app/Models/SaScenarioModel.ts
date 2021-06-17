@@ -13,6 +13,7 @@ export class SaScenarioModel {
   hasSixthForm: boolean;
   londonWeighting: string;
   isReturnsComplete: boolean;
+  doReturnsExist: boolean;
   numberOfPupils: number;
   numberOfPupilsLatestTerm: number;
   fsm: number;
@@ -53,6 +54,7 @@ export class SaScenarioModel {
     this.hasSixthForm = data.hasSixthForm;
     this.overallPhase = data.overallPhase;
     this.isReturnsComplete = data.isReturnsComplete;
+    this.doReturnsExist = data.doReturnsExist;
     this.londonWeighting = data.londonWeighting;
     this.numberOfPupilsLatestTerm = data.numberOfPupilsLatestTerm;
     this.fsmLatestTerm = data.fsmLatestTerm;
@@ -130,7 +132,7 @@ export class SaScenarioModel {
 
   private initCharacteristicAAsWithCalculatedData() {
 
-    const averageTeacherCostAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Average teacher cost');
+    let averageTeacherCostAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Average teacher cost');
     if (averageTeacherCostAA) {
       averageTeacherCostAA.totalForAreaType = this.teachersTotal;
       averageTeacherCostAA.schoolData = this.getAAValue('Teaching staff');
@@ -143,7 +145,7 @@ export class SaScenarioModel {
       this.setAAsMatchingTreshold(averageTeacherCostAA);
     }
 
-    const seniorLeadersAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Senior leaders as a percentage of workforce');
+    let seniorLeadersAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Senior leaders as a percentage of workforce');
     if (seniorLeadersAA) {
       seniorLeadersAA.totalForAreaType = this.workforceTotal;
       seniorLeadersAA.schoolData = this.teachersLeader;
@@ -156,7 +158,7 @@ export class SaScenarioModel {
       this.setAAsMatchingTreshold(seniorLeadersAA);
     }
 
-    const pupilToTeacherAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Pupil to teacher ratio');
+    let pupilToTeacherAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Pupil to teacher ratio');
     if (pupilToTeacherAA) {
       pupilToTeacherAA.totalForAreaType = this.teachersTotal;
       pupilToTeacherAA.schoolData = this.numberOfPupils;
@@ -169,7 +171,7 @@ export class SaScenarioModel {
       this.setAAsMatchingTreshold(pupilToTeacherAA);
     }
 
-    const pupilToAdultAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Pupil to adult ratio');
+    let pupilToAdultAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Pupil to adult ratio');
     if (pupilToAdultAA) {
       pupilToAdultAA.totalForAreaType = this.workforceTotal;
       pupilToAdultAA.schoolData = this.numberOfPupils;
@@ -182,19 +184,19 @@ export class SaScenarioModel {
       this.setAAsMatchingTreshold(pupilToAdultAA);
     }
 
-    const teacherContactRatioAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Teacher contact ratio (less than 1)');
+    let teacherContactRatioAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Teacher contact ratio (less than 1)');
     if (teacherContactRatioAA && teacherContactRatioAA.schoolData) {
       teacherContactRatioAA.calculatedSchoolData = parseFloat(teacherContactRatioAA.schoolData?.toFixed(2));
       this.setAAsMatchingTreshold(teacherContactRatioAA);
     }
 
-    const pupilChangeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years');
+    let pupilChangeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Predicted percentage pupil number change in 3-5 years');
     if (pupilChangeAA && pupilChangeAA.schoolData) {
       pupilChangeAA.calculatedSchoolData = parseFloat(pupilChangeAA.schoolData?.toFixed(3));
       this.setAAsMatchingTreshold(pupilChangeAA);
     }
 
-    const avClassSizeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Average Class size');
+    let avClassSizeAA = this.sadAssessmentAreas?.find(aa => aa.assessmentAreaName === 'Average Class size');
     if (avClassSizeAA && avClassSizeAA.schoolData) {
       avClassSizeAA.calculatedSchoolData = parseFloat(avClassSizeAA.schoolData?.toFixed(2));
       this.setAAsMatchingTreshold(avClassSizeAA);

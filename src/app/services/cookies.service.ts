@@ -93,7 +93,7 @@ private setCookie (name, value, options) {
 private getCookie (name) {
   var nameEQ = name + "=";
   var cookies = document.cookie.split(';');
-  for(var i = 0, len = cookies.length; i < len; i++) {
+  for (let i = 0, len = cookies.length; i < len; i++) {
     var cookie = cookies[i];
     while (cookie.charAt(0) == ' ') {
       cookie = cookie.substring(1, cookie.length);

@@ -102,9 +102,9 @@ export class SaScenariosService {
       this.secondScenarioInMemory = this.generateNewFromSavedScenarioData(this.buildScenarioModelFromLocalStorage(urn, 1));
       return this.secondScenarioInMemory;
     } else {
-      const firstScenario = this.firstScenarioInMemory;
-      const data: SaData = JSON.parse(JSON.stringify(firstScenario.data));
-      const secondScenario = new SaScenarioModel(data);
+      let firstScenario = this.firstScenarioInMemory;
+      let data: SaData = JSON.parse(JSON.stringify(firstScenario.data));
+      let secondScenario = new SaScenarioModel(data);
       secondScenario.scenarioName = null;
       secondScenario.scenarioNo = 1;
       secondScenario.numberOfPupils = null;
@@ -203,6 +203,13 @@ export class SaScenariosService {
     this.secondScenarioInMemory = null;
   }
 
+  isFirstScenarioEditedAndStored(urn: number) {
+    if (this.getScenarioFromLocalStorage(urn, 0) || this.getScenarioFromSessionStorage(urn, 0)) {
+      return true;
+    }
+    return false;
+  }
+
   isSecondScenarioEditedAndStored(urn: number) {
     if (this.getScenarioFromLocalStorage(urn, 1) || this.getScenarioFromSessionStorage(urn, 1)) {
       return true;
@@ -247,7 +254,7 @@ export class SaScenariosService {
   }
 
   private generateNewFromSavedScenarioData(savedModel: SaScenarioModel) {
-    const newModel = new SaScenarioModel(savedModel.data);
+    let newModel = new SaScenarioModel(savedModel.data);
     newModel.scenarioName = savedModel.scenarioName;
     newModel.termOfScenario = savedModel.termOfScenario;
     newModel.numberOfPupils = savedModel.numberOfPupils;

@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SidebysideComponent } from './sidebyside/sidebyside.component';
 
-const routes: Routes = [
+const ROUTES: Routes = [
   { path: 'self-assessment/side-by-side', component: SidebysideComponent},
   { path: 'self-assessment/edit-data/:urn/:viewType/:scenarioNo', component: EditDataComponent},
   { path: 'self-assessment/edit-data/:urn/:viewType', component: EditDataComponent},
@@ -20,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled',  useHash: false,  anchorScrolling: 'enabled'})],
+  imports: [RouterModule.forRoot(ROUTES, {scrollPositionRestoration: 'enabled',  useHash: false,  anchorScrolling: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

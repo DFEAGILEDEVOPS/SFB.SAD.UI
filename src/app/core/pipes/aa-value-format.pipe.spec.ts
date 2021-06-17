@@ -3,7 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { AaValueFormatPipe } from './aa-value-format.pipe';
 
 describe('Pipe: aaValueFormat', () => {
-  const pipe = new AaValueFormatPipe();
+  let pipe = new AaValueFormatPipe();
 
   it('create an instance', () => {
     expect(pipe).toBeTruthy();

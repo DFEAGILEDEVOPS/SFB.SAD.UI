@@ -10,8 +10,8 @@ export class SidebysideTableMobileComponent implements OnInit {
 
   @Input() firstScenario: SaScenarioModel;
   @Input() secondScenario: SaScenarioModel;
-  @Output() modalTriggered = new EventEmitter();
-  @Output() scenarioRemoveTriggered = new EventEmitter();
+  @Output() onModalTriggered = new EventEmitter();
+  @Output() onScenarioRemoveTriggered = new EventEmitter();
 
   constructor() { }
 
@@ -19,11 +19,11 @@ export class SidebysideTableMobileComponent implements OnInit {
   }
 
   openModalWithComponent(assessmentArea: string, activeScenario: SaScenarioModel, scenarioNo: number) {
-    this.modalTriggered.emit([assessmentArea, activeScenario, scenarioNo]);
+    this.onModalTriggered.emit([assessmentArea, activeScenario, scenarioNo]);
   }
 
   removeScenario(scenarioNo: number) {
-    this.scenarioRemoveTriggered.emit(scenarioNo);
+    this.onScenarioRemoveTriggered.emit(scenarioNo);
   }
 
 }

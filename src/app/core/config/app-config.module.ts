@@ -10,22 +10,22 @@ import { appSettings, AppSettings } from './settings/app-settings';
 import { emailSettings, EmailSettings } from './settings/email-settings';
 
 export function configLoaderFactory(http: HttpClient): ConfigLoader {
-  const endpoint = `/assets/configuration/config.${environment.name}.json`;
+  let endpoint = `/assets/configuration/config.${environment.name}.json`;
   return new ConfigHttpLoader(http, endpoint);
 }
 
 export function appSettingsFactory(configService: ConfigService, urlService: URLService): AppSettings {
-  const appsettings: AppSettings = configService.getSettings().appSettings;
+  let appsettings: AppSettings = configService.getSettings().appSettings;
   appsettings.domain = urlService.getDomain();
   return appsettings;
 }
 
 export function emailSettingsFactory(configService: ConfigService): EmailSettings {
-  const emailsettings: EmailSettings = configService.getSettings().emailSettings;
+  let emailsettings: EmailSettings = configService.getSettings().emailSettings;
   return emailsettings;
 }
 
-const configProviders = [
+const CONFIG_PROVIDERS = [
   { provide: appSettings, useFactory: appSettingsFactory, deps: [ConfigService, URLService] },
   { provide: emailSettings, useFactory: emailSettingsFactory, deps: [ConfigService] }
 ];
@@ -38,7 +38,7 @@ const configProviders = [
       deps: [HttpClient]
     })
   ],
-  providers: [...configProviders]
+  providers: [...CONFIG_PROVIDERS]
 })
 export class AppConfigModule { }
 
