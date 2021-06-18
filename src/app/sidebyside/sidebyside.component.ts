@@ -33,149 +33,156 @@ export class SidebysideComponent implements OnInit {
   downloadFormat = "pdf";
 
   constructor(
-              private router: Router,
-              private modalService: BsModalService,
-              private saScenariosService: SaScenariosService,
-              private pdfService: PdfService,
-              private pptService: PptService,
-              titleService: TitleService,
-              viewModeService: ViewModeService,
-              @Inject(appSettings) public settings: AppSettings) {
-      viewModeService.setDashboardMode();
-      titleService.setWithPrefix("Self-assessment dashboard");
-      this.aaModalModels = new AAModalModels();
-      this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
+    private router: Router,
+    private modalService: BsModalService,
+    private saScenariosService: SaScenariosService,
+    private pdfService: PdfService,
+    private pptService: PptService,
+    titleService: TitleService,
+    viewModeService: ViewModeService,
+    @Inject(appSettings) public settings: AppSettings) {
+    viewModeService.setDashboardMode();
+    titleService.setWithPrefix("Self-assessment dashboard");
+    this.aaModalModels = new AAModalModels();
+    this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
+  }
+
+  ngOnInit() {
+    this.saScenariosService.getFirstScenario(null).
+      subscribe(result => {
+        this.firstScenario = result;
+        this.firstScenarioLoaded = true;
+        this.secondScenario = this.saScenariosService.getSecondScenario(this.firstScenario.urn);
+        this.secondScenarioLoaded = true;
+      });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
+  }
+
+  removeScenario(scenarioNo: number) {
+    if (scenarioNo === 0) {
+      this.saScenariosService.deleteFirstScenarioAndReplaceItWithSecond();
+      this.router.navigate(['self-assessment/', this.secondScenario.urn]);
     }
-
-    ngOnInit() {
-      this.saScenariosService.getFirstScenario(null).
-        subscribe(result => {
-          this.firstScenario = result;
-          this.firstScenarioLoaded = true;
-          this.secondScenario = this.saScenariosService.getSecondScenario(this.firstScenario.urn);
-          this.secondScenarioLoaded = true;
-        });
+    if (scenarioNo === 1) {
+      this.saScenariosService.deleteSecondScenarioFromEverywhere();
+      this.router.navigate(['self-assessment/', this.firstScenario.urn]);
     }
+  }
 
-    @HostListener('window:resize', ['$event'])
-    onResize() {
-      this.isMobileScreen = window.innerWidth < this.tabletBreakPoint;
+  openModalWithComponent(parameters: any[]) {
+    let assessmentArea: string = parameters[0];
+    let activeScenario: SaScenarioModel = parameters[1];
+    let scenarioNo: number = parameters[2];
+    let modalContent: AAModalModel;
+    let initialState: any;
+    let assessmentAreas: AssessmentAreaModel;
+
+    switch (assessmentArea) {
+      case 'Ofsted':
+      case 'KS2':
+      case 'P8':
+        modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
+        initialState = {
+          assessmentArea: assessmentArea,
+          title: modalContent.title,
+          textContent: modalContent.textContent,
+          referrer: `help-${assessmentArea}`
+        };
+
+        this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+        break;
+
+      default:
+        modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
+        assessmentAreas = activeScenario.sadAssessmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
+        initialState = {
+          assessmentArea: modalContent.assessmentArea,
+          title: modalContent.title,
+          textContent: modalContent.textContent,
+          tresholds: assessmentAreas.allTresholds,
+          matchingTreshold: assessmentAreas.matchingTreshold,
+          tresholdFormat: getAADataFormat(modalContent.assessmentArea),
+          referrer: `help-${assessmentArea}-${scenarioNo}`
+        };
+
+        this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+        break;
     }
+  }
 
-    removeScenario(scenarioNo: number) {
-      if (scenarioNo === 0) {
-        this.saScenariosService.deleteFirstScenarioAndReplaceItWithSecond();
-        this.router.navigate(['self-assessment/', this.secondScenario.urn]);
-      }
-      if (scenarioNo === 1) {
-        this.saScenariosService.deleteSecondScenarioFromEverywhere();
-        this.router.navigate(['self-assessment/', this.firstScenario.urn]);
-      }
-    }
+  onReset() {
+    this.onResetClose();
 
-    openModalWithComponent(parameters: any[]) {
-      let assessmentArea: string = parameters[0];
-      let activeScenario: SaScenarioModel = parameters[1];
-      let scenarioNo: number = parameters[2];
-      let modalContent: AAModalModel;
-      let initialState: any;
-      let assessmentAreas: AssessmentAreaModel;
-
-      switch (assessmentArea) {
-        case 'Ofsted':
-        case 'KS2':
-        case 'P8':
-          modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
-          initialState = {
-            assessmentArea: assessmentArea,
-            title: modalContent.title,
-            textContent: modalContent.textContent,
-            referrer: `help-${assessmentArea}`
-          };
-
-          this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
-          break;
-
-        default:
-          modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
-          assessmentAreas = activeScenario.sadAssessmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
-          initialState = {
-            assessmentArea: modalContent.assessmentArea,
-            title: modalContent.title,
-            textContent: modalContent.textContent,
-            tresholds: assessmentAreas.allTresholds,
-            matchingTreshold: assessmentAreas.matchingTreshold,
-            tresholdFormat: getAADataFormat(modalContent.assessmentArea),
-            referrer: `help-${assessmentArea}-${scenarioNo}`
-          };
-
-          this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
-          break;
-      }
-    }
-
-    onReset() {
-      this.onResetClose();
-      let urn = this.secondScenario.urn;
+    if(this.firstScenario.doReturnsExist) {
+      let urn = this.firstScenario.urn;
       this.saScenariosService.deleteFirstScenarioFromEverywhere();
       this.saScenariosService.deleteSecondScenarioFromEverywhere();
       this.router.navigate(['self-assessment/', urn]);
+    }else{
+      let urn = this.firstScenario.urn;
+      this.saScenariosService.deleteFirstScenarioFromEverywhere();
+      this.saScenariosService.deleteSecondScenarioFromEverywhere();
+      this.router.navigate([`self-assessment/edit-data/${urn}/add-new`]);
     }
-
-    onPrintPage() {
-      var detailses = document.getElementsByTagName("details");
-      var details;
-      var i = -1;
-
-      while (details = detailses[++i]) {
-        //DOM API
-        details["open"] = true;
-      }
-
-      window.print();
-    }
-
-    onDownload() {
-      this.onDownloadClose();
-
-      switch (this.downloadFormat) {
-        case "pdf":
-          if (this.isMobileScreen) {
-            this.pdfService.generatePdfForMobile();
-          } else {
-            this.pdfService.generatePdfForDesktop();
-          }
-          break;
-
-        case "ppt":
-          if (this.isMobileScreen) {
-            this.pptService.generatePptForMobile();
-          } else {
-            this.pptService.generatePptForDesktop();
-          }
-          break;
-        default:
-          break;
-      }
-    }
-
-    onDownloadPopup(template: TemplateRef<any>) {
-      this.downloadModalRef = this.modalService.show(template, {ariaDescribedby: 'title',ariaLabelledBy: 'legend'});
-    }
-
-
-  onResetPopup(template: TemplateRef<any>) {
-    this.resetModalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
   }
 
-    onDownloadClose(){
-      this.downloadModalRef.hide();
-      document.getElementById("downloadPageLink").focus();
+  onPrintPage() {
+    var detailses = document.getElementsByTagName("details");
+    var details;
+    var i = -1;
+
+    while (details = detailses[++i]) {
+      //DOM API
+      details["open"] = true;
     }
 
-    onResetClose(){
-      this.resetModalRef.hide();
-      document.getElementById("reset-button").focus();
+    window.print();
+  }
+
+  onDownload() {
+    this.onDownloadClose();
+
+    switch (this.downloadFormat) {
+      case "pdf":
+        if (this.isMobileScreen) {
+          this.pdfService.generatePdfForMobile();
+        } else {
+          this.pdfService.generatePdfForDesktop();
+        }
+        break;
+
+      case "ppt":
+        if (this.isMobileScreen) {
+          this.pptService.generatePptForMobile();
+        } else {
+          this.pptService.generatePptForDesktop();
+        }
+        break;
+      default:
+        break;
     }
+  }
+
+  onDownloadPopup(template: TemplateRef<any>) {
+    this.downloadModalRef = this.modalService.show(template, { ariaDescribedby: 'title', ariaLabelledBy: 'legend' });
+  }
+
+  onResetPopup(template: TemplateRef<any>) {
+    this.resetModalRef = this.modalService.show(template, { ariaDescribedby: 'title', ariaLabelledBy: 'legend' });
+  }
+
+  onDownloadClose() {
+    this.downloadModalRef.hide();
+    document.getElementById("downloadPageLink").focus();
+  }
+
+  onResetClose() {
+    this.resetModalRef.hide();
+    document.getElementById("reset-button")?.focus();
+  }
 
 }

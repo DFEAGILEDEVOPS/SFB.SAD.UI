@@ -129,6 +129,10 @@ export class DashboardComponent implements OnInit {
     this.onResetClose();
     this.saScenariosService.deleteFirstScenarioFromEverywhere();
     this.ngOnInit();
+
+    if(!this.activeScenario.doReturnsExist) {
+      this.router.navigate([`self-assessment/edit-data/${this.urn}/add-new`]);
+    }
   }
 
   onPrintPage() {
@@ -182,7 +186,7 @@ export class DashboardComponent implements OnInit {
 
   onResetClose(){
     this.resetModalRef.hide();
-    document.getElementById("reset-button").focus();
+    document.getElementById("reset-button")?.focus();
   }
 
 }
