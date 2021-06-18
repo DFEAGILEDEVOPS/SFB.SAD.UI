@@ -23,7 +23,8 @@ import { appSettings, AppSettings } from '@core/config/settings/app-settings';
 export class SidebysideComponent implements OnInit {
   firstScenario: SaScenarioModel;
   secondScenario: SaScenarioModel;
-  modalRef: BsModalRef;
+  downloadModalRef: BsModalRef;
+  resetModalRef: BsModalRef;
   aaModalModels: AAModalModels;
   firstScenarioLoaded: boolean;
   secondScenarioLoaded: boolean;
@@ -92,7 +93,7 @@ export class SidebysideComponent implements OnInit {
             referrer: `help-${assessmentArea}`
           };
 
-          this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+          this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
           break;
 
         default:
@@ -108,12 +109,13 @@ export class SidebysideComponent implements OnInit {
             referrer: `help-${assessmentArea}-${scenarioNo}`
           };
 
-          this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+          this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
           break;
       }
     }
 
     onReset() {
+      this.onResetClose();
       let urn = this.secondScenario.urn;
       this.saScenariosService.deleteFirstScenarioFromEverywhere();
       this.saScenariosService.deleteSecondScenarioFromEverywhere();
@@ -134,7 +136,7 @@ export class SidebysideComponent implements OnInit {
     }
 
     onDownload() {
-      this.onDownLoadClose();
+      this.onDownloadClose();
 
       switch (this.downloadFormat) {
         case "pdf":
@@ -158,12 +160,22 @@ export class SidebysideComponent implements OnInit {
     }
 
     onDownloadPopup(template: TemplateRef<any>) {
-      this.modalRef = this.modalService.show(template, {ariaDescribedby: 'title',ariaLabelledBy: 'legend'});
+      this.downloadModalRef = this.modalService.show(template, {ariaDescribedby: 'title',ariaLabelledBy: 'legend'});
     }
 
-    onDownLoadClose(){
-      this.modalRef.hide();
+
+  onResetPopup(template: TemplateRef<any>) {
+    this.resetModalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
+  }
+
+    onDownloadClose(){
+      this.downloadModalRef.hide();
       document.getElementById("downloadPageLink").focus();
+    }
+
+    onResetClose(){
+      this.resetModalRef.hide();
+      document.getElementById("reset-button").focus();
     }
 
 }

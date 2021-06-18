@@ -41,8 +41,8 @@
       </a>
     </div>
     <div class="govuk-grid-column-one-half">
-      <button class="govuk-button govuk-button--secondary float-right reset-button" data-module="govuk-button"
-        (click)='onReset()'>
+      <button class="govuk-button govuk-button--secondary float-right reset-button" data-module="govuk-button" id="reset-button"
+        (click)='onResetPopup(resetTemplate)'>
         Reset dashboard
       </button>
     </div>
@@ -62,10 +62,25 @@
   Loading...
 </div>
 
+<ng-template #resetTemplate>
+  <div class="modal-header">
+    <h4 id="title" class="modal-title pull-left">Are you sure you want to reset the dashboard?</h4>
+    <a href="javascript:void(0)" class="pull-right modal-close-link" aria-label="Close modal dialog" (click)="onResetClose()">
+      <span aria-hidden="true">Close</span>
+    </a>
+  </div>
+  <div class="modal-body">
+      <p id="legend">You will lose any data you have added.</p>
+      <div class="govuk-button-group mb-0 pt-3">
+        <button class="govuk-button" data-module="govuk-button" (click)="onReset()">Reset</button>
+        <a class="govuk-link" href="javascript:void(0)" (click)="onResetClose()">Cancel</a></div>
+  </div>
+</ng-template>
+
 <ng-template #downloadPopupTemplate>
   <div class="modal-header">
     <h4 id="title" class="modal-title pull-left">Select file format</h4>
-    <a href="javascript:void(0)" class="pull-right modal-close-link" aria-label="Close modal dialog" (click)="onDownLoadClose()">
+    <a href="javascript:void(0)" class="pull-right modal-close-link" aria-label="Close modal dialog" (click)="onDownloadClose()">
       <span aria-hidden="true">Close</span>
     </a>
   </div>
@@ -93,7 +108,7 @@
       </fieldset>
       <div class="govuk-!-padding-top-1">
             <button class="govuk-button govuk-!-margin-right-4" data-module="govuk-button" (click)="onDownload()">Download</button>
-            <a class="govuk-link govuk-!-font-size-19" style="vertical-align: -webkit-baseline-middle;" href="javascript:void(0)" (click)="onDownLoadClose()">Cancel</a>
+            <a class="govuk-link govuk-!-font-size-19" style="vertical-align: -webkit-baseline-middle;" href="javascript:void(0)" (click)="onDownloadClose()">Cancel</a>
       </div>
   </div>
 </ng-template>
