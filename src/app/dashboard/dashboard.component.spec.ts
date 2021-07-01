@@ -1,4 +1,4 @@
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SaScenarioModel } from './../Models/SaScenarioModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { DashboardComponent } from './dashboard.component';
@@ -23,7 +23,7 @@ describe('Component: Dashboard', () => {
   let comp: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
-  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'isSecondScenarioEditedAndStored']);
+  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'isSecondScenarioEditedAndStored', 'deleteFirstScenarioFromEverywhere']);
   let routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   let activatedRouteStub = new ActivatedRouteStub();
   let configServiceSpy =  jasmine.createSpyObj('ConfigService', ['getSettings']);
@@ -179,5 +179,27 @@ describe('Component: Dashboard', () => {
     fixture.detectChanges();
 
     expect(comp.activeScenario.overallPhaseWSixthForm).toEqual("Special");
+  });
+
+  it('should navigate to edit on reset, if financial data absent', () => {
+
+    fixture = TestBed.createComponent(DashboardComponent);
+    comp = fixture.componentInstance;
+    comp.resetModalRef = new BsModalRef();
+
+    let stubSaData = new SaData();
+    stubSaData.urn = 123;
+    stubSaData.doReturnsExist = false;
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData)));
+    saScenariosServiceSpy.isSecondScenarioEditedAndStored.and.returnValue(false);
+
+    activatedRouteStub.setParamMap({ urn: 123 });
+
+    fixture.detectChanges();
+
+    comp.onReset();
+
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['self-assessment/edit-data/123/add-new']);
+
   });
 });
