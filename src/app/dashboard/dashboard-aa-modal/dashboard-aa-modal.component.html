@@ -28,7 +28,7 @@
              {{treshold.scoreLow == null ? '&infin;' : treshold.scoreLow | aaValueFormat : assessmentArea}}
              {{treshold.scoreHigh != null ? ' - ' : ''}}
              {{treshold.scoreHigh == null ? ' and above' : treshold.scoreHigh | aaValueFormat : assessmentArea}}
-             <span *ngIf='treshold.scoreLow === matchingTreshold?.scoreLow' class="visually-hidden"> Matching treshold</span>
+             <span *ngIf='treshold.scoreLow === matchingTreshold?.scoreLow' class="visually-hidden"> Matching threshold</span>
             </span>
         </td>
         <td class="govuk-table__cell"><span class="rating-box" [class]='treshold.ratingColour'>{{treshold.ratingText}}</span>

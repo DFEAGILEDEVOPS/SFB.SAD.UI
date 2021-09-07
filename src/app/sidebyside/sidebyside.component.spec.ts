@@ -1,5 +1,5 @@
 import { SidebysideComponent } from './sidebyside.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SaScenarioModel } from './../Models/SaScenarioModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { TestBed, async, inject, fakeAsync, ComponentFixture } from '@angular/core/testing';
@@ -21,7 +21,7 @@ function asyncData<T>(data: T) {
 describe('Component: SideBySide', () => {
   let fixture: ComponentFixture<SidebysideComponent>;
   let comp: SidebysideComponent;
-  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'getSecondScenario', 'deleteFirstScenarioAndReplaceItWithSecond', 'deleteSecondScenario', 'deleteSecondScenarioFromEverywhere']);
+  let saScenariosServiceSpy =  jasmine.createSpyObj('SaScenariosService', ['getFirstScenario', 'getSecondScenario', 'deleteFirstScenarioAndReplaceItWithSecond', 'deleteSecondScenario', 'deleteSecondScenarioFromEverywhere', 'deleteFirstScenarioFromEverywhere']);
   let routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   let configServiceSpy =  jasmine.createSpyObj('ConfigService', ['getSettings']);
   let urlServiceSpy =  jasmine.createSpyObj('URLService', ['getDomain']);
@@ -138,6 +138,27 @@ describe('Component: SideBySide', () => {
     comp.removeScenario(1);
 
     expect(routerSpy.navigate).toHaveBeenCalledWith([ 'self-assessment/', 111 ] );
+
+  });
+
+  it('should navigate to edit on reset, if financial data absent', () => {
+
+    let stubSaData1 = new SaData();
+    stubSaData1.urn = 111;
+    let stubSaData2 = new SaData();
+    stubSaData2.urn = 222;
+    saScenariosServiceSpy.getFirstScenario.and.returnValue(of(new SaScenarioModel(stubSaData1)));
+    saScenariosServiceSpy.getSecondScenario.and.returnValue(of(new SaScenarioModel(stubSaData2)));
+
+    fixture = TestBed.createComponent(SidebysideComponent);
+    comp = fixture.componentInstance;
+    comp.resetModalRef = new BsModalRef();
+
+    fixture.detectChanges();
+
+    comp.onReset();
+
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['self-assessment/edit-data/111/add-new']);
 
   });
 

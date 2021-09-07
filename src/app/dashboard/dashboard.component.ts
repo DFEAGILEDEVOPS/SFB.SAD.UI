@@ -26,7 +26,8 @@ import { appSettings } from '@core/config/settings/app-settings';
 export class DashboardComponent implements OnInit {
   urn: number;
   activeScenario: SaScenarioModel;
-  modalRef: BsModalRef;
+  downloadModalRef: BsModalRef;
+  resetModalRef: BsModalRef;
   aaModalModels: AAModalModels = new AAModalModels();
   scenarioLoaded: boolean = false;
   isMobileScreen: boolean;
@@ -81,7 +82,7 @@ export class DashboardComponent implements OnInit {
           referrer: "help-add-dashboard"
         };
 
-        this.modalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
+        this.downloadModalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
         break;
       case 'dashboard-year':
         initialState = {
@@ -90,7 +91,7 @@ export class DashboardComponent implements OnInit {
           referrer: "help-dashboard-year"
         };
 
-        this.modalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
+        this.downloadModalRef = this.modalService.show(DashboardInfoModalComponent, { initialState });
         break;
       case 'Ofsted':
       case 'KS2':
@@ -103,7 +104,7 @@ export class DashboardComponent implements OnInit {
           referrer: "help-" + assessmentArea
         };
 
-        this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+        this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
         break;
 
       default:
@@ -119,14 +120,19 @@ export class DashboardComponent implements OnInit {
           referrer: "help-" + assessmentArea
         };
 
-        this.modalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
+        this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
         break;
     }
   }
 
   onReset() {
+    this.onResetClose();
     this.saScenariosService.deleteFirstScenarioFromEverywhere();
     this.ngOnInit();
+
+    if(!this.activeScenario.doReturnsExist) {
+      this.router.navigate([`self-assessment/edit-data/${this.urn}/add-new`]);
+    }
   }
 
   onPrintPage() {
@@ -142,7 +148,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onDownload() {
-    this.onDownLoadClose();
+    this.onDownloadClose();
 
     switch (this.downloadFormat) {
       case "pdf":
@@ -166,12 +172,21 @@ export class DashboardComponent implements OnInit {
   }
 
   onDownloadPopup(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
+    this.downloadModalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
   }
 
-  onDownLoadClose(){
-    this.modalRef.hide();
+  onResetPopup(template: TemplateRef<any>) {
+    this.resetModalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
+  }
+
+  onDownloadClose(){
+    this.downloadModalRef.hide();
     document.getElementById("downloadPageLink").focus();
+  }
+
+  onResetClose(){
+    this.resetModalRef.hide();
+    document.getElementById("reset-button")?.focus();
   }
 
 }
