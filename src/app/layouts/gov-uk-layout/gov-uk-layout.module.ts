@@ -1,3 +1,4 @@
+import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -10,10 +11,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
+    CookieBannerComponent,
     NotFoundComponent],
   exports: [
       HeaderComponent,
       FooterComponent,
+      CookieBannerComponent,
       NotFoundComponent]
 })
 export class GovUkLayoutModule { }

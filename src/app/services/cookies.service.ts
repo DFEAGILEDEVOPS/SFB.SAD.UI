@@ -10,18 +10,16 @@ export class CookiesService {
 constructor(@Inject(appSettings) public settings: AppSettings) {
 }
 
-public manageCookies() {
-
+public manageCookies() : boolean {
   var cookiesPolicyCookie = this.getCookie("cookies_policy");
   if (!cookiesPolicyCookie) {
       let cookiesPolicyCookie = { "essential": true, "settings": false, "usage": false };
       this.setDomainCookie("cookies_policy", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
-  } else {
-      cookiesPolicyCookie = JSON.parse(cookiesPolicyCookie);
   }
 
-  this.manageCookiePreferencesCookies();
   this.manageGACookies();
+
+  return this.getCookie("cookies_preferences_set") === "true";
 
 }
 
@@ -29,21 +27,12 @@ public acceptAllCookies() {
   let cookiesPolicyCookie = { "essential": true, "settings": true, "usage": true };
   this.setDomainCookie("cookies_policy", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
   this.setDomainCookie("cookies_preferences_set", "true", { days: 365 }, this.settings.cookieDomain );
-
-  $(".gem-c-cookie-banner__wrapper").hide();
-  $(".gem-c-cookie-banner__confirmation").show();
-  this.unRenderCookieOverlay();
 }
 
-public acceptedHide() {
-  $("#global-cookie-message").hide();
-}
-
-private manageCookiePreferencesCookies() {
-  if (!this.getCookie("cookies_preferences_set")) {
-      $("#global-cookie-message").show();
-      this.renderCookieOverlay();
-  }
+public rejectAllCookies() {
+  let cookiesPolicyCookie = { "essential": true, "settings": false, "usage": false };
+  this.setDomainCookie("cookies_policy", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
+  this.setDomainCookie("cookies_preferences_set", "true", { days: 365 }, this.settings.cookieDomain );
 }
 
 private manageGACookies() {
@@ -105,16 +94,5 @@ private getCookie (name) {
   return null;
 };
 
-private renderCookieOverlay() {
-  var div = document.createElement("div");
-  div.className += "cookie-overlay";
-  document.getElementById('cookie-overlay-wrapper').appendChild(div);
-  window.onscroll = function () { window.scrollTo(0, 0); };
-}
-
-private unRenderCookieOverlay() {
-  document.getElementById('cookie-overlay-wrapper').removeChild(document.getElementById('cookie-overlay-wrapper').lastChild);
-  window.onscroll = null;
-}
 
 }
