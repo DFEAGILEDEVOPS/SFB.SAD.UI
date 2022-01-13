@@ -13,10 +13,10 @@ export class SaFsmLookupService {
 
   getFSMLookup(overallPhase: string, hasSixthForm: boolean, term: string, fsm: number): Observable<FSMLookupModel> {
     return this.saDataService.getFSMLookupList().pipe(
-      map(sizes => sizes.find(
-        s => s.overallPhase === overallPhase
+      map(sizes => sizes.sort(a => parseInt(a.term.substring(5))).reverse().find(
+          s => s.overallPhase === overallPhase
           && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm)
-          && (!s.term || s.term === term)
+          && (!s.term || s.term <= term)
           && fsm >= s.fsmMin && fsm <= s.fsmMax)
       ));
   }
