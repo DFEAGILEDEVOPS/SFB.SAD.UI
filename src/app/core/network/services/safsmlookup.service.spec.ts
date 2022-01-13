@@ -40,7 +40,7 @@ describe('Service: SaFSMlookup', () => {
 
 
   it('#getFSMLookup should return correct fsm lookup from list', done => {
-    saFSMLookupService.getFSMLookup('Secondary', true, null, 7).subscribe(
+    saFSMLookupService.getFSMLookup('Secondary', true, "2020/2021", 7).subscribe(
       result => {
         expect(result).toBeDefined();
         expect(result.overallPhase).toBe('Secondary');

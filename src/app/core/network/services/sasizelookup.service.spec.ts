@@ -43,7 +43,7 @@ describe('Service: Sasizelookup', () => {
   });
 
   it('#getSizeLookup should return correct size lookup from list', done => {
-    saSizeLookupService.getSizeLookup('Primary', false, null, 1000).subscribe(
+    saSizeLookupService.getSizeLookup('Primary', false, "2020/2021", 1000).subscribe(
       result => {
         expect(result).toBeDefined();
         expect(result.overallPhase).toBe('Primary');
