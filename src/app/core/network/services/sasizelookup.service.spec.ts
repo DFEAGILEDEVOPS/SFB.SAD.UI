@@ -27,7 +27,16 @@ describe('Service: Sasizelookup', () => {
     saDataServiceSpy = TestBed.inject(SaDataService) as jasmine.SpyObj<SaDataService>;
 
     // tslint:disable-next-line:max-line-length
-    let stubValue = [{ term: null, overallPhase: 'Primary', hasSixthForm: null, noPupilsMin: 1, noPupilsMax: 100, sizeType: 'Very small' }, { term: null, overallPhase: 'Primary', hasSixthForm: null, noPupilsMin: 101, noPupilsMax: 175, sizeType: 'Small' }, { term: null, overallPhase: 'Primary', hasSixthForm: null, noPupilsMin: 176, noPupilsMax: 385, sizeType: 'Medium' }, { term: null, overallPhase: 'Secondary', hasSixthForm: false, noPupilsMin: 486, noPupilsMax: 935, sizeType: 'Medium' }, { term: null, overallPhase: 'Secondary', hasSixthForm: true, noPupilsMin: 1, noPupilsMax: 770, sizeType: 'Small' }, { term: null, overallPhase: 'Secondary', hasSixthForm: false, noPupilsMin: 1, noPupilsMax: 485, sizeType: 'Small' }, { term: null, overallPhase: 'Secondary', hasSixthForm: true, noPupilsMin: 771, noPupilsMax: 1300, sizeType: 'Medium' }, { term: null, overallPhase: 'Secondary', hasSixthForm: true, noPupilsMin: 1301, noPupilsMax: null, sizeType: 'Large' }, { term: null, overallPhase: 'Secondary', hasSixthForm: false, noPupilsMin: 936, noPupilsMax: null, sizeType: 'Large' }, { term: null, overallPhase: 'Primary', hasSixthForm: null, noPupilsMin: 386, noPupilsMax: null, sizeType: 'Large' }];
+    let stubValue = [{ term: "2020/2021", overallPhase: 'Primary', hasSixthForm: null, noPupilsMin: 1, noPupilsMax: 100, sizeType: 'Very small' },
+    { term: "2020/2021", overallPhase: 'Primary', hasSixthForm: null, noPupilsMin: 101, noPupilsMax: 175, sizeType: 'Small' },
+    { term: "2020/2021", overallPhase: 'Primary', hasSixthForm: null, noPupilsMin: 176, noPupilsMax: 385, sizeType: 'Medium' },
+    { term: "2020/2021", overallPhase: 'Secondary', hasSixthForm: false, noPupilsMin: 486, noPupilsMax: 935, sizeType: 'Medium' },
+    { term: "2020/2021", overallPhase: 'Secondary', hasSixthForm: true, noPupilsMin: 1, noPupilsMax: 770, sizeType: 'Small' },
+    { term: "2020/2021", overallPhase: 'Secondary', hasSixthForm: false, noPupilsMin: 1, noPupilsMax: 485, sizeType: 'Small' },
+    { term: "2020/2021", overallPhase: 'Secondary', hasSixthForm: true, noPupilsMin: 771, noPupilsMax: 1300, sizeType: 'Medium' },
+    { term: "2020/2021", overallPhase: 'Secondary', hasSixthForm: true, noPupilsMin: 1301, noPupilsMax: null, sizeType: 'Large' },
+    { term: "2020/2021", overallPhase: 'Secondary', hasSixthForm: false, noPupilsMin: 936, noPupilsMax: null, sizeType: 'Large' },
+    { term: "2020/2021", overallPhase: 'Primary', hasSixthForm: null, noPupilsMin: 386, noPupilsMax: null, sizeType: 'Large' }];
 
     saDataServiceSpy.getSizeLookupList.and.returnValue(asyncData(stubValue));
 
