@@ -13,9 +13,10 @@ export class SaSizeLookupService {
 
   getSizeLookup(overallPhase: string, hasSixthForm: boolean, term: string, noPupils: number): Observable<SizeLookupModel> {
     return this.saDataService.getSizeLookupList().pipe(
-      map(sizes => sizes.find(s => s.overallPhase === overallPhase
+      map(sizes => sizes.sort(a => parseInt(a.term.substring(5))).reverse().find(
+        s => s.overallPhase === overallPhase
         && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm)
-        && (!s.term || s.term === term)
+        && (!s.term || s.term <= term)
         && (noPupils >= s.noPupilsMin && (s.noPupilsMax == null || noPupils <= s.noPupilsMax))))
     );
   }
