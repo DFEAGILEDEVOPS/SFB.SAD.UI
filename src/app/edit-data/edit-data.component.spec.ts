@@ -164,7 +164,7 @@ describe('Component: Edit-data', () => {
 
     let fsmDe = fixture.debugElement.query(By.css('.govuk-error-summary'));
 
-    expect(fsmDe).not.toBeNull();
+    expect(fsmDe).not.toBeNull(); 
   });
 
 });
