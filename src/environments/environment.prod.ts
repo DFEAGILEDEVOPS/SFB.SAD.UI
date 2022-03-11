@@ -3,6 +3,6 @@ export const environment = {
   name: 'prod',
   assetsPath: './assets',
   appInsights: {
-    instrumentationKey: '0cda2fde-1876-405a-8cd6-28e838b58de6'
+    instrumentationKey: '8710e7a7-ac03-4768-aea0-366a05173591'
   }
 };
