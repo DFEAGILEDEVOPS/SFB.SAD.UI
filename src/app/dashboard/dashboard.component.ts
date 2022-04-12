@@ -1,7 +1,6 @@
 import { PptService } from './../services/ppt.service';
 import { DashboardInfoModalComponent } from './dashboard-info-modal/dashboard-info-modal.component';
 import { PdfService } from './../services/pdf.service';
-import { throwError } from 'rxjs';
 import { AssessmentAreaModel } from './../Models/AssessmentAreaModel';
 import { SaScenariosService } from './../core/network/services/sascenarios.service';
 import { AAModalModels } from './../Models/AAModalModels';
@@ -16,7 +15,8 @@ import { TitleService } from 'app/services/title.service';
 import { ViewModeService } from 'app/services/viewMode.service';
 import { AppSettings } from '../core/config/settings/app-settings';
 import { appSettings } from '@core/config/settings/app-settings';
-
+import * as $ from 'jquery';
+declare let dataLayer: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -61,6 +61,8 @@ export class DashboardComponent implements OnInit {
         this.activeScenario = result;
         this.scenarioLoaded = true;
       });
+
+
   }
 
   @HostListener('window:resize', ['$event'])
@@ -123,6 +125,12 @@ export class DashboardComponent implements OnInit {
         this.downloadModalRef = this.modalService.show(DashboardAaModalComponent, { initialState });
         break;
     }
+
+    var $externalLinks = $(".aa-modal-left-section .govuk-link[target='_blank']");
+    $externalLinks.on("click", (event)=>{
+      dataLayer.push({ 'event': 'sad_out_link', 'link': event.target.innerText });
+    });
+
   }
 
   onReset() {
