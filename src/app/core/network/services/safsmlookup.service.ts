@@ -15,7 +15,7 @@ export class SaFsmLookupService {
     return this.saDataService.getFSMLookupList().pipe(
       map(sizes => sizes.sort(a => parseInt(a.term.substring(5))).reverse().find(
           s => s.overallPhase === overallPhase
-          && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm)
+          && (s.hasSixthForm === hasSixthForm || s.hasSixthForm == null)
           && (!s.term || s.term <= term)
           && fsm >= s.fsmMin && fsm <= s.fsmMax)
       ));
