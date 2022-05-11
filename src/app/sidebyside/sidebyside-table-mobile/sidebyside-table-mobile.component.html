@@ -155,10 +155,11 @@
       </tr>
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Rating against thresholds</th>
-        <td *ngIf="firstScenario.spendingAAs[i].schoolData != null && firstScenario.spendingAAs[i].matchingTreshold"
+        <td *ngIf="firstScenario.spendingAAs[i].schoolData != null"
           class="govuk-table__cell">
-          <span class="rating-box"
+          <span class="rating-box" *ngIf="firstScenario.spendingAAs[i].matchingTreshold && firstScenario.spendingAAs[i].calculatedSchoolData >= 0"
             [class]='firstScenario.spendingAAs[i].matchingTreshold.ratingColour'>{{firstScenario.spendingAAs[i].matchingTreshold.ratingText}}</span>
+            <span class="rating-box transparent-gray" *ngIf="firstScenario.spendingAAs[i].calculatedSchoolData < 0">Rating exceeds threshold</span>
           <a [routerLink]=''
             (click)="openModalWithComponent(firstScenario.spendingAAs[i].assessmentAreaName, firstScenario, 1)"
             class="rating-help-icon"
@@ -183,16 +184,17 @@
               attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}" />
           </a>
         </td>
-        <td *ngIf="secondScenario.spendingAAs[i].schoolData != null && secondScenario.spendingAAs[i].matchingTreshold"
+        <td *ngIf="secondScenario.spendingAAs[i].schoolData != null"
           class="govuk-table__cell">
-          <span class="rating-box"
+          <span class="rating-box" *ngIf="secondScenario.spendingAAs[i].matchingTreshold && secondScenario.spendingAAs[i].calculatedSchoolData >= 0"
             [class]='secondScenario.spendingAAs[i].matchingTreshold.ratingColour'>{{secondScenario.spendingAAs[i].matchingTreshold.ratingText}}</span>
+          <span class="rating-box transparent-gray" *ngIf="secondScenario.spendingAAs[i].calculatedSchoolData < 0">Rating exceeds threshold</span>
           <a [routerLink]=''
             (click)="openModalWithComponent(secondScenario.spendingAAs[i].assessmentAreaName, secondScenario, 2)"
             class="rating-help-icon"
             id="help-{{secondScenario.spendingAAs[i].assessmentAreaName}}-2">
             <img src="assets/images/info.svg" class="small-icon"
-              attr.alt="Help for {{secondScenario.characteristicAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}" />
+              attr.alt="Help for {{secondScenario.spendingAAs[i].assessmentAreaName}} in {{secondScenario.scenarioName}}" />
           </a>
         </td>
         <td *ngIf="secondScenario.spendingAAs[i].schoolData === null" class="govuk-table__cell">
@@ -243,10 +245,13 @@
       <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">Rating against thresholds</th>
         <td
-          *ngIf="firstScenario.characteristicAAs[i].calculatedSchoolData != null && firstScenario.characteristicAAs[i].matchingTreshold"
+          *ngIf="firstScenario.characteristicAAs[i].calculatedSchoolData != null"
           class="govuk-table__cell">
-          <span class="rating-box"
-            [class]='firstScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>
+            <span class="rating-box"
+              *ngIf="firstScenario.characteristicAAs[i].matchingTreshold && firstScenario.characteristicAAs[i].calculatedSchoolData >= 0"
+              [class]='firstScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{firstScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>
+            <span class="rating-box transparent-gray" *ngIf="firstScenario.characteristicAAs[i].calculatedSchoolData < 0">Rating
+              exceeds threshold</span>
           <a [routerLink]=''
             (click)="openModalWithComponent(firstScenario.characteristicAAs[i].assessmentAreaName, secondScenario, 1)"
             class="rating-help-icon"
@@ -275,10 +280,13 @@
           </a>
         </td>
         <td
-          *ngIf="secondScenario.characteristicAAs[i].calculatedSchoolData != null && secondScenario.characteristicAAs[i].matchingTreshold"
+          *ngIf="secondScenario.characteristicAAs[i].calculatedSchoolData != null"
           class="govuk-table__cell">
-          <span class="rating-box"
+            <span class="rating-box"
+            *ngIf="secondScenario.characteristicAAs[i].matchingTreshold && secondScenario.characteristicAAs[i].calculatedSchoolData >= 0"
             [class]='secondScenario.characteristicAAs[i].matchingTreshold.ratingColour'>{{secondScenario.characteristicAAs[i].matchingTreshold.ratingText}}</span>
+          <span class="rating-box transparent-gray" *ngIf="secondScenario.characteristicAAs[i].calculatedSchoolData < 0">Rating
+            exceeds threshold</span>
           <a [routerLink]=''
             (click)="openModalWithComponent(secondScenario.characteristicAAs[i].assessmentAreaName, secondScenario, 2)"
             class="rating-help-icon"

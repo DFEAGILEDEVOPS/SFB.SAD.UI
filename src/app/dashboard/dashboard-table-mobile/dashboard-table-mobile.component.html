@@ -53,8 +53,9 @@
     </tr>
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header">Rating against thresholds</th>
-      <td *ngIf="aa.schoolData != null && aa.matchingTreshold" class="govuk-table__cell">
-        <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
+      <td *ngIf="aa.schoolData != null" class="govuk-table__cell">
+        <span *ngIf="aa.matchingTreshold && aa.calculatedSchoolData >= 0" class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
+        <span *ngIf="aa.calculatedSchoolData < 0" class="rating-box transparent">Rating exceeds threshold</span>
         <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon" id="help-{{aa.assessmentAreaName}}">
           <img src="assets/images/info.svg" attr.alt="Help for {{aa.assessmentAreaName}}" class="small-icon" />
         </a>
@@ -87,8 +88,9 @@
     </tr>
     <tr class="govuk-table__row">
       <th scope="row" class="govuk-table__header">Rating against thresholds</th>
-      <td *ngIf="aa.calculatedSchoolData != null && aa.matchingTreshold" class="govuk-table__cell">
-        <span class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
+      <td *ngIf="aa.calculatedSchoolData != null" class="govuk-table__cell">
+        <span *ngIf="aa.matchingTreshold && aa.calculatedSchoolData >= 0" class="rating-box" [class]='aa.matchingTreshold.ratingColour'>{{aa.matchingTreshold.ratingText}}</span>
+        <span *ngIf="aa.calculatedSchoolData < 0" class="rating-box transparent">Rating exceeds threshold</span>
         <a [routerLink]='' (click)="openModalWithComponent(aa.assessmentAreaName)" class="rating-help-icon" id="help-{{aa.assessmentAreaName}}">
           <img src="assets/images/info.svg" attr.alt="Help for {{aa.assessmentAreaName}}"
             class="small-icon rating-help-icon" />

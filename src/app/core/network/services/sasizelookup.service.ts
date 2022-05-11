@@ -15,7 +15,7 @@ export class SaSizeLookupService {
     return this.saDataService.getSizeLookupList().pipe(
       map(sizes => sizes.sort(a => parseInt(a.term.substring(5))).reverse().find(
         s => s.overallPhase === overallPhase
-        && (!s.hasSixthForm || s.hasSixthForm === hasSixthForm)
+        && (s.hasSixthForm === hasSixthForm || s.hasSixthForm == null)
         && (!s.term || s.term <= term)
         && (noPupils >= s.noPupilsMin && (s.noPupilsMax == null || noPupils <= s.noPupilsMax))))
     );

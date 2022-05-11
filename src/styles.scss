@@ -207,6 +207,16 @@ caption{
   background-color: govuk-colour("light-grey");
 }
 
+.rating-box.transparent{
+  background-color: govuk-colour("white");
+  border: 1px solid govuk-colour("black");
+}
+
+.rating-box.transparent-gray{
+  background-color: govuk-colour("light-grey");
+  border: 1px solid govuk-colour("black");
+}
+
 .button-link {
   text-decoration: underline!important;
   cursor: pointer;
