@@ -53,7 +53,7 @@ export class EditModalModels {
       {
         formControlName : 'averageClassSize',
         title : 'Average class size',
-        textContent : `<p>This is the FTE number of children in your school divided by the number of classes.</p>`
+        textContent : `<p class="govuk-!-font-weight-bold">Average class size = FTE number of children in your school ÷ number of classes</p>`
       },
       {
         formControlName : 'totalIncome',

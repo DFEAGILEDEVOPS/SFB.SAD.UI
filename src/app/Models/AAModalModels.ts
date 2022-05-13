@@ -202,20 +202,22 @@ export class AAModalModels {
       {
         assessmentArea : 'Teacher contact ratio (less than 1)',
         title : 'Teacher contact ratio',
-        textContent : `<p>The teacher contact ratio will always be less than 1.0.</p>
+        textContent : `<p>The teacher contact ratio will always be less than 1.0. It is calculated as:<br/>
+        <span class="govuk-!-font-weight-bold">Teacher contact ratio = total amount of contact time (in hours) timetabled for all teachers in the school ÷ total possible teaching time for all teachers in the school</p>
         <p>Thresholds for this indicator are set on the basis of Association of School and College Leaders (ASCL) aspirational target of 0.78. All teachers should have a guaranteed minimum of 10% timetabled planning, preparation and assessment (PPA) time.</p>`
       },
       {
         assessmentArea : 'Predicted percentage pupil number change in 3-5 years',
         title : 'Predicted percentage pupil number change in 3-5 years',
-        textContent : `<p>Schools should be making 3 to 5 year financial projections and assumptions. A key factor determining a school’s finances is pupil numbers.</p>
+        textContent : `<p>Schools should be making 3 to 5 year financial projections and assumptions. A key factor determining a school's finances is pupil numbers.</p>
         <p>Predicting a significant reduction in pupil numbers over this period risks implying that the school may not be financially sustainable in the medium term. The school should consider how medium-term budgets may be affected by the pupil projections and what could be put in place now to mitigate risks and ensure it has the necessary funding in the future.</p>
         <p>Schools predicting a reduction in pupil numbers of more than 10% receive a red rating; schools predicting a reduction in pupil numbers of between 2% and 10% receive an amber rating; and all others receive a light green rating.</p>`
       },
       {
         assessmentArea : 'Average Class size',
         title : 'Average Class size',
-        textContent : `<p>Average class sizes are a key determinant of the cost of running a school.</p>
+        textContent : `<p>Average class sizes are a key determinant of the cost of running a school. it is calulated as:<br>
+        <span class="govuk-!-font-weight-bold">Average class size = FTE number of children in your school ÷ number of classes</span></p>
         <p>A relatively low average class size could imply that the per-pupil funding does not cover the cost of delivering the class and may not be an effective use of resources.</p>
         <p>A relatively large average class size may affect pupil outcomes and teacher workload and may contribute to higher costs in other areas of the budget.</p>`
       },
