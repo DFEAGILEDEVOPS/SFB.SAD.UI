@@ -98,6 +98,7 @@ export class DashboardComponent implements OnInit {
       case 'Ofsted':
       case 'KS2':
       case 'P8':
+      case 'P8Part':
         modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
         initialState = {
           assessmentArea: assessmentArea,
@@ -112,6 +113,8 @@ export class DashboardComponent implements OnInit {
       default:
         modalContent = this.aaModalModels.models.find(aa => aa.assessmentArea === assessmentArea);
         assessmentAreas = this.activeScenario.sadAssessmentAreas.find(sad => sad.assessmentAreaName === assessmentArea);
+        console.log(assessmentArea);
+        console.log(this.activeScenario.sadAssessmentAreas);
         initialState = {
           assessmentArea: modalContent.assessmentArea,
           title: modalContent.title,

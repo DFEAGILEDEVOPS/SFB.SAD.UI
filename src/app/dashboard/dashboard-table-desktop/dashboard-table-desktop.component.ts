@@ -17,6 +17,7 @@ export class DashboardTableDesktopComponent implements OnInit {
   }
 
   openModalWithComponent(assessmentArea: string) {
+    console.log('assessmentArea: ', assessmentArea);
     this.onModalTriggered.emit(assessmentArea);
   }
 }

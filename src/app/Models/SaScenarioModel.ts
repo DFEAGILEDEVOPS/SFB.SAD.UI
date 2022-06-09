@@ -2,6 +2,9 @@ import { SaData } from './SaData';
 import { AssessmentAreaModel } from './AssessmentAreaModel';
 import { FSMLookupModel } from './FSMLookupModel';
 import { SizeLookupModel } from './SizeLookupModel';
+
+const bandings: number[] = [1, 2, 3, 4, 5];
+
 export class SaScenarioModel {
   scenarioName: string;
   urn: number;
@@ -28,6 +31,7 @@ export class SaScenarioModel {
   ks2Score: number;
   progressScoreType: string;
   progress8Banding: number;
+  hasFullProgressCoverage: boolean;
   teachersTotal: number;
   teachersLeader: number;
   workforceTotal: number;
@@ -64,6 +68,7 @@ export class SaScenarioModel {
     this.ks2Score = data.ks2Score;
     this.progressScoreType = data.progressScoreType;
     this.progress8Banding = data.progress8Banding;
+    this.hasFullProgressCoverage = bandings.indexOf(data.progress8Banding) > -1;
     this.totalExpenditureLatestTerm = data.totalExpenditureLatestTerm;
     this.totalIncomeLatestTerm = data.totalIncomeLatestTerm;
     this.teachersTotalLastTerm = data.teachersTotalLastTerm;
