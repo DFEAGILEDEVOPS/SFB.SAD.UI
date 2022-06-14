@@ -1,4 +1,5 @@
 export function getAADataFormat(assessmentArea): string {
+  console.log(assessmentArea);
   switch (assessmentArea) {
     case 'Pupil to teacher ratio':
     case 'Pupil to adult ratio':
@@ -12,6 +13,8 @@ export function getAADataFormat(assessmentArea): string {
     case 'In-year balance':
     case 'Revenue reserve':
       return 'percentageOfInc';
+    case 'Predicted percentage pupil number change in 3-5 years':
+      return 'percentageOfChange';
     default:
       return 'percentageOfExp';
   }
