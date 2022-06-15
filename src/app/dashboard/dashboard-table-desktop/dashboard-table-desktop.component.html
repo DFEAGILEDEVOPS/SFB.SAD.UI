@@ -180,7 +180,8 @@
                       'progress-text--below': activeScenario.progress8Banding === 4,
                       'progress-text--average': activeScenario.progress8Banding === 3,
                       'progress-text--above': activeScenario.progress8Banding === 2,
-                      'progress-text--well-above': activeScenario.progress8Banding === 1}">
+                      'progress-text--well-above': activeScenario.progress8Banding === 1,
+                      'progress-text--unknown': activeScenario.progress8Banding === 0}">
             {{activeScenario.p8Score | number: '1.2-2'}}
             <span [ngSwitch]="activeScenario.progress8Banding">
               <span *ngSwitchCase="5">&nbsp; Well below average</span>
@@ -192,7 +193,10 @@
           </span>
           <span [hidden]='activeScenario.p8Score' class="progress--na">No data available</span>
         </div>
-        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon" id="help-P8">
+        <a [routerLink]='' (click)="openModalWithComponent('P8')" class="rating-help-icon" id="help-P8" *ngIf="activeScenario.progress8Banding > 0">
+          <img src="assets/images/info.svg" alt="Help for P8 score" class="small-icon progress-icon" />
+        </a>
+        <a [routerLink]='' (click)="openModalWithComponent('P8Part')" class="rating-help-icon" id="help-P8Part" *ngIf="activeScenario.progress8Banding === 0">
           <img src="assets/images/info.svg" alt="Help for P8 score" class="small-icon progress-icon" />
         </a>
       </td>
@@ -233,7 +237,8 @@
                       'progress-text--below': activeScenario.progress8Banding === 4,
                       'progress-text--average': activeScenario.progress8Banding === 3,
                       'progress-text--above': activeScenario.progress8Banding === 2,
-                      'progress-text--well-above': activeScenario.progress8Banding === 1}">
+                      'progress-text--well-above': activeScenario.progress8Banding === 1,
+                      'progress-text--unknown' : activeScenario.progress8Banding === 0}">
             {{activeScenario.p8Score | number: '1.2-2'}}
             <span [ngSwitch]="activeScenario.progress8Banding">
               <span *ngSwitchCase="5">&nbsp; Well below average</span>

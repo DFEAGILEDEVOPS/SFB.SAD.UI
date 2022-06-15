@@ -27,6 +27,17 @@ export class AAModalModels {
         <div class='govuk-inset-text'><span class='govuk-body-s'>Due to Covid-19 the Government is not publishing the school educational performance data for 2020, the latest progress data is from 2019.</span></div>`
       },
       {
+        assessmentArea : 'P8Part',
+        title : 'Progress 8 score',
+        textContent : `<p>Progress 8 scores show how much progress pupils have made between the end of key stage 2 and the end of key stage 4, compared to pupils across all of England who got similar results at the end of key stage 2. This measure only applies to schools with key stage 4.</p>
+        <p>Schools will receive an amber or red rating if their progress score is below average.</p>
+        <p>Progress scores can be found on the <a href="https://www.gov.uk/school-performance-tables" class="govuk-link" target="_blank" rel="external noopener noreferrer">school performance tables website</a>.</p>
+        <p>Thresholds have been set using the department’s progress measure bandings.</p>
+        <h2 class="govuk-heading-s">This school or college does not cover the full Progress 8 period. </h2>
+        <p>Some schools start educating pupils partway through the 5-year period covered by Progress 8, which should be taken into account when comparing their results with schools that start at Key Stage 3.</p>
+        <div class='govuk-inset-text'><span class='govuk-body-s'>Due to Covid-19 the Government is not publishing the school educational performance data for 2020, the latest progress data is from 2019.</span></div>`
+      },
+      {
         assessmentArea : 'Teaching staff',
         title : 'Spend on teaching staff as a percentage of total expenditure',
         textContent : `<p>Spend on teaching staff typically takes up the largest proportion of a school’s overall spending.</p>
@@ -202,20 +213,22 @@ export class AAModalModels {
       {
         assessmentArea : 'Teacher contact ratio (less than 1)',
         title : 'Teacher contact ratio',
-        textContent : `<p>The teacher contact ratio will always be less than 1.0.</p>
+        textContent : `<p>The teacher contact ratio will always be less than 1.0. It is calculated as:<br/>
+        <span class="govuk-!-font-weight-bold">Teacher contact ratio = total amount of contact time (in hours) timetabled for all teachers in the school ÷ total possible teaching time for all teachers in the school</p>
         <p>Thresholds for this indicator are set on the basis of Association of School and College Leaders (ASCL) aspirational target of 0.78. All teachers should have a guaranteed minimum of 10% timetabled planning, preparation and assessment (PPA) time.</p>`
       },
       {
         assessmentArea : 'Predicted percentage pupil number change in 3-5 years',
         title : 'Predicted percentage pupil number change in 3-5 years',
-        textContent : `<p>Schools should be making 3 to 5 year financial projections and assumptions. A key factor determining a school’s finances is pupil numbers.</p>
+        textContent : `<p>Schools should be making 3 to 5 year financial projections and assumptions. A key factor determining a school's finances is pupil numbers.</p>
         <p>Predicting a significant reduction in pupil numbers over this period risks implying that the school may not be financially sustainable in the medium term. The school should consider how medium-term budgets may be affected by the pupil projections and what could be put in place now to mitigate risks and ensure it has the necessary funding in the future.</p>
         <p>Schools predicting a reduction in pupil numbers of more than 10% receive a red rating; schools predicting a reduction in pupil numbers of between 2% and 10% receive an amber rating; and all others receive a light green rating.</p>`
       },
       {
         assessmentArea : 'Average Class size',
         title : 'Average Class size',
-        textContent : `<p>Average class sizes are a key determinant of the cost of running a school.</p>
+        textContent : `<p>Average class sizes are a key determinant of the cost of running a school. it is calulated as:<br>
+        <span class="govuk-!-font-weight-bold">Average class size = FTE number of children in your school ÷ number of classes</span></p>
         <p>A relatively low average class size could imply that the per-pupil funding does not cover the cost of delivering the class and may not be an effective use of resources.</p>
         <p>A relatively large average class size may affect pupil outcomes and teacher workload and may contribute to higher costs in other areas of the budget.</p>`
       },

@@ -97,26 +97,31 @@
   &--well-below {
     background-color: #df3034;
     color: #fff;
-}
+  }
 
-&--below {
-    background-color: #f47738;
-    color: #0C0C0C;
-}
+  &--below {
+      background-color: #f47738;
+      color: #0C0C0C;
+  }
 
-&--average {
-    background-color: #ffbf47;
-}
+  &--average {
+      background-color: #ffbf47;
+  }
 
-&--above {
-    background-color: #85994b;
-    color: #0C0C0C;
-}
+  &--above {
+      background-color: #85994b;
+      color: #0C0C0C;
+  }
 
-&--well-above {
-    background-color: #006435;
-    color: #fff;
-}
+  &--well-above {
+      background-color: #006435;
+      color: #fff;
+  }
+
+  &--unknown {
+    background-color: govuk-colour("white");
+    border: solid 2px govuk-colour("black");
+  }
 }
 
 .progress-text-wrapper {
