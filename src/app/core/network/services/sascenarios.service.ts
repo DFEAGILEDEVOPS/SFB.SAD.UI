@@ -273,7 +273,7 @@ export class SaScenariosService {
   }
 
   private refreshAATresholdsWithApiData(scenario: SaScenarioModel) {
-    return from(new Promise((resolve) => {
+    return from(new Promise<void>((resolve) => {
       scenario.isTresholdsRefreshed = false;
       scenario.sadAssessmentAreas.forEach(aa => {
         aa.allTresholds = null;
