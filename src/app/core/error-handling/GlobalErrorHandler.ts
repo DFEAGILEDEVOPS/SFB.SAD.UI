@@ -15,6 +15,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
     if (settings.customErrorPage) {
       let router = this.injector.get(Router);
+      console.error(error);
       router.navigate(['service-problem']);
     }
 
