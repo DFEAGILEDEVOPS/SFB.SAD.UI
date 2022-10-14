@@ -1,34 +1,32 @@
-import { appSettings, AppSettings } from './../core/config/settings/app-settings';
-import { EditDataInfoModalComponent } from './edit-data-info-modal/edit-data-info-modal.component';
-import { mustBeLowerThanTotalSpendingValidator } from './../core/directives/mustBeLowerThanTotalSpendingValidator.directive';
-import { Location, CurrencyPipe } from '@angular/common';
-import { SaFsmLookupService } from './../core/network/services/safsmlookup.service';
-import { SaSizeLookupService } from './../core/network/services/sasizelookup.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SaScenarioModel } from '../Models/SaScenarioModel';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Inject } from '@angular/core';
-import { SaScenariosService } from '@core/network/services/sascenarios.service';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { isNumber } from 'util';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { EditModalModels } from 'app/Models/EditModalModels';
-import { TitleService } from 'app/services/title.service';
-import { ViewModeService } from 'app/services/viewMode.service';
-import { analyzeFileForInjectables } from '@angular/compiler';
+import {appSettings, AppSettings} from '@core/config/settings/app-settings';
+import {EditDataInfoModalComponent} from './edit-data-info-modal/edit-data-info-modal.component';
+import {mustBeLowerThanTotalSpendingValidator} from '@core/directives/mustBeLowerThanTotalSpendingValidator.directive';
+import {Location, CurrencyPipe} from '@angular/common';
+import {SaFsmLookupService} from '@core/network/services/safsmlookup.service';
+import {SaSizeLookupService} from '@core/network/services/sasizelookup.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SaScenarioModel} from '../Models/SaScenarioModel';
+import {Component, OnInit, ViewChild, ElementRef, AfterViewInit, Inject} from '@angular/core';
+import {SaScenariosService} from '@core/network/services/sascenarios.service';
+import {Validators, FormGroup, FormBuilder} from '@angular/forms';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {EditModalModels} from 'app/Models/EditModalModels';
+import {TitleService} from 'app/services/title.service';
+import {ViewModeService} from 'app/services/viewMode.service';
 
 @Component({
   selector: 'app-edit-data',
   templateUrl: './edit-data.component.html',
   styleUrls: ['./edit-data.component.scss']
 })
-  export class EditDataComponent implements OnInit, AfterViewInit {
+export class EditDataComponent implements OnInit, AfterViewInit {
   scenarioInEdit: SaScenarioModel;
   urn: number;
   editDataForm: FormGroup;
   viewType: string;
   scenarioNo: number;
-  scenarioLoaded: boolean = false;
-  storeScenarioBeyondSession: boolean = true;
+  scenarioLoaded = false;
+  storeScenarioBeyondSession = true;
   missingField: string;
   formSubmitted: boolean;
   modalRef: BsModalRef;
@@ -162,10 +160,10 @@ import { analyzeFileForInjectables } from '@angular/compiler';
       this.missingField = pmap.get('field');
       this.scenarioNo = pmap.get('scenarioNo') ? Number(pmap.get('scenarioNo')) : null;
     });
-    if (this.viewType === "edit") {
-      titleService.setWithPrefix("Edit dashboard");
+    if (this.viewType === 'edit') {
+      titleService.setWithPrefix('Edit dashboard');
     } else {
-      titleService.setWithPrefix("Add a custom dashboard");
+      titleService.setWithPrefix('Add a custom dashboard');
     }
   }
 
@@ -173,7 +171,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
     if ((this.viewType === 'edit' && (this.scenarioNo === null || this.scenarioNo === 0)) || this.viewType === 'add-new') {
       this.scenariosService.getFirstScenario(this.urn)
         .subscribe(result => {
-          if(this.viewType === 'add-new' && this.scenariosService.isFirstScenarioEditedAndStored(this.urn)){
+          if (this.viewType === 'add-new' && this.scenariosService.isFirstScenarioEditedAndStored(this.urn)) {
             this.router.navigate(['self-assessment/', this.urn]);
           }
           this.scenarioInEdit = result;
@@ -194,10 +192,10 @@ import { analyzeFileForInjectables } from '@angular/compiler';
   onSubmit() {
 
     this.formSubmitted = true;
-    this.storeScenarioBeyondSession =  this.editDataForm.value.scenarioDetails.storeBeyondSession;
+    this.storeScenarioBeyondSession = this.editDataForm.value.scenarioDetails.storeBeyondSession;
 
     if (this.editDataForm.valid) {
-      let editedScenario: SaScenarioModel = this.scenarioInEdit;
+      const editedScenario: SaScenarioModel = this.scenarioInEdit;
       editedScenario.scenarioName = this.editDataForm.value.scenarioDetails.scenarioName;
       editedScenario.termOfScenario = this.editDataForm.value.scenarioDetails.scenarioTerm;
       editedScenario.numberOfPupils = this.editDataForm.value.schoolDetails.numberOfPupils;
@@ -207,7 +205,7 @@ import { analyzeFileForInjectables } from '@angular/compiler';
       editedScenario.fsm = this.editDataForm.value.schoolDetails.fsm;
       editedScenario.setAAValue('Teacher contact ratio (less than 1)', this.editDataForm.value.schoolDetails.teacherContactRatio);
       editedScenario.setAAValue('Predicted percentage pupil number change in 3-5 years',
-        isNumber(this.editDataForm.value.schoolDetails.predictedPupil) ?
+        typeof (this.editDataForm.value.schoolDetails.predictedPupil) === 'number' ?
           this.editDataForm.value.schoolDetails.predictedPupil / 100 : null);
       editedScenario.setAAValue('Average Class size', this.editDataForm.value.schoolDetails.averageClassSize);
 
@@ -237,23 +235,23 @@ import { analyzeFileForInjectables } from '@angular/compiler';
             editedScenario.hasSixthForm,
             editedScenario.termOfScenario,
             editedScenario.numberOfPupils).subscribe(result => {
-              editedScenario.sadSizeLookup = result;
-              editedScenario.data.sadSizeLookup = result;
+            editedScenario.sadSizeLookup = result;
+            editedScenario.data.sadSizeLookup = result;
 
-              this.fsmLookupService.getFSMLookup(
-                editedScenario.overallPhase,
-                editedScenario.hasSixthForm,
-                editedScenario.termOfScenario,
-                editedScenario.fsm).subscribe(response => {
-                  editedScenario.sadFSMLookup = response;
-                  editedScenario.data.sadFSMLookup = response;
+            this.fsmLookupService.getFSMLookup(
+              editedScenario.overallPhase,
+              editedScenario.hasSixthForm,
+              editedScenario.termOfScenario,
+              editedScenario.fsm).subscribe(response => {
+              editedScenario.sadFSMLookup = response;
+              editedScenario.data.sadFSMLookup = response;
 
-                  this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
-                    .subscribe(() => {
-                      this.router.navigate(['self-assessment/', this.urn]);
-                    });
+              this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
+                .subscribe(() => {
+                  this.router.navigate(['self-assessment/', this.urn]);
                 });
             });
+          });
         } else {
           this.scenariosService.setFirstScenario(editedScenario, this.storeScenarioBeyondSession);
           this.router.navigate(['self-assessment/', this.urn]);
@@ -267,21 +265,21 @@ import { analyzeFileForInjectables } from '@angular/compiler';
               editedScenario.hasSixthForm,
               editedScenario.termOfScenario,
               editedScenario.numberOfPupils).subscribe(result => {
-                editedScenario.sadSizeLookup = result;
+              editedScenario.sadSizeLookup = result;
 
-                this.fsmLookupService.getFSMLookup(
-                  editedScenario.overallPhase,
-                  editedScenario.hasSixthForm,
-                  editedScenario.termOfScenario,
-                  editedScenario.fsm).subscribe(response => {
-                    editedScenario.sadFSMLookup = response;
+              this.fsmLookupService.getFSMLookup(
+                editedScenario.overallPhase,
+                editedScenario.hasSixthForm,
+                editedScenario.termOfScenario,
+                editedScenario.fsm).subscribe(response => {
+                editedScenario.sadFSMLookup = response;
 
-                    this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
-                      .subscribe(() => {
-                        this.router.navigate(['self-assessment/side-by-side']);
-                      });
+                this.scenariosService.setFirstScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
+                  .subscribe(() => {
+                    this.router.navigate(['self-assessment/side-by-side']);
                   });
               });
+            });
 
           } else {
             this.scenariosService.setFirstScenario(editedScenario, this.storeScenarioBeyondSession);
@@ -295,32 +293,31 @@ import { analyzeFileForInjectables } from '@angular/compiler';
               editedScenario.hasSixthForm,
               editedScenario.termOfScenario,
               editedScenario.numberOfPupils).subscribe(result => {
-                editedScenario.sadSizeLookup = result;
+              editedScenario.sadSizeLookup = result;
 
-                this.fsmLookupService.getFSMLookup(
-                  editedScenario.overallPhase,
-                  editedScenario.hasSixthForm,
-                  editedScenario.termOfScenario,
-                  editedScenario.fsm).subscribe(response => {
-                    editedScenario.sadFSMLookup = response;
+              this.fsmLookupService.getFSMLookup(
+                editedScenario.overallPhase,
+                editedScenario.hasSixthForm,
+                editedScenario.termOfScenario,
+                editedScenario.fsm).subscribe(response => {
+                editedScenario.sadFSMLookup = response;
 
-                    this.scenariosService.setSecondScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
-                      .subscribe(() => {
-                        this.router.navigate(['self-assessment/side-by-side']);
-                      });
+                this.scenariosService.setSecondScenarioWithRefresh(editedScenario, this.storeScenarioBeyondSession)
+                  .subscribe(() => {
+                    this.router.navigate(['self-assessment/side-by-side']);
                   });
               });
-         } else {
+            });
+          } else {
             this.scenariosService.setSecondScenario(editedScenario, this.storeScenarioBeyondSession);
             this.router.navigate(['self-assessment/side-by-side']);
           }
         }
       }
-    }
-    else {
+    } else {
       setTimeout(() => {
         this.errorSummaryElement.nativeElement.focus();
-        //this.titleService.setTitle("Error: " + this.titleService.getTitle().replace("Error: ", ""));
+        // this.titleService.setTitle("Error: " + this.titleService.getTitle().replace("Error: ", ""));
       });
     }
   }
@@ -337,19 +334,19 @@ import { analyzeFileForInjectables } from '@angular/compiler';
     element.target.value = this.numberToDecimal(formControl);
   }
 
-  setFocus(input: ElementRef){
+  setFocus(input: ElementRef) {
     input.nativeElement.focus();
   }
 
   openModalWithComponent(formControlName: string) {
-    let modalContent = this.editDataModels.models.find(aa => aa.formControlName === formControlName);
-    let initialState = {
+    const modalContent = this.editDataModels.models.find(aa => aa.formControlName === formControlName);
+    const initialState = {
       title: modalContent.title,
       textContent: modalContent.textContent,
-      referrer: "help-" + formControlName
+      referrer: 'help-' + formControlName
     };
 
-    this.modalRef = this.modalService.show(EditDataInfoModalComponent, { initialState });
+    this.modalRef = this.modalService.show(EditDataInfoModalComponent, {initialState});
   }
 
   private numberToDecimal(val: number): number {
@@ -382,9 +379,9 @@ import { analyzeFileForInjectables } from '@angular/compiler';
         setTimeout(() => this.totalIncomeInput.nativeElement.focus());
         break;
       case 'Revenue reserve':
-        if(this.scenarioInEdit.totalIncome === 0) {
+        if (this.scenarioInEdit.totalIncome === 0) {
           setTimeout(() => this.totalIncomeInput.nativeElement.focus());
-        }else {
+        } else {
           setTimeout(() => this.revenueReserveInput.nativeElement.focus());
         }
         break;
@@ -437,20 +434,23 @@ import { analyzeFileForInjectables } from '@angular/compiler';
     this.editDataForm = this.fb.group({
       scenarioDetails: this.fb.group({
         scenarioName: [this.scenarioInEdit.scenarioName, [Validators.required, Validators.minLength(3)]],
-        scenarioTerm: [this.scenarioInEdit.termOfScenario ?? "", [Validators.required]],
+        scenarioTerm: [this.scenarioInEdit.termOfScenario ?? '', [Validators.required]],
         storeBeyondSession: [this.storeScenarioBeyondSession]
       }),
       schoolDetails: this.fb.group({
         numberOfPupils: [this.scenarioInEdit.numberOfPupils, [Validators.required, Validators.min(1)]],
         schoolWorkforce: [this.scenarioInEdit.workforceTotal, [Validators.required, Validators.min(1)]],
-        numberOfTeachers: [this.scenarioInEdit.teachersTotal, [Validators.required, Validators.min(1)]],
-        seniorLeadership: [this.scenarioInEdit.teachersLeader, [Validators.required, Validators.min(0)]],
+        numberOfTeachers: [this.scenarioInEdit.teachersTotal,
+          [Validators.required, Validators.min(1), Validators.max(this.scenarioInEdit.workforceTotal)]],
+        seniorLeadership: [this.scenarioInEdit.teachersLeader,
+          [Validators.required, Validators.min(0), Validators.max(this.scenarioInEdit.teachersTotal)]],
         fsm: [this.scenarioInEdit.fsm],
         teacherContactRatio: [this.scenarioInEdit.getAAValue('Teacher contact ratio (less than 1)'),
           [Validators.min(0), Validators.max(1)]],
         predictedPupil: [this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') ?
           this.scenarioInEdit.getAAValue('Predicted percentage pupil number change in 3-5 years') * 100 : null, Validators.min(-100)],
-        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size'), Validators.min(0)],
+        averageClassSize: [this.scenarioInEdit.getAAValue('Average Class size'),
+          [Validators.min(0), Validators.max(this.scenarioInEdit.numberOfPupils)]],
       }),
       spending: this.fb.group({
         teachingStaff: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Teaching staff'))],
@@ -467,17 +467,17 @@ import { analyzeFileForInjectables } from '@angular/compiler';
         totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure), [Validators.required]],
         rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
       })
-    }, { validators: mustBeLowerThanTotalSpendingValidator });
+    }, {validators: mustBeLowerThanTotalSpendingValidator});
 
-    if(this.scenarioInEdit.overallPhase === "Primary" || this.scenarioInEdit.overallPhase === "Secondary") {
+    if (this.scenarioInEdit.overallPhase === 'Primary' || this.scenarioInEdit.overallPhase === 'Secondary') {
       this.fsm.setValidators([Validators.required, Validators.min(0)]);
     }
 
-    if(this.scenarioInEdit.overallPhase === "Special"
-    || this.scenarioInEdit.overallPhase === "Nursery"
-    || this.scenarioInEdit.overallPhase === "Pupil referral unit") {
-      (this.editDataForm.get('schoolDetails') as FormGroup).removeControl("averageClassSize");
-      (this.editDataForm.get('schoolDetails') as FormGroup).removeControl("teacherContactRatio");
+    if (this.scenarioInEdit.overallPhase === 'Special'
+      || this.scenarioInEdit.overallPhase === 'Nursery'
+      || this.scenarioInEdit.overallPhase === 'Pupil referral unit') {
+      (this.editDataForm.get('schoolDetails') as FormGroup).removeControl('averageClassSize');
+      (this.editDataForm.get('schoolDetails') as FormGroup).removeControl('teacherContactRatio');
     }
   }
 
