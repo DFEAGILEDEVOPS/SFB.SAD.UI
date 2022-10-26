@@ -32,11 +32,19 @@
       <li *ngIf="numberOfTeachers.errors?.min">
         <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers must be minimum 1</a>
       </li>
+      <li *ngIf="numberOfTeachers.errors?.max">
+        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers cannot exceed the school
+          workforce</a>
+      </li>
       <li *ngIf="seniorLeadership.errors?.required">
         <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Enter the school leadership number to continue</a>
       </li>
       <li *ngIf="seniorLeadership.errors?.min">
         <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership number must be minimum 0</a>
+      </li>
+      <li *ngIf="seniorLeadership.errors?.max">
+        <a [routerLink]='' (click)="setFocus(seniorLeadershipInput)">Senior leadership cannot be greater than the total
+          number of teachers</a>
       </li>
       <li *ngIf="fsm.errors?.required">
         <a [routerLink]='' (click)="setFocus(fsmInput)">Enter the percentage of pupils eligible for FSM to continue</a>
@@ -57,6 +65,11 @@
       </li>
       <li *ngIf="averageClassSize?.errors?.min">
         <a [routerLink]='' (click)="setFocus(averageClassSizeElement.nativeElement)">Average class size must be minimum 0</a>
+      </li>
+      <li *ngIf="averageClassSize?.errors?.max">
+        <a [routerLink]='' (click)="setFocus(averageClassSizeElement.nativeElement)">
+          Average class size cannot be greater than the number of pupils attending {{scenarioInEdit.name}}
+        </a>
       </li>
       <li *ngIf="totalIncome.errors?.required">
         <a [routerLink]='' (click)="setFocus(totalIncomeInput)">Enter the total income to continue</a>
@@ -277,6 +290,9 @@
           <span *ngIf="numberOfTeachers.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Number of teachers must be minimum 1
           </span>
+          <span *ngIf="numberOfTeachers.errors.max" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Number of teachers cannot exceed the school workforce
+          </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number"
           #numberOfTeachersInput formControlName='numberOfTeachers'
@@ -302,6 +318,9 @@
           </span>
           <span *ngIf="seniorLeadership.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Senior leadership number must be minimum 0
+          </span>
+          <span *ngIf="seniorLeadership.errors.max" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Senior leadership cannot be greater than the total number of teachers
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number"
@@ -391,6 +410,10 @@
         <div *ngIf="averageClassSize.invalid && averageClassSize.dirty">
           <span *ngIf="averageClassSize.errors.min" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Average class size must be minimum 0
+          </span>
+          <span *ngIf="averageClassSize.errors.max" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span>
+            Average class size cannot be greater than the number of pupils attending {{scenarioInEdit.name}}
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="acsize" name="acsize" type="number"

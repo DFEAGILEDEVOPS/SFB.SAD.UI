@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import html2canvas from "html2canvas";
+import html2canvas from 'html2canvas';
 import * as $ from 'jquery';
 import { from } from 'rxjs';
-import { jsPDF } from "jspdf";
+import { jsPDF } from 'jspdf';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class PdfService {
     this.writeWarnings();
     setTimeout(() => {
       this.generateCanvassesForDesktopTables().subscribe(() => {
-        this.writeTableFromCanvasForDesktop("criteriaTable");
+        this.writeTableFromCanvasForDesktop('criteriaTable');
         if ($('#scenarioName').length > 0) {
           this.pdfWriteLine('H3', $('#scenarioName').get(0).innerText);
         }
@@ -33,15 +33,15 @@ export class PdfService {
           this.pdfWriteLine('Grayed', $('#scenarioYear').get(0).innerText);
         }
 
-        this.writeTableFromCanvasForDesktop("reserveTable");
+        this.writeTableFromCanvasForDesktop('reserveTable');
         this.offset -= 30;
-        this.writeTableFromCanvasForDesktop("spendingTable");
+        this.writeTableFromCanvasForDesktop('spendingTable');
         this.pdfAddNewPage();
-        this.writeTableFromCanvasForDesktop("charTable");
+        this.writeTableFromCanvasForDesktop('charTable');
         this.offset -= 150;
-        this.writeTableFromCanvasForDesktop("outcomesTable");
+        this.writeTableFromCanvasForDesktop('outcomesTable');
 
-        this.pdfSave("Self-assessment-dashboard.pdf");
+        this.pdfSave('Self-assessment-dashboard.pdf');
 
         this.restorePage();
       });
@@ -56,14 +56,14 @@ export class PdfService {
     setTimeout(() => {
       this.generateCanvassesForMobileTables().subscribe(() => {
 
-        this.writeTableFromCanvasForMobile("criteriaTables");
-        this.writeTableFromCanvasForMobile("page1Tables");
+        this.writeTableFromCanvasForMobile('criteriaTables');
+        this.writeTableFromCanvasForMobile('page1Tables');
         this.pdfAddNewPage();
-        this.writeTableFromCanvasForMobile("page2Tables");
+        this.writeTableFromCanvasForMobile('page2Tables');
         this.pdfAddNewPage();
-        this.writeTableFromCanvasForMobile("page3Tables");
+        this.writeTableFromCanvasForMobile('page3Tables');
 
-        this.pdfSave("Self-assessment-dashboard.pdf");
+        this.pdfSave('Self-assessment-dashboard.pdf');
 
         this.restorePage();
       });
@@ -76,28 +76,28 @@ export class PdfService {
   }
 
   private restorePage() {
-    $("body").css("cursor", "");
-    $(".small-icon").show();
+    $('body').css('cursor', '');
+    $('.small-icon').show();
   }
 
   private preparePage() {
     this.expandDetails();
-    $("body").css("cursor", "wait");
-    $(".small-icon").hide();
+    $('body').css('cursor', 'wait');
+    $('.small-icon').hide();
   }
 
   private writeTableFromCanvasForMobile(id: string) {
-    let canvas = this.canvassesForMobileTables.find(ct => ct.id === id).canvas;
-    let ratio = canvas.width / canvas.height;
-    let width = 145;
-    let height = 145 / ratio;
+    const canvas = this.canvassesForMobileTables.find(ct => ct.id === id).canvas;
+    const ratio = canvas.width / canvas.height;
+    const width = 145;
+    const height = 145 / ratio;
 
     this.pdfAddImage(canvas, width, height);
     this.offset += height + 25;
   }
 
   private writeTableFromCanvasForDesktop(id: string) {
-    let canvas = this.canvassesForDesktopTables.find(ct => ct.id === id).canvas;
+    const canvas = this.canvassesForDesktopTables.find(ct => ct.id === id).canvas;
     if (this.offset + canvas.height > 900) {
       this.pdfAddNewPage();
     }
@@ -112,9 +112,9 @@ export class PdfService {
       this.pdfWriteLine('Grayed', $('#dateCaption').get(0).innerText);
     }
     this.offset += 10;
-    let assessingText = $('#assessing').get(0).innerText;
-    let part1 = assessingText.substring(0, assessingText.indexOf('.') + 1);
-    let part2 = assessingText.substring(assessingText.indexOf('.') + 2);
+    const assessingText = $('#assessing').get(0).innerText;
+    const part1 = assessingText.substring(0, assessingText.indexOf('.') + 1);
+    const part2 = assessingText.substring(assessingText.indexOf('.') + 2);
     this.pdfWriteLine('Bold', part1);
     if (part2) {
       this.pdfWriteLine('Bold', part2);
@@ -128,9 +128,9 @@ export class PdfService {
       this.pdfWriteLine('Grayed', $('#dateCaption').get(0).innerText);
     }
     this.offset += 10;
-    let assessingText = $('#assessing').get(0).innerText;
-    let part1 = assessingText.substring(0, assessingText.indexOf('.') + 1);
-    let part2 = assessingText.substring(assessingText.indexOf('.') + 2);
+    const assessingText = $('#assessing').get(0).innerText;
+    const part1 = assessingText.substring(0, assessingText.indexOf('.') + 1);
+    const part2 = assessingText.substring(assessingText.indexOf('.') + 2);
     this.pdfWriteLine('Bold', part1);
     if (part2) {
       this.pdfWriteLine('Bold', part2);
@@ -139,9 +139,9 @@ export class PdfService {
 
   private writeWarnings() {
     if ($('#partialWarning').length > 0) {
-      let warningText = $('#partialWarning__text').get(0).innerText;
-      let part1 = warningText.substring(0, warningText.indexOf('.') + 1);
-      let part2 = warningText.substring(warningText.indexOf('.') + 2);
+      const warningText = $('#partialWarning__text').get(0).innerText;
+      const part1 = warningText.substring(0, warningText.indexOf('.') + 1);
+      const part2 = warningText.substring(warningText.indexOf('.') + 2);
       this.pdfWriteLine('Warning', part1);
       this.pdfWriteLine('Warning', part2);
     }
@@ -154,20 +154,20 @@ export class PdfService {
   }
 
   private pdfGenerateImage(elementId) {
-    let element = $(elementId)[0];
+    const element = $(elementId)[0];
     return html2canvas(element, {
       imageTimeout: 20000,
       removeContainer: false,
       width: element.clientWidth,
       height: element.clientHeight,
-      allowTaint:true,
+      allowTaint: true,
       scale: 1
     });
   }
 
   private pdfAddImage(canvas, width, height) {
-    let img = canvas.toDataURL("image/png");
-    this.doc.addImage(img, 'JPEG', this.MARGIN_LEFT + 5, this.offset, width, height, "", 'FAST');
+    const img = canvas.toDataURL('image/png');
+    this.doc.addImage(img, 'JPEG', this.MARGIN_LEFT + 5, this.offset, width, height, '', 'FAST');
   }
 
   private pdfSave(pdfName: string) {
@@ -180,21 +180,21 @@ export class PdfService {
     switch (type) {
       case 'H1':
         this.offset += 4;
-        this.doc.setFont("helvetica", "bold");
+        this.doc.setFont('helvetica', 'bold');
         fontSize = 40;
         break;
       case 'H2':
         this.offset += 3;
-        this.doc.setFont("helvetica", "bold");
+        this.doc.setFont('helvetica', 'bold');
         fontSize = 30;
         break;
       case 'H3':
         this.offset += 2;
-        this.doc.setFont("helvetica", "bold");
+        this.doc.setFont('helvetica', 'bold');
         fontSize = 20;
         break;
       case 'Warning':
-        this.doc.setFont("helvetica", "italic");
+        this.doc.setFont('helvetica', 'italic');
         this.doc.setTextColor(244, 119, 56);
         fontSize = 12;
         break;
@@ -203,19 +203,19 @@ export class PdfService {
         fontSize = 14;
         break;
       case 'Info':
-        this.doc.setFont("helvetica", "italic");
+        this.doc.setFont('helvetica', 'italic');
         fontSize = 14;
         break;
       case 'Bold':
-        this.doc.setFont("helvetica", "bold");
+        this.doc.setFont('helvetica', 'bold');
         fontSize = 14;
         break;
       case 'SmallBold':
-        this.doc.setFont("helvetica", "bold");
+        this.doc.setFont('helvetica', 'bold');
         fontSize = 8;
         break;
       default:
-        this.doc.setFont("helvetica");
+        this.doc.setFont('helvetica');
         fontSize = 12;
         this.offset += 2;
     }
@@ -232,10 +232,10 @@ export class PdfService {
   private generateCanvassesForMobileTables() {
 
     this.canvassesForMobileTables = [
-      { id: "criteriaTables" },
-      { id: "page1Tables" },
-      { id: "page2Tables" },
-      { id: "page3Tables" },
+      { id: 'criteriaTables' },
+      { id: 'page1Tables' },
+      { id: 'page2Tables' },
+      { id: 'page3Tables' },
     ];
 
     return from(new Promise<void>((resolve) => {
@@ -245,7 +245,7 @@ export class PdfService {
           if (this.canvassesForMobileTables.every(ct => ct.canvas)) {
             resolve();
           }
-        })
+        });
       });
     }));
 
@@ -253,12 +253,12 @@ export class PdfService {
 
   private generateCanvassesForDesktopTables() {
     this.canvassesForDesktopTables = [
-      { id: "criteriaTable" },
-      { id: "reserveTable" },
-      { id: "spendingTable" },
-      { id: "charTable" },
-      { id: "outcomesTable" }
-    ]
+      { id: 'criteriaTable' },
+      { id: 'reserveTable' },
+      { id: 'spendingTable' },
+      { id: 'charTable' },
+      { id: 'outcomesTable' }
+    ];
 
     return from(new Promise<void>((resolve) => {
       this.canvassesForDesktopTables.forEach(tableCanvas => {
@@ -267,17 +267,13 @@ export class PdfService {
           if (this.canvassesForDesktopTables.every(ct => ct.canvas)) {
             resolve();
           }
-        })
+        });
       });
     }));
   }
 
   private expandDetails() {
-    let detailses = document.getElementsByTagName("details");
-    let details;
-    var i = -1;
-    while (details = detailses[++i]) {
-      details["open"] = true;
-    }
+    const detailses = Array.from(document.getElementsByTagName('details'));
+    detailses.forEach(detail => detail.setAttribute('open', ''));
   }
 }
