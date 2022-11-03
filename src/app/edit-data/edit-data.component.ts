@@ -13,6 +13,8 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {EditModalModels} from 'app/Models/EditModalModels';
 import {TitleService} from 'app/services/title.service';
 import {ViewModeService} from 'app/services/viewMode.service';
+import {staffTotalsValidatorDirective} from '@core/directives/staffTotalsValidator.directive';
+import {classroomValidatorDirective} from '@core/directives/classroomValidator.directive';
 
 @Component({
   selector: 'app-edit-data',
@@ -467,7 +469,12 @@ export class EditDataComponent implements OnInit, AfterViewInit {
         totalExpenditure: [this.numberToCurrency(this.scenarioInEdit.totalExpenditure), [Validators.required]],
         rr: [this.numberToCurrency(this.scenarioInEdit.getAAValue('Revenue reserve'))],
       })
-    }, {validators: mustBeLowerThanTotalSpendingValidator});
+    }, {
+      validators: [
+        mustBeLowerThanTotalSpendingValidator,
+        staffTotalsValidatorDirective,
+        classroomValidatorDirective
+      ]});
 
     if (this.scenarioInEdit.overallPhase === 'Primary' || this.scenarioInEdit.overallPhase === 'Secondary') {
       this.fsm.setValidators([Validators.required, Validators.min(0)]);
