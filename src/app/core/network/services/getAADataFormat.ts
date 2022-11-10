@@ -1,5 +1,4 @@
 export function getAADataFormat(assessmentArea): string {
-  console.log(assessmentArea);
   switch (assessmentArea) {
     case 'Pupil to teacher ratio':
     case 'Pupil to adult ratio':
