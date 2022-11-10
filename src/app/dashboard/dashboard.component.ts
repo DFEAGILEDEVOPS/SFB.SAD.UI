@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
       case 'dashboard-year':
         initialState = {
           title: "Dashboard year",
-          textContent: "<p>By choosing a different year banding figures are adjusted to align to that year. An 8.6% uplift has been applied to Teaching staff and average salary (including pensions) for 2019/20 and an 11.9% uplift on 2020/21 and future years.</p>",
+          textContent: "<p>By choosing a different year banding figures are aligned to that year for published finance, Future years use the most recent bands and can have uplifts applied to specific expenditure areas where there is an expectation of significant expenditure changes such pending salary awards.</p>",
           referrer: "help-dashboard-year"
         };
 
