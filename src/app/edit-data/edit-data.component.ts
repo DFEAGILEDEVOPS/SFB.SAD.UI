@@ -333,6 +333,23 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   }
 
   transformDecimal(element, formControl) {
+    console.log(element);
+    console.log(formControl);
+    if (element.target.id === 'school-workforce') {
+      this.scenarioInEdit.workforceTotal = formControl;
+      this.buildForm();
+    }
+
+    if (element.target.id === 'number-teachers') {
+      this.scenarioInEdit.teachersTotal = formControl;
+      this.buildForm();
+    }
+
+    if (element.target.id === 'senior-leadership') {
+      this.scenarioInEdit.teachersLeader = formControl;
+      this.buildForm();
+    }
+
     element.target.value = this.numberToDecimal(formControl);
   }
 
@@ -441,7 +458,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       }),
       schoolDetails: this.fb.group({
         numberOfPupils: [this.scenarioInEdit.numberOfPupils, [Validators.required, Validators.min(1)]],
-        schoolWorkforce: [this.scenarioInEdit.workforceTotal, [Validators.required, Validators.min(1)]],
+        schoolWorkforce: [this.scenarioInEdit.workforceTotal, [Validators.required, Validators.min(0)]],
         numberOfTeachers: [this.scenarioInEdit.teachersTotal,
           [Validators.required, Validators.min(1), Validators.max(this.scenarioInEdit.workforceTotal)]],
         seniorLeadership: [this.scenarioInEdit.teachersLeader,

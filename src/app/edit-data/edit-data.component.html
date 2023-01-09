@@ -24,13 +24,13 @@
         <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">Enter the school workforce count to continue</a>
       </li>
       <li *ngIf="schoolWorkforce.errors?.min">
-        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count must be minimum 1</a>
+        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count must be minimum 0</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.required">
         <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Enter the number of teachers to continue</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.min">
-        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers must be minimum 1</a>
+        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers must be minimum 0</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.max || editDataForm.errors?.teachersGreaterThanStaff">
         <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers cannot exceed the school
@@ -262,7 +262,7 @@
             <span class="govuk-visually-hidden">Error:</span> Enter the school workforce count to continue
           </span>
           <span *ngIf="schoolWorkforce.errors.min" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> School workforce count must be minimum 1
+            <span class="govuk-visually-hidden">Error:</span> School workforce count must be minimum 0
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number"
