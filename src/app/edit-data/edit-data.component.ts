@@ -332,24 +332,31 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     element.target.value = this.numberToCurrency(this.currencyToNumber(formControl));
   }
 
+  updateScenarioField($event, field, fieldType) {
+    const userVal = $event.target.value;
+    if (fieldType === 'number' && userVal && typeof parseFloat(userVal) === 'number') {
+      this.scenarioInEdit[field] = parseFloat($event.target.value);
+    }
+    if (fieldType === 'string') {
+      this.scenarioInEdit[field] = $event.target.value;
+    }
+    this.buildForm();
+  }
+
+  updatePredictedPupilChange($event) {
+    const val = typeof parseFloat($event.target.value) === 'number' ?
+      parseFloat($event.target.value) / 100 : 0;
+
+    this.scenarioInEdit.setAAValue('Predicted percentage pupil number change in 3-5 years', val);
+    window.setTimeout(() => { this.buildForm(); } , 0);
+  }
+
+  updateAverageClassSize($event) {
+    // const val = typeof parseFloat($event.target.value) === 'number' ?
+    this.scenarioInEdit.setAAValue('Average Class size', parseFloat($event.target.value));
+    window.setTimeout(() => { this.buildForm(); } , 0);
+  }
   transformDecimal(element, formControl) {
-    console.log(element);
-    console.log(formControl);
-    if (element.target.id === 'school-workforce') {
-      this.scenarioInEdit.workforceTotal = formControl;
-      this.buildForm();
-    }
-
-    if (element.target.id === 'number-teachers') {
-      this.scenarioInEdit.teachersTotal = formControl;
-      this.buildForm();
-    }
-
-    if (element.target.id === 'senior-leadership') {
-      this.scenarioInEdit.teachersLeader = formControl;
-      this.buildForm();
-    }
-
     element.target.value = this.numberToDecimal(formControl);
   }
 
@@ -368,11 +375,11 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     this.modalRef = this.modalService.show(EditDataInfoModalComponent, {initialState});
   }
 
-  private numberToDecimal(val: number): number {
+  private numberToDecimal(val: string): number {
     if (val === null) {
       return null;
     }
-    return Number(val.toFixed(2));
+    return Number(parseFloat(val).toFixed(2));
   }
 
   private numberToCurrency(val: number): string {
@@ -460,7 +467,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
         numberOfPupils: [this.scenarioInEdit.numberOfPupils, [Validators.required, Validators.min(1)]],
         schoolWorkforce: [this.scenarioInEdit.workforceTotal, [Validators.required, Validators.min(0)]],
         numberOfTeachers: [this.scenarioInEdit.teachersTotal,
-          [Validators.required, Validators.min(1), Validators.max(this.scenarioInEdit.workforceTotal)]],
+          [Validators.required, Validators.min(0), Validators.max(this.scenarioInEdit.workforceTotal)]],
         seniorLeadership: [this.scenarioInEdit.teachersLeader,
           [Validators.required, Validators.min(0), Validators.max(this.scenarioInEdit.teachersTotal)]],
         fsm: [this.scenarioInEdit.fsm],
