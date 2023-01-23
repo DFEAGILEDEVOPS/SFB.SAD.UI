@@ -120,10 +120,8 @@ export class SaScenarioModel {
   }
 
   setAAValue(aaName: string, value: number) {
-    if(this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0]){
-      console.log('YO! ', value);
+    if (this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0]){
       this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0].schoolData = value;
-      console.log(this.sadAssessmentAreas.filter(aa => aa.assessmentAreaName === aaName)[0]);
     }
   }
 
