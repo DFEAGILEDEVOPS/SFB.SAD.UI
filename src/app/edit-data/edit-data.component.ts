@@ -329,18 +329,22 @@ export class EditDataComponent implements OnInit, AfterViewInit {
   }
 
   transformAmount(element, formControl) {
-    element.target.value = this.numberToCurrency(this.currencyToNumber(formControl));
+    const currencyAsNumber = this.currencyToNumber(formControl);
+    element.target.value = this.numberToCurrency(currencyAsNumber);
   }
 
   updateScenarioField($event, field, fieldType) {
     const userVal = $event.target.value;
     if (fieldType === 'number' && userVal && typeof parseFloat(userVal) === 'number') {
-      this.scenarioInEdit[field] = parseFloat($event.target.value);
+      this.scenarioInEdit[field] = Number(userVal.replace(new RegExp('[^.0-9-]', 'g'), ''));
     }
     if (fieldType === 'string') {
       this.scenarioInEdit[field] = $event.target.value;
     }
-    this.buildForm();
+    window.setTimeout(() => {
+      this.buildForm();
+    }, 500);
+
   }
 
   updatePredictedPupilChange($event) {
