@@ -9,9 +9,9 @@ import { CookiesService } from 'app/services/cookies.service';
   styleUrls: ['./cookie-banner.component.scss']
 })
 export class CookieBannerComponent implements OnInit {
-  public cookiesAccepted: Boolean;
-  public cookiesRejected: Boolean;
-  public cookiesSetAndConfirmed: Boolean;
+  public cookiesAccepted: boolean;
+  public cookiesRejected: boolean;
+  public cookiesSetAndConfirmed: boolean;
 
   constructor(
     @Inject(appSettings) public settings: AppSettings,

@@ -1,10 +1,11 @@
-
-  <div id="global-cookie-message" class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Schools financial benchmarking" *ngIf="!cookiesSetAndConfirmed">
+<span class="modal-overlay" *ngIf="!cookiesSetAndConfirmed"></span>
+<div class="cookie-prefs-modal modal-dialog">
+<div id="global-cookie-message" class="govuk-cookie-banner" data-nosnippet role="region" aria-label="Cookies on Schools financial benchmarking" *ngIf="!cookiesSetAndConfirmed">
 
 
     <div class="govuk-cookie-banner__message govuk-width-container" id="govuk-cookie-banner-question-message" *ngIf="!cookiesAccepted && !cookiesRejected">
       <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-grid-column-full">
           <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on Schools financial benchmarking</h2>
 
           <div class="govuk-cookie-banner__content">
@@ -61,4 +62,5 @@
         </a>
       </div>
     </div>
+</div>
 </div>
