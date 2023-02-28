@@ -190,8 +190,7 @@
         </div>
         <input class="govuk-input govuk-input--width-20" id="scenario-name" name="scenario-name" type="text"
           #scenarioNameInput formControlName='scenarioName'
-          [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}" required
-          (blur)="updateScenarioField($event, 'scenarioName', 'string')">
+          [class]="{'govuk-input--error' : !scenarioName.valid && !scenarioName.pristine}" required>
       </div>
 
       <div class="govuk-form-group"
@@ -207,8 +206,7 @@
             <span class="govuk-visually-hidden">Error:</span> Select the dashboard year to continue
           </span>
         </div>
-        <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm' #scenarioTermInput
-          (blur)="updateScenarioField($event, 'termOfScenario', 'string')">
+        <select class="govuk-select" id="scenario-term" name="scenario-term" formControlName='scenarioTerm' #scenarioTermInput>
           <option value="" selected>Please select</option>
           <option *ngFor="let term of scenarioInEdit.availableScenarioTerms" value="{{term}}">{{term}}</option>
         </select>
@@ -244,7 +242,7 @@
         <input class="govuk-input govuk-input--width-20" id="number-pupils" name="number-pupils" type="number"
           #numberOfPupilsInput formControlName='numberOfPupils'
           [class]="{'govuk-input--error' : !numberOfPupils.valid && !numberOfPupils.pristine}" required
-          (blur)="updateScenarioField($event, 'numberOfPupils', 'number');transformDecimal($event, editDataForm.value.schoolDetails.numberOfPupils)">
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfPupils)">
       </div>
 
       <div class="govuk-form-group"
@@ -270,7 +268,7 @@
         <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number"
           #schoolWorkforceInput formControlName='schoolWorkforce'
           [class]="{'govuk-input--error' : !schoolWorkforce.valid && !schoolWorkforce.pristine}" required
-          (blur)="updateScenarioField($event, 'workforceTotal', 'number');transformDecimal($event, editDataForm.value.schoolDetails.schoolWorkforce)">
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.schoolWorkforce)">
       </div>
 
       <div class="govuk-form-group"
@@ -299,7 +297,7 @@
         <input class="govuk-input govuk-input--width-20" id="number-teachers" name="number-teachers" type="number"
           #numberOfTeachersInput formControlName='numberOfTeachers'
           [class]="{'govuk-input--error' : !numberOfTeachers.valid && !numberOfTeachers.pristine}" required
-          (blur)="updateScenarioField($event, 'teachersTotal', 'number');transformDecimal($event, editDataForm.value.schoolDetails.numberOfTeachers)">
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.numberOfTeachers)">
       </div>
 
       <div class="govuk-form-group"
@@ -328,7 +326,7 @@
         <input class="govuk-input govuk-input--width-20" id="senior-leadership" name="senior-leadership" type="number"
           #seniorLeadershipInput formControlName='seniorLeadership'
           [class]="{'govuk-input--error' : !seniorLeadership.valid && !seniorLeadership.pristine}" required
-          (blur)="updateScenarioField($event, 'teachersLeader', 'number');transformDecimal($event, editDataForm.value.schoolDetails.seniorLeadership)">
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.seniorLeadership)">
       </div>
 
       <div class="govuk-form-group" [class]="{'govuk-form-group--error' : !fsm.valid && !fsm.pristine}"
@@ -355,7 +353,7 @@
         </div>
         <input class="govuk-input govuk-input--width-20" id="fsm" name="fsm" type="number" #fsmInput
           formControlName='fsm' [class]="{'govuk-input--error' : !fsm.valid && !fsm.pristine}"
-          (blur)="updateScenarioField($event, 'fsm', 'number');transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.fsm)">
       </div>
 
       <div class="govuk-form-group" *ngIf="teacherContactRatio"
@@ -421,7 +419,7 @@
         <input class="govuk-input govuk-input--width-20" id="acsize" name="acsize" type="number"
           formControlName='averageClassSize' #averageClassSizeElement
           [class]="{'govuk-input--error' : !averageClassSize.valid && !averageClassSize.pristine}"
-          (blur)="updateScenarioField($event, 'fsm', 'number');transformDecimal($event, editDataForm.value.schoolDetails.averageClassSize)">
+          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.averageClassSize)">
       </div>
 
     </fieldset>
@@ -451,7 +449,7 @@
         <input class="govuk-input govuk-input--width-20" id="total-income" name="total-income" type="text"
           #totalIncomeInput formControlName='totalIncome'
           [class]="{'govuk-input--error' : !totalIncome.valid && !totalIncome.pristine}"
-          (blur)="updateScenarioField($event, 'totalIncome', 'number');transformAmount($event, editDataForm.value.reserveBalance.totalIncome)" required>
+          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalIncome)" required>
       </div>
 
       <div class="govuk-form-group"
@@ -480,7 +478,7 @@
         <input class="govuk-input govuk-input--width-20" id="total-expenditure" name="total-expenditure" type="text"
           #totalExpenditureInput formControlName='totalExpenditure'
           [class]="{'govuk-input--error' : (!totalExpenditure.valid && !totalExpenditure.pristine) || editDataForm.errors?.maxExpenditureExceeded}"
-          (blur)="updateScenarioField($event, 'totalExpenditure', 'number');transformAmount($event, editDataForm.value.reserveBalance.totalExpenditure)" required>
+          (blur)="transformAmount($event, editDataForm.value.reserveBalance.totalExpenditure)" required>
       </div>
 
       <div class="govuk-form-group">
@@ -496,7 +494,7 @@
             aaValueFormat}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text" #revenueReserveInput
-          formControlName='rr' (blur)="updateScenarioField($event, 'rr', 'number');transformAmount($event, editDataForm.value.reserveBalance.rr)">
+          formControlName='rr' (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr);">
       </div>
     </fieldset>
 

@@ -332,7 +332,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
     const currencyAsNumber = this.currencyToNumber(formControl);
     element.target.value = this.numberToCurrency(currencyAsNumber);
   }
-
+/*
   updateScenarioField($event, field, fieldType) {
     const userVal = $event.target.value;
     if (fieldType === 'number' && userVal && typeof parseFloat(userVal) === 'number') {
@@ -345,7 +345,7 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       this.buildForm();
     }, 500);
 
-  }
+  }*/
 
   updatePredictedPupilChange($event) {
     const val = typeof parseFloat($event.target.value) === 'number' ?
