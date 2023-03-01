@@ -6,12 +6,10 @@ export const staffTotalsValidatorDirective: ValidatorFn = (control: FormGroup): 
   const teacherCount: number = control.get('schoolDetails').get('numberOfTeachers')?.value;
 
   if (seniorLeadersCount > teacherCount) {
-    console.log('seniorLeadersGreaterThanTeachers');
     return {seniorLeadersGreaterThanTeachers: true };
   }
 
   if (teacherCount > staffTotal) {
-    console.log('teachersGreaterThanStaff');
     return { teachersGreaterThanStaff: true };
   }
 };

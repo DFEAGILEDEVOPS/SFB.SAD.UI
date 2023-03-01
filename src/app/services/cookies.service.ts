@@ -11,32 +11,32 @@ constructor(@Inject(appSettings) public settings: AppSettings) {
 }
 
 public manageCookies() : boolean {
-  var cookiesPolicyCookie = this.getCookie("cookies_policy");
+  var cookiesPolicyCookie = this.getCookie("cookies_policy_");
   if (!cookiesPolicyCookie) {
       let cookiesPolicyCookie = { "essential": true, "settings": false, "usage": false };
-      this.setDomainCookie("cookies_policy", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
+      this.setDomainCookie("cookies_policy_", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
   }
 
   this.manageGACookies();
 
-  return this.getCookie("cookies_preferences_set") === "true";
+  return this.getCookie("cookies_preferences_set_") === "true";
 
 }
 
 public acceptAllCookies() {
   let cookiesPolicyCookie = { "essential": true, "settings": true, "usage": true };
-  this.setDomainCookie("cookies_policy", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
-  this.setDomainCookie("cookies_preferences_set", "true", { days: 365 }, this.settings.cookieDomain );
+  this.setDomainCookie("cookies_policy_", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
+  this.setDomainCookie("cookies_preferences_set_", "true", { days: 365 }, this.settings.cookieDomain );
 }
 
 public rejectAllCookies() {
   let cookiesPolicyCookie = { "essential": true, "settings": false, "usage": false };
-  this.setDomainCookie("cookies_policy", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
-  this.setDomainCookie("cookies_preferences_set", "true", { days: 365 }, this.settings.cookieDomain );
+  this.setDomainCookie("cookies_policy_", JSON.stringify(cookiesPolicyCookie), { days: 365 }, this.settings.cookieDomain );
+  this.setDomainCookie("cookies_preferences_set_", "true", { days: 365 }, this.settings.cookieDomain );
 }
 
 private manageGACookies() {
-  let cookiesPolicyCookie = JSON.parse(this.getCookie("cookies_policy"));
+  let cookiesPolicyCookie = JSON.parse(this.getCookie("cookies_policy_"));
   if (!cookiesPolicyCookie.usage)  {
       this.setCookie("_ga", '', { days: -1 });
       this.setCookie("_gat", '', { days: -1 });

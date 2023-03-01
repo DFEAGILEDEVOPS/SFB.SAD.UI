@@ -24,13 +24,13 @@
         <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">Enter the school workforce count to continue</a>
       </li>
       <li *ngIf="schoolWorkforce.errors?.min">
-        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count must be minimum 1</a>
+        <a [routerLink]='' (click)="setFocus(schoolWorkforceInput)">School workforce count must be minimum 0</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.required">
         <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Enter the number of teachers to continue</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.min">
-        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers must be minimum 1</a>
+        <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers must be minimum 0</a>
       </li>
       <li *ngIf="numberOfTeachers.errors?.max || editDataForm.errors?.teachersGreaterThanStaff">
         <a [routerLink]='' (click)="setFocus(numberOfTeachersInput)">Number of teachers cannot exceed the school
@@ -262,7 +262,7 @@
             <span class="govuk-visually-hidden">Error:</span> Enter the school workforce count to continue
           </span>
           <span *ngIf="schoolWorkforce.errors.min" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> School workforce count must be minimum 1
+            <span class="govuk-visually-hidden">Error:</span> School workforce count must be minimum 0
           </span>
         </div>
         <input class="govuk-input govuk-input--width-20" id="school-workforce" name="school-workforce" type="number"
@@ -301,7 +301,7 @@
       </div>
 
       <div class="govuk-form-group"
-        [class]="{'govuk-form-group--error' : !seniorLeadership.valid && !seniorLeadership.pristine || editDataForm.errors?.seniorLeadersGreaterThanTeachers}">
+        [class]="{'govuk-form-group--error' : seniorLeadership.invalid && !seniorLeadership.pristine || editDataForm.errors?.seniorLeadersGreaterThanTeachers}">
         <label class="govuk-label" for="senior-leadership">
           Senior leadership (FTE)
         </label>
@@ -375,7 +375,7 @@
         <input class="govuk-input govuk-input--width-20" id="tcr" name="tcr" type="number"
           formControlName='teacherContactRatio' #teacherContactRatioElement
           [class]="{'govuk-input--error' : !teacherContactRatio.valid && !teacherContactRatio.pristine}"
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.teacherContactRatio)">
+          (blur)="scenarioInEdit.setAAValue('Teacher contact ratio (less than 1)', this.editDataForm.value.schoolDetails.teacherContactRatio);transformDecimal($event, editDataForm.value.schoolDetails.teacherContactRatio)">
       </div>
 
       <div class="govuk-form-group"
@@ -396,7 +396,7 @@
         <input class="govuk-input govuk-input--width-20" id="ppl" name="ppl" type="number"
           formControlName='predictedPupil' #predictedPupilElement
           [class]="{'govuk-input--error' : !predictedPupil.valid && !predictedPupil.pristine}"
-          (blur)="transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
+          (blur)="updatePredictedPupilChange($event); transformDecimal($event, editDataForm.value.schoolDetails.predictedPupil)">
       </div>
 
       <div class="govuk-form-group" *ngIf="averageClassSize"
@@ -494,7 +494,7 @@
             aaValueFormat}}</span>
         </span>
         <input class="govuk-input govuk-input--width-20" id="rr" name="rr" type="text" #revenueReserveInput
-          formControlName='rr' (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr)">
+          formControlName='rr' (blur)="transformAmount($event, editDataForm.value.reserveBalance.rr);">
       </div>
     </fieldset>
 

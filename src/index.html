@@ -73,7 +73,7 @@
         return "";
     }
 
-    var cookies_policy = getCookie("cookies_policy");
+    var cookies_policy = getCookie("cookies_policy_");
     if (cookies_policy) {
         var cookiesPolicyCookie = JSON.parse(cookies_policy);
         if (cookiesPolicyCookie.usage) {

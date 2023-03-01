@@ -1,0 +1,41 @@
+@import "govuk-frontend/govuk/settings/media-queries";
+@import "govuk-frontend/govuk/helpers/media-queries";
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.6;
+  z-index: 998;
+}
+.cookie-prefs-modal {
+  width: auto;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 999;
+  top: 25%;
+  overflow: hidden;
+  pointer-events: unset;
+
+
+  @include govuk-media-query($from: mobile) {
+    max-width: 320px;
+    left: calc(50% - 160px);
+  }
+  @include govuk-media-query($from: tablet) {
+    max-width: 680px;
+    left: calc(50% - 340px);
+  }
+  @include govuk-media-query($from: desktop) {
+    max-width: 900px;
+    left: calc(50% - 450px);
+  }
+
+  .govuk-cookie-banner {
+    background-color: govuk-colour("white");
+    padding: 30px 15px 0;
+  }
+}
