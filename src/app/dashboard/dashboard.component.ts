@@ -35,15 +35,15 @@ export class DashboardComponent implements OnInit {
   downloadFormat = "pdf";
 
   constructor(
-              private route: ActivatedRoute,
-              private router: Router,
-              private modalService: BsModalService,
-              private saScenariosService: SaScenariosService,
-              private pdfService: PdfService,
-              private pptService: PptService,
-              titleService: TitleService,
-              viewModeService: ViewModeService,
-              @Inject(appSettings) public settings: AppSettings) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private modalService: BsModalService,
+    private saScenariosService: SaScenariosService,
+    private pdfService: PdfService,
+    private pptService: PptService,
+    titleService: TitleService,
+    viewModeService: ViewModeService,
+    @Inject(appSettings) public settings: AppSettings) {
     viewModeService.setDashboardMode();
     titleService.setWithPrefix("Self-assessment dashboard");
     this.route.paramMap.subscribe(pmap => {
@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
         initialState = {
           title: "Add a custom dashboard",
           textContent: "<p>The custom dashboard allows schools to plan for hypothetical or projected changes to their financial situation and see a red, amber or green (RAG) rating against it.</p>" +
-                       "<p>Custom dashboards are for personal use and <span class='govuk-!-font-weight-bold'>only visible to you</span>. Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</p>",
+            "<p>Custom dashboards are for personal use and <span class='govuk-!-font-weight-bold'>only visible to you</span>. Any changes you make will be viewable on subsequent visits to this school’s dashboard unless you choose to reset them.</p>",
           referrer: "help-add-dashboard"
         };
 
@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
     }
 
     var $externalLinks = $(".aa-modal-left-section .govuk-link[target='_blank']");
-    $externalLinks.on("click", (event)=>{
+    $externalLinks.on("click", (event) => {
       dataLayer.push({ 'event': 'sad_out_link', 'link': event.target.innerText });
     });
 
@@ -139,7 +139,7 @@ export class DashboardComponent implements OnInit {
     this.saScenariosService.deleteFirstScenarioFromEverywhere();
     this.ngOnInit();
 
-    if(!this.activeScenario.doReturnsExist) {
+    if (!this.activeScenario.doReturnsExist) {
       this.router.navigate([`self-assessment/edit-data/${this.urn}/add-new`]);
     }
   }
@@ -181,19 +181,19 @@ export class DashboardComponent implements OnInit {
   }
 
   onDownloadPopup(template: TemplateRef<any>) {
-    this.downloadModalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
+    this.downloadModalRef = this.modalService.show(template, { ariaDescribedby: 'title', ariaLabelledBy: 'legend' });
   }
 
   onResetPopup(template: TemplateRef<any>) {
-    this.resetModalRef = this.modalService.show(template,{ariaDescribedby: 'title', ariaLabelledBy: 'legend'});
+    this.resetModalRef = this.modalService.show(template, { ariaDescribedby: 'title', ariaLabelledBy: 'legend' });
   }
 
-  onDownloadClose(){
+  onDownloadClose() {
     this.downloadModalRef.hide();
     document.getElementById("downloadPageLink").focus();
   }
 
-  onResetClose(){
+  onResetClose() {
     this.resetModalRef.hide();
     document.getElementById("reset-button")?.focus();
   }

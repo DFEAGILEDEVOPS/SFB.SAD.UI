@@ -12,19 +12,19 @@ export class SaScenariosService {
 
   scenarios: SaScenarioModel[];
 
-  public get firstScenarioInMemory() : SaScenarioModel {
+  public get firstScenarioInMemory(): SaScenarioModel {
     return this.scenarios[0];
   }
 
-  public set firstScenarioInMemory(v : SaScenarioModel) {
+  public set firstScenarioInMemory(v: SaScenarioModel) {
     this.scenarios[0] = v;
   }
 
-  public get secondScenarioInMemory() : SaScenarioModel {
+  public get secondScenarioInMemory(): SaScenarioModel {
     return this.scenarios[1];
   }
 
-  public set secondScenarioInMemory(v : SaScenarioModel) {
+  public set secondScenarioInMemory(v: SaScenarioModel) {
     this.scenarios[1] = v;
   }
 
@@ -50,7 +50,7 @@ export class SaScenariosService {
         observer.next(this.firstScenarioInMemory);
         observer.complete();
       });
-    } else if(urn != null){
+    } else if (urn != null) {
       return this.saDataService.getSaScenario(urn)
         .pipe(
           tap(scenario => {
@@ -65,26 +65,26 @@ export class SaScenariosService {
     scenario.initAAsWithCalculatedData();
     scenario.scenarioNo = 0;
     this.firstScenarioInMemory = scenario;
-    if(storeBeyondSession){
+    if (storeBeyondSession) {
       this.storeScenarioInLocalStorage(scenario, 0);
       this.deleteFirstScenarioFromSessionStorage();
-    }else {
+    } else {
       this.storeScenarioInSessionStorage(scenario, 0);
       this.deleteFirstScenarioFromLocalStorage();
     }
   }
 
   setFirstScenarioWithRefresh(scenario: SaScenarioModel, storeBeyondSession: boolean) {
-      scenario.initAAsWithCalculatedData();
-      return this.refreshAATresholdsWithApiData(scenario)
+    scenario.initAAsWithCalculatedData();
+    return this.refreshAATresholdsWithApiData(scenario)
       .pipe(
         tap(() => {
           scenario.scenarioNo = 0;
           this.firstScenarioInMemory = scenario;
-          if(storeBeyondSession){
+          if (storeBeyondSession) {
             this.storeScenarioInLocalStorage(scenario, 0);
             this.deleteFirstScenarioFromSessionStorage();
-          }else {
+          } else {
             this.storeScenarioInSessionStorage(scenario, 0);
             this.deleteFirstScenarioFromLocalStorage();
           }
@@ -127,15 +127,15 @@ export class SaScenariosService {
     scenario.initAAsWithCalculatedData();
     scenario.scenarioNo = 1;
     this.secondScenarioInMemory = scenario;
-    if(storeBeyondSession) {
+    if (storeBeyondSession) {
       this.storeScenarioInLocalStorage(scenario, 1);
       this.deleteSecondScenarioFromSessionStorage();
       this.storeScenarioInLocalStorage(this.firstScenarioInMemory, 0);
       this.deleteFirstScenarioFromSessionStorage();
-    }else{
+    } else {
       this.storeScenarioInSessionStorage(scenario, 1);
       this.deleteSecondScenarioFromLocalStorage();
-      if(!this.getScenarioFromLocalStorage(this.firstScenarioInMemory.urn, 0))  {
+      if (!this.getScenarioFromLocalStorage(this.firstScenarioInMemory.urn, 0)) {
         this.storeScenarioInSessionStorage(this.firstScenarioInMemory, 0);
       }
     }
@@ -144,21 +144,21 @@ export class SaScenariosService {
   setSecondScenarioWithRefresh(scenario: SaScenarioModel, storeBeyondSession: boolean) {
     scenario.initAAsWithCalculatedData();
     return this.refreshAATresholdsWithApiData(scenario)
-    .pipe(
-      tap(() => {
-        scenario.scenarioNo = 1;
-        this.secondScenarioInMemory = scenario;
-        if(storeBeyondSession) {
-          this.storeScenarioInLocalStorage(scenario, 1);
-          this.storeScenarioInLocalStorage(this.firstScenarioInMemory, 0);
-          this.removeScenarioFromSessionStorage(this.firstScenarioInMemory.urn, 0);
-        }else{
-          this.storeScenarioInSessionStorage(scenario, 1);
-          this.storeScenarioInSessionStorage(this.firstScenarioInMemory, 0);
-          this.removeScenarioFromLocalStorage(this.firstScenarioInMemory.urn, 0);
-        }
-      })
-    );
+      .pipe(
+        tap(() => {
+          scenario.scenarioNo = 1;
+          this.secondScenarioInMemory = scenario;
+          if (storeBeyondSession) {
+            this.storeScenarioInLocalStorage(scenario, 1);
+            this.storeScenarioInLocalStorage(this.firstScenarioInMemory, 0);
+            this.removeScenarioFromSessionStorage(this.firstScenarioInMemory.urn, 0);
+          } else {
+            this.storeScenarioInSessionStorage(scenario, 1);
+            this.storeScenarioInSessionStorage(this.firstScenarioInMemory, 0);
+            this.removeScenarioFromLocalStorage(this.firstScenarioInMemory.urn, 0);
+          }
+        })
+      );
   }
 
   deleteFirstScenarioFromLocalStorage() {
@@ -177,7 +177,7 @@ export class SaScenariosService {
 
   deleteFirstScenarioAndReplaceItWithSecond() {
     let urn = this.firstScenarioInMemory.urn;
-    if(this.getScenarioFromLocalStorage(urn, 1)) {
+    if (this.getScenarioFromLocalStorage(urn, 1)) {
       this.storeScenarioInLocalStorage(this.secondScenarioInMemory, 0);
     } else {
       this.storeScenarioInSessionStorage(this.secondScenarioInMemory, 0);
@@ -249,7 +249,7 @@ export class SaScenariosService {
     return JSON.parse(this.getScenarioFromSessionStorage(urn, scenarioNo));
   }
 
-  private storageKey(urn: number, scenarioNo: number){
+  private storageKey(urn: number, scenarioNo: number) {
     return `urn#${urn}-scenario_${scenarioNo}`;
   }
 
