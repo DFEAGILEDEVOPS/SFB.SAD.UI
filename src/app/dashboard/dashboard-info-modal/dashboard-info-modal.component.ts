@@ -12,7 +12,7 @@ export class DashboardInfoModalComponent implements OnInit {
   textContent: string;
   referrer: string;
 
-  constructor(public bsModalRef: BsModalRef) {}
+  constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit() {
   }
