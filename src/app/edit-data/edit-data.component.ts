@@ -352,13 +352,11 @@ export class EditDataComponent implements OnInit, AfterViewInit {
       parseFloat($event.target.value) / 100 : 0;
 
     this.scenarioInEdit.setAAValue('Predicted percentage pupil number change in 3-5 years', val);
-    window.setTimeout(() => { this.buildForm(); } , 0);
   }
 
   updateAverageClassSize($event) {
     // const val = typeof parseFloat($event.target.value) === 'number' ?
     this.scenarioInEdit.setAAValue('Average Class size', parseFloat($event.target.value));
-    window.setTimeout(() => { this.buildForm(); } , 0);
   }
   transformDecimal(element, formControl) {
     element.target.value = this.numberToDecimal(formControl);
