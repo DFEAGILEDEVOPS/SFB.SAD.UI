@@ -33,6 +33,7 @@ import { SidebysideFormatBreadcrumbsComponent } from './sidebyside-format/sideby
 import { SidebysideFormatComponent } from './sidebyside-format/sidebyside-format.component';
 import { GlobalErrorHandler } from '@core/error-handling/GlobalErrorHandler';
 import { CurrencyPipe } from '@angular/common';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { CurrencyPipe } from '@angular/common';
     CoreModule.forRoot(),
     GovUkLayoutModule,
     AppRoutingModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    MarkdownModule.forRoot()
   ],
   providers: [{provide: ErrorHandler, useClass: GlobalErrorHandler}, CurrencyPipe],
   bootstrap: [AppComponent]

@@ -1,5 +1,24 @@
   <app-cookie-banner></app-cookie-banner>
   <app-header></app-header>
+
+  <div *ngIf="settings.deprecationInformation?.enabled" class="govuk-width-container govuk-!-margin-top-3" id="deprecation-notification">
+    <div class="govuk-notification-banner govuk-!-margin-bottom-3" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        <div class="govuk-notification-banner__header">
+            <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                Important  
+            </h2>
+        </div>
+        <div class="govuk-notification-banner__content">
+            <h3 class="govuk-notification-banner__heading" style="max-width: 100%">
+              {{settings.deprecationInformation?.title}}
+            </h3>
+            <div class="govuk-body" style="max-width: 100%">
+              <markdown [data]="settings.deprecationInformation?.body?.replace('{.govuk-notification-banner__link}','')"></markdown>
+            </div>
+        </div>
+    </div>
+  </div>
+
   <div class="govuk-width-container app-width-container--wide">
 
     <a *ngIf="isInEditMode()" (click)='onBack()' href="javascript:void(0)" class="govuk-back-link">Back</a>
