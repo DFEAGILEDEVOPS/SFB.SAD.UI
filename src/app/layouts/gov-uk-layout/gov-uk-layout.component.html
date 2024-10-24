@@ -13,7 +13,7 @@
               {{settings.deprecationInformation?.title}}
             </h3>
             <div class="govuk-body" style="max-width: 100%">
-              <markdown [data]="settings.deprecationInformation?.body?.replace('{.govuk-notification-banner__link}','')"></markdown>
+              <markdown [data]="settings.deprecationInformation?.body?.replaceAll('\\n','\n').replace('{.govuk-notification-banner__link}','')"></markdown>
             </div>
         </div>
     </div>
