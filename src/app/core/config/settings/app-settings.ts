@@ -13,6 +13,15 @@ export class AppSettings {
   version: string;
   demo: boolean;
   logo: string;
+  deprecationInformation?: Partial<DeprecationInformationSettings>
+}
+
+interface DeprecationInformationSettings {
+  enabled: boolean;
+  title: string;
+  body: string;
+  newServiceUrl: string;
+  oldServiceLinkText: string;
 }
 
 export let appSettings = new InjectionToken<AppSettings>('AppSettings');
